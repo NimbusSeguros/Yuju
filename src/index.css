@@ -1,0 +1,120 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Sora:wght@400;500;600;700;800&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-accent: "Sora", sans-serif;
+
+  --color-yuju-blue: #3369ff;
+  --color-yuju-cyan: #00ff88;
+  --color-yuju-dark: #020617;
+  --color-yuju-slate: #0f172a;
+
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-border-primary: var(--border-primary);
+
+  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-scroll: scroll 40s linear infinite;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+  }
+
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+}
+
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --border-primary: rgba(0, 0, 0, 0.08);
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --hero-overlay: rgba(51, 105, 255, 0.9);
+  color-scheme: light;
+}
+
+[data-theme='dark'] {
+  --bg-primary: #020617;
+  --bg-secondary: #0f172a;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --border-primary: rgba(255, 255, 255, 0.1);
+  --glass-bg: rgba(15, 23, 42, 0.8);
+  --hero-overlay: rgba(2, 6, 23, 0.85);
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 100vh;
+}
+
+h1, h2, h3, .font-accent {
+  font-family: var(--font-accent);
+}
+
+@layer components {
+  .glass-card {
+    @apply backdrop-blur-xl border transition-all duration-500 shadow-sm hover:shadow-xl;
+    background-color: var(--glass-bg);
+    border-color: var(--border-primary);
+  }
+  
+  .btn-primary {
+    @apply relative px-8 py-3.5 rounded-full font-bold overflow-hidden transition-all duration-300
+           bg-yuju-blue text-white shadow-lg shadow-yuju-blue/20 hover:shadow-yuju-blue/40
+           hover:scale-105 active:scale-95 text-sm uppercase tracking-wider;
+  }
+
+  .btn-outline {
+    @apply px-8 py-3.5 rounded-full font-bold border-2 border-yuju-blue text-yuju-blue
+           hover:bg-yuju-blue/5 transition-all duration-300 hover:scale-105 active:scale-95
+           text-sm uppercase tracking-wider;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-yuju-blue to-yuju-cyan;
+  }
+
+  .hero-highlight {
+    @apply bg-yuju-cyan py-1.5 px-6 text-white font-black inline-block shadow-lg shadow-yuju-cyan/20;
+    box-shadow: 10px 10px 0px rgba(0, 246, 185, 0.1);
+  }
+
+  .section-title {
+    @apply text-4xl md:text-5xl font-black font-accent uppercase tracking-tighter mb-4;
+  }
+
+  .section-subtitle {
+     @apply text-lg text-text-secondary max-w-2xl leading-relaxed font-medium;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background-color: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-yuju-blue/30 rounded-full hover:bg-yuju-blue/50 transition-colors;
+}
+
+/* Companies infinite scroll */
+.logo-track {
+  @apply flex gap-12 w-fit animate-scroll;
+}

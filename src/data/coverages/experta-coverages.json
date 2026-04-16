@@ -1,0 +1,692 @@
+{
+  "RC": {
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil frente a terceros",
+        "descripcion": "Cobertura de responsabilidad civil ante daños causados a terceros.",
+        "limite": "Hasta $160.000.000"
+      },
+      {
+        "nombre": "Auxilio Mecánico y Remolque",
+        "descripcion": "Servicio de asistencia mecánica y remolque en caso de desperfectos.",
+        "limite": "300 Km lineales - 600 km totales en Argentina. 300 Km lineales - 600 km totales en países limítrofes. Hasta 12 eventos anuales (Máximo 2 mensuales)"
+      },
+      {
+        "nombre": "Cobertura en exterior",
+        "descripcion": "Cobertura válida en países del Mercosur.",
+        "limite": "Mercosur"
+      },
+      {
+        "nombre": "Seguro de muerte del conductor/ocupante",
+        "descripcion": "Indemnización en caso de fallecimiento del conductor u ocupantes.",
+        "limite": "$1.500.000"
+      },
+      {
+        "nombre": "Refacturación",
+        "descripcion": "Modalidad de pago mensual.",
+        "limite": "Mensual"
+      }
+    ]
+  },
+  "B1": {
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil frente a terceros",
+        "descripcion": "Cobertura de responsabilidad civil ante daños causados a terceros.",
+        "limite": "Hasta $160.000.000"
+      },
+      {
+        "nombre": "Robo o Hurto Total",
+        "descripcion": "Cobertura en caso de robo o hurto total del vehículo.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Incendio Total",
+        "descripcion": "Cobertura en caso de incendio total del vehículo.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Reposición de 0 km",
+        "descripcion": "Reposición del vehículo por uno 0 km si fue asegurado desde nuevo.",
+        "limite": "Hasta 6 meses (vehículos asegurados desde 0 km)"
+      },
+      {
+        "nombre": "Cláusula de ajuste automático de suma asegurada",
+        "descripcion": "Ajuste automático del valor asegurado según depreciación.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Cobertura en exterior",
+        "descripcion": "Cobertura válida en países del Mercosur.",
+        "limite": "Mercosur"
+      },
+      {
+        "nombre": "Seguro de muerte del conductor/ocupante",
+        "descripcion": "Indemnización en caso de fallecimiento del conductor u ocupantes.",
+        "limite": "$1.500.000"
+      },
+      {
+        "nombre": "Refacturación",
+        "descripcion": "Modalidad de pago mensual.",
+        "limite": "Mensual"
+      }
+    ]
+  },
+  "B": {
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil frente a terceros",
+        "descripcion": "Cobertura de responsabilidad civil ante daños causados a terceros.",
+        "limite": "Hasta $160.000.000"
+      },
+      {
+        "nombre": "Robo o Hurto Total",
+        "descripcion": "Cobertura en caso de robo o hurto total del vehículo.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Incendio Total",
+        "descripcion": "Cobertura en caso de incendio total del vehículo.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Reposición de 0 km",
+        "descripcion": "Reposición del vehículo por uno 0 km si fue asegurado desde nuevo.",
+        "limite": "Hasta 6 meses (vehículos asegurados desde 0 km)"
+      },
+      {
+        "nombre": "Cláusula de ajuste automático de suma asegurada",
+        "descripcion": "Ajuste automático del valor asegurado según depreciación.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Cobertura en exterior",
+        "descripcion": "Cobertura válida en países del Mercosur.",
+        "limite": "Mercosur"
+      },
+      {
+        "nombre": "Seguro de muerte del conductor/ocupante",
+        "descripcion": "Indemnización en caso de fallecimiento del conductor u ocupantes.",
+        "limite": "$1.500.000"
+      },
+      {
+        "nombre": "Refacturación",
+        "descripcion": "Modalidad de pago mensual.",
+        "limite": "Mensual"
+      },
+      {
+        "nombre": "Destrucción Total",
+        "descripcion": "Cobertura por destrucción total del vehículo (Cl 80%).",
+        "limite": "Cl 80%"
+      }
+    ]
+  },
+  "TERCERO COMPLETO XL": {
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil",
+        "descripcion": "Cobertura de responsabilidad civil ante daños causados a terceros.",
+        "limite": "Hasta $160.000.000"
+      },
+      {
+        "nombre": "Daños totales por granizo, terremoto e inundación o desbordamiento y tumulto o alboroto popular y/o huelga",
+        "descripcion": "Cobertura completa contra fenómenos climáticos and eventos extraordinarios que causen daños totales.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Robo o hurto Total y Parcial",
+        "descripcion": "Cobertura en caso de robo o hurto total y parcial del vehículo.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Incendio Total",
+        "descripcion": "Cobertura en caso de incendio total del vehículo.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Incendio Parcial",
+        "descripcion": "Cobertura en caso de incendio parcial del vehículo.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Daño Parcial al amparo del Robo Total",
+        "descripcion": "Cobertura de daños parciales relacionados con el robo total.",
+        "limite": "Sin límite ni franquicia"
+      },
+      {
+        "nombre": "Destrucción Total (Cl 80%)",
+        "descripcion": "Cobertura por destrucción total del vehículo cuando los daños superan el 80% del valor asegurado.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Vidrios laterales y cerraduras",
+        "descripcion": "Cobertura de cristales laterales y cerraduras del vehículo.",
+        "limite": "Sin límite ni franquicia"
+      },
+      {
+        "nombre": "Luneta y Parabrisas",
+        "descripcion": "Cobertura de parabrisas y luneta trasera.",
+        "limite": "Sin límite ni franquicia"
+      },
+      {
+        "nombre": "Cláusula de ajuste automático",
+        "descripcion": "Ajuste automático del valor asegurado según depreciación.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Reposición de 0Km por 12 meses",
+        "descripcion": "Reposición del vehículo por uno 0 km si fue asegurado desde nuevo.",
+        "limite": "Hasta 12 meses (para vehículos asegurados desde 0km)"
+      },
+      {
+        "nombre": "Plan opcional con equipo recuperador",
+        "descripcion": "Opción de incluir dispositivo de rastreo vehicular.",
+        "limite": "Disponible"
+      }
+    ]
+  },
+  "Terceros Completo XL": {
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil",
+        "descripcion": "Cobertura de responsabilidad civil ante daños causados a terceros.",
+        "limite": "Hasta $160.000.000"
+      },
+      {
+        "nombre": "Daños totales por granizo, terremoto e inundación o desbordamiento y tumulto o alboroto popular y/o huelga",
+        "descripcion": "Cobertura completa contra fenómenos climáticos and eventos extraordinarios que causen daños totales.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Robo o hurto Total y Parcial",
+        "descripcion": "Cobertura en caso de robo o hurto total y parcial del vehículo.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Incendio Total",
+        "descripcion": "Cobertura en caso de incendio total del vehículo.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Incendio Parcial",
+        "descripcion": "Cobertura en caso de incendio parcial del vehículo.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Daño Parcial al amparo del Robo Total",
+        "descripcion": "Cobertura de daños parciales relacionados con el robo total.",
+        "limite": "Sin límite ni franquicia"
+      },
+      {
+        "nombre": "Destrucción Total (Cl 80%)",
+        "descripcion": "Cobertura por destrucción total del vehículo cuando los daños superan el 80% del valor asegurado.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Vidrios laterales y cerraduras",
+        "descripcion": "Cobertura de cristales laterales y cerraduras del vehículo.",
+        "limite": "Sin límite ni franquicia"
+      },
+      {
+        "nombre": "Luneta y Parabrisas",
+        "descripcion": "Cobertura de parabrisas y luneta trasera.",
+        "limite": "Sin límite ni franquicia"
+      },
+      {
+        "nombre": "Cláusula de ajuste automático",
+        "descripcion": "Ajuste automático del valor asegurado según depreciación.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Reposición de 0Km por 12 meses",
+        "descripcion": "Reposición del vehículo por uno 0 km si fue asegurado desde nuevo.",
+        "limite": "Hasta 12 meses (para vehículos asegurados desde 0km)"
+      },
+      {
+        "nombre": "Plan opcional con equipo recuperador",
+        "descripcion": "Opción de incluir dispositivo de rastreo vehicular.",
+        "limite": "Disponible"
+      }
+    ]
+  },
+  "TERCERO_COMPLETO_XL": {
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil",
+        "descripcion": "Cobertura de responsabilidad civil ante daños causados a terceros.",
+        "limite": "Hasta $160.000.000"
+      },
+      {
+        "nombre": "Daños totales por granizo, terremoto e inundación o desbordamiento y tumulto o alboroto popular y/o huelga",
+        "descripcion": "Cobertura completa contra fenómenos climáticos and eventos extraordinarios que causen daños totales.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Robo o hurto Total y Parcial",
+        "descripcion": "Cobertura en caso de robo o hurto total y parcial del vehículo.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Incendio Total",
+        "descripcion": "Cobertura en caso de incendio total del vehículo.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Incendio Parcial",
+        "descripcion": "Cobertura en caso de incendio parcial del vehículo.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Daño Parcial al amparo del Robo Total",
+        "descripcion": "Cobertura de daños parciales relacionados con el robo total.",
+        "limite": "Sin límite ni franquicia"
+      },
+      {
+        "nombre": "Destrucción Total (Cl 80%)",
+        "descripcion": "Cobertura por destrucción total del vehículo cuando los daños superan el 80% del valor asegurado.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Vidrios laterales y cerraduras",
+        "descripcion": "Cobertura de cristales laterales y cerraduras del vehículo.",
+        "limite": "Sin límite ni franquicia"
+      },
+      {
+        "nombre": "Luneta y Parabrisas",
+        "descripcion": "Cobertura de parabrisas y luneta trasera.",
+        "limite": "Sin límite ni franquicia"
+      },
+      {
+        "nombre": "Cláusula de ajuste automático",
+        "descripcion": "Ajuste automático del valor asegurado según depreciación.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Reposición de 0Km por 12 meses",
+        "descripcion": "Reposición del vehículo por uno 0 km si fue asegurado desde nuevo.",
+        "limite": "Hasta 12 meses (para vehículos asegurados desde 0km)"
+      },
+      {
+        "nombre": "Plan opcional con equipo recuperador",
+        "descripcion": "Opción de incluir dispositivo de rastreo vehicular.",
+        "limite": "Disponible"
+      }
+    ]
+  },
+  "TERCERO_COMPLETO_XL_GRANIZO": {
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil frente a terceros",
+        "descripcion": "Cobertura de responsabilidad civil ante daños causados a terceros.",
+        "limite": "Hasta $160.000.000"
+      },
+      {
+        "nombre": "Robo o Hurto Total y Parcial",
+        "descripcion": "Cobertura en caso de robo o hurto total y parcial del vehículo.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Daños totales por granizo, terremoto e inundación o desbordamiento y tumulto o alboroto popular y/o huelga",
+        "descripcion": "Cobertura completa contra fenómenos climáticos and eventos extraordinarios.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Incendio Total y Parcial",
+        "descripcion": "Cobertura en caso de incendio total o parcial del vehículo.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Daño Parcial al amparo del Robo Total",
+        "descripcion": "Cobertura de daños parciales relacionados con el robo total.",
+        "limite": "Sin límite ni franquicia"
+      },
+      {
+        "nombre": "Destrucción Total (Cl 80%)",
+        "descripcion": "Cobertura por destrucción total del vehículo.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Vidrios laterales y cerraduras",
+        "descripcion": "Cobertura de cristales laterales y cerraduras del vehículo.",
+        "limite": "Sin límite ni franquicia"
+      },
+      {
+        "nombre": "Parabrisas y luneta",
+        "descripcion": "Cobertura de parabrisas y luneta trasera.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Daño parcial por Granizo",
+        "descripcion": "Cobertura específica para daños causados por granizo.",
+        "limite": "Sin límite ni franquicia"
+      },
+      {
+        "nombre": "Cláusula de ajuste automático de suma asegurada",
+        "descripcion": "Ajuste automático del valor asegurado según depreciación.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Reposición de 0 km",
+        "descripcion": "Reposición del vehículo por uno 0 km si fue asegurado desde nuevo.",
+        "limite": "Hasta 12 meses (para vehículos asegurados desde 0 km)"
+      },
+      {
+        "nombre": "Auxilio Mecánico y Remolque",
+        "descripcion": "Servicio de asistencia mecánica y remolque en caso de desperfectos.",
+        "limite": "300 Km lineales - 600 km totales en Argentina. 300 Km lineales - 600 km totales en países limítrofes. Hasta 12 eventos anuales (Máximo 2 mensuales)"
+      },
+      {
+        "nombre": "Auto sustituto",
+        "descripcion": "Vehículo de reemplazo mientras el suyo está en reparación.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Cobertura en exterior",
+        "descripcion": "Cobertura válida en países del Mercosur.",
+        "limite": "Mercosur"
+      },
+      {
+        "nombre": "Seguro de muerte del conductor/ocupante",
+        "descripcion": "Indemnización en caso de fallecimiento del conductor u ocupantes.",
+        "limite": "$3.000.000"
+      },
+      {
+        "nombre": "Plan opcional con equipo recuperador",
+        "descripcion": "Opción de incluir dispositivo de rastreo vehicular.",
+        "limite": "Disponible"
+      },
+      {
+        "nombre": "Refacturación",
+        "descripcion": "Modalidad de pago mensual.",
+        "limite": "Mensual"
+      }
+    ]
+  },
+  "TERCERO COMPLETO XL + GRANIZO": {
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil frente a terceros",
+        "descripcion": "Cobertura de responsabilidad civil ante daños causados a terceros.",
+        "limite": "Hasta $160.000.000"
+      },
+      {
+        "nombre": "Robo o Hurto Total y Parcial",
+        "descripcion": "Cobertura en caso de robo o hurto total y parcial del vehículo.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Daños totales por granizo, terremoto e inundación o desbordamiento y tumulto o alboroto popular y/o huelga",
+        "descripcion": "Cobertura completa contra fenómenos climáticos and eventos extraordinarios.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Incendio Total y Parcial",
+        "descripcion": "Cobertura en caso de incendio total o parcial del vehículo.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Daño Parcial al amparo del Robo Total",
+        "descripcion": "Cobertura de daños parciales relacionados con el robo total.",
+        "limite": "Sin límite ni franquicia"
+      },
+      {
+        "nombre": "Destrucción Total (Cl 80%)",
+        "descripcion": "Cobertura por destrucción total del vehículo.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Vidrios laterales y cerraduras",
+        "descripcion": "Cobertura de cristales laterales y cerraduras del vehículo.",
+        "limite": "Sin límite ni franquicia"
+      },
+      {
+        "nombre": "Parabrisas y luneta",
+        "descripcion": "Cobertura de parabrisas y luneta trasera.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Daño parcial por Granizo",
+        "descripcion": "Cobertura específica para daños causados por granizo.",
+        "limite": "Sin límite ni franquicia"
+      },
+      {
+        "nombre": "Cláusula de ajuste automático de suma asegurada",
+        "descripcion": "Ajuste automático del valor asegurado según depreciación.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Reposición de 0 km",
+        "descripcion": "Reposición del vehículo por uno 0 km si fue asegurado desde nuevo.",
+        "limite": "Hasta 12 meses (para vehículos asegurados desde 0 km)"
+      },
+      {
+        "nombre": "Auxilio Mecánico y Remolque",
+        "descripcion": "Servicio de asistencia mecánica y remolque en caso de desperfectos.",
+        "limite": "300 Km lineales - 600 km totales en Argentina. 300 Km lineales - 600 km totales en países limítrofes. Hasta 12 eventos anuales (Máximo 2 mensuales)"
+      },
+      {
+        "nombre": "Auto sustituto",
+        "descripcion": "Vehículo de reemplazo mientras el suyo está en reparación.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Cobertura en exterior",
+        "descripcion": "Cobertura válida en países del Mercosur.",
+        "limite": "Mercosur"
+      },
+      {
+        "nombre": "Seguro de muerte del conductor/ocupante",
+        "descripcion": "Indemnización en caso de fallecimiento del conductor u ocupantes.",
+        "limite": "$3.000.000"
+      },
+      {
+        "nombre": "Plan opcional con equipo recuperador",
+        "descripcion": "Opción de incluir dispositivo de rastreo vehicular.",
+        "limite": "Disponible"
+      },
+      {
+        "nombre": "Refacturación",
+        "descripcion": "Modalidad de pago mensual.",
+        "limite": "Mensual"
+      }
+    ]
+  },
+  "TODO RIESGO XL 5%": {
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil frente a terceros",
+        "descripcion": "Cobertura de responsabilidad civil ante daños causados a terceros.",
+        "limite": "Hasta $160.000.000"
+      },
+      {
+        "nombre": "Daños totales y parciales por terremoto e inundación o desbordamiento y tumulto o alboroto popular y/o huelga",
+        "descripcion": "Cobertura completa contra fenómenos climáticos and eventos extraordinarios.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Robo o hurto Total y Parcial",
+        "descripcion": "Cobertura en caso de robo o hurto total and parcial del vehículo.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Incendio Total",
+        "descripcion": "Cobertura en caso de incendio total del vehículo.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Incendio Parcial sin franquicia",
+        "descripcion": "Cobertura de incendio parcial sin costo adicional.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Daño Parcial al amparo del Robo Total",
+        "descripcion": "Cobertura de daños parciales relacionados con el robo total.",
+        "limite": "Sin límite ni franquicia"
+      },
+      {
+        "nombre": "Destrucción Total (Cl 80%)",
+        "descripcion": "Cobertura por destrucción total del vehículo.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Vidrios laterales y cerraduras",
+        "descripcion": "Cobertura de cristales laterales and cerraduras del vehículo.",
+        "limite": "Sin límite ni franquicia"
+      },
+      {
+        "nombre": "Parabrisas y luneta",
+        "descripcion": "Cobertura de parabrisas and luneta trasera.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Daño parcial por Granizo",
+        "descripcion": "Cobertura específica para daños causados por granizo.",
+        "limite": "Sin límite ni franquicia"
+      },
+      {
+        "nombre": "Cláusula de ajuste automático de suma asegurada",
+        "descripcion": "Ajuste automático del valor asegurado según depreciación.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Reposición de 0 km",
+        "descripcion": "Reposición del vehículo por uno 0 km si fue asegurado desde nuevo.",
+        "limite": "Hasta 12 meses (vehículos asegurados desde 0 km)"
+      },
+      {
+        "nombre": "Daño parcial por accidente",
+        "descripcion": "Cobertura de daños parciales causados por accidentes con franquicia del 5%.",
+        "limite": "Franquicia a cargo del asegurado equivalente al porcentaje seleccionado calculado sobre el valor de la suma asegurada al momento del alta o renovación"
+      },
+      {
+        "nombre": "Auxilio Mecánico y Remolque",
+        "descripcion": "Servicio de asistencia mecánica and remolque en caso de desperfectos.",
+        "limite": "1000 Km Lineales - 2000 totales en Argentina. 1000 Km Lineales - 2000 totales en países limítrofes. Cantidad de eventos ilimitado"
+      },
+      {
+        "nombre": "Auto sustituto",
+        "descripcion": "Vehículo de reemplazo mientras el suyo está en reparación.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Cobertura en exterior",
+        "descripcion": "Cobertura válida en países del Mercosur.",
+        "limite": "Mercosur"
+      },
+      {
+        "nombre": "Seguro de muerte del conductor/ocupante",
+        "descripcion": "Indemnización en caso de fallecimiento del conductor u ocupantes.",
+        "limite": "$3.000.000"
+      },
+      {
+        "nombre": "Plan opcional con equipo recuperador",
+        "descripcion": "Opción de incluir dispositivo de rastreo vehicular.",
+        "limite": "Disponible"
+      },
+      {
+        "nombre": "Refacturación",
+        "descripcion": "Modalidad de pago mensual.",
+        "limite": "Mensual"
+      }
+    ]
+  },
+  "TODO RIESGO XL 2%": {
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil frente a terceros",
+        "descripcion": "Cobertura de responsabilidad civil ante daños causados a terceros.",
+        "limite": "Hasta $160.000.000"
+      },
+      {
+        "nombre": "Daños totales y parciales por terremoto e inundación o desbordamiento y tumulto o alboroto popular y/o huelga",
+        "descripcion": "Cobertura completa contra fenómenos climáticos and eventos extraordinarios.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Robo o hurto Total y Parcial",
+        "descripcion": "Cobertura en caso de robo o hurto total and parcial del vehículo.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Incendio Total",
+        "descripcion": "Cobertura en caso de incendio total del vehículo.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Incendio Parcial sin franquicia",
+        "descripcion": "Cobertura de incendio parcial sin costo adicional.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Daño Parcial al amparo del Robo Total",
+        "descripcion": "Cobertura de daños parciales relacionados con el robo total.",
+        "limite": "Sin límite ni franquicia"
+      },
+      {
+        "nombre": "Destrucción Total (Cl 80%)",
+        "descripcion": "Cobertura por destrucción total del vehículo.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Vidrios laterales y cerraduras",
+        "descripcion": "Cobertura de cristales laterales and cerraduras del vehículo.",
+        "limite": "Sin límite ni franquicia"
+      },
+      {
+        "nombre": "Parabrisas y luneta",
+        "descripcion": "Cobertura de parabrisas and luneta trasera.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Daño parcial por Granizo",
+        "descripcion": "Cobertura específica para daños causados por granizo.",
+        "limite": "Sin límite ni franquicia"
+      },
+      {
+        "nombre": "Cláusula de ajuste automático de suma asegurada",
+        "descripcion": "Ajuste automático del valor asegurado según depreciación.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Reposición de 0 km",
+        "descripcion": "Reposición del vehículo por uno 0 km si fue asegurado desde nuevo.",
+        "limite": "Hasta 12 meses (para vehículos asegurados desde 0 km)"
+      },
+      {
+        "nombre": "Daño parcial por accidente",
+        "descripcion": "Cobertura de daños parciales causados por accidentes con franquicia del 2%.",
+        "limite": "Franquicia a cargo del asegurado equivalente al porcentaje seleccionado calculado sobre el valor de la suma asegurada al momento del alta o renovación"
+      },
+      {
+        "nombre": "Auxilio Mecánico y Remolque",
+        "descripcion": "Servicio de asistencia mecánica and remolque en caso de desperfectos.",
+        "limite": "1000 Km Lineales - 2000 totales en Argentina. 1000 Km Lineales - 2000 totales en países limítrofes. Cantidad de eventos ilimitado"
+      },
+      {
+        "nombre": "Auto sustituto",
+        "descripcion": "Vehículo de reemplazo mientras el suyo está en reparación.",
+        "limite": "Sí"
+      },
+      {
+        "nombre": "Cobertura en exterior",
+        "descripcion": "Cobertura válida en países del Mercosur.",
+        "limite": "Mercosur"
+      },
+      {
+        "nombre": "Seguro de muerte del conductor/ocupante",
+        "descripcion": "Indemnización en caso de fallecimiento del conductor u ocupantes.",
+        "limite": "$3.000.000"
+      },
+      {
+        "nombre": "Plan opcional con equipo recuperador",
+        "descripcion": "Opción de incluir dispositivo de rastreo vehicular.",
+        "limite": "Disponible"
+      },
+      {
+        "nombre": "Refacturación",
+        "descripcion": "Modalidad de pago mensual.",
+        "limite": "Mensual"
+      }
+    ]
+  }
+}
