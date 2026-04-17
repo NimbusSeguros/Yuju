@@ -76,7 +76,7 @@ export const PostalCodeSelect: React.FC<PostalCodeSelectProps> = ({ value, local
         <input
           type="text"
           placeholder="Ej. 1425 o 3260"
-          className={`w-full h-[56px] bg-bg-secondary border ${hasError ? 'border-red-500' : 'border-border-primary'} rounded-2xl pl-10 pr-10 text-base font-bold text-text-primary focus:border-yuju-blue focus:outline-none focus:ring-2 focus:ring-yuju-blue/20 outline-none transition-all placeholder:opacity-20`}
+          className={`w-full h-[56px] bg-bg-secondary border ${hasError ? 'border-red-500' : 'border-border-primary'} rounded-2xl pl-10 pr-10 text-base font-bold text-text-primary yuju-input-blue transition-all shadow-sm placeholder:opacity-20`}
           value={inputValue}
           onChange={handleInputChange}
           onFocus={() => inputValue.length >= 3 && setShowDropdown(true)}

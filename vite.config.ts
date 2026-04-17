@@ -23,6 +23,7 @@ export default defineConfig({
       '/api/infoauto': { target: 'http://localhost:3000', changeOrigin: true },
       '/api/atm': { target: 'http://localhost:3000', changeOrigin: true },
       '/api/integrity': { target: 'http://localhost:3000', changeOrigin: true },
+      '/api/sancristobal': { target: 'http://localhost:3000', changeOrigin: true },
       '/api/vehiculos': { target: 'http://localhost:3000', changeOrigin: true },
       '/api/localidades': { target: 'http://localhost:3000', changeOrigin: true },
       '/api/ramos': { target: 'http://localhost:3000', changeOrigin: true },

@@ -273,7 +273,7 @@ export const HogarCotizador = () => {
                     boxShadow: currentStep === step.id ? '0 0 20px rgba(16, 185, 129, 0.3)' : 'none',
                     scale: currentStep === step.id ? 1.15 : 1
                   }}
-                  className="w-8 h-8 rounded-xl flex items-center justify-center border-[1.5px] border-border-primary shadow-sm"
+                  className="w-8 h-8 rounded-full flex items-center justify-center border-[1.5px] border-border-primary shadow-sm"
                 >
                   {currentStep > step.id ? (
                     <CheckCircle2 size={16} className="text-white" />
@@ -360,8 +360,8 @@ export const HogarCotizador = () => {
                             onClick={() => setAnswers({ [q.codigo]: opt.codigo })}
                             className={`p-4 rounded-2xl border-2 transition-all flex items-center gap-4 text-left group
                               ${answers[q.codigo] === opt.codigo 
-                                ? 'border-emerald-500 bg-emerald-500/5 shadow-md shadow-emerald-500/5' 
-                                : 'border-border-primary bg-bg-secondary hover:border-emerald-500/30'}`}
+                                ? 'border-emerald-500 bg-emerald-500/5 shadow-lg shadow-emerald-500/10 ring-4 ring-emerald-500/10' 
+                                : 'border-border-primary bg-bg-secondary hover:border-emerald-500/30 hover:shadow-lg hover:shadow-emerald-500/5 transition-all duration-300'}`}
                           >
                             <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-colors flex-shrink-0
                               ${answers[q.codigo] === opt.codigo ? 'bg-emerald-500 text-white' : 'bg-bg-primary text-text-secondary group-hover:bg-emerald-500/10'}`}>
@@ -408,8 +408,8 @@ export const HogarCotizador = () => {
                     {plans.map((plan) => (
                       <div 
                         key={plan.codigo}
-                        className={`group relative rounded-2xl border-2 transition-all overflow-hidden cursor-pointer
-                          ${selectedPlanCode === plan.codigo ? 'border-emerald-500 bg-emerald-500/5 shadow-lg shadow-emerald-500/10' : 'border-border-primary bg-bg-secondary/30 hover:border-emerald-500/40'}`}
+                        className={`group relative rounded-3xl border-2 transition-all overflow-hidden cursor-pointer shadow-sm hover:border-emerald-500 hover:shadow-[0_0_20px_rgba(16,185,129,0.2)]
+                          ${selectedPlanCode === plan.codigo ? 'border-emerald-500 bg-emerald-500/5 shadow-lg shadow-emerald-500/10' : 'border-border-primary bg-bg-secondary/30'}`}
                         onClick={() => setSelectedPlanCode(plan.codigo)}
                       >
                          <div className="p-3 sm:p-5 flex flex-col md:flex-row md:items-start justify-between gap-3 sm:gap-4">
@@ -512,7 +512,7 @@ export const HogarCotizador = () => {
                         <label className="text-[10px] font-black uppercase text-text-secondary tracking-widest pl-1">Nombre</label>
                         <input 
                             type="text" 
-                            className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold outline-none focus:border-emerald-500 transition-all"
+                            className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold yuju-input-emerald"
                             value={personalData.nombre}
                             onChange={(e) => setPersonalData({...personalData, nombre: e.target.value})}
                         />
@@ -521,7 +521,7 @@ export const HogarCotizador = () => {
                         <label className="text-[10px] font-black uppercase text-text-secondary tracking-widest pl-1">Apellido</label>
                         <input 
                             type="text" 
-                            className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold outline-none focus:border-emerald-500 transition-all"
+                            className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold yuju-input-emerald"
                             value={personalData.apellido}
                             onChange={(e) => setPersonalData({...personalData, apellido: e.target.value})}
                         />
@@ -531,7 +531,7 @@ export const HogarCotizador = () => {
                         <label className="text-[10px] font-black uppercase text-text-secondary tracking-widest pl-1">Email</label>
                         <input 
                             type="email" 
-                            className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold outline-none focus:border-emerald-500 transition-all"
+                            className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold yuju-input-emerald"
                             value={personalData.email}
                             onChange={(e) => setPersonalData({...personalData, email: e.target.value})}
                         />
@@ -540,16 +540,16 @@ export const HogarCotizador = () => {
                     <div className="space-y-1.5">
                         <label className="text-[10px] font-black uppercase text-text-secondary tracking-widest pl-1">Fin de Nacimiento (<span className="opacity-70 lowercase">dd/mm/aaaa</span>)</label>
                         <div className="flex gap-2">
-                          <input type="text" placeholder="DD" className="w-1/3 h-12 bg-bg-secondary border border-border-primary rounded-xl px-2 text-center text-sm font-semibold focus:border-emerald-500 outline-none" value={personalData.fechaNacimientoDia} onChange={(e) => setPersonalData({...personalData, fechaNacimientoDia: e.target.value})}/>
-                          <input type="text" placeholder="MM" className="w-1/3 h-12 bg-bg-secondary border border-border-primary rounded-xl px-2 text-center text-sm font-semibold focus:border-emerald-500 outline-none" value={personalData.fechaNacimientoMes} onChange={(e) => setPersonalData({...personalData, fechaNacimientoMes: e.target.value})}/>
-                          <input type="text" placeholder="AAAA" className="w-1/3 h-12 bg-bg-secondary border border-border-primary rounded-xl px-2 text-center text-sm font-semibold focus:border-emerald-500 outline-none" value={personalData.fechaNacimientoAno} onChange={(e) => setPersonalData({...personalData, fechaNacimientoAno: e.target.value})}/>
+                          <input type="text" placeholder="DD" className="w-1/3 h-12 bg-bg-secondary border border-border-primary rounded-xl px-2 text-center text-sm font-semibold yuju-input-emerald" value={personalData.fechaNacimientoDia} onChange={(e) => setPersonalData({...personalData, fechaNacimientoDia: e.target.value})}/>
+                          <input type="text" placeholder="MM" className="w-1/3 h-12 bg-bg-secondary border border-border-primary rounded-xl px-2 text-center text-sm font-semibold yuju-input-emerald" value={personalData.fechaNacimientoMes} onChange={(e) => setPersonalData({...personalData, fechaNacimientoMes: e.target.value})}/>
+                          <input type="text" placeholder="AAAA" className="w-1/3 h-12 bg-bg-secondary border border-border-primary rounded-xl px-2 text-center text-sm font-semibold yuju-input-emerald" value={personalData.fechaNacimientoAno} onChange={(e) => setPersonalData({...personalData, fechaNacimientoAno: e.target.value})}/>
                         </div>
                     </div>
 
                     <div className="space-y-1.5">
                         <label className="text-[10px] font-black uppercase text-text-secondary tracking-widest pl-1">Tipo Doc.</label>
                         <select 
-                            className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold outline-none focus:border-emerald-500 transition-all appearance-none"
+                            className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold yuju-input-emerald appearance-none"
                             value={personalData.tipoDocumento}
                             onChange={(e) => setPersonalData({...personalData, tipoDocumento: e.target.value})}
                         >
@@ -563,7 +563,7 @@ export const HogarCotizador = () => {
                         <label className="text-[10px] font-black uppercase text-text-secondary tracking-widest pl-1">Nro. Documento</label>
                         <input 
                             type="text" 
-                            className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold outline-none focus:border-emerald-500 transition-all"
+                            className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold yuju-input-emerald"
                             value={personalData.dni}
                             onChange={(e) => setPersonalData({...personalData, dni: e.target.value})}
                         />
@@ -572,11 +572,11 @@ export const HogarCotizador = () => {
                     <div className="space-y-1.5 md:col-span-2">
                         <label className="text-[10px] font-black uppercase text-text-secondary tracking-widest pl-1">Teléfono Móvil</label>
                         <div className="flex gap-3">
-                           <div className="flex w-1/3 bg-bg-secondary border border-border-primary rounded-xl overflow-hidden focus-within:border-emerald-500 transition-all h-12">
+                           <div className="flex w-1/3 bg-bg-secondary border border-border-primary rounded-xl overflow-hidden yuju-container-emerald h-12">
                               <span className="h-full flex items-center justify-center bg-bg-primary/50 px-3 text-text-secondary text-xs font-bold border-r border-border-primary">0</span>
                               <input type="text" placeholder="Cód. área" className="w-full bg-transparent px-3 text-sm font-semibold outline-none" value={personalData.codArea} onChange={(e) => setPersonalData({...personalData, codArea: e.target.value})} />
                            </div>
-                           <div className="flex w-2/3 bg-bg-secondary border border-border-primary rounded-xl overflow-hidden focus-within:border-emerald-500 transition-all h-12">
+                           <div className="flex w-2/3 bg-bg-secondary border border-border-primary rounded-xl overflow-hidden yuju-container-emerald h-12">
                               <span className="h-full flex items-center justify-center bg-bg-primary/50 px-3 text-text-secondary text-xs font-bold border-r border-border-primary">15</span>
                               <input type="text" placeholder="Número" className="w-full bg-transparent px-3 text-sm font-semibold outline-none" value={personalData.telefono} onChange={(e) => setPersonalData({...personalData, telefono: e.target.value})} />
                            </div>
@@ -626,7 +626,7 @@ export const HogarCotizador = () => {
                             <label className="text-[9px] font-black uppercase text-text-secondary tracking-widest pl-1">Calle</label>
                             <input 
                                 type="text" 
-                                className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold outline-none focus:border-emerald-500 transition-all"
+                                className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold yuju-input-emerald"
                                 value={addressData.calle}
                                 onChange={(e) => setAddressData({...addressData, calle: e.target.value})}
                             />
@@ -635,7 +635,7 @@ export const HogarCotizador = () => {
                             <label className="text-[9px] font-black uppercase text-text-secondary tracking-widest pl-1">Nro</label>
                             <input 
                                 type="text" 
-                                className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold outline-none focus:border-emerald-500 transition-all"
+                                className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold yuju-input-emerald"
                                 value={addressData.numero}
                                 onChange={(e) => setAddressData({...addressData, numero: e.target.value})}
                             />
@@ -646,7 +646,7 @@ export const HogarCotizador = () => {
                             <label className="text-[9px] font-black uppercase text-text-secondary tracking-widest pl-1">Localidad</label>
                             <input 
                                 type="text" 
-                                className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold outline-none focus:border-emerald-500 transition-all"
+                                className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold yuju-input-emerald"
                                 value={addressData.localidad}
                                 onChange={(e) => setAddressData({...addressData, localidad: e.target.value})}
                             />
@@ -655,7 +655,7 @@ export const HogarCotizador = () => {
                             <label className="text-[9px] font-black uppercase text-text-secondary tracking-widest pl-1">Código Postal</label>
                             <input 
                                 type="text" 
-                                className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold outline-none focus:border-emerald-500 transition-all"
+                                className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold yuju-input-emerald"
                                 value={addressData.codigoPostal}
                                 onChange={(e) => setAddressData({...addressData, codigoPostal: e.target.value})}
                             />
@@ -666,7 +666,7 @@ export const HogarCotizador = () => {
                        <div className="space-y-1.5">
                             <label className="text-[9px] font-black uppercase text-text-secondary tracking-widest pl-1">Su vivienda es</label>
                             <select 
-                                className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold outline-none focus:border-emerald-500 transition-all appearance-none"
+                                className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold yuju-input-emerald appearance-none"
                                 value={addressData.tipoVivienda}
                                 onChange={(e) => setAddressData({...addressData, tipoVivienda: e.target.value})}
                             >
@@ -690,7 +690,7 @@ export const HogarCotizador = () => {
                            <div className="space-y-1.5">
                                 <label className="text-[9px] font-black uppercase text-text-secondary tracking-widest pl-1">Muros</label>
                                 <select 
-                                    className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold outline-none focus:border-emerald-500 transition-all appearance-none"
+                                    className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold yuju-input-emerald appearance-none"
                                     value={addressData.muros}
                                     onChange={(e) => setAddressData({...addressData, muros: e.target.value})}
                                 >
@@ -701,7 +701,7 @@ export const HogarCotizador = () => {
                             <div className="space-y-1.5">
                                 <label className="text-[9px] font-black uppercase text-text-secondary tracking-widest pl-1">Carácter</label>
                                 <select 
-                                    className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold outline-none focus:border-emerald-500 transition-all appearance-none"
+                                    className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold yuju-input-emerald appearance-none"
                                     value={addressData.caracter}
                                     onChange={(e) => setAddressData({...addressData, caracter: e.target.value})}
                                 >
@@ -765,7 +765,7 @@ export const HogarCotizador = () => {
                                 <div className="space-y-1.5">
                                     <label className="text-[9px] font-black uppercase text-text-secondary tracking-widest pl-1">Marca de Tarjeta</label>
                                     <select 
-                                        className="w-full h-12 bg-bg-primary border border-border-primary rounded-xl px-4 text-sm font-semibold outline-none focus:border-emerald-500 appearance-none"
+                                        className="w-full h-12 bg-bg-primary border border-border-primary rounded-xl px-4 text-sm font-semibold yuju-input-emerald appearance-none shadow-sm"
                                         value={paymentData.marcaTarjeta}
                                         onChange={(e) => setPaymentData({...paymentData, marcaTarjeta: e.target.value})}
                                     >

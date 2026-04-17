@@ -455,7 +455,7 @@ export const AutoCotizador = () => {
                             const logoUrl = getInsurerLogo(cot.aseguradora);
                             
                             return (
-                              <div key={idx} className="bg-bg-secondary/20 backdrop-blur-sm border border-border-primary rounded-xl p-3 sm:p-4 flex flex-col shadow-sm hover:shadow-xl hover:shadow-yuju-blue/10 hover:border-yuju-blue/30 transition-all duration-500 relative overflow-hidden group/card h-[190px] sm:h-[210px]">
+                              <div key={idx} className="bg-bg-secondary/20 backdrop-blur-sm border-2 border-border-primary/50 rounded-2xl p-3 sm:p-4 flex flex-col shadow-sm hover:shadow-[0_0_20px_rgba(51,105,255,0.25)] hover:border-yuju-blue transition-all duration-500 relative overflow-hidden group/card h-[190px] sm:h-[210px]">
                                 {/* Glassmore Hover Gradient */}
                                 <div className="absolute inset-0 bg-gradient-to-br from-yuju-blue/10 to-yuju-cyan/10 opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 pointer-events-none -z-10 blur-xl" />
                                 <div className="absolute inset-0 bg-bg-primary/5 opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 pointer-events-none -z-10 backdrop-blur-md" />

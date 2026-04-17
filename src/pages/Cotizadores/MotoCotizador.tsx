@@ -6,6 +6,8 @@ import { Button } from '../../components/ui/Button';
 import { Layout } from '../../layout/Layout';
 import { SEOHelmet } from '../../components/SEO/SEOHelmet';
 import { MotoResultsGrid } from '../../components/MotoResultsGrid';
+import RusProposalModal from '../../components/cotizadores/RusProposalModal';
+import AtmProposalModal from '../../components/cotizadores/AtmProposalModal';
 import { FAQAccordion } from '../../components/cotizadores/FAQAccordion';
 
 const motoFAQ = [
@@ -37,7 +39,8 @@ import {
   getVigencias,
   cotizar,
   cotizarATM,
-  cotizarIntegrity
+  cotizarIntegrity,
+  cotizarSanCristobal
 } from '../../services/motoApi';
 
 export const MotoCotizador = () => {
@@ -69,11 +72,13 @@ export const MotoCotizador = () => {
   
   const [quotationResult, setQuotationResult] = useState<any>(null);
   const [quotationLoading, setQuotationLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [, setError] = useState<string | null>(null);
 
   // Modals state
   const [conflictModalOpen, setConflictModalOpen] = useState(false);
   const [whatsappModalOpen, setWhatsappModalOpen] = useState(false);
+  const [emissionModalOpen, setEmissionModalOpen] = useState(false);
+  const [emissionModalSource, setEmissionModalSource] = useState('');
   const [payWithCard, setPayWithCard] = useState(true);
   const [selectedQuoteObj, setSelectedQuoteObj] = useState<any>(null);
 
@@ -259,7 +264,7 @@ export const MotoCotizador = () => {
     };
 
     try {
-        const [rusResult, atmResult, integrityResult] = await Promise.allSettled([
+        const [rusResult, atmResult, integrityResult, sancristobalResult] = await Promise.allSettled([
             cotizar(payload),
             cotizarATM({
                 codia: String(selectedModel.codia),
@@ -272,13 +277,20 @@ export const MotoCotizador = () => {
                 anio: parseInt(selectedYear),
                 codigoPostal: zipCode,
                 localidad: selectedLocality ? (selectedLocality.id || selectedLocality.ID) : ""
+            }),
+            cotizarSanCristobal({
+                codia: String(selectedModel.codia),
+                anio: parseInt(selectedYear),
+                localidad: selectedLocality ? (selectedLocality.id || selectedLocality.ID) : "",
+                sumaAsegurada: null
             })
         ]);
 
-        const combined: any = { rus: null, atm: null, integrity: null };
+        const combined: any = { rus: null, atm: null, integrity: null, sancristobal: null };
         if (rusResult.status === 'fulfilled') combined.rus = rusResult.value;
         if (atmResult.status === 'fulfilled') combined.atm = atmResult.value;
         if (integrityResult.status === 'fulfilled') combined.integrity = integrityResult.value;
+        if (sancristobalResult.status === 'fulfilled') combined.sancristobal = sancristobalResult.value;
 
         setQuotationResult(combined);
     } catch (err: any) {
@@ -292,15 +304,31 @@ export const MotoCotizador = () => {
     }
   };
 
-  const handleContractClick = (quote: any, source: string) => {
+  const getVehicleDetails = () => {
+      if (!selectedBrand || !selectedModel) return null;
+      return {
+          brand: selectedBrand.name,
+          model: selectedModel.group?.name || '',
+          version: selectedModel.description || '',
+          year: selectedYear,
+          codia: selectedModel.codia
+      };
+  };
+
+  const handleContractClick = (quote: any, source: string, isEmissionFlow: boolean) => {
       setSelectedQuoteObj({ quote, source });
-      setWhatsappModalOpen(true);
+      if (isEmissionFlow) {
+          setEmissionModalSource(source);
+          setEmissionModalOpen(true);
+      } else {
+          setWhatsappModalOpen(true);
+      }
   };
 
   const handleWhatsAppRedirect = () => {
       const { quote, source } = selectedQuoteObj;
-      let text = `Hola! Quiero contratar el seguro para mi moto.\n\n`;
-      text += `*Moto:* ${selectedBrand?.name} ${selectedModel?.group?.name} ${selectedModel?.description}\n`;
+      let text = `Soy una persona interesada en contratar un seguro de motos a través de wsp. Quiero contratar el seguro:\n\n`;
+      text += `Aseguradora: ${source}\n`;
       text += `*Año:* ${selectedYear}\n`;
       text += `*Compañía:* ${source}\n`;
       if(source === 'RUS') {
@@ -436,7 +464,7 @@ export const MotoCotizador = () => {
                         }}
                         onFocus={() => setBrandListOpen(true)}
                         placeholder="Ej. Yamaha" 
-                        className="w-full bg-bg-secondary border border-border-primary rounded-2xl pl-12 pr-5 py-4 text-text-primary focus:border-orange-500 outline-none transition-all font-bold" 
+                        className="w-full bg-bg-secondary border border-border-primary rounded-2xl pl-12 pr-5 py-4 text-text-primary yuju-input-orange transition-all font-bold shadow-sm" 
                     />
                     {brandsLoading && <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs text-orange-500 animate-pulse">Cargando...</span>}
                     {brandListOpen && (
@@ -493,7 +521,7 @@ export const MotoCotizador = () => {
                         value={selectedYear}
                         onChange={(e) => handleYearSelect(e.target.value)}
                         disabled={!selectedBrand || allModelsLoading}
-                        className="w-full bg-bg-secondary border border-border-primary rounded-2xl px-5 py-4 text-text-primary focus:border-orange-500 outline-none transition-all disabled:opacity-50 appearance-none cursor-pointer font-bold"
+                        className="w-full bg-bg-secondary border border-border-primary rounded-2xl px-5 py-4 text-text-primary yuju-input-orange transition-all disabled:opacity-50 appearance-none cursor-pointer font-bold shadow-sm"
                     >
                         <option value="" disabled>Seleccioná el año</option>
                         {availableYears.map(y => (
@@ -529,7 +557,7 @@ export const MotoCotizador = () => {
                             setSelectedModel(mod);
                         }}
                         disabled={!selectedYear}
-                        className="w-full bg-bg-secondary border border-border-primary rounded-2xl px-5 py-4 text-text-primary focus:border-orange-500 outline-none transition-all disabled:opacity-50 appearance-none cursor-pointer font-bold"
+                        className="w-full bg-bg-secondary border border-border-primary rounded-2xl px-5 py-4 text-text-primary yuju-input-orange transition-all disabled:opacity-50 appearance-none cursor-pointer font-bold shadow-sm"
                     >
                         <option value="" disabled>Seleccioná la versión exacta</option>
                         {filteredModels.map(m => (
@@ -566,7 +594,7 @@ export const MotoCotizador = () => {
                             value={zipCode}
                             onChange={(e) => handleZipCodeSearch(e.target.value)}
                             placeholder="C.P. Ej. 1425" 
-                            className="w-full bg-bg-secondary border border-border-primary rounded-2xl p-4 font-bold text-text-primary focus:border-orange-500 outline-none transition-all" 
+                            className="w-full bg-bg-secondary border border-border-primary rounded-2xl p-4 font-bold text-text-primary yuju-input-orange transition-all shadow-sm" 
                         />
                         {localitiesLoading && <Loader2 size={16} className="absolute right-4 top-1/2 -translate-y-1/2 animate-spin text-orange-500" />}
                     </div>
@@ -579,7 +607,7 @@ export const MotoCotizador = () => {
                             setSelectedLocality(loc);
                         }}
                         disabled={localities.length === 0}
-                        className="w-full bg-bg-secondary border border-border-primary rounded-2xl px-5 py-4 text-text-primary focus:border-orange-500 outline-none transition-all cursor-pointer disabled:opacity-50 font-bold"
+                        className="w-full bg-bg-secondary border border-border-primary rounded-2xl px-5 py-4 text-text-primary yuju-input-orange transition-all cursor-pointer disabled:opacity-50 font-bold shadow-sm"
                     >
                         {localities.length === 0 ? (
                             <option value="">Esperando CP...</option>
@@ -655,6 +683,8 @@ export const MotoCotizador = () => {
                         payWithCard={payWithCard} 
                         setPayWithCard={setPayWithCard} 
                         onContract={handleContractClick} 
+                        vehicleInfo={getVehicleDetails()}
+                        zipCode={zipCode}
                     />
                   )}
                </motion.div>
@@ -666,6 +696,30 @@ export const MotoCotizador = () => {
       </div>
 
       {/* --- MODALS --- */}
+      <RusProposalModal
+          isOpen={emissionModalOpen && emissionModalSource === 'RUS'}
+          onClose={() => setEmissionModalOpen(false)}
+          quote={selectedQuoteObj?.quote}
+          quotationContext={{
+              vigencias: [{id: 2, ID: 2, descripcion: "ANUAL"}],
+              selectedVigencia: 2,
+              selectedLocality,
+              year: selectedYear,
+              selectedVersionId: selectedModel?.codia
+          }}
+          vehicleInfo={getVehicleDetails()}
+          payWithCard={payWithCard}
+      />
+      <AtmProposalModal
+          isOpen={emissionModalOpen && emissionModalSource === 'ATM'}
+          onClose={() => setEmissionModalOpen(false)}
+          cobertura={selectedQuoteObj?.quote?.cobertura}
+          atmOperacion={selectedQuoteObj?.quote?.operacion}
+          vehicleInfo={getVehicleDetails()}
+          zipCode={zipCode}
+          payWithCard={payWithCard}
+      />
+
       {conflictModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-bg-dark/80 backdrop-blur-sm">
             <GlassCard className="p-8 max-w-md w-full relative">

@@ -51,14 +51,7 @@ const COVERAGE_FILTERS: any = {
 
 type InternalType = 'rc' | 'terceros' | 'tercerosCompleto' | 'todoRiesgo';
 
-function mapToInternalType(c: CoverageCategory): InternalType {
-  switch (c) {
-    case 'Responsabilidad Civil': return 'rc';
-    case 'Terceros Completo': return 'terceros';
-    case 'Terceros Completo Full': return 'tercerosCompleto';
-    case 'Todo Riesgo': return 'todoRiesgo';
-  }
-}
+
 
 /**
  * Lógica base heredada de v1 para mapear la categoría genérica

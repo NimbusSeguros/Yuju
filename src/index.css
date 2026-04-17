@@ -55,6 +55,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -64,6 +65,8 @@ body {
   -webkit-font-smoothing: antialiased;
   transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   min-height: 100vh;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 h1, h2, h3, .font-accent {
@@ -94,7 +97,7 @@ h1, h2, h3, .font-accent {
   }
 
   .hero-box-highlight {
-    @apply bg-yuju-cyan/70 py-3 px-8 text-white font-black inline-block rounded-none;
+    @apply bg-yuju-cyan py-3 px-8 text-white font-black inline-block rounded-xl;
   }
 
   .section-title {
@@ -103,6 +106,31 @@ h1, h2, h3, .font-accent {
 
   .section-subtitle {
      @apply text-lg text-text-secondary max-w-2xl leading-relaxed font-medium;
+  }
+
+  /* Glow Utilities for Inputs */
+  .yuju-input-emerald {
+    @apply transition-all duration-300 outline-none focus:ring-4 focus:ring-emerald-500/15 focus:border-emerald-500 focus:shadow-[0_0_20px_rgba(16,185,129,0.1)];
+  }
+  
+  .yuju-input-blue {
+    @apply transition-all duration-300 outline-none focus:ring-4 focus:ring-yuju-blue/15 focus:border-yuju-blue focus:shadow-[0_0_20px_rgba(51,105,255,0.1)];
+  }
+  
+  .yuju-input-orange {
+    @apply transition-all duration-300 outline-none focus:ring-4 focus:ring-orange-500/15 focus:border-orange-500 focus:shadow-[0_0_20px_rgba(249,115,22,0.1)];
+  }
+
+  .yuju-container-emerald {
+    @apply transition-all duration-300 focus-within:ring-4 focus-within:ring-emerald-500/15 focus-within:border-emerald-500 focus-within:shadow-[0_0_20px_rgba(16,185,129,0.1)];
+  }
+
+  .yuju-container-blue {
+    @apply transition-all duration-300 focus-within:ring-4 focus-within:ring-yuju-blue/15 focus-within:border-yuju-blue focus-within:shadow-[0_0_20px_rgba(51,105,255,0.1)];
+  }
+
+  .yuju-container-orange {
+    @apply transition-all duration-300 focus-within:ring-4 focus-within:ring-orange-500/15 focus-within:border-orange-500 focus-within:shadow-[0_0_20px_rgba(249,115,22,0.1)];
   }
 }
 

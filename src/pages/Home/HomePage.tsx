@@ -201,7 +201,7 @@ export const HomePage = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {services.map((service, i) => (
+            {services.map((service) => (
               <GlassCard
                 key={service.title}
                 className={cn(

@@ -38,6 +38,7 @@ export const Navbar = () => {
   const location = useLocation();
   const { theme, toggleTheme } = useTheme();
   const isHomePage = location.pathname === '/';
+  const isCotizador = location.pathname.includes('/cotizar/');
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -47,7 +48,8 @@ export const Navbar = () => {
 
   return (
     <nav className={cn(
-      "fixed top-0 left-0 right-0 z-50 transition-all duration-700 ease-in-out",
+      isCotizador ? "absolute" : "fixed",
+      "top-0 left-0 right-0 z-50 transition-all duration-700 ease-in-out",
       scrolled ? "py-3 md:py-4 px-6" : "py-4 md:py-6 px-6 md:px-8"
     )}>
       <motion.div 

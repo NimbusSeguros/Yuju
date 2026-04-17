@@ -37,7 +37,7 @@ export const YearSelect: React.FC<YearSelectProps> = ({ value, onChange, hasErro
     <div className="relative w-full" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`w-full h-[56px] bg-bg-secondary border ${hasError ? 'border-red-500' : 'border-border-primary'} rounded-2xl px-5 flex items-center justify-between group hover:border-yuju-blue transition-all outline-none focus:outline-none focus:ring-2 focus:ring-yuju-blue/20`}
+        className={`w-full h-[56px] bg-bg-secondary border ${hasError ? 'border-red-500' : 'border-border-primary'} rounded-2xl px-5 flex items-center justify-between group yuju-input-blue transition-all shadow-sm`}
       >
         <span className={`${value ? 'text-text-primary font-bold' : 'text-text-secondary opacity-50'} text-base uppercase font-bold tracking-tight`}>
           {value || "Seleccioná el año"}

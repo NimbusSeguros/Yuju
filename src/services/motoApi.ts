@@ -184,4 +184,15 @@ export const cotizarIntegrity = async ({ codia, brandId, anio, codigoPostal, loc
     return response.data;
 };
 
+// --- San Cristobal Seguros ---
+export const cotizarSanCristobal = async ({ codia, anio, localidad, sumaAsegurada }: any) => {
+    const response = await axios.post('/api/sancristobal/cotizar', {
+        codia,
+        anio,
+        localidad,
+        sumaAsegurada
+    });
+    return response.data;
+};
+
 export default api;
