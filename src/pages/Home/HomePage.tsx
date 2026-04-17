@@ -7,27 +7,27 @@ import { cn } from '../../utils/utils';
 import { useTheme } from '../../hooks/useTheme';
 
 const services = [
-  { 
-    title: 'Seguro de Auto', 
-    icon: Car, 
+  {
+    title: 'Seguro de Auto',
+    icon: Car,
     desc: 'Protección inteligente para tu vehículo con asistencia mecánica 24/7.',
     href: '/cotizar/seguro-auto',
     color: 'from-[#3369ff] to-[#60a5fa]',
     hoverColor: 'border-yuju-blue/20',
     btnHover: 'hover:bg-yuju-blue shadow-yuju-blue/20'
   },
-  { 
-    title: 'Seguro de Moto', 
-    icon: Bike, 
+  {
+    title: 'Seguro de Moto',
+    icon: Bike,
     desc: 'Cobertura especializada para rodar con total libertad y tranquilidad.',
     href: '/cotizar/seguro-moto',
     color: 'from-orange-500 to-orange-400',
     hoverColor: 'border-orange-500/20',
     btnHover: 'hover:bg-orange-500 shadow-orange-500/20'
   },
-  { 
-    title: 'Seguro de Hogar', 
-    icon: Home, 
+  {
+    title: 'Seguro de Hogar',
+    icon: Home,
     desc: 'Tu refugio, protegido con la mayor seguridad y beneficios exclusivos.',
     href: '/cotizar/seguro-hogar',
     color: 'from-emerald-500 to-emerald-400',
@@ -48,30 +48,30 @@ const partners = [
 ];
 
 const testimonials = [
-  { 
-    name: 'Lucía López', 
-    date: '03/01/2024', 
-    text: 'Estoy muy contenta con el servicio de Yuju seguros. La atención de Malena fue excelente. Los recomiendo 100%.' 
+  {
+    name: 'Lucía López',
+    date: '03/01/2024',
+    text: 'Estoy muy contenta con el servicio de Yuju seguros. La atención de Malena fue excelente. Los recomiendo 100%.'
   },
-  { 
-    name: 'Martín Fernández', 
-    date: '21/12/2023', 
-    text: 'Muy satisfecho con el servicio. Me ofrecieron el mejor precio y cobertura para mi seguro. Los recomiendo.' 
+  {
+    name: 'Martín Fernández',
+    date: '21/12/2023',
+    text: 'Muy satisfecho con el servicio. Me ofrecieron el mejor precio y cobertura para mi seguro. Los recomiendo.'
   },
-  { 
-    name: 'Pablo Rodríguez', 
-    date: '19/02/2024', 
-    text: 'Me atendieron súper rápido y pude contratar de forma sencilla. Me explicaron todo con claridad y con paciencia.' 
+  {
+    name: 'Pablo Rodríguez',
+    date: '19/02/2024',
+    text: 'Me atendieron súper rápido y pude contratar de forma sencilla. Me explicaron todo con claridad y con paciencia.'
   },
-  { 
-    name: 'Laura González', 
-    date: '10/03/2024', 
-    text: 'Me está asesorando Malena. ¡Una genia! Me atendió de forma impecable y me dio el mejor precio.' 
+  {
+    name: 'Laura González',
+    date: '10/03/2024',
+    text: 'Me está asesorando Malena. ¡Una genia! Me atendió de forma impecable y me dio el mejor precio.'
   },
-  { 
-    name: 'Carlos Mendez', 
-    date: '15/03/2024', 
-    text: 'Excelente atención y rapidez en la gestión. El precio fue el más competitivo que encontré.' 
+  {
+    name: 'Carlos Mendez',
+    date: '15/03/2024',
+    text: 'Excelente atención y rapidez en la gestión. El precio fue el más competitivo que encontré.'
   },
 ];
 
@@ -80,9 +80,9 @@ export const HomePage = () => {
 
   return (
     <div className="relative overflow-hidden bg-bg-primary transition-colors duration-500">
-      
+
       {/* SECTION: HERO - Reworked for Yuju Blue style + Real Image */}
-      <section className="relative min-h-screen flex items-center pt-24 md:pt-28 pb-12 overflow-hidden px-6">
+      <section className="relative min-h-screen flex items-center pt-20 md:pt-24 pb-8 overflow-hidden px-6">
         {/* Background Base (Yuju Blue) */}
         <div className="absolute inset-0 bg-yuju-blue z-0 overflow-hidden">
           {/* Subtle tech patterns overlay */}
@@ -91,126 +91,102 @@ export const HomePage = () => {
           <motion.div animate={{ scale: [1, 1.2, 1], rotate: [0, 90, 0] }} transition={{ duration: 20, repeat: Infinity, ease: "linear" }} className="absolute -top-1/4 -left-1/4 w-[800px] h-[800px] bg-yuju-cyan blur-[180px] rounded-full opacity-50" />
           <motion.div animate={{ scale: [1, 1.4, 1], rotate: [0, -120, 0] }} transition={{ duration: 30, repeat: Infinity, ease: "linear" }} className="absolute -bottom-1/4 -right-1/6 w-[700px] h-[700px] bg-yuju-cyan blur-[200px] rounded-full opacity-40" />
           <motion.div animate={{ scale: [1, 1.3, 1], rotate: [0, -90, 0] }} transition={{ duration: 25, repeat: Infinity, ease: "linear" }} className="absolute -bottom-1/4 -right-1/4 w-[600px] h-[600px] bg-[#3369ff] blur-[150px] rounded-full opacity-40 border border-white/5" />
-          
+
           {/* Real Background Image Overlay (Right Side) */}
           <div className="absolute inset-0 z-10 pointer-events-none">
-            <div className="absolute inset-y-0 right-0 w-full lg:w-3/5 bg-cover bg-center lg:rounded-l-[80px] opacity-40 lg:opacity-100" 
-                 style={{ 
-                   backgroundImage: `url('file:///C:/Users/schut/.gemini/antigravity/brain/864463c5-3699-4436-912c-8ec06fa1c974/premium_yuju_hero_family_car_2026_1775603137026.png')`,
-                   maskImage: 'linear-gradient(to left, black 60%, transparent 100%)',
-                   WebkitMaskImage: 'linear-gradient(to left, black 60%, transparent 100%)'
-                 }} />
+            <div className="absolute inset-y-0 right-0 w-full lg:w-3/5 bg-cover bg-center lg:rounded-l-[80px] opacity-40 lg:opacity-100"
+              style={{
+                backgroundImage: `url('file:///C:/Users/schut/.gemini/antigravity/brain/864463c5-3699-4436-912c-8ec06fa1c974/premium_yuju_hero_family_car_2026_1775603137026.png')`,
+                maskImage: 'linear-gradient(to left, black 60%, transparent 100%)',
+                WebkitMaskImage: 'linear-gradient(to left, black 60%, transparent 100%)'
+              }} />
             <div className="absolute inset-0 bg-gradient-to-r from-yuju-blue via-yuju-blue/40 to-transparent lg:hidden" />
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-16 relative z-20 items-center">
-          <div className="space-y-6 md:space-y-8 lg:space-y-12">
-
-            <motion.h1 
+        <div className="max-w-5xl mx-auto w-full relative z-20 flex flex-col items-center text-center space-y-8 py-6 md:py-8">
+          <div className="space-y-4 md:space-y-6">
+            <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="text-2xl md:text-3xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-black leading-none text-white font-accent uppercase tracking-tighter"
+              className="space-y-3"
             >
-              Conectá <br />
-              <span className="text-white/50 italic pr-4 tracking-normal">e</span> 
-              Inspirá <br />
-              <div className="hero-highlight mt-4 md:mt-0">Seguridad</div>
-            </motion.h1>
+              <h1 className="text-4xl md:text-5xl lg:text-7xl font-black leading-tight text-white font-accent tracking-tighter">
+                Conectá con la alegría <br /> de estar protegido.
+              </h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-xl text-white/80 max-w-lg leading-relaxed font-medium"
-            >
-              Conectá con la alegría de estar protegido. Elegí, cotizá y viví seguro en segundos con inteligencia de última generación.
-            </motion.p>
+              <div className="pt-1">
+                <div className="hero-box-highlight">
+                  <span className="text-xl md:text-3xl lg:text-4xl  tracking-tighter">
+                    Elegí, cotizá y viví seguro,
+                  </span>
+                </div>
+              </div>
+
+              <p className="text-2xl md:text-3xl lg:text-4xl text-white font-medium tracking-tight">
+                en unos simples pasos
+              </p>
+            </motion.div>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="flex flex-wrap gap-5"
+              className="flex flex-wrap items-center justify-center pt-4"
             >
-              <Link to="/cotizar/seguro-auto" className="w-full md:w-auto">
-                <Button size="lg" className="w-full md:bg-white md:text-yuju-blue bg-white text-yuju-blue hover:bg-white/95 px-10 border-none group transition-all duration-500 shadow-2xl hover:shadow-white/20">
-                  Cotizar Auto <ChevronRight size={20} className="ml-2 group-hover:translate-x-1.5 transition-transform" />
+              <a href="#seguros" className="w-full sm:w-auto">
+                <Button size="lg" className="w-full bg-white/10 hover:bg-white text-white hover:text-yuju-blue border-white/20 px-12 h-16 rounded-2xl font-black uppercase tracking-widest text-xs transition-all duration-500 backdrop-blur-md">
+                  Cotizá ahora <ArrowRight size={20} className="ml-3" />
                 </Button>
-              </Link>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
-              className="flex items-center gap-10 pt-10 border-t border-white/10"
-            >
-               <div className="flex flex-col">
-                  <span className="text-3xl font-black text-white font-accent">1M+</span>
-                  <span className="text-[10px] text-yuju-cyan font-black uppercase tracking-widest">Protegidos</span>
-               </div>
-               <div className="w-px h-12 bg-white/10" />
-               <div className="flex flex-col">
-                  <span className="text-3xl font-black text-white font-accent">4.9</span>
-                  <span className="text-[10px] text-yuju-cyan font-black uppercase tracking-widest">Valoración</span>
-               </div>
+              </a>
             </motion.div>
           </div>
         </div>
-        
+
         {/* Scroll indicator for tech feel */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-20">
-          <div className="w-6 h-10 border-2 border-white/20 rounded-full flex justify-center p-1">
-            <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 2, repeat: Infinity }} className="w-1.5 h-1.5 bg-yuju-cyan rounded-full" />
+        <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-20 opacity-40">
+          <div className="w-5 h-8 border-2 border-white/20 rounded-full flex justify-center p-1">
+            <motion.div animate={{ y: [0, 6, 0] }} transition={{ duration: 2, repeat: Infinity }} className="w-1 h-1 bg-yuju-cyan rounded-full" />
           </div>
         </div>
       </section>
 
       {/* SECTION: TRUST - Sourced from dev_v1 partners */}
-      <section className="py-24 bg-bg-primary overflow-hidden border-b border-border-primary">
-         <div className="max-w-7xl mx-auto px-6 mb-12 text-center md:text-left flex flex-col md:flex-row md:items-end justify-between gap-6">
-           <div className="space-y-4">
-             <h2 className="text-xl font-black uppercase tracking-widest text-text-primary/40 font-accent">Nuestras Alianzas</h2>
-             <p className="text-3xl font-black text-text-primary uppercase tracking-tighter">Trabajamos junto a líderes</p>
-           </div>
-           <div className="text-text-secondary font-bold text-sm uppercase tracking-widest">Aseguradoras Aliadas</div>
-         </div>
-         
-         <div className="logo-track-container relative">
-           <div className="logo-track py-10 grayscale-0 opacity-100">
-             {[...partners, ...partners, ...partners].map((logo, i) => {
-               const isMercantil = logo.includes('MERCANTIL');
-               const isFedPat = logo.includes('FEDPA');
-               
-               let logoSrc = logo;
-               if (theme === 'dark') {
-                 if (isMercantil) logoSrc = "https://res.cloudinary.com/dr8n9s55i/image/upload/v1755863727/mercantil_xhcmdc.png";
-                 if (isFedPat) logoSrc = "https://res.cloudinary.com/dr8n9s55i/image/upload/v1758284666/Logo_FedPat_-_Blanco_myusp4.png";
-               }
+      <section className="py-8 bg-bg-primary overflow-hidden border-y border-border-primary/50 relative z-30">
+        <div className="logo-track-container relative">
+          <div className="logo-track grayscale-0 opacity-100 items-center">
+            {[...partners, ...partners, ...partners].map((logo, i) => {
+              const isMercantil = logo.includes('MERCANTIL');
+              const isFedPat = logo.includes('FEDPA');
 
-               return (
-                 <div key={i} className="min-w-[280px] h-28 flex items-center justify-center p-6">
-                   <img 
-                     src={logoSrc} 
-                     alt="Partner" 
-                     className={cn(
-                       "max-h-full w-auto object-contain filter drop-shadow-md transition-all duration-700 hover:scale-110",
-                       theme === 'dark' 
-                         ? ((isMercantil || isFedPat) ? "opacity-60 hover:opacity-100" : "brightness-0 invert opacity-60 hover:brightness-100 hover:invert-0 hover:opacity-100") 
-                         : "grayscale-0 opacity-100"
-                     )} 
-                   />
-                 </div>
-               );
-             })}
-           </div>
-         </div>
+              let logoSrc = logo;
+              if (theme === 'dark') {
+                if (isMercantil) logoSrc = "https://res.cloudinary.com/dr8n9s55i/image/upload/v1755863727/mercantil_xhcmdc.png";
+                if (isFedPat) logoSrc = "https://res.cloudinary.com/dr8n9s55i/image/upload/v1758284666/Logo_FedPat_-_Blanco_myusp4.png";
+              }
+
+              return (
+                <div key={i} className="min-w-[180px] h-14 flex items-center justify-center px-4">
+                  <img
+                    src={logoSrc}
+                    alt="Partner"
+                    className={cn(
+                      "max-h-full w-auto object-contain filter drop-shadow-sm transition-all duration-700 hover:scale-105",
+                      theme === 'dark'
+                        ? ((isMercantil || isFedPat) ? "opacity-50 hover:opacity-100" : "brightness-0 invert opacity-40 hover:brightness-100 hover:invert-0 hover:opacity-100")
+                        : "grayscale opacity-50 hover:grayscale-0 hover:opacity-100"
+                    )}
+                  />
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </section>
 
       {/* SECTION: SERVICES - Unified Design */}
-      <section id="seguros" className="py-32 px-6 bg-bg-secondary">
+      <section id="seguros" className="py-10 px-6 bg-bg-secondary scroll-mt-32">
         <div className="max-w-7xl mx-auto">
           <div className="mb-24 flex flex-col md:flex-row md:items-end justify-between gap-12">
             <div className="space-y-6">
@@ -224,39 +200,48 @@ export const HomePage = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {services.map((service, i) => (
-              <GlassCard 
+              <GlassCard
                 key={service.title}
                 className={cn(
-                  "group p-8 border-border-primary bg-bg-primary transition-all duration-700 relative overflow-hidden flex flex-col min-h-[420px]",
+                  "group p-6 border-border-primary bg-bg-primary transition-all duration-700 relative overflow-hidden flex flex-col h-full min-h-[340px] rounded-[32px]",
                   `hover:${service.hoverColor}`
                 )}
               >
                 {/* Background glow per service color */}
-                <div className={cn("absolute -bottom-20 -right-20 w-40 h-40 blur-3xl opacity-0 group-hover:opacity-10 transition-opacity rounded-full bg-gradient-to-tr", service.color)} />
-                
-                <div className={cn(
-                  "w-16 h-16 rounded-2xl bg-gradient-to-br mb-8 flex items-center justify-center transition-all duration-700 group-hover:rotate-6 group-hover:scale-110 shadow-lg",
-                  service.color
-                )}>
-                  <service.icon className="text-white" size={32} />
+                <div className={cn("absolute -bottom-20 -right-20 w-48 h-48 blur-3xl opacity-0 group-hover:opacity-25 transition-opacity rounded-full bg-gradient-to-tr", service.color)} />
+
+                <div className="relative mb-6">
+                  <motion.div
+                    animate={{ y: [0, -5, 0] }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                    className={cn(
+                      "w-16 h-16 rounded-2xl flex items-center justify-center relative z-10",
+                      "bg-gradient-to-br border border-white/20 shadow-xl",
+                      service.color
+                    )}
+                  >
+                    <service.icon size={32} className="text-white" />
+                  </motion.div>
+                  {/* Subtle soft shadow/glow behind icon */}
+                  <div className={cn("absolute inset-0 blur-xl opacity-40 scale-110", service.color)} />
                 </div>
-                
-                <h3 className="text-3xl font-black text-text-primary mb-5 font-accent tracking-tighter uppercase whitespace-pre-wrap">{service.title}</h3>
-                <p className="text-text-secondary mb-10 leading-relaxed font-medium">
+
+                <h3 className="text-2xl font-black text-text-primary mb-3 font-accent tracking-tighter uppercase whitespace-pre-wrap leading-tight min-h-[4rem] flex items-center">{service.title}</h3>
+                <p className="text-text-secondary mb-8 leading-relaxed font-medium text-sm min-h-[4.5rem]">
                   {service.desc}
                 </p>
-                
+
                 <div className="mt-auto">
                   <Link to={service.href} className="block group/btn">
                     <Button variant="ghost" className={cn(
-                      "w-full text-text-primary font-black uppercase tracking-widest text-xs flex items-center justify-between px-6 py-4 rounded-2xl bg-bg-secondary transition-all duration-300",
+                      "w-full text-text-primary font-black uppercase tracking-widest text-[10px] flex items-center justify-between px-6 py-4 rounded-2xl bg-bg-secondary transition-all duration-300",
                       service.btnHover,
                       "hover:text-white"
                     )}>
                       <span>Ver detalles</span>
-                      <ArrowRight size={18} className="translate-x-0 group-hover/btn:translate-x-1.5 transition-transform" />
+                      <ArrowRight size={16} className="translate-x-0 group-hover/btn:translate-x-1.5 transition-transform" />
                     </Button>
                   </Link>
                 </div>
@@ -267,75 +252,75 @@ export const HomePage = () => {
       </section>
 
       {/* SECTION: EXPERIENCE REWORKED - The "Yuju v1" spirit modernized */}
-      <section className="py-32 px-6 relative bg-bg-primary overflow-hidden">
-         <div className="absolute top-0 right-0 w-[50%] h-full bg-yuju-blue/5 -skew-x-12 translate-x-1/2" />
-         
-         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
-            <div className="relative">
-              <motion.div initial={{ scale: 0.9, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} transition={{ duration: 1 }}>
-                <div className="relative rounded-[40px] overflow-hidden shadow-2xl border-4 border-white dark:border-white/10 aspect-video">
-                  <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&q=80&w=1000" 
-                       alt="Lifestyle" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000 duration-500" />
-                  <div className="absolute inset-0 bg-yuju-blue/20 mix-blend-multiply" />
+      <section className="py-10 px-6 relative bg-bg-primary overflow-hidden">
+        <div className="absolute top-0 right-0 w-[50%] h-full bg-yuju-blue/5 -skew-x-12 translate-x-1/2" />
+
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+          <div className="relative">
+            <motion.div initial={{ scale: 0.9, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} transition={{ duration: 1 }}>
+              <div className="relative rounded-[40px] overflow-hidden shadow-2xl border-4 border-white dark:border-white/10 aspect-video">
+                <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&q=80&w=1000"
+                  alt="Lifestyle" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000 duration-500" />
+                <div className="absolute inset-0 bg-yuju-blue/20 mix-blend-multiply" />
+              </div>
+
+              {/* Floating Tech Badge */}
+              <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 4, repeat: Infinity }} className="absolute -bottom-10 -right-10 glass-card p-6 rounded-3xl border-yuju-blue/20 bg-bg-primary/90 flex items-center gap-4 shadow-2xl">
+                <div className="w-12 h-12 bg-yuju-cyan/20 text-yuju-cyan flex items-center justify-center rounded-2xl">
+                  <Activity size={24} />
                 </div>
-                
-                {/* Floating Tech Badge */}
-                <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 4, repeat: Infinity }} className="absolute -bottom-10 -right-10 glass-card p-6 rounded-3xl border-yuju-blue/20 bg-bg-primary/90 flex items-center gap-4 shadow-2xl">
-                   <div className="w-12 h-12 bg-yuju-cyan/20 text-yuju-cyan flex items-center justify-center rounded-2xl">
-                      <Activity size={24} />
-                   </div>
-                   <div className="flex flex-col pr-10">
-                      <span className="text-[10px] font-black uppercase tracking-widest text-text-secondary">Monitoreo</span>
-                      <span className="text-sm font-black text-text-primary uppercase font-accent">Tecnología Activa</span>
-                   </div>
-                </motion.div>
+                <div className="flex flex-col pr-10">
+                  <span className="text-[10px] font-black uppercase tracking-widest text-text-secondary">Monitoreo</span>
+                  <span className="text-sm font-black text-text-primary uppercase font-accent">Tecnología Activa</span>
+                </div>
               </motion.div>
+            </motion.div>
+          </div>
+
+          <div className="space-y-10">
+            <div className="space-y-4">
+              <h2 className="section-title uppercase">Nacimos para<br />simplificar el futuro</h2>
+              <p className="text-text-secondary leading-relaxed font-medium">
+                Somos una empresa joven, dinámica y comprometida con la innovación y la sostenibilidad. Nacimos como la evolución digital de Nimbus Bróker, integrando 15 años de trayectoria con la agilidad del mañana.
+              </p>
             </div>
 
-            <div className="space-y-10">
-               <div className="space-y-4">
-                 <h2 className="section-title uppercase">Nacimos para<br/>simplificar el futuro</h2>
-                 <p className="text-text-secondary leading-relaxed font-medium">
-                   Somos una empresa joven, dinámica y comprometida con la innovación y la sostenibilidad. Nacimos como la evolución digital de Nimbus Bróker, integrando 15 años de trayectoria con la agilidad del mañana.
-                 </p>
-               </div>
-
-               <div className="grid grid-cols-2 gap-8">
-                  <div className="space-y-3">
-                     <div className="flex items-center gap-2 text-yuju-blue">
-                        <MousePointer2 size={16} />
-                        <span className="text-xs font-black uppercase tracking-widest">Digital First</span>
-                     </div>
-                     <p className="text-sm font-bold text-text-primary">Experiencia 100% online, sin papeles ni complicaciones.</p>
-                  </div>
-                  <div className="space-y-3">
-                     <div className="flex items-center gap-2 text-yuju-cyan">
-                        <ShieldCheck size={16} />
-                        <span className="text-xs font-black uppercase tracking-widest">Respaldo Total</span>
-                     </div>
-                     <p className="text-sm font-bold text-text-primary">Las aseguradoras más solventes del mercado argentino.</p>
-                  </div>
-               </div>
-
-               <Link to="/institucional">
-                 <Button variant="outline" className="group">
-                   Conocé nuestra historia <ChevronRight size={18} className="ml-2 group-hover:translate-x-1.5 transition-transform" />
-                 </Button>
-               </Link>
+            <div className="grid grid-cols-2 gap-8">
+              <div className="space-y-3">
+                <div className="flex items-center gap-2 text-yuju-blue">
+                  <MousePointer2 size={16} />
+                  <span className="text-xs font-black uppercase tracking-widest">Digital First</span>
+                </div>
+                <p className="text-sm font-bold text-text-primary">Experiencia 100% online, sin papeles ni complicaciones.</p>
+              </div>
+              <div className="space-y-3">
+                <div className="flex items-center gap-2 text-yuju-cyan">
+                  <ShieldCheck size={16} />
+                  <span className="text-xs font-black uppercase tracking-widest">Respaldo Total</span>
+                </div>
+                <p className="text-sm font-bold text-text-primary">Las aseguradoras más solventes del mercado argentino.</p>
+              </div>
             </div>
-         </div>
+
+            <Link to="/institucional">
+              <Button variant="outline" className="group">
+                Conocé nuestra historia <ChevronRight size={18} className="ml-2 group-hover:translate-x-1.5 transition-transform" />
+              </Button>
+            </Link>
+          </div>
+        </div>
       </section>
-      
+
       {/* SECTION: TESTIMONIALS - New Horizontal Scroll Section */}
-      <section className="py-32 bg-bg-secondary overflow-hidden">
+      <section className="py-10 bg-bg-secondary overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 mb-16">
           <h2 className="text-yuju-blue font-black uppercase tracking-widest text-sm mb-4">Opiniones de nuestros clientes</h2>
           <p className="section-title">Lo que dicen de nosotros</p>
         </div>
 
         <div className="relative flex overflow-hidden group">
-          <motion.div 
-            animate={{ x: ["0%", "-50%"] }} 
+          <motion.div
+            animate={{ x: ["0%", "-50%"] }}
             transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
             className="flex gap-8 px-4 py-8"
           >

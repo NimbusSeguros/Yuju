@@ -215,11 +215,11 @@ export const Navbar = () => {
           >
             <div className="flex items-center justify-between mb-12">
               <div className="flex items-center gap-3">
-              <div className={cn(
-                "w-10 h-10 rounded-xl flex items-center justify-center font-black text-white italic",
-                theme === 'dark' || !scrolled ? "bg-yuju-blue" : "bg-yuju-blue"
-              )}>Y</div>
-                <span className="font-accent font-black text-xl uppercase tracking-tighter">Menu</span>
+                <img 
+                  src={theme === 'dark' ? "https://yuju.com.ar/assets/webBlanco-SASFsG6e.png" : "https://yuju.com.ar/assets/logoYujuAzul-DE5urkwK.png"} 
+                  alt="Yuju Logo" 
+                  className="h-8 w-auto object-contain"
+                />
               </div>
               <motion.button 
                 whileTap={{ scale: 0.9 }}
@@ -243,7 +243,7 @@ export const Navbar = () => {
                     className={cn(
                       "flex items-center justify-between p-5 rounded-2xl border transition-all",
                       location.pathname === item.href 
-                        ? `bg-bg-secondary border-${item.iconColor.split('-')[1]}-500/30 ${item.activeColor}` 
+                        ? `bg-bg-secondary border-${item.iconColor.split('-')[1] === 'orange' ? 'orange' : (item.iconColor.split('-')[1] === 'emerald' ? 'emerald' : 'yuju-blue')}-500/30 ${item.activeColor}` 
                         : "bg-bg-secondary/50 border-border-primary text-text-primary"
                     )}
                     onClick={() => setMobileMenuOpen(false)}
@@ -252,7 +252,7 @@ export const Navbar = () => {
                       <div className={cn(
                         "p-2.5 rounded-xl",
                         location.pathname === item.href 
-                          ? `bg-${item.iconColor.split('-')[1] === 'yuju' ? 'yuju-blue' : item.iconColor.split('-')[1] + '-500'} text-white` 
+                          ? `bg-${item.iconColor.split('-')[1] === 'yuju' ? 'yuju-blue' : (item.iconColor.split('-')[1] === 'orange' ? 'orange-500' : 'emerald-500')} text-white` 
                           : "bg-bg-primary text-text-secondary opacity-40"
                       )}>
                         <item.icon size={20} />
@@ -265,15 +265,44 @@ export const Navbar = () => {
               ))}
             </div>
 
-            <div className="mt-auto space-y-4">
-              <Link to="/ingreso" onClick={() => setMobileMenuOpen(false)}>
-                <button className="w-full bg-yuju-blue text-white py-5 rounded-2xl font-bold text-lg shadow-xl shadow-yuju-blue/20">
-                  Iniciar Sesión
-                </button>
-              </Link>
-              <button className="w-full bg-bg-secondary text-text-primary py-5 rounded-2xl font-bold text-lg border border-border-primary">
-                Registrarme
-              </button>
+            <div className="mt-auto pt-10 pb-6 flex items-center justify-center gap-6">
+              {[
+                { 
+                  icon: (props: any) => <svg viewBox="0 0 24 24" fill="currentColor" {...props}><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.414 0 .018 5.396.015 12.032c0 2.12.554 4.189 1.605 6.006L0 24l6.117-1.605a11.803 11.803 0 005.925 1.586h.005c6.632 0 12.028-5.396 12.031-12.032a11.777 11.777 0 00-3.528-8.508z"/></svg>, 
+                  name: 'WhatsApp', 
+                  href: 'https://wa.me/5491156307246',
+                  activeClass: "hover:bg-[#25D366] hover:shadow-[0_0_20px_rgba(37,211,102,0.4)]"
+                },
+                { 
+                  icon: (props: any) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>, 
+                  name: 'Instagram', 
+                  href: 'https://www.instagram.com/segurosyuju?igsh=djkyZWxkZ3pvcXJn',
+                  activeClass: "hover:bg-gradient-to-tr hover:from-[#f09433] hover:via-[#dc2743] hover:to-[#bc1888]"
+                },
+                { 
+                  icon: (props: any) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>, 
+                  name: 'Facebook', 
+                  href: 'https://www.facebook.com/segurosyuju?rdid=hooJkOBqHzBZS2mq&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1BtqRdRJeQ%2F#',
+                  activeClass: "hover:bg-[#1877F2]"
+                }
+              ].map((social) => (
+                <motion.a
+                  key={social.name}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  className={cn(
+                    "w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-300 border",
+                    "bg-bg-secondary border-border-primary text-text-secondary hover:text-white hover:border-transparent shadow-sm",
+                    social.activeClass
+                  )}
+                  aria-label={social.name}
+                >
+                  <social.icon className="w-6 h-6" />
+                </motion.a>
+              ))}
             </div>
           </motion.div>
         )}

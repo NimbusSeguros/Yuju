@@ -18,7 +18,7 @@
 
   --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   --animate-float: float 6s ease-in-out infinite;
-  --animate-scroll: scroll 40s linear infinite;
+  --animate-scroll: scroll 120s linear infinite;
 
   @keyframes float {
     0%, 100% { transform: translateY(0); }
@@ -51,6 +51,10 @@
   --glass-bg: rgba(15, 23, 42, 0.8);
   --hero-overlay: rgba(2, 6, 23, 0.85);
   color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -89,9 +93,8 @@ h1, h2, h3, .font-accent {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-yuju-blue to-yuju-cyan;
   }
 
-  .hero-highlight {
-    @apply bg-yuju-cyan py-1.5 px-6 text-white font-black inline-block shadow-lg shadow-yuju-cyan/20;
-    box-shadow: 10px 10px 0px rgba(0, 246, 185, 0.1);
+  .hero-box-highlight {
+    @apply bg-yuju-cyan/70 py-3 px-8 text-white font-black inline-block rounded-none;
   }
 
   .section-title {
@@ -116,5 +119,5 @@ h1, h2, h3, .font-accent {
 
 /* Companies infinite scroll */
 .logo-track {
-  @apply flex gap-12 w-fit animate-scroll;
+  @apply flex gap-8 w-fit animate-scroll;
 }
