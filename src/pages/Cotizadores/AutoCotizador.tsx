@@ -200,7 +200,7 @@ export const AutoCotizador = () => {
         description="Asegurá tu auto con la tecnología más avanzada de Argentina."
       />
       
-      <div className="relative pt-28 md:pt-36 lg:pt-40 pb-12 px-6 bg-bg-secondary transition-colors duration-500 overflow-hidden">
+      <div className="relative pt-28 md:pt-36 lg:pt-40 pb-12 px-6 bg-bg-secondary transition-colors duration-500 overflow-visible">
         {/* Background decorative patterns */}
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-yuju-blue/5 blur-[150px] rounded-full -z-10 animate-pulse" />
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-yuju-cyan/5 blur-[120px] rounded-full -z-10" />
@@ -273,11 +273,11 @@ export const AutoCotizador = () => {
               {/* Step 1: MARCA */}
               <div className="relative z-[40] space-y-3">
                 <div className="flex items-center gap-2">
-                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-500 ${formData.marcaId ? 'bg-yuju-blue text-white shadow-lg shadow-yuju-blue/20' : 'bg-bg-secondary text-text-secondary opacity-40'}`}>
+                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-500 ${formData.marcaId ? 'bg-yuju-blue text-white' : 'bg-bg-secondary text-text-secondary opacity-40'}`}>
                     <ShieldCheck size={16} />
                   </div>
                   <div className="flex-1">
-                    <h2 className="text-sm font-black font-accent tracking-tighter uppercase leading-none">Marca del Vehículo</h2>
+                    <h2 className="text-sm font-black font-accent tracking-tighter leading-none">Marca del Vehículo</h2>
                     <p className="text-[10px] text-text-secondary font-bold uppercase tracking-widest opacity-50 mt-0.5">Seleccioná la marca de tu rodado</p>
                   </div>
                 </div>
@@ -303,18 +303,14 @@ export const AutoCotizador = () => {
 
               {/* Step 2: AÑO */}
               <motion.div 
-                animate={activeStep === 2 ? {
-                  boxShadow: ["0 0 0px rgba(51, 105, 255, 0)", "0 0 20px rgba(51, 105, 255, 0.3)", "0 0 0px rgba(51, 105, 255, 0)"],
-                } : {}}
-                transition={{ duration: 1.5, repeat: 1 }}
-                className={`relative z-[30] border-t border-border-primary pt-6 space-y-3 rounded-2xl transition-all duration-500 ${activeStep < 2 ? 'opacity-30 grayscale pointer-events-none' : 'opacity-100'}`}
+                className={`relative z-[30] pt-6 space-y-3 rounded-2xl transition-all duration-500 ${activeStep < 2 ? 'opacity-30 grayscale pointer-events-none' : 'opacity-100'}`}
               >
                 <div className="flex items-center gap-2">
-                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-500 ${formData.year ? 'bg-yuju-blue text-white shadow-lg shadow-yuju-blue/20' : 'bg-bg-secondary text-text-secondary opacity-40'}`}>
+                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-500 ${formData.year ? 'bg-yuju-blue text-white' : 'bg-bg-secondary text-text-secondary opacity-40'}`}>
                     <ShieldCheck size={16} />
                   </div>
                   <div className="flex-1">
-                    <h2 className="text-sm font-black font-accent tracking-tighter uppercase leading-none">Año de Fabricación</h2>
+                    <h2 className="text-sm font-black font-accent tracking-tighter leading-none">Año de Fabricación</h2>
                     <p className="text-[10px] text-text-secondary font-bold uppercase tracking-widest opacity-50 mt-0.5">Modelo de fabricación según cédula</p>
                   </div>
                 </div>
@@ -327,18 +323,14 @@ export const AutoCotizador = () => {
 
               {/* Step 3: MODELO */}
               <motion.div 
-                animate={activeStep === 3 ? {
-                  boxShadow: ["0 0 0px rgba(51, 105, 255, 0)", "0 0 20px rgba(51, 105, 255, 0.3)", "0 0 0px rgba(51, 105, 255, 0)"],
-                } : {}}
-                transition={{ duration: 1.5, repeat: 1 }}
-                className={`relative z-[20] border-t border-border-primary pt-6 space-y-3 rounded-2xl transition-all duration-500 ${activeStep < 3 ? 'opacity-30 grayscale pointer-events-none' : 'opacity-100'}`}
+                className={`relative z-[20] pt-6 space-y-3 rounded-2xl transition-all duration-500 ${activeStep < 3 ? 'opacity-30 grayscale pointer-events-none' : 'opacity-100'}`}
               >
                 <div className="flex items-center gap-2">
-                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-500 ${formData.modeloId ? 'bg-yuju-blue text-white shadow-lg shadow-yuju-blue/20' : 'bg-bg-secondary text-text-secondary opacity-40'}`}>
+                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-500 ${formData.modeloId ? 'bg-yuju-blue text-white' : 'bg-bg-secondary text-text-secondary opacity-40'}`}>
                     <ShieldCheck size={16} />
                   </div>
                   <div className="flex-1">
-                    <h2 className="text-sm font-black font-accent tracking-tighter uppercase leading-none">Modelo y Versión</h2>
+                    <h2 className="text-sm font-black font-accent tracking-tighter leading-none">Modelo y Versión</h2>
                     <p className="text-[10px] text-text-secondary font-bold uppercase tracking-widest opacity-50 mt-0.5">Buscá la versión específica de tu auto</p>
                   </div>
                 </div>
@@ -361,18 +353,14 @@ export const AutoCotizador = () => {
 
               {/* Step 4: CP */}
               <motion.div 
-                animate={activeStep === 4 ? {
-                  boxShadow: ["0 0 0px rgba(51, 105, 255, 0)", "0 0 20px rgba(51, 105, 255, 0.3)", "0 0 0px rgba(51, 105, 255, 0)"],
-                } : {}}
-                transition={{ duration: 1.5, repeat: 1 }}
-                className={`relative z-[10] border-t border-border-primary pt-6 space-y-3 rounded-2xl transition-all duration-500 ${activeStep < 4 ? 'opacity-30 grayscale pointer-events-none' : 'opacity-100'}`}
+                className={`relative z-[10] pt-6 space-y-3 rounded-2xl transition-all duration-500 ${activeStep < 4 ? 'opacity-30 grayscale pointer-events-none' : 'opacity-100'}`}
               >
                 <div className="flex items-center gap-2">
-                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-500 ${formData.cp ? 'bg-yuju-blue text-white shadow-lg shadow-yuju-blue/20' : 'bg-bg-secondary text-text-secondary opacity-40'}`}>
+                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-500 ${formData.cp ? 'bg-yuju-blue text-white' : 'bg-bg-secondary text-text-secondary opacity-40'}`}>
                     <MapPin size={16} />
                   </div>
                   <div className="flex-1">
-                    <h2 className="text-sm font-black font-accent tracking-tighter uppercase leading-none">Lugar de Guarda</h2>
+                    <h2 className="text-sm font-black font-accent tracking-tighter leading-none">Lugar de Guarda</h2>
                     <p className="text-[10px] text-text-secondary font-bold uppercase tracking-widest opacity-50 mt-0.5">Ingresá el Código Postal de residencia</p>
                   </div>
                 </div>
@@ -419,7 +407,7 @@ export const AutoCotizador = () => {
                >
                   <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-4 border-b border-border-primary pb-6">
                     <div className="text-center md:text-left">
-                      <h2 className="text-4xl font-black uppercase font-accent tracking-tighter">Comparador</h2>
+                      <h2 className="text-4xl font-black font-accent tracking-tighter">Comparador</h2>
                       <p className="text-text-secondary font-medium">Analizando opciones para {formData.marcaName} {formData.modeloName}</p>
                     </div>
                     <div className="flex flex-wrap items-center justify-center gap-3">
@@ -443,7 +431,7 @@ export const AutoCotizador = () => {
 
                       return (
                         <div key={categoryName} className="flex flex-col gap-4">
-                          <h3 className="text-lg font-black uppercase tracking-tight border-b-2 border-yuju-blue/30 pb-2 mb-2 text-center text-text-primary/90">{categoryName}</h3>
+                          <h3 className="text-lg font-black tracking-tight border-b-2 border-yuju-blue/30 pb-2 mb-2 text-center text-text-primary/90">{categoryName}</h3>
                           
                           {categoryQuotes.length === 0 && !isProcessing && (
                             <div className="text-center py-8 text-text-secondary opacity-40 italic text-sm">
@@ -474,20 +462,20 @@ export const AutoCotizador = () => {
                                       <div className="text-[9px] font-black uppercase text-yuju-blue opacity-40 tracking-widest">Premium</div>
                                     </div>
                                     <div className="h-[36px] sm:h-[40px] flex items-center mb-1">
-                                      <h4 className="text-[12px] sm:text-[14px] font-black leading-none sm:leading-tight line-clamp-2 text-text-primary uppercase tracking-tighter">{cot.cobertura}</h4>
+                                      <h4 className="text-[12px] sm:text-[14px] font-black leading-none sm:leading-tight line-clamp-2 text-text-primary tracking-tighter">{cot.cobertura}</h4>
                                     </div>
                                   </div>
                                   {/* Middle: Details (Larger Numbers) */}
                                   <div className="flex-1 border-t border-border-primary/20 pt-3 pb-1 text-xs space-y-1.5">
                                     {cot.sumaAsegurada > 0 && (
                                       <div className="flex justify-between items-center text-text-secondary">
-                                        <span className="font-bold opacity-60 uppercase tracking-tighter text-[9px] sm:text-[10px]">Suma Seg.</span>
+                                        <span className="font-bold opacity-60 tracking-tighter text-[9px] sm:text-[10px]">Suma Seg.</span>
                                         <span className="font-black text-text-primary text-[11px] sm:text-[13px]">${Number(cot.sumaAsegurada).toLocaleString('es-AR')}</span>
                                       </div>
                                     )}
                                     {cot.franquicia && (
                                       <div className="flex justify-between items-center text-text-secondary">
-                                        <span className="font-bold opacity-60 uppercase tracking-tighter text-[10px]">Franquicia</span>
+                                        <span className="font-bold opacity-60 tracking-tighter text-[10px]">Franquicia</span>
                                         <span className="font-black text-yuju-cyan px-1.5 py-0.5 bg-yuju-cyan/5 rounded border border-yuju-cyan/10 text-[11px]">{cot.franquicia}</span>
                                       </div>
                                     )}

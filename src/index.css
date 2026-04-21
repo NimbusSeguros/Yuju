@@ -39,6 +39,7 @@
   --border-primary: rgba(0, 0, 0, 0.08);
   --glass-bg: rgba(255, 255, 255, 0.7);
   --hero-overlay: rgba(51, 105, 255, 0.9);
+  --logo-filter: none;
   color-scheme: light;
 }
 
@@ -50,6 +51,7 @@
   --border-primary: rgba(255, 255, 255, 0.1);
   --glass-bg: rgba(15, 23, 42, 0.8);
   --hero-overlay: rgba(2, 6, 23, 0.85);
+  --logo-filter: brightness(0) invert(1);
   color-scheme: dark;
 }
 
@@ -101,7 +103,7 @@ h1, h2, h3, .font-accent {
   }
 
   .section-title {
-    @apply text-4xl md:text-5xl font-black font-accent uppercase tracking-tighter mb-4;
+    @apply text-4xl md:text-5xl font-black font-accent tracking-tighter mb-4;
   }
 
   .section-subtitle {

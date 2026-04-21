@@ -59,7 +59,7 @@ export const InstitutionalPage = () => {
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-6xl md:text-8xl font-black text-text-primary uppercase font-accent tracking-tighter leading-none mb-10"
+            className="text-6xl md:text-8xl font-black text-text-primary font-accent tracking-tighter leading-none mb-10"
           >
             Nacimos para <br />
             <span className="text-yuju-blue italic">simplificar</span> el futuro
@@ -86,7 +86,7 @@ export const InstitutionalPage = () => {
               viewport={{ once: true }}
               className="space-y-8"
             >
-              <h2 className="text-4xl md:text-5xl font-black text-text-primary uppercase font-accent tracking-tighter">
+              <h2 className="text-4xl md:text-5xl font-black text-text-primary font-accent tracking-tighter">
                 Más de 15 años <br />
                 <span className="text-text-primary/40">trascendiendo límites</span>
               </h2>
@@ -146,7 +146,7 @@ export const InstitutionalPage = () => {
               <div className="w-16 h-16 rounded-2xl bg-bg-primary border border-border-primary flex items-center justify-center text-yuju-blue mb-2">
                 <Target size={32} />
               </div>
-              <h3 className="text-3xl font-black text-text-primary uppercase font-accent">Misión</h3>
+              <h3 className="text-3xl font-black text-text-primary font-accent">Misión</h3>
               <p className="text-lg text-text-secondary leading-relaxed font-medium">
                 Revolucionar la protección de lo que la gente ama mediante tecnología, mejorando la seguridad y calidad de vida con soluciones ágiles y transparentes.
               </p>
@@ -164,7 +164,7 @@ export const InstitutionalPage = () => {
               <div className="w-16 h-16 rounded-2xl bg-bg-primary border border-border-primary flex items-center justify-center text-yuju-cyan mb-2">
                 <Eye size={32} />
               </div>
-              <h3 className="text-3xl font-black text-text-primary uppercase font-accent">Visión</h3>
+              <h3 className="text-3xl font-black text-text-primary font-accent">Visión</h3>
               <p className="text-lg text-text-secondary leading-relaxed font-medium">
                 Ser la Insurtech líder de la región, destacada por su excelencia, innovación constante y por construir los vínculos de mayor confianza en la industria.
               </p>
@@ -182,7 +182,7 @@ export const InstitutionalPage = () => {
               <div className="w-16 h-16 rounded-2xl bg-bg-primary border border-border-primary flex items-center justify-center text-indigo-500 mb-2">
                 <Flag size={32} />
               </div>
-              <h3 className="text-3xl font-black text-text-primary uppercase font-accent">Objetivo</h3>
+              <h3 className="text-3xl font-black text-text-primary font-accent">Objetivo</h3>
               <p className="text-lg text-text-secondary leading-relaxed font-medium">
                 Cubrir a tus seres queridos y tu patrimonio, con productos justos y modernos, totalmente transparentes y al mejor precio del mercado.
               </p>
@@ -195,8 +195,8 @@ export const InstitutionalPage = () => {
       <section className="py-32 px-6 bg-bg-primary">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-24">
-            <h2 className="text-yuju-blue font-black uppercase tracking-widest text-sm mb-4">Nuestros Pilares</h2>
-            <p className="text-5xl md:text-6xl font-black text-text-primary uppercase font-accent tracking-tighter">Valores que nos impulsan</p>
+            <h2 className="text-yuju-blue font-black tracking-widest text-sm mb-4">Nuestros Pilares</h2>
+            <p className="text-5xl md:text-6xl font-black text-text-primary font-accent tracking-tighter">Valores que nos impulsan</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -213,7 +213,7 @@ export const InstitutionalPage = () => {
                   <div className="w-14 h-14 rounded-xl bg-bg-primary border border-border-primary flex items-center justify-center text-yuju-blue mb-8 group-hover:scale-110 group-hover:rotate-3 transition-transform">
                     <pillar.icon size={24} />
                   </div>
-                  <h4 className="text-xl font-black text-text-primary mb-4 uppercase font-accent">{pillar.title}</h4>
+                  <h4 className="text-xl font-black text-text-primary mb-4 font-accent">{pillar.title}</h4>
                   <p className="text-text-secondary font-medium leading-relaxed">
                     {pillar.desc}
                   </p>
@@ -240,7 +240,7 @@ export const InstitutionalPage = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl md:text-7xl font-black text-text-primary uppercase font-accent tracking-tighter leading-tight"
+            className="text-4xl md:text-7xl font-black text-text-primary font-accent tracking-tighter leading-tight"
           >
             El futuro del seguro es <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-yuju-blue to-yuju-cyan">más simple de lo que imaginás.</span>

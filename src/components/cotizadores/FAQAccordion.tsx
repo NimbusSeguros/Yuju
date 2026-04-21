@@ -31,7 +31,7 @@ export const FAQAccordion = ({
           <HelpCircle size={24} />
         </div>
         <div>
-          <h2 className="text-3xl font-black font-accent tracking-tighter uppercase text-text-primary">
+          <h2 className="text-3xl font-black font-accent tracking-tighter text-text-primary">
             Preguntas Frecuentes
           </h2>
           <p className="text-sm text-text-secondary font-medium">Todo lo que necesitás saber antes de asegurarte</p>

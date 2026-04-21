@@ -30,7 +30,8 @@ export default defineConfig({
       '/api/cotizaciones': { target: 'http://localhost:3000', changeOrigin: true },
       '/api/propuesta': { target: 'http://localhost:3000', changeOrigin: true },
       '/api/propuestas': { target: 'http://localhost:3000', changeOrigin: true },
-      '/api/polizas': { target: 'http://localhost:3000', changeOrigin: true }
+      '/api/polizas': { target: 'http://localhost:3000', changeOrigin: true },
+      '/api/leads': { target: 'http://localhost:3000', changeOrigin: true }
     }
   }
 })

@@ -36,7 +36,7 @@ export const Footer = () => {
         </div>
 
         <div>
-          <h4 className="text-text-primary font-bold mb-8 font-accent uppercase tracking-widest text-xs">Asegurá tu mundo</h4>
+          <h4 className="text-text-primary font-bold mb-8 font-accent tracking-widest text-xs">Asegurá tu mundo</h4>
           <ul className="space-y-4 text-text-secondary text-sm font-medium">
             <li><a href="/cotizar/seguro-auto" className="hover:text-yuju-blue transition-colors flex items-center gap-2 group"><div className="w-1.5 h-1.5 rounded-full bg-yuju-blue opacity-0 group-hover:opacity-100 transition-opacity" /> Seguro de Auto</a></li>
             <li><a href="/cotizar/seguro-moto" className="hover:text-orange-500 transition-colors flex items-center gap-2 group"><div className="w-1.5 h-1.5 rounded-full bg-orange-500 opacity-0 group-hover:opacity-100 transition-opacity" /> Seguro de Moto</a></li>
@@ -45,7 +45,7 @@ export const Footer = () => {
         </div>
 
         <div>
-          <h4 className="text-text-primary font-bold mb-8 font-accent uppercase tracking-widest text-xs">Sobre Nosotros</h4>
+          <h4 className="text-text-primary font-bold mb-8 font-accent tracking-widest text-xs">Sobre Nosotros</h4>
           <ul className="space-y-4 text-text-secondary text-sm font-medium">
             <li><a href="/institucional" className="hover:text-yuju-blue transition-colors">Institucional</a></li>
             <li><a href="#" className="hover:text-yuju-blue transition-colors">Misión y Visión</a></li>
@@ -55,7 +55,7 @@ export const Footer = () => {
         </div>
 
         <div>
-          <h4 className="text-text-primary font-bold mb-8 font-accent uppercase tracking-widest text-xs">Atención 24/7</h4>
+          <h4 className="text-text-primary font-bold mb-8 font-accent tracking-widest text-xs">Atención 24/7</h4>
           <ul className="space-y-5 text-text-secondary text-sm">
             <li className="flex items-center gap-4">
               <div className="w-10 h-10 rounded-xl bg-yuju-blue/10 flex items-center justify-center text-yuju-blue shrink-0">
@@ -113,7 +113,7 @@ export const Footer = () => {
            </div>
            
            <div className="space-y-6">
-              <h5 className="text-[10px] font-black uppercase tracking-[0.3em] text-yuju-blue">Atención al Asegurado</h5>
+              <h5 className="text-[10px] font-black tracking-[0.3em] text-yuju-blue">Atención al Asegurado</h5>
               <div className="space-y-5">
                  <div className="flex flex-col">
                     <span className="text-[9px] font-black text-text-secondary/40 uppercase tracking-widest mb-1">Responsable</span>

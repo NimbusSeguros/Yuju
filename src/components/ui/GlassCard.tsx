@@ -16,7 +16,7 @@ export const GlassCard: React.FC<GlassCardProps> = ({ children, className, delay
       viewport={{ once: true }}
       transition={{ duration: 0.8, delay, ease: "easeOut" }}
       className={cn(
-        'glass-card rounded-[40px] p-8 overflow-hidden relative group',
+        'glass-card rounded-[40px] p-8 overflow-visible relative group',
         className
       )}
     >

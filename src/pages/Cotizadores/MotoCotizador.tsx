@@ -9,6 +9,8 @@ import { MotoResultsGrid } from '../../components/MotoResultsGrid';
 import RusProposalModal from '../../components/cotizadores/RusProposalModal';
 import AtmProposalModal from '../../components/cotizadores/AtmProposalModal';
 import { FAQAccordion } from '../../components/cotizadores/FAQAccordion';
+import { createLead } from '../../services/motoApi';
+import { getInsurerLogo } from '../../utils/insurerLogos';
 
 const motoFAQ = [
   { id: 1, title: "¿Es obligatorio contratar un seguro de moto?", subtitle: "Sí, es obligatorio. En Argentina, la ley exige que todo vehículo que circule por las calles tenga un seguro de responsabilidad civil, que cubre los daños que puedas ocasionar a terceros con tu moto. Así, podés manejar con tranquilidad y seguridad, sabiendo que estás cumpliendo con la normativa vigente." },
@@ -28,7 +30,7 @@ const motoFAQ = [
   { id: 15, title: "¿Qué puede ocurrir si mi moto no está asegurada?", subtitle: "Estarías incumpliendo la ley de tránsito, que exige tener un seguro obligatorio de Responsabilidad Civil. Estarías cometiendo una infracción que te puede traer multas y sanciones." },
   { id: 16, title: "¿Cómo recibo la documentación?", subtitle: "Te mandamos la documentación en PDF por mail, Whatsapp o por la App móvil de cada seguro." },
   { id: 17, title: "¿Cuál es la vigencia de la póliza?", subtitle: "La vigencia suele ser anual con refacturaciones en el medio, que son actualizaciones del valor del vehículo y del seguro. El período de cada refacturación suele ser trimestral, pero puede variar por la inflación." },
-  { id: 18, title: "¿Cómo se actualiza el valor de las coberturas?", subtitle: "La inflación puede desactualizar el valor de tu moto y de tu seguro. Existen distintas formas de actualizar el valor de las coberturas: cláusula de ajuste de suma asegurada, actualizar la suma asegurada en cada renovación, o solicitar el aumento durante la vigencia mediante un endoso." },
+  { id: 18, title: "¿Cómo se actualiza el valor de las coberturas?", subtitle: "La inflación puede desactualizar el valor de tu moto y de tu seguro. Existen distintas formas de actualizar el valor de las coberturas: cláusula de ajuste de suma asegurada, actualizar la suma asegurada en cada renovación, o solicitar el aumento durante la vigencia mediante un endoso." }
 ];
 
 // API Imports
@@ -81,6 +83,9 @@ export const MotoCotizador = () => {
   const [emissionModalSource, setEmissionModalSource] = useState('');
   const [payWithCard, setPayWithCard] = useState(true);
   const [selectedQuoteObj, setSelectedQuoteObj] = useState<any>(null);
+  const [whatsappPhone, setWhatsappPhone] = useState('');
+  const [whatsappSending, setWhatsappSending] = useState(false);
+  const [thankYouOpen, setThankYouOpen] = useState(false);
 
   useEffect(() => {
     fetchBrands();
@@ -325,23 +330,64 @@ export const MotoCotizador = () => {
       }
   };
 
-  const handleWhatsAppRedirect = () => {
-      const { quote, source } = selectedQuoteObj;
-      let text = `Soy una persona interesada en contratar un seguro de motos a través de wsp. Quiero contratar el seguro:\n\n`;
-      text += `Aseguradora: ${source}\n`;
-      text += `*Año:* ${selectedYear}\n`;
-      text += `*Compañía:* ${source}\n`;
-      if(source === 'RUS') {
-          text += `*Cobertura:* ${quote.codigoCasco || quote.codigoRC}\n`;
-      } else if(source === 'ATM') {
-          text += `*Cobertura:* ${quote.cobertura?.descripcion || quote.descripcion}\n`;
-      } else if (source === 'INTEGRITY') {
-          text += `*Cobertura:* ${quote.Nombre || quote.nombre || quote.producto}\n`;
+  const handleWhatsAppRedirect = async () => {
+      if (!whatsappPhone || whatsappPhone.length < 8) {
+          alert('Por favor ingresá tu número de WhatsApp para continuar.');
+          return;
       }
-      text += `*Forma de pago:* ${payWithCard ? 'Tarjeta' : 'Efectivo'}\n`;
-      
-      window.open(`https://wa.me/5491156307246?text=${encodeURIComponent(text)}`, '_blank');
-      setWhatsappModalOpen(false);
+      const { quote, source } = selectedQuoteObj;
+      let text = `Nueva cotización recibida desde Yuju:\n\n`;
+      text += `Aseguradora: ${source}\n`;
+      text += `Moto: ${selectedBrand?.name} ${selectedModel?.group?.name} ${selectedModel?.description} (${selectedYear})\n`;
+      if(source === 'RUS') {
+          text += `Cobertura: ${quote.codigoCasco || quote.codigoRC}\n`;
+      } else if(source === 'ATM') {
+          text += `Cobertura: ${quote.cobertura?.descripcion || quote.descripcion}\n`;
+      } else if (source === 'INTEGRITY') {
+          text += `Cobertura: ${quote.Nombre || quote.nombre || quote.producto}\n`;
+      } else if (source === 'SAN CRISTOBAL') {
+          text += `Cobertura: ${quote.description || quote.descripcion}\n`;
+      }
+      text += `Forma de pago: ${payWithCard ? 'Tarjeta' : 'Efectivo'}\n`;
+      text += `Teléfono cliente: +54${whatsappPhone}\n`;
+      text += `C.P: ${zipCode}\n`;
+
+      setWhatsappSending(true);
+      try {
+          const vehicleInfo = getVehicleDetails();
+          const planName = source === 'RUS'
+              ? (quote.codigoCasco || quote.codigoRC)
+              : source === 'ATM'
+              ? (quote.cobertura?.descripcion || quote.descripcion)
+              : source === 'SAN CRISTOBAL'
+              ? (quote.description || quote.descripcion)
+              : (quote.Nombre || quote.nombre || quote.producto || '');
+          const precio = source === 'RUS'
+              ? parseFloat(quote.premio || 0) / 6
+              : source === 'ATM'
+              ? parseFloat(quote.premio || 0)
+              : parseFloat(quote.Premio || quote.premio || 0);
+
+          await createLead({
+              vehicleInfo,
+              provider: source,
+              planName,
+              precio,
+              sumaAsegurada: parseFloat(quote.sumaAsegurada || quote.SumaAsegurada || 0),
+              phone: whatsappPhone,
+              zipCode,
+              wspText: text
+          });
+
+          setWhatsappModalOpen(false);
+          setThankYouOpen(true);
+          setWhatsappPhone('');
+      } catch (e) {
+          console.error('Lead save failed:', e);
+          alert('Hubo un problema al enviar. Por favor intentá de nuevo.');
+      } finally {
+          setWhatsappSending(false);
+      }
   };
 
   const handleResetAll = () => {
@@ -370,7 +416,7 @@ export const MotoCotizador = () => {
         description="Protección premium para tu moto. Cotizá en segundos con la tecnología de Yuju."
       />
       
-      <div className="relative pt-28 md:pt-36 lg:pt-40 pb-12 px-6 bg-bg-secondary transition-colors duration-500 overflow-hidden">
+      <div className="relative pt-28 md:pt-36 lg:pt-40 pb-12 px-6 bg-bg-secondary transition-colors duration-500 overflow-visible">
         {/* Background decorative patterns */}
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-orange-500/5 blur-[150px] rounded-full -z-10 animate-pulse" />
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-orange-400/5 blur-[120px] rounded-full -z-10" />
@@ -443,17 +489,17 @@ export const MotoCotizador = () => {
               {/* Step 1: MARCA */}
               <div className="relative z-[40] space-y-3">
                 <div className="flex items-center gap-2">
-                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-500 ${selectedBrand ? 'bg-orange-500 text-white shadow-lg shadow-orange-500/20' : 'bg-bg-secondary text-text-secondary opacity-40'}`}>
+                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-500 ${selectedBrand ? 'bg-orange-500 text-white' : 'bg-bg-secondary text-text-secondary opacity-40'}`}>
                     <Bike size={16} />
                   </div>
                   <div className="flex-1">
-                    <h2 className="text-sm font-black font-accent tracking-tighter uppercase leading-none">Marca de la Moto</h2>
+                    <h2 className="text-sm font-black font-accent tracking-tighter leading-none">Marca de la Moto</h2>
                     <p className="text-[10px] text-text-secondary font-bold uppercase tracking-widest opacity-50 mt-0.5">Seleccioná la marca</p>
                   </div>
                 </div>
                 
-                <div className="relative pl-10">
-                    <Search className="absolute left-14 top-1/2 -translate-y-1/2 text-text-secondary/50 pointer-events-none" size={18} />
+                <div className="relative">
+                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary/50 pointer-events-none" size={18} />
                     <input 
                         type="text"
                         value={brandSearchTerm}
@@ -464,11 +510,11 @@ export const MotoCotizador = () => {
                         }}
                         onFocus={() => setBrandListOpen(true)}
                         placeholder="Ej. Yamaha" 
-                        className="w-full bg-bg-secondary border border-border-primary rounded-2xl pl-12 pr-5 py-4 text-text-primary yuju-input-orange transition-all font-bold shadow-sm" 
+                        className="w-full bg-bg-secondary border border-border-primary rounded-2xl pl-12 pr-5 py-4 text-text-primary yuju-input-orange transition-all font-bold" 
                     />
                     {brandsLoading && <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs text-orange-500 animate-pulse">Cargando...</span>}
                     {brandListOpen && (
-                        <div className="absolute left-10 right-0 w-[calc(100%-2.5rem)] z-50 mt-2 bg-bg-secondary border border-border-primary rounded-xl shadow-2xl max-h-60 overflow-y-auto custom-scrollbar">
+                        <div className="absolute left-0 right-0 w-full z-50 mt-2 bg-bg-secondary border border-border-primary rounded-xl shadow-2xl max-h-60 overflow-y-auto custom-scrollbar">
                             {filteredBrandsList.length > 0 ? filteredBrandsList.map(b => (
                                 <div 
                                     key={b.id} 
@@ -500,28 +546,24 @@ export const MotoCotizador = () => {
 
               {/* Step 2: AÑO */}
               <motion.div 
-                animate={activeStep === 2 ? {
-                  boxShadow: ["0 0 0px rgba(249, 115, 22, 0)", "0 0 20px rgba(249, 115, 22, 0.4)", "0 0 0px rgba(249, 115, 22, 0)"],
-                } : {}}
-                transition={{ duration: 1.5, repeat: 1 }}
-                className={`relative z-[30] border-t border-border-primary pt-6 space-y-3 rounded-2xl transition-all duration-500 ${activeStep < 2 ? 'opacity-30 grayscale pointer-events-none' : 'opacity-100'}`}
+                className={`relative z-[30] pt-6 space-y-3 rounded-2xl transition-all duration-500 ${activeStep < 2 ? 'opacity-30 grayscale pointer-events-none' : 'opacity-100'}`}
               >
                 <div className="flex items-center gap-2">
-                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-500 ${selectedYear ? 'bg-orange-500 text-white shadow-lg shadow-orange-500/20' : 'bg-bg-secondary text-text-secondary opacity-40'}`}>
+                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-500 ${selectedYear ? 'bg-orange-500 text-white' : 'bg-bg-secondary text-text-secondary opacity-40'}`}>
                     <Calendar size={16} />
                   </div>
                   <div className="flex-1">
-                    <h2 className="text-sm font-black font-accent tracking-tighter uppercase leading-none">Año de Fabricación</h2>
+                    <h2 className="text-sm font-black font-accent tracking-tighter leading-none">Año de Fabricación</h2>
                     <p className="text-[10px] text-text-secondary font-bold uppercase tracking-widest opacity-50 mt-0.5">Modelo según cédula</p>
                   </div>
                 </div>
 
-                <div className="relative pl-10">
+                <div className="relative">
                     <select 
                         value={selectedYear}
                         onChange={(e) => handleYearSelect(e.target.value)}
                         disabled={!selectedBrand || allModelsLoading}
-                        className="w-full bg-bg-secondary border border-border-primary rounded-2xl px-5 py-4 text-text-primary yuju-input-orange transition-all disabled:opacity-50 appearance-none cursor-pointer font-bold shadow-sm"
+                        className="w-full bg-bg-secondary border border-border-primary rounded-2xl px-5 py-4 text-text-primary yuju-input-orange transition-all disabled:opacity-50 appearance-none cursor-pointer font-bold"
                     >
                         <option value="" disabled>Seleccioná el año</option>
                         {availableYears.map(y => (
@@ -533,23 +575,19 @@ export const MotoCotizador = () => {
 
               {/* Step 3: MODELO */}
               <motion.div 
-                animate={activeStep === 3 ? {
-                  boxShadow: ["0 0 0px rgba(249, 115, 22, 0)", "0 0 20px rgba(249, 115, 22, 0.4)", "0 0 0px rgba(249, 115, 22, 0)"],
-                } : {}}
-                transition={{ duration: 1.5, repeat: 1 }}
-                className={`relative z-[20] border-t border-border-primary pt-6 space-y-3 rounded-2xl transition-all duration-500 ${activeStep < 3 ? 'opacity-30 grayscale pointer-events-none' : 'opacity-100'}`}
+                className={`relative z-[20] pt-6 space-y-3 rounded-2xl transition-all duration-500 ${activeStep < 3 ? 'opacity-30 grayscale pointer-events-none' : 'opacity-100'}`}
               >
                 <div className="flex items-center gap-2">
-                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-500 ${selectedModel ? 'bg-orange-500 text-white shadow-lg shadow-orange-500/20' : 'bg-bg-secondary text-text-secondary opacity-40'}`}>
+                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-500 ${selectedModel ? 'bg-orange-500 text-white' : 'bg-bg-secondary text-text-secondary opacity-40'}`}>
                     <Tag size={16} />
                   </div>
                   <div className="flex-1">
-                    <h2 className="text-sm font-black font-accent tracking-tighter uppercase leading-none">Modelo y Versión</h2>
+                    <h2 className="text-sm font-black font-accent tracking-tighter leading-none">Modelo y Versión</h2>
                     <p className="text-[10px] text-text-secondary font-bold uppercase tracking-widest opacity-50 mt-0.5">Buscá la versión específica</p>
                   </div>
                 </div>
 
-                <div className="relative pl-10">
+                <div className="relative">
                     <select 
                         value={selectedModel ? selectedModel.codia : ''}
                         onChange={(e) => {
@@ -557,7 +595,7 @@ export const MotoCotizador = () => {
                             setSelectedModel(mod);
                         }}
                         disabled={!selectedYear}
-                        className="w-full bg-bg-secondary border border-border-primary rounded-2xl px-5 py-4 text-text-primary yuju-input-orange transition-all disabled:opacity-50 appearance-none cursor-pointer font-bold shadow-sm"
+                        className="w-full bg-bg-secondary border border-border-primary rounded-2xl px-5 py-4 text-text-primary yuju-input-orange transition-all disabled:opacity-50 appearance-none cursor-pointer font-bold"
                     >
                         <option value="" disabled>Seleccioná la versión exacta</option>
                         {filteredModels.map(m => (
@@ -571,30 +609,26 @@ export const MotoCotizador = () => {
 
               {/* Step 4: CP */}
               <motion.div 
-                animate={activeStep === 4 ? {
-                  boxShadow: ["0 0 0px rgba(249, 115, 22, 0)", "0 0 20px rgba(249, 115, 22, 0.4)", "0 0 0px rgba(249, 115, 22, 0)"],
-                } : {}}
-                transition={{ duration: 1.5, repeat: 1 }}
-                className={`relative z-[10] border-t border-border-primary pt-6 space-y-3 rounded-2xl transition-all duration-500 ${activeStep < 4 ? 'opacity-30 grayscale pointer-events-none' : 'opacity-100'}`}
+                className={`relative z-[10] pt-6 space-y-3 rounded-2xl transition-all duration-500 ${activeStep < 4 ? 'opacity-30 grayscale pointer-events-none' : 'opacity-100'}`}
               >
                 <div className="flex items-center gap-2">
-                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-500 ${zipCode && selectedLocality ? 'bg-orange-500 text-white shadow-lg shadow-orange-500/20' : 'bg-bg-secondary text-text-secondary opacity-40'}`}>
+                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-500 ${zipCode && selectedLocality ? 'bg-orange-500 text-white' : 'bg-bg-secondary text-text-secondary opacity-40'}`}>
                     <MapPin size={16} />
                   </div>
                   <div className="flex-1">
-                    <h2 className="text-sm font-black font-accent tracking-tighter uppercase leading-none">Lugar de Guarda</h2>
+                    <h2 className="text-sm font-black font-accent tracking-tighter leading-none">Lugar de Guarda</h2>
                     <p className="text-[10px] text-text-secondary font-bold uppercase tracking-widest opacity-50 mt-0.5">Código postal de residencia</p>
                   </div>
                 </div>
 
-                <div className="pl-10 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="relative">
                         <input 
                             type="text" 
                             value={zipCode}
                             onChange={(e) => handleZipCodeSearch(e.target.value)}
                             placeholder="C.P. Ej. 1425" 
-                            className="w-full bg-bg-secondary border border-border-primary rounded-2xl p-4 font-bold text-text-primary yuju-input-orange transition-all shadow-sm" 
+                            className="w-full bg-bg-secondary border border-border-primary rounded-2xl p-4 font-bold text-text-primary yuju-input-orange transition-all" 
                         />
                         {localitiesLoading && <Loader2 size={16} className="absolute right-4 top-1/2 -translate-y-1/2 animate-spin text-orange-500" />}
                     </div>
@@ -656,9 +690,11 @@ export const MotoCotizador = () => {
                 className="space-y-8 w-full mt-8"
                >
                   <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-4 border-b border-border-primary pb-6">
-                    <div className="text-center md:text-left">
-                      <h2 className="text-3xl lg:text-4xl font-black uppercase font-accent tracking-tighter text-orange-500">MotoCotizador</h2>
-                      <p className="text-text-secondary font-medium">Resultados para {selectedBrand?.name} {selectedModel?.group?.name}</p>
+                    <div className="text-center md:text-left w-full">
+                      <div className="text-sm font-bold text-text-secondary uppercase tracking-widest mb-1">Resultados para tu</div>
+                      <h2 className="text-2xl lg:text-3xl font-black font-accent tracking-tighter text-orange-500 leading-tight">
+                        {selectedBrand?.name} {selectedModel?.group?.name} <span className="text-text-primary">{selectedModel?.description}</span> <span className="text-orange-400">({selectedYear})</span>
+                      </h2>
                     </div>
                     <div className="flex flex-wrap items-center justify-center gap-3">
                     </div>
@@ -671,7 +707,7 @@ export const MotoCotizador = () => {
                             <Zap className="text-orange-500 relative z-10 animate-float" size={48} />
                         </div>
                         <div className="space-y-3">
-                            <h2 className="text-4xl font-black text-text-primary font-accent tracking-tighter uppercase whitespace-pre-wrap">Preparando tu ruta</h2>
+                            <h2 className="text-4xl font-black text-text-primary font-accent tracking-tighter whitespace-pre-wrap">Preparando tu ruta</h2>
                             <p className="text-text-secondary font-medium max-w-xs mx-auto">
                             Estamos comparando las mejores tasas de aseguradoras especializadas.
                             </p>
@@ -701,8 +737,8 @@ export const MotoCotizador = () => {
           onClose={() => setEmissionModalOpen(false)}
           quote={selectedQuoteObj?.quote}
           quotationContext={{
-              vigencias: [{id: 2, ID: 2, descripcion: "ANUAL"}],
-              selectedVigencia: 2,
+              vigencias,
+              selectedVigencia,
               selectedLocality,
               year: selectedYear,
               selectedVersionId: selectedModel?.codia
@@ -747,28 +783,94 @@ export const MotoCotizador = () => {
       )}
 
       {whatsappModalOpen && selectedQuoteObj && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-bg-dark/80 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
             <GlassCard className="p-8 max-w-md w-full relative">
-                <button className="absolute top-4 right-4 text-text-secondary hover:text-text-primary" onClick={() => setWhatsappModalOpen(false)}>✕</button>
+                <button className="absolute top-4 right-4 text-text-secondary hover:text-text-primary" onClick={() => { setWhatsappModalOpen(false); setWhatsappPhone(''); }}>✕</button>
                 <div className="flex justify-center mb-4 text-orange-500">
                     <ShieldCheck size={48} />
                 </div>
-                <h3 className="text-2xl font-black font-accent text-center mb-2">¡Casi listo!</h3>
-                <p className="text-center text-text-secondary mb-6">
-                    Vas a contratar la cobertura con <strong className="text-text-primary uppercase">{selectedQuoteObj.source}</strong> a través de uno de nuestros asesores oficiales mediante WhatsApp.
+                <h3 className="text-2xl font-black font-accent text-center mb-1">¡Un paso más!</h3>
+                <p className="text-center text-text-secondary mb-5 text-sm">
+                    Dejanos tu número y un asesor de <strong className="text-orange-500">Yuju</strong> te va a contactar para ayudarte a cerrar tu seguro con {getInsurerLogo(selectedQuoteObj.source) ? (
+                        <img 
+                            src={getInsurerLogo(selectedQuoteObj.source)!} 
+                            alt={selectedQuoteObj.source} 
+                            className="inline-block h-6 ml-2 align-middle object-contain" 
+                            style={{ filter: 'var(--logo-filter)' }} 
+                        />
+                    ) : (
+                        <strong className="text-text-primary uppercase ml-1">{selectedQuoteObj.source}</strong>
+                    )}.
                 </p>
-                <div className="bg-bg-secondary p-4 rounded-xl border border-border-primary mb-6">
-                    <p className="text-sm text-text-primary font-bold">Resumen:</p>
-                    <ul className="text-sm text-text-secondary space-y-1 mt-2">
-                        <li>Moto: {selectedBrand?.name} {selectedYear}</li>
-                        <li>Método: {payWithCard ? 'Tarjeta' : 'Efectivo'}</li>
+                <div className="bg-bg-secondary p-4 rounded-xl border border-border-primary mb-5">
+                    <p className="text-xs font-bold text-text-secondary uppercase tracking-widest mb-2">Resumen</p>
+                    <ul className="text-sm text-text-primary space-y-1">
+                        <li><span className="text-text-secondary">Moto:</span> {selectedBrand?.name} {selectedModel?.group?.name} ({selectedYear})</li>
+                        <li><span className="text-text-secondary">Pago:</span> {payWithCard ? 'Tarjeta' : 'Efectivo'}</li>
                     </ul>
                 </div>
+                <div className="mb-5">
+                    <label className="block text-sm font-bold text-text-primary mb-2">Tu número de WhatsApp <span className="text-red-400">*</span></label>
+                    <div className="relative">
+                        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary font-bold text-sm">🇦🇷 +54</span>
+                        <input
+                            type="tel"
+                            value={whatsappPhone}
+                            onChange={(e) => setWhatsappPhone(e.target.value.replace(/[^0-9]/g, ''))}
+                            placeholder="Ej: 1156307246"
+                            maxLength={12}
+                            className="w-full bg-bg-secondary border border-border-primary rounded-xl pl-20 pr-4 py-3 text-text-primary font-bold yuju-input-orange transition-all shadow-sm"
+                        />
+                    </div>
+                    <p className="text-[10px] text-text-secondary mt-1.5 opacity-60">Tu asesor se va a comunicar por este número.</p>
+                </div>
                 <Button 
-                    className="w-full bg-orange-500 hover:bg-orange-600 border-none text-white font-bold shadow-[0_0_15px_rgba(249,115,22,0.3)]"
+                    className="w-full bg-gradient-to-r from-orange-500 to-amber-500 hover:shadow-orange-400/30 border-none text-white font-black shadow-lg uppercase tracking-wider"
                     onClick={handleWhatsAppRedirect}
+                    isLoading={whatsappSending}
                 >
-                    Continuar a WhatsApp
+                    {!whatsappSending && 'Enviar Cotización'}
+                </Button>
+            </GlassCard>
+        </div>
+      )}
+
+      {/* Thank You Modal */}
+      {thankYouOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+            <GlassCard className="p-10 max-w-md w-full text-center relative overflow-hidden">
+                {/* Glow decoration */}
+                <div className="absolute -top-16 -right-16 w-48 h-48 bg-orange-500/20 rounded-full blur-3xl" />
+                <div className="absolute -bottom-16 -left-16 w-48 h-48 bg-amber-400/10 rounded-full blur-3xl" />
+                
+                {/* Icon */}
+                <div className="relative w-20 h-20 mx-auto mb-6">
+                    <div className="absolute inset-0 bg-orange-500/20 rounded-full blur-xl animate-pulse" />
+                    <div className="relative w-20 h-20 bg-gradient-to-br from-orange-500 to-amber-400 rounded-full flex items-center justify-center shadow-2xl shadow-orange-500/30">
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                </div>
+
+                <h3 className="text-3xl font-black font-accent text-text-primary mb-2 tracking-tighter relative">
+                    ¡Gracias por elegirnos!
+                </h3>
+                <p className="text-text-secondary mb-2 relative">
+                    Tu cotización fue enviada con éxito.
+                </p>
+                <p className="text-text-secondary text-sm mb-8 relative">
+                    Un asesor de <span className="text-orange-500 font-black">Yuju</span> se pondrá en contacto con vos a la brevedad para ayudarte a finalizar tu seguro.
+                </p>
+
+                <div className="bg-orange-500/10 border border-orange-500/20 rounded-2xl p-4 mb-8 relative text-left">
+                    <p className="text-xs text-orange-400 font-bold uppercase tracking-widest mb-1">¿Querés agilizar?</p>
+                    <p className="text-sm text-text-secondary">Podés escribirnos directamente al <span className="text-text-primary font-bold">+54 11 5630 7246</span> mencionando tu cotización.</p>
+                </div>
+
+                <Button
+                    className="w-full bg-gradient-to-r from-orange-500 to-amber-500 border-none text-white font-black shadow-lg uppercase tracking-wider"
+                    onClick={() => setThankYouOpen(false)}
+                >
+                    Volver a cotizaciones
                 </Button>
             </GlassCard>
         </div>

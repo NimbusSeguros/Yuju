@@ -184,6 +184,21 @@ export const cotizarIntegrity = async ({ codia, brandId, anio, codigoPostal, loc
     return response.data;
 };
 
+// --- Leads / Supabase ---
+export const createLead = async (payload: {
+    vehicleInfo: any;
+    provider: string;
+    planName: string;
+    precio: number;
+    sumaAsegurada?: number;
+    phone: string;
+    zipCode: string;
+    wspText: string;
+}) => {
+    const response = await axios.post('/api/leads', payload);
+    return response.data;
+};
+
 // --- San Cristobal Seguros ---
 export const cotizarSanCristobal = async ({ codia, anio, localidad, sumaAsegurada }: any) => {
     const response = await axios.post('/api/sancristobal/cotizar', {

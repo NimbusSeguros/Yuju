@@ -343,7 +343,7 @@ export const HogarCotizador = () => {
                       <div className="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center">
                         <Building2 size={24} />
                       </div>
-                      <h2 className="text-2xl font-black font-accent tracking-tighter uppercase">Tu Vivienda</h2>
+                      <h2 className="text-2xl font-black font-accent tracking-tighter">Tu Vivienda</h2>
                     </div>
                     <p className="text-sm text-text-secondary font-medium">Contanos qué tipo de hogar querés proteger hoy.</p>
                   </div>
@@ -368,7 +368,7 @@ export const HogarCotizador = () => {
                               <Home size={20} />
                             </div>
                             <div>
-                                <h3 className="font-bold text-text-primary uppercase text-xs">{opt.texto}</h3>
+                                <h3 className="font-bold text-text-primary text-xs">{opt.texto}</h3>
                                 {q.significado && <p className="text-[9px] text-text-secondary font-medium mt-1 leading-tight">{q.significado}</p>}
                             </div>
                           </button>
@@ -400,7 +400,7 @@ export const HogarCotizador = () => {
                 >
                   <div className="flex items-center justify-between pointer-events-none">
                     <div className="space-y-1">
-                        <h2 className="text-2xl font-black font-accent tracking-tighter uppercase">{plans.length > 1 ? 'Planes Recomendados' : 'Plan Recomendado'}</h2>
+                        <h2 className="text-2xl font-black font-accent tracking-tighter">{plans.length > 1 ? 'Planes Recomendados' : 'Plan Recomendado'}</h2>
                     </div>
                   </div>
 
@@ -416,7 +416,7 @@ export const HogarCotizador = () => {
                              <div className="space-y-1 sm:space-y-2 flex-1">
                                  <div className="flex items-center gap-2">
                                      {selectedPlanCode === plan.codigo && <CheckCircle2 size={16} className="text-emerald-500 flex-shrink-0 sm:size-[18px]" />}
-                                     <h3 className="text-sm sm:text-lg font-black font-accent uppercase tracking-tight line-clamp-1">{plan.descripcion}</h3>
+                                     <h3 className="text-sm sm:text-lg font-black font-accent tracking-tight line-clamp-1">{plan.descripcion}</h3>
                                      {plan.codigo.includes('GOLD') && <Star size={12} className="text-amber-400 fill-amber-400 sm:size-[14px]" />}
                                  </div>
                                  <p className="text-[10px] sm:text-xs text-text-secondary leading-relaxed max-w-sm line-clamp-2 sm:line-clamp-none">{plan.informacionAdicional}</p>
@@ -445,7 +445,7 @@ export const HogarCotizador = () => {
                                     className="overflow-hidden bg-bg-primary/50 border-t border-emerald-500/10"
                                 >
                                     <div className="p-5 md:p-6">
-                                        <h4 className="text-[10px] font-black uppercase tracking-widest text-text-secondary opacity-60 mb-4">Coberturas incluidas</h4>
+                                        <h4 className="text-[10px] font-black tracking-widest text-text-secondary opacity-60 mb-4">Coberturas incluidas</h4>
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                             {plan.coberturas?.map((c, i) => (
                                                 <div key={i} className="flex justify-between items-start p-3 bg-bg-secondary/50 rounded-xl border border-border-primary/50 gap-3">
@@ -495,7 +495,7 @@ export const HogarCotizador = () => {
                           <User size={24} />
                       </div>
                       <div>
-                        <h2 className="text-2xl font-black font-accent uppercase tracking-tighter">Tus Datos</h2>
+                        <h2 className="text-2xl font-black font-accent tracking-tighter">Tus Datos</h2>
                         <p className="text-xs text-text-secondary font-medium">Necesitamos identificarte para generar la póliza.</p>
                       </div>
                     </div>
@@ -610,7 +610,7 @@ export const HogarCotizador = () => {
                     <div className="w-14 h-14 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center mx-auto mb-3">
                         <MapPin size={28} />
                     </div>
-                    <h2 className="text-2xl font-black font-accent uppercase tracking-tighter">Domicilio</h2>
+                    <h2 className="text-2xl font-black font-accent tracking-tighter">Domicilio</h2>
                     <p className="text-xs text-text-secondary font-medium">¿Dónde está ubicada la propiedad?</p>
                   </div>
 
@@ -739,7 +739,7 @@ export const HogarCotizador = () => {
                     <div className="w-14 h-14 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center mx-auto mb-3">
                         <CreditCard size={28} />
                     </div>
-                    <h2 className="text-2xl font-black font-accent uppercase tracking-tighter">Método de Pago</h2>
+                    <h2 className="text-2xl font-black font-accent tracking-tighter">Método de Pago</h2>
                     <p className="text-xs text-text-secondary font-medium">Último paso para estar protegido.</p>
                   </div>
 
@@ -754,7 +754,7 @@ export const HogarCotizador = () => {
                             <CreditCard size={24} />
                         </div>
                         <div>
-                            <h3 className="font-black uppercase tracking-tight text-sm md:text-base leading-tight">Tarjeta de Crédito</h3>
+                            <h3 className="font-black tracking-tight text-sm md:text-base leading-tight">Tarjeta de Crédito</h3>
                             <p className="text-[10px] text-text-secondary font-medium mt-0.5">VISA, MasterCard, AMEX, CABAL</p>
                         </div>
                     </button>
@@ -799,7 +799,7 @@ export const HogarCotizador = () => {
                             <Landmark size={24} />
                         </div>
                         <div>
-                            <h3 className="font-black uppercase tracking-tight text-sm md:text-base leading-tight">CBU / Débito Bancario</h3>
+                            <h3 className="font-black tracking-tight text-sm md:text-base leading-tight">CBU / Débito Bancario</h3>
                             <p className="text-[10px] text-text-secondary font-medium mt-0.5">Bancos oficiales de Argentina</p>
                         </div>
                     </button>
@@ -854,7 +854,7 @@ export const HogarCotizador = () => {
                        <CheckCircle2 size={20} />
                        <span className="text-[10px] font-black uppercase tracking-[0.3em]">Emisión Exitosa</span>
                     </div>
-                    <h2 className="text-4xl font-black text-text-primary font-accent tracking-tighter uppercase whitespace-pre-wrap">¡Ya estás protegido!</h2>
+                    <h2 className="text-4xl font-black text-text-primary font-accent tracking-tighter whitespace-pre-wrap">¡Ya estás protegido!</h2>
                     <p className="text-xs text-text-secondary font-medium max-w-sm mx-auto">
                         Hemos enviado el certificado de cobertura y la póliza digital a tu casilla de correo. 
                     </p>

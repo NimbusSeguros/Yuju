@@ -193,7 +193,7 @@ export const HomePage = () => {
               <div className="px-4 py-1 bg-yuju-blue/10 text-yuju-blue inline-block rounded-full text-xs font-black uppercase tracking-widest">
                 Coberturas Inteligentes
               </div>
-              <h2 className="section-title uppercase tracking-[ -0.05em]">Elegí tu Tranquilidad</h2>
+              <h2 className="section-title tracking-[ -0.05em]">Elegí tu Tranquilidad</h2>
               <p className="section-subtitle">
                 Descubrí seguros diseñados para tu estilo de vida. Cotización instantánea e inteligente para personas que valoran su tiempo.
               </p>
@@ -228,7 +228,7 @@ export const HomePage = () => {
                   <div className={cn("absolute inset-0 blur-xl opacity-40 scale-110", service.color)} />
                 </div>
 
-                <h3 className="text-2xl font-black text-text-primary mb-3 font-accent tracking-tighter uppercase whitespace-pre-wrap leading-tight min-h-[4rem] flex items-center">{service.title}</h3>
+                <h3 className="text-2xl font-black text-text-primary mb-3 font-accent tracking-tighter whitespace-pre-wrap leading-tight min-h-[4rem] flex items-center">{service.title}</h3>
                 <p className="text-text-secondary mb-8 leading-relaxed font-medium text-sm min-h-[4.5rem]">
                   {service.desc}
                 </p>
@@ -271,7 +271,7 @@ export const HomePage = () => {
                 </div>
                 <div className="flex flex-col pr-10">
                   <span className="text-[10px] font-black uppercase tracking-widest text-text-secondary">Monitoreo</span>
-                  <span className="text-sm font-black text-text-primary uppercase font-accent">Tecnología Activa</span>
+                  <span className="text-sm font-black text-text-primary font-accent">Tecnología Activa</span>
                 </div>
               </motion.div>
             </motion.div>
@@ -279,7 +279,7 @@ export const HomePage = () => {
 
           <div className="space-y-10">
             <div className="space-y-4">
-              <h2 className="section-title uppercase">Nacimos para<br />simplificar el futuro</h2>
+              <h2 className="section-title">Nacimos para<br />simplificar el futuro</h2>
               <p className="text-text-secondary leading-relaxed font-medium">
                 Somos una empresa joven, dinámica y comprometida con la innovación y la sostenibilidad. Nacimos como la evolución digital de Nimbus Bróker, integrando 15 años de trayectoria con la agilidad del mañana.
               </p>
@@ -314,7 +314,7 @@ export const HomePage = () => {
       {/* SECTION: TESTIMONIALS - New Horizontal Scroll Section */}
       <section className="py-10 bg-bg-secondary overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 mb-16">
-          <h2 className="text-yuju-blue font-black uppercase tracking-widest text-sm mb-4">Opiniones de nuestros clientes</h2>
+          <h2 className="text-yuju-blue font-black tracking-widest text-sm mb-4">Opiniones de nuestros clientes</h2>
           <p className="section-title">Lo que dicen de nosotros</p>
         </div>
 
@@ -328,7 +328,7 @@ export const HomePage = () => {
               <GlassCard key={i} className="min-w-[350px] md:min-w-[450px] p-8 border-border-primary hover:border-yuju-blue/30 transition-all duration-500 bg-bg-primary">
                 <div className="flex justify-between items-start mb-6">
                   <div>
-                    <h4 className="text-yuju-blue font-black text-lg uppercase font-accent">{t.name}</h4>
+                    <h4 className="text-yuju-blue font-black text-lg font-accent">{t.name}</h4>
                     <span className="text-text-secondary text-[11px] font-bold uppercase tracking-widest">{t.date}</span>
                   </div>
                   <div className="w-10 h-10 rounded-full bg-yuju-blue flex items-center justify-center text-white shadow-lg shadow-yuju-blue/20">
