@@ -49,7 +49,8 @@ export const AutoCotizador = () => {
     cp: '',
     localidad: '',
     codia: '',
-    version: ''
+    version: '',
+    sancorCityCode: null as string | null
   });
 
   const [activeStep, setActiveStep] = useState(1); // 1: Marca, 2: Año, 3: Modelo, 4: CP, 5: Results
@@ -64,6 +65,14 @@ export const AutoCotizador = () => {
 
   const [cotizaciones, setCotizaciones] = useState<any[]>([]);
 
+  const formatTodayDDMMYYYY = () => {
+    const d = new Date();
+    const dd = String(d.getDate()).padStart(2, "0");
+    const mm = String(d.getMonth() + 1).padStart(2, "0");
+    const yyyy = d.getFullYear();
+    return `${dd}-${mm}-${yyyy}`;
+  };
+
   const handleCotizar = async () => {
     setIsProcessing(true);
     setCotizaciones([]);
@@ -76,7 +85,7 @@ export const AutoCotizador = () => {
         marca: formData.marcaId,
         modelo: formData.modeloId,
         version: formData.version,      
-        anio: formData.year,
+        anio: Number(formData.year), // Backend expects number
         codigoPostal: formData.cp,
         localidad: formData.localidad,
         tieneGNC: false,
@@ -87,7 +96,9 @@ export const AutoCotizador = () => {
         codia: formData.codia,
         codInfoAuto: formData.codia,
         infoauto: formData.codia,
-        version_desc: formData.version
+        version_desc: formData.version,
+        fechaVigencia: formatTodayDDMMYYYY(),
+        cityCode: formData.sancorCityCode
       };
 
       console.log("=== PAYLOAD FRONTEND ENVIADO AL BACKEND ===", payload);
@@ -284,7 +295,18 @@ export const AutoCotizador = () => {
                 
                 <BrandSelect 
                   value={formData.marcaId} 
-                  onChange={(id, name) => setFormData(prev => ({ ...prev, marcaId: id, marcaName: name }))} 
+                  onChange={(id, name) => {
+                    setFormData(prev => ({ 
+                      ...prev, 
+                      marcaId: id, 
+                      marcaName: name,
+                      year: '',
+                      modeloId: '',
+                      modeloName: '',
+                      codia: '',
+                      version: ''
+                    }));
+                  }} 
                 />
 
                 {formData.marcaId && (
@@ -368,7 +390,14 @@ export const AutoCotizador = () => {
                 <PostalCodeSelect 
                   value={formData.cp}
                   localidad={formData.localidad}
-                  onChange={(cp, loc) => setFormData(prev => ({ ...prev, cp, localidad: loc }))}
+                  onChange={(cp, loc, cityCode) => {
+                    setFormData(prev => ({ 
+                      ...prev, 
+                      cp, 
+                      localidad: loc,
+                      sancorCityCode: cityCode || null
+                    }));
+                  }}
                 />
               </motion.div>
 
