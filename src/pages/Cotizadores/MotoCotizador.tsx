@@ -453,7 +453,7 @@ export const MotoCotizador = () => {
           </div>
 
           {/* Mobile/Tablet Back Button - shown between stepper and card */}
-          {activeStep > 1 && (
+          {activeStep > 1 && activeStep < 5 && (
             <motion.button
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
@@ -470,7 +470,7 @@ export const MotoCotizador = () => {
           <GlassCard className="p-4 md:p-8 border-border-primary bg-bg-primary/70 rounded-[28px] shadow-2xl relative !overflow-visible backdrop-blur-3xl">
             
             <div className="relative">
-              {activeStep > 1 && (
+              {activeStep > 1 && activeStep < 5 && (
                 <motion.button
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -690,11 +690,16 @@ export const MotoCotizador = () => {
                 className="space-y-8 w-full mt-8"
                >
                   <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-4 border-b border-border-primary pb-6">
-                    <div className="text-center md:text-left w-full">
-                      <div className="text-sm font-bold text-text-secondary uppercase tracking-widest mb-1">Resultados para tu</div>
-                      <h2 className="text-2xl lg:text-3xl font-black font-accent tracking-tighter text-orange-500 leading-tight">
-                        {selectedBrand?.name} {selectedModel?.group?.name} <span className="text-text-primary">{selectedModel?.description}</span> <span className="text-orange-400">({selectedYear})</span>
-                      </h2>
+                    <div className="flex items-start md:items-center gap-4 w-full">
+                       <button onClick={() => setActiveStep(prev => prev - 1)} className="p-2 bg-orange-500/10 hover:bg-orange-500/20 text-orange-500 rounded-xl transition-all cursor-pointer shrink-0 mt-1 md:mt-0">
+                          <ArrowLeft size={24} />
+                       </button>
+                      <div className="text-center md:text-left w-full">
+                        <div className="text-sm font-bold text-text-secondary uppercase tracking-widest mb-1">Resultados para tu</div>
+                        <h2 className="text-2xl lg:text-3xl font-black font-accent tracking-tighter text-orange-500 leading-tight">
+                          {selectedBrand?.name} {selectedModel?.group?.name} <span className="text-text-primary">{selectedModel?.description}</span> <span className="text-orange-400">({selectedYear})</span>
+                        </h2>
+                      </div>
                     </div>
                     <div className="flex flex-wrap items-center justify-center gap-3">
                     </div>

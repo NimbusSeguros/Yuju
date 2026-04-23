@@ -248,7 +248,7 @@ export const AutoCotizador = () => {
           </div>
 
           {/* Mobile/Tablet Back Button - shown between stepper and card */}
-          {activeStep > 1 && (
+          {activeStep > 1 && activeStep < 5 && (
             <motion.button
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
@@ -265,7 +265,7 @@ export const AutoCotizador = () => {
           <GlassCard className="p-4 md:p-8 border-border-primary bg-bg-primary/70 rounded-[28px] shadow-2xl relative !overflow-visible backdrop-blur-3xl">
             
             <div className="relative">
-              {activeStep > 1 && (
+              {activeStep > 1 && activeStep < 5 && (
                 <motion.button
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -435,9 +435,14 @@ export const AutoCotizador = () => {
                 className="space-y-8 w-full mt-8"
                >
                   <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-4 border-b border-border-primary pb-6">
-                    <div className="text-center md:text-left">
-                      <h2 className="text-4xl font-black font-accent tracking-tighter">Comparador</h2>
-                      <p className="text-text-secondary font-medium">Analizando opciones para {formData.marcaName} {formData.modeloName}</p>
+                    <div className="flex items-center gap-4 w-full">
+                       <button onClick={() => setActiveStep(prev => prev - 1)} className="p-2 bg-yuju-blue/10 hover:bg-yuju-blue/20 text-yuju-blue rounded-xl transition-all cursor-pointer shrink-0">
+                          <ArrowLeft size={24} />
+                       </button>
+                      <div className="text-center md:text-left w-full">
+                        <h2 className="text-4xl font-black font-accent tracking-tighter">Comparador</h2>
+                        <p className="text-text-secondary font-medium">Analizando opciones para {formData.marcaName} {formData.modeloName}</p>
+                      </div>
                     </div>
                     <div className="flex flex-wrap items-center justify-center gap-3">
                       <Button variant="outline" className="border-yuju-blue text-yuju-blue">Descargar PDF</Button>

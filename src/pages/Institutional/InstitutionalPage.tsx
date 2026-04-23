@@ -134,7 +134,7 @@ export const InstitutionalPage = () => {
       </section>
 
       {/* CORE IDENTITY: MISSION, VISION & OBJECTIVE */}
-      <section className="py-32 px-6 bg-bg-secondary overflow-hidden">
+      <section id="mision" className="py-32 px-6 bg-bg-secondary overflow-hidden">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
