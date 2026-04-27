@@ -1,17 +1,18 @@
 import axios from 'axios';
 
-// API instances configured to use the proxy defined in vite.config.ts
+// API instances configured to use the production URL or proxy
+const MOTO_API_BASE = import.meta.env.VITE_MOTO_API_URL || '';
 
 const api = axios.create({
-    baseURL: '/api/rus/',
+    baseURL: `${MOTO_API_BASE}/api/rus/`,
 });
 
 const infoautoApi = axios.create({
-    baseURL: '/api/infoauto/',
+    baseURL: `${MOTO_API_BASE}/api/infoauto/`,
 });
 
 const atmApi = axios.create({
-    baseURL: '/api/atm/',
+    baseURL: `${MOTO_API_BASE}/api/atm/`,
 });
 
 // Global Error Interceptor
@@ -117,7 +118,11 @@ export const getPropuestaStatus = async (proposalNumber: string | number) => {
 
 export const getPolizaPdf = async (ramo: string | number, poliza: string | number, endoso: string | number) => {
     try {
-        const response = await api.get(`polizas/${ramo}/${poliza}/${endoso}/pdf`, {
+        const response = await api.post('descargar-poliza', {
+            ramo,
+            poliza,
+            endoso
+        }, {
             responseType: 'blob'
         });
         return response.data;
@@ -173,7 +178,7 @@ export const descargarPolizaATM = async ({ npoliza, reporte = 'POL', seccion = 4
 
 // --- Integrity Seguros ---
 export const cotizarIntegrity = async ({ codia, brandId, anio, codigoPostal, localidad, sumaAsegurada }: any) => {
-    const response = await axios.post('/api/integrity/cotizar', {
+    const response = await axios.post(`${MOTO_API_BASE}/api/integrity/cotizar`, {
         codia,
         brandId,
         anio,
@@ -194,19 +199,21 @@ export const createLead = async (payload: {
     phone: string;
     zipCode: string;
     wspText: string;
+    isMoto?: boolean;
 }) => {
-    const response = await axios.post('/api/leads', payload);
+    // If isMoto is not provided, default to true (Moto)
+    const body = {
+        ...payload,
+        isMoto: payload.isMoto !== undefined ? payload.isMoto : true
+    };
+    const response = await axios.post(`${MOTO_API_BASE}/api/leads`, body);
     return response.data;
 };
 
 // --- San Cristobal Seguros ---
-export const cotizarSanCristobal = async ({ codia, anio, localidad, sumaAsegurada }: any) => {
-    const response = await axios.post('/api/sancristobal/cotizar', {
-        codia,
-        anio,
-        localidad,
-        sumaAsegurada
-    });
+export const cotizarSanCristobal = async (payload: any) => {
+    // Aligned with backend: router.post('/san-cristobal/cotizacion-auto', ...)
+    const response = await axios.post(`${MOTO_API_BASE}/api/san-cristobal/cotizacion-auto`, payload);
     return response.data;
 };
 

@@ -1,4 +1,3 @@
-import { Mail, Phone } from 'lucide-react';
 import { useTheme } from '../hooks/useTheme';
 
 export const Footer = () => {

@@ -1,0 +1,989 @@
+{
+  "A - RESPONSABILIDAD CIVIL LIMITADA": {
+    "titulo": "A - RESPONSABILIDAD CIVIL LIMITADA",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil frente a terceros",
+        "limite": "hasta $160.000.000"
+      },
+      {
+        "nombre": "Cobertura en exterior",
+        "descripcion": "Mercosur"
+      },
+      {
+        "nombre": "Refacturación",
+        "descripcion": "Mensual"
+      }
+    ]
+  },
+  "RESPONSABILIDAD CIVIL LIMITADA": {
+    "titulo": "A - RESPONSABILIDAD CIVIL LIMITADA",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil frente a terceros",
+        "limite": "hasta $160.000.000"
+      },
+      {
+        "nombre": "Cobertura en exterior",
+        "descripcion": "Mercosur"
+      },
+      {
+        "nombre": "Refacturación",
+        "descripcion": "Mensual"
+      }
+    ]
+  },
+  "B  - R.C.L.- INCENDIO, ROBO Y ACCIDENTE TOTAL": {
+    "titulo": "B – Robo e Incendio Total",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil hacia tercero",
+        "limite": "hasta $160.000.000"
+      },
+      {
+        "nombre": "Pérdida Total por Incendio",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Pérdida Total por Robo o Hurto",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Auxilio Mecánico y Remolque",
+        "descripcion": "150 km en Argentina / 100 km en países limítrofes. Hasta 6 servicios anuales (1 por mes)"
+      },
+      {
+        "nombre": "Accidentes personales para el conductor y/o asegurado",
+        "limite": "Hasta $7.500"
+      },
+      {
+        "nombre": "Cobertura de robo y/o hurto y/o incendio sin franquicia",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Gastos de gestoría por baja del vehículo",
+        "limite": "Hasta $8.000"
+      },
+      {
+        "nombre": "Cobertura en exterior",
+        "descripcion": "Mercosur"
+      },
+      {
+        "nombre": "Refacturación",
+        "descripcion": "Mensual"
+      }
+    ]
+  },
+  "INCENDIO, ROBO Y ACCIDENTE TOTAL": {
+    "titulo": "B – Robo e Incendio Total",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil hacia tercero",
+        "limite": "hasta $160.000.000"
+      },
+      {
+        "nombre": "Pérdida Total por Incendio",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Pérdida Total por Robo o Hurto",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Auxilio Mecánico y Remolque",
+        "descripcion": "150 km en Argentina / 100 km en países limítrofes. Hasta 6 servicios anuales (1 por mes)"
+      },
+      {
+        "nombre": "Accidentes personales para el conductor y/o asegurado",
+        "limite": "Hasta $7.500"
+      },
+      {
+        "nombre": "Cobertura de robo y/o hurto y/o incendio sin franquicia",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Gastos de gestoría por baja del vehículo",
+        "limite": "Hasta $8.000"
+      },
+      {
+        "nombre": "Cobertura en exterior",
+        "descripcion": "Mercosur"
+      },
+      {
+        "nombre": "Refacturación",
+        "descripcion": "Mensual"
+      }
+    ]
+  },
+  "B1": {
+    "titulo": "B1 – Robo e Incendio Total",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil hacia tercero",
+        "limite": "hasta $160.000.000"
+      },
+      {
+        "nombre": "Pérdida Total por Incendio",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Pérdida Total por Robo o Hurto",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Auxilio Mecánico y Remolque",
+        "descripcion": "150 km en Argentina / 100 km en países limítrofes. Hasta 6 servicios anuales (1 por mes)"
+      },
+      {
+        "nombre": "Accidentes personales para el conductor y/o asegurado",
+        "limite": "Hasta $7.500"
+      },
+      {
+        "nombre": "Cobertura de robo y/o hurto y/o incendio sin franquicia",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Gastos de gestoría por baja del vehículo",
+        "limite": "Hasta $8.000"
+      },
+      {
+        "nombre": "Cobertura en exterior",
+        "descripcion": "Mercosur"
+      },
+      {
+        "nombre": "Refacturación",
+        "descripcion": "Mensual"
+      }
+    ]
+  },
+  "ROBO E INCENDIO TOTAL": {
+    "titulo": "B1 – Robo e Incendio Total",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil hacia tercero",
+        "limite": "hasta $160.000.000"
+      },
+      {
+        "nombre": "Pérdida Total por Incendio",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Pérdida Total por Robo o Hurto",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Auxilio Mecánico y Remolque",
+        "descripcion": "150 km en Argentina / 100 km en países limítrofes. Hasta 6 servicios anuales (1 por mes)"
+      },
+      {
+        "nombre": "Accidentes personales para el conductor y/o asegurado",
+        "limite": "Hasta $7.500"
+      },
+      {
+        "nombre": "Cobertura de robo y/o hurto y/o incendio sin franquicia",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Gastos de gestoría por baja del vehículo",
+        "limite": "Hasta $8.000"
+      },
+      {
+        "nombre": "Cobertura en exterior",
+        "descripcion": "Mercosur"
+      },
+      {
+        "nombre": "Refacturación",
+        "descripcion": "Mensual"
+      }
+    ]
+  },
+  "M PLUS – RLC, INC Y ROBO TOT Y PARCIAL, ACC.TOTAL": {
+    "titulo": "M PLUS – RLC, INC Y ROBO TOT Y PARCIAL, ACC.TOTAL",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil hacia terceros",
+        "limite": "hasta $160.000.000"
+      },
+      {
+        "nombre": "Robo o Hurto Total y Parcial",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Incendio Total y Parcial",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Destrucción Total",
+        "descripcion": "Sí"
+      },
+      {
+        "nombre": "Auxilio Mecánico y Remolque",
+        "descripcion": "300 km en Argentina / 100 km en países limítrofes. Hasta 6 servicios anuales (1 por mes)"
+      },
+      {
+        "nombre": "Asistencia Legal",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Cobertura en exterior",
+        "descripcion": "Mercosur"
+      },
+      {
+        "nombre": "Accidentes personales para el conductor y/o asegurado",
+        "descripcion": "Antigüedad 15 años: hasta $150.000. Antigüedad de 16 a 20 años: hasta $37.500"
+      },
+      {
+        "nombre": "Accidentes personales para el cónyuge y/o familiares del conductor y/o asegurado",
+        "descripcion": "Antigüedad 15 años: hasta $75.000. Antigüedad de 16 a 20 años: hasta $75.000"
+      },
+      {
+        "nombre": "Cobertura de robo y/o hurto y/o incendio sin franquicia",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Gastos de gestoría por baja del vehículo",
+        "limite": "Hasta $8.000"
+      },
+      {
+        "nombre": "Daños de luneta, parabrisas y vidrio en techo",
+        "descripcion": "Antigüedad 15 años: 2 eventos anuales, tope 100% Suma Asegurada. Antigüedad de 16 a 20 años: 2 eventos anuales, tope 20% SA"
+      },
+      {
+        "nombre": "Daño de vidrios laterales y cerraduras en puertas",
+        "descripcion": "1 evento anual, tope 5% SA"
+      },
+      {
+        "nombre": "Daños parciales al amparo del Robo Total",
+        "limite": "Hasta 40% Suma Asegurada"
+      },
+      {
+        "nombre": "Reposición de cubiertas (con desgaste) afectadas por un siniestro",
+        "descripcion": "Tope: 2 eventos o 4 cubiertas anuales"
+      },
+      {
+        "nombre": "Reposición a nuevo de cubiertas afectadas por un siniestro",
+        "descripcion": "Antigüedad 15 años: tope de 2 eventos o 4 cubiertas anuales"
+      },
+      {
+        "nombre": "Cobertura adicional por robo de llave",
+        "descripcion": "Antigüedad 15 años: 1 evento anual, hasta 5% de la SA"
+      },
+      {
+        "nombre": "Adicional de Granizo parcial, sin franquicia",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Adicional de Inundación parcial con franquicia",
+        "descripcion": "Antigüedad 15 años: Si"
+      },
+      {
+        "nombre": "Refacturación",
+        "descripcion": "Mensual"
+      }
+    ]
+  },
+  "M PLUS": {
+    "titulo": "M PLUS – RLC, INC Y ROBO TOT Y PARCIAL, ACC.TOTAL",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil hacia terceros",
+        "limite": "hasta $160.000.000"
+      },
+      {
+        "nombre": "Robo o Hurto Total y Parcial",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Incendio Total y Parcial",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Destrucción Total",
+        "descripcion": "Sí"
+      },
+      {
+        "nombre": "Auxilio Mecánico y Remolque",
+        "descripcion": "300 km en Argentina / 100 km en países limítrofes. Hasta 6 servicios anuales (1 por mes)"
+      },
+      {
+        "nombre": "Asistencia Legal",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Cobertura en exterior",
+        "descripcion": "Mercosur"
+      },
+      {
+        "nombre": "Accidentes personales para el conductor y/o asegurado",
+        "descripcion": "Antigüedad 15 años: hasta $150.000. Antigüedad de 16 a 20 años: hasta $37.500"
+      },
+      {
+        "nombre": "Accidentes personales para el cónyuge y/o familiares del conductor y/o asegurado",
+        "descripcion": "Antigüedad 15 años: hasta $75.000. Antigüedad de 16 a 20 años: hasta $75.000"
+      },
+      {
+        "nombre": "Cobertura de robo y/o hurto y/o incendio sin franquicia",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Gastos de gestoría por baja del vehículo",
+        "limite": "Hasta $8.000"
+      },
+      {
+        "nombre": "Daños de luneta, parabrisas y vidrio en techo",
+        "descripcion": "Antigüedad 15 años: 2 eventos anuales, tope 100% Suma Asegurada. Antigüedad de 16 a 20 años: 2 eventos anuales, tope 20% SA"
+      },
+      {
+        "nombre": "Daño de vidrios laterales y cerraduras en puertas",
+        "descripcion": "1 evento anual, tope 5% SA"
+      },
+      {
+        "nombre": "Daños parciales al amparo del Robo Total",
+        "limite": "Hasta 40% Suma Asegurada"
+      },
+      {
+        "nombre": "Reposición de cubiertas (con desgaste) afectadas por un siniestro",
+        "descripcion": "Tope: 2 eventos o 4 cubiertas anuales"
+      },
+      {
+        "nombre": "Reposición a nuevo de cubiertas afectadas por un siniestro",
+        "descripcion": "Antigüedad 15 años: tope de 2 eventos o 4 cubiertas anuales"
+      },
+      {
+        "nombre": "Cobertura adicional por robo de llave",
+        "descripcion": "Antigüedad 15 años: 1 evento anual, hasta 5% de la SA"
+      },
+      {
+        "nombre": "Adicional de Granizo parcial, sin franquicia",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Adicional de Inundación parcial con franquicia",
+        "descripcion": "Antigüedad 15 años: Si"
+      },
+      {
+        "nombre": "Refacturación",
+        "descripcion": "Mensual"
+      }
+    ]
+  },
+  "RLC, INC Y ROBO": {
+    "titulo": "M PLUS – RLC, INC Y ROBO TOT Y PARCIAL, ACC.TOTAL",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil hacia terceros",
+        "limite": "hasta $160.000.000"
+      },
+      {
+        "nombre": "Robo o Hurto Total y Parcial",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Incendio Total y Parcial",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Destrucción Total",
+        "descripcion": "Sí"
+      },
+      {
+        "nombre": "Auxilio Mecánico y Remolque",
+        "descripcion": "300 km en Argentina / 100 km en países limítrofes. Hasta 6 servicios anuales (1 por mes)"
+      },
+      {
+        "nombre": "Asistencia Legal",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Cobertura en exterior",
+        "descripcion": "Mercosur"
+      },
+      {
+        "nombre": "Accidentes personales para el conductor y/o asegurado",
+        "descripcion": "Antigüedad 15 años: hasta $150.000. Antigüedad de 16 a 20 años: hasta $37.500"
+      },
+      {
+        "nombre": "Accidentes personales para el cónyuge y/o familiares del conductor y/o asegurado",
+        "descripcion": "Antigüedad 15 años: hasta $75.000. Antigüedad de 16 a 20 años: hasta $75.000"
+      },
+      {
+        "nombre": "Cobertura de robo y/o hurto y/o incendio sin franquicia",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Gastos de gestoría por baja del vehículo",
+        "limite": "Hasta $8.000"
+      },
+      {
+        "nombre": "Daños de luneta, parabrisas y vidrio en techo",
+        "descripcion": "Antigüedad 15 años: 2 eventos anuales, tope 100% Suma Asegurada. Antigüedad de 16 a 20 años: 2 eventos anuales, tope 20% SA"
+      },
+      {
+        "nombre": "Daño de vidrios laterales y cerraduras en puertas",
+        "descripcion": "1 evento anual, tope 5% SA"
+      },
+      {
+        "nombre": "Daños parciales al amparo del Robo Total",
+        "limite": "Hasta 40% Suma Asegurada"
+      },
+      {
+        "nombre": "Reposición de cubiertas (con desgaste) afectadas por un siniestro",
+        "descripcion": "Tope: 2 eventos o 4 cubiertas anuales"
+      },
+      {
+        "nombre": "Reposición a nuevo de cubiertas afectadas por un siniestro",
+        "descripcion": "Antigüedad 15 años: tope de 2 eventos o 4 cubiertas anuales"
+      },
+      {
+        "nombre": "Cobertura adicional por robo de llave",
+        "descripcion": "Antigüedad 15 años: 1 evento anual, hasta 5% de la SA"
+      },
+      {
+        "nombre": "Adicional de Granizo parcial, sin franquicia",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Adicional de Inundación parcial con franquicia",
+        "descripcion": "Antigüedad 15 años: Si"
+      },
+      {
+        "nombre": "Refacturación",
+        "descripcion": "Mensual"
+      }
+    ]
+  },
+  "D2 - R.C.L.- TODO RIESGO CON FRANQUICIA 2%": {
+    "titulo": "D2 - R.C.L.- TODO RIESGO CON FRANQUICIA 2%",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil hacia terceros",
+        "limite": "hasta $160.000.000"
+      },
+      {
+        "nombre": "Robo o Hurto Total y Parcial",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Incendio Total y Parcial",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Destrucción Total",
+        "descripcion": "Sí"
+      },
+      {
+        "nombre": "Daño Parcial",
+        "descripcion": "Sí"
+      },
+      {
+        "nombre": "Auxilio Mecánico y Remolque",
+        "descripcion": "300 km en Argentina / 100 km en países limítrofes. Hasta 6 servicios anuales (1 por mes)"
+      },
+      {
+        "nombre": "Asistencia Legal",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Cobertura en exterior",
+        "descripcion": "Mercosur"
+      },
+      {
+        "nombre": "Accidentes personales para el conductor y/o asegurado",
+        "limite": "Hasta $150.000"
+      },
+      {
+        "nombre": "Accidentes personales para el cónyuge y/o familiares del conductor y/o asegurado",
+        "limite": "Hasta $75.000"
+      },
+      {
+        "nombre": "Cobertura de robo y/o hurto y/o incendio sin franquicia",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Gastos de gestoría por baja del vehículo",
+        "limite": "Hasta $8.000"
+      },
+      {
+        "nombre": "Daño de luneta, parabrisas, vidrios laterales, vidrio en techo y cerraduras en puertas",
+        "limite": "Hasta 100% Suma Asegurada"
+      },
+      {
+        "nombre": "Daños parciales al amparo del Robo Total",
+        "limite": "Hasta 100% Suma Asegurada"
+      },
+      {
+        "nombre": "Reposición de cubiertas (con desgaste) afectadas por un siniestro",
+        "descripcion": "Tope: 4 cubiertas anuales"
+      },
+      {
+        "nombre": "Reposición a nuevo de cubiertas afectadas por un siniestro",
+        "descripcion": "Tope: 4 cubiertas anuales"
+      },
+      {
+        "nombre": "Cobertura adicional por robo de llave",
+        "descripcion": "1 evento anual, hasta 5% de la SA"
+      },
+      {
+        "nombre": "Adicional de Granizo parcial, sin franquicia",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Adicional de Inundación parcial con franquicia",
+        "descripcion": "Antigüedad 15 años: Si"
+      },
+      {
+        "nombre": "Daños parciales con franquicia",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Refacturación",
+        "descripcion": "Mensual"
+      }
+    ]
+  },
+  "D2": {
+    "titulo": "D2 - R.C.L.- TODO RIESGO CON FRANQUICIA 2%",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil hacia terceros",
+        "limite": "hasta $160.000.000"
+      },
+      {
+        "nombre": "Robo o Hurto Total y Parcial",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Incendio Total y Parcial",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Destrucción Total",
+        "descripcion": "Sí"
+      },
+      {
+        "nombre": "Daño Parcial",
+        "descripcion": "Sí"
+      },
+      {
+        "nombre": "Auxilio Mecánico y Remolque",
+        "descripcion": "300 km en Argentina / 100 km en países limítrofes. Hasta 6 servicios anuales (1 por mes)"
+      },
+      {
+        "nombre": "Asistencia Legal",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Cobertura en exterior",
+        "descripcion": "Mercosur"
+      },
+      {
+        "nombre": "Accidentes personales para el conductor y/o asegurado",
+        "limite": "Hasta $150.000"
+      },
+      {
+        "nombre": "Accidentes personales para el cónyuge y/o familiares del conductor y/o asegurado",
+        "limite": "Hasta $75.000"
+      },
+      {
+        "nombre": "Cobertura de robo y/o hurto y/o incendio sin franquicia",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Gastos de gestoría por baja del vehículo",
+        "limite": "Hasta $8.000"
+      },
+      {
+        "nombre": "Daño de luneta, parabrisas, vidrios laterales, vidrio en techo y cerraduras en puertas",
+        "limite": "Hasta 100% Suma Asegurada"
+      },
+      {
+        "nombre": "Daños parciales al amparo del Robo Total",
+        "limite": "Hasta 100% Suma Asegurada"
+      },
+      {
+        "nombre": "Reposición de cubiertas (con desgaste) afectadas por un siniestro",
+        "descripcion": "Tope: 4 cubiertas anuales"
+      },
+      {
+        "nombre": "Reposición a nuevo de cubiertas afectadas por un siniestro",
+        "descripcion": "Tope: 4 cubiertas anuales"
+      },
+      {
+        "nombre": "Cobertura adicional por robo de llave",
+        "descripcion": "1 evento anual, hasta 5% de la SA"
+      },
+      {
+        "nombre": "Adicional de Granizo parcial, sin franquicia",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Adicional de Inundación parcial con franquicia",
+        "descripcion": "Antigüedad 15 años: Si"
+      },
+      {
+        "nombre": "Daños parciales con franquicia",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Refacturación",
+        "descripcion": "Mensual"
+      }
+    ]
+  },
+  "TODO RIESGO CON FRANQUICIA 2%": {
+    "titulo": "D2 - R.C.L.- TODO RIESGO CON FRANQUICIA 2%",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil hacia terceros",
+        "limite": "hasta $160.000.000"
+      },
+      {
+        "nombre": "Robo o Hurto Total y Parcial",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Incendio Total y Parcial",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Destrucción Total",
+        "descripcion": "Sí"
+      },
+      {
+        "nombre": "Daño Parcial",
+        "descripcion": "Sí"
+      },
+      {
+        "nombre": "Auxilio Mecánico y Remolque",
+        "descripcion": "300 km en Argentina / 100 km en países limítrofes. Hasta 6 servicios anuales (1 por mes)"
+      },
+      {
+        "nombre": "Asistencia Legal",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Cobertura en exterior",
+        "descripcion": "Mercosur"
+      },
+      {
+        "nombre": "Accidentes personales para el conductor y/o asegurado",
+        "limite": "Hasta $150.000"
+      },
+      {
+        "nombre": "Accidentes personales para el cónyuge y/o familiares del conductor y/o asegurado",
+        "limite": "Hasta $75.000"
+      },
+      {
+        "nombre": "Cobertura de robo y/o hurto y/o incendio sin franquicia",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Gastos de gestoría por baja del vehículo",
+        "limite": "Hasta $8.000"
+      },
+      {
+        "nombre": "Daño de luneta, parabrisas, vidrios laterales, vidrio en techo y cerraduras en puertas",
+        "limite": "Hasta 100% Suma Asegurada"
+      },
+      {
+        "nombre": "Daños parciales al amparo del Robo Total",
+        "limite": "Hasta 100% Suma Asegurada"
+      },
+      {
+        "nombre": "Reposición de cubiertas (con desgaste) afectadas por un siniestro",
+        "descripcion": "Tope: 4 cubiertas anuales"
+      },
+      {
+        "nombre": "Reposición a nuevo de cubiertas afectadas por un siniestro",
+        "descripcion": "Tope: 4 cubiertas anuales"
+      },
+      {
+        "nombre": "Cobertura adicional por robo de llave",
+        "descripcion": "1 evento anual, hasta 5% de la SA"
+      },
+      {
+        "nombre": "Adicional de Granizo parcial, sin franquicia",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Adicional de Inundación parcial con franquicia",
+        "descripcion": "Antigüedad 15 años: Si"
+      },
+      {
+        "nombre": "Daños parciales con franquicia",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Refacturación",
+        "descripcion": "Mensual"
+      }
+    ]
+  },
+  "FRANQUICIA 2%": {
+    "titulo": "D2 - R.C.L.- TODO RIESGO CON FRANQUICIA 2%",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil hacia terceros",
+        "limite": "hasta $160.000.000"
+      },
+      {
+        "nombre": "Robo o Hurto Total y Parcial",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Incendio Total y Parcial",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Destrucción Total",
+        "descripcion": "Sí"
+      },
+      {
+        "nombre": "Daño Parcial",
+        "descripcion": "Sí"
+      },
+      {
+        "nombre": "Auxilio Mecánico y Remolque",
+        "descripcion": "300 km en Argentina / 100 km en países limítrofes. Hasta 6 servicios anuales (1 por mes)"
+      },
+      {
+        "nombre": "Asistencia Legal",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Cobertura en exterior",
+        "descripcion": "Mercosur"
+      },
+      {
+        "nombre": "Accidentes personales para el conductor y/o asegurado",
+        "limite": "Hasta $150.000"
+      },
+      {
+        "nombre": "Accidentes personales para el cónyuge y/o familiares del conductor y/o asegurado",
+        "limite": "Hasta $75.000"
+      },
+      {
+        "nombre": "Cobertura de robo y/o hurto y/o incendio sin franquicia",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Gastos de gestoría por baja del vehículo",
+        "limite": "Hasta $8.000"
+      },
+      {
+        "nombre": "Daño de luneta, parabrisas, vidrios laterales, vidrio en techo y cerraduras en puertas",
+        "limite": "Hasta 100% Suma Asegurada"
+      },
+      {
+        "nombre": "Daños parciales al amparo del Robo Total",
+        "limite": "Hasta 100% Suma Asegurada"
+      },
+      {
+        "nombre": "Reposición de cubiertas (con desgaste) afectadas por un siniestro",
+        "descripcion": "Tope: 4 cubiertas anuales"
+      },
+      {
+        "nombre": "Reposición a nuevo de cubiertas afectadas por un siniestro",
+        "descripcion": "Tope: 4 cubiertas anuales"
+      },
+      {
+        "nombre": "Cobertura adicional por robo de llave",
+        "descripcion": "1 evento anual, hasta 5% de la SA"
+      },
+      {
+        "nombre": "Adicional de Granizo parcial, sin franquicia",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Adicional de Inundación parcial con franquicia",
+        "descripcion": "Antigüedad 15 años: Si"
+      },
+      {
+        "nombre": "Daños parciales con franquicia",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Refacturación",
+        "descripcion": "Mensual"
+      }
+    ]
+  },
+  "TODO RIESGO CON FRANQUICIA 5%": {
+    "titulo": "D2 - TODO RIESGO CON FRANQUICIA 5%",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil hacia terceros",
+        "limite": "hasta $160.000.000"
+      },
+      {
+        "nombre": "Robo o Hurto Total y Parcial",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Incendio Total y Parcial",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Destrucción Total",
+        "descripcion": "Sí"
+      },
+      {
+        "nombre": "Daño Parcial",
+        "descripcion": "Sí"
+      },
+      {
+        "nombre": "Auxilio Mecánico y Remolque",
+        "descripcion": "300 km en Argentina / 100 km en países limítrofes. Hasta 6 servicios anuales (1 por mes)"
+      },
+      {
+        "nombre": "Asistencia Legal",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Cobertura en exterior",
+        "descripcion": "Mercosur"
+      },
+      {
+        "nombre": "Accidentes personales para el conductor y/o asegurado",
+        "limite": "Hasta $150.000"
+      },
+      {
+        "nombre": "Accidentes personales para el cónyuge y/o familiares del conductor y/o asegurado",
+        "limite": "Hasta $75.000"
+      },
+      {
+        "nombre": "Cobertura de robo y/o hurto y/o incendio sin franquicia",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Gastos de gestoría por baja del vehículo",
+        "limite": "Hasta $8.000"
+      },
+      {
+        "nombre": "Daño de luneta, parabrisas, vidrios laterales, vidrio en techo y cerraduras en puertas",
+        "limite": "Hasta 100% Suma Asegurada"
+      },
+      {
+        "nombre": "Daños parciales al amparo del Robo Total",
+        "limite": "Hasta 100% Suma Asegurada"
+      },
+      {
+        "nombre": "Reposición de cubiertas (con desgaste) afectadas por un siniestro",
+        "descripcion": "Tope: 4 cubiertas anuales"
+      },
+      {
+        "nombre": "Reposición a nuevo de cubiertas afectadas por un siniestro",
+        "descripcion": "Tope: 4 cubiertas anuales"
+      },
+      {
+        "nombre": "Cobertura adicional por robo de llave",
+        "descripcion": "1 evento anual, hasta 5% de la SA"
+      },
+      {
+        "nombre": "Adicional de Granizo parcial, sin franquicia",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Adicional de Inundación parcial con franquicia",
+        "descripcion": "Antigüedad 15 años: Si"
+      },
+      {
+        "nombre": "Daños parciales con franquicia",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Refacturación",
+        "descripcion": "Mensual"
+      }
+    ]
+  },
+  "FRANQUICIA 5%": {
+    "titulo": "D2 - TODO RIESGO CON FRANQUICIA 5%",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil hacia terceros",
+        "limite": "hasta $160.000.000"
+      },
+      {
+        "nombre": "Robo o Hurto Total y Parcial",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Incendio Total y Parcial",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Destrucción Total",
+        "descripcion": "Sí"
+      },
+      {
+        "nombre": "Daño Parcial",
+        "descripcion": "Sí"
+      },
+      {
+        "nombre": "Auxilio Mecánico y Remolque",
+        "descripcion": "300 km en Argentina / 100 km en países limítrofes. Hasta 6 servicios anuales (1 por mes)"
+      },
+      {
+        "nombre": "Asistencia Legal",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Cobertura en exterior",
+        "descripcion": "Mercosur"
+      },
+      {
+        "nombre": "Accidentes personales para el conductor y/o asegurado",
+        "limite": "Hasta $150.000"
+      },
+      {
+        "nombre": "Accidentes personales para el cónyuge y/o familiares del conductor y/o asegurado",
+        "limite": "Hasta $75.000"
+      },
+      {
+        "nombre": "Cobertura de robo y/o hurto y/o incendio sin franquicia",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Gastos de gestoría por baja del vehículo",
+        "limite": "Hasta $8.000"
+      },
+      {
+        "nombre": "Daño de luneta, parabrisas, vidrios laterales, vidrio en techo y cerraduras en puertas",
+        "limite": "Hasta 100% Suma Asegurada"
+      },
+      {
+        "nombre": "Daños parciales al amparo del Robo Total",
+        "limite": "Hasta 100% Suma Asegurada"
+      },
+      {
+        "nombre": "Reposición de cubiertas (con desgaste) afectadas por un siniestro",
+        "descripcion": "Tope: 4 cubiertas anuales"
+      },
+      {
+        "nombre": "Reposición a nuevo de cubiertas afectadas por un siniestro",
+        "descripcion": "Tope: 4 cubiertas anuales"
+      },
+      {
+        "nombre": "Cobertura adicional por robo de llave",
+        "descripcion": "1 evento anual, hasta 5% de la SA"
+      },
+      {
+        "nombre": "Adicional de Granizo parcial, sin franquicia",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Adicional de Inundación parcial con franquicia",
+        "descripcion": "Antigüedad 15 años: Si"
+      },
+      {
+        "nombre": "Daños parciales con franquicia",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Refacturación",
+        "descripcion": "Mensual"
+      }
+    ]
+  }
+}

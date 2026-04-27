@@ -1,0 +1,662 @@
+{
+  "COBERTURA A": {
+    "titulo": "Cobertura A - Responsabilidad Civil",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil frente a terceros",
+        "descripcion": "Cubre lesiones o fallecimiento de terceros y daños a cosas de terceros.",
+        "limite": "Límite hasta $160.000.000"
+      },
+      {
+        "nombre": "Protección para el conductor",
+        "descripcion": "Cobertura de protección personal para el conductor del vehículo.",
+        "limite": "$200.000"
+      }
+    ]
+  },
+  "A": {
+    "titulo": "Cobertura A - Responsabilidad Civil",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil frente a terceros",
+        "descripcion": "Cubre lesiones o fallecimiento de terceros y daños a cosas de terceros.",
+        "limite": "Límite hasta $160.000.000"
+      },
+      {
+        "nombre": "Protección para el conductor",
+        "descripcion": "Cobertura de protección personal para el conductor del vehículo.",
+        "limite": "$200.000"
+      }
+    ]
+  },
+  "CA7_A": {
+    "titulo": "Cobertura A - Responsabilidad Civil",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil frente a terceros",
+        "descripcion": "Cubre lesiones o fallecimiento de terceros y daños a cosas de terceros.",
+        "limite": "Límite hasta $160.000.000"
+      },
+      {
+        "nombre": "Protección para el conductor",
+        "descripcion": "Cobertura de protección personal para el conductor del vehículo.",
+        "limite": "$200.000"
+      }
+    ]
+  },
+  "COBERTURA B1": {
+    "titulo": "B1 - Robo e Incendio Total",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil frente a terceros",
+        "descripcion": "Cubre lesiones o fallecimiento de terceros y daños a cosas de terceros.",
+        "limite": "Límite hasta $160.000.000"
+      },
+      {
+        "nombre": "Robo Total",
+        "descripcion": "Cobertura completa en caso de robo total del vehículo.",
+        "limite": "Si"
+      },
+      {
+        "nombre": "Incendio Total",
+        "descripcion": "Cobertura completa en caso de incendio total del vehículo.",
+        "limite": "Si"
+      },
+      {
+        "nombre": "Protección para el conductor",
+        "descripcion": "Cobertura de protección personal para el conductor del vehículo.",
+        "limite": "Hasta $200.000"
+      },
+      {
+        "nombre": "Remolque de vehículo por avería o accidente",
+        "descripcion": "Servicio de remolque incluido en caso de avería o accidente.",
+        "limite": "Hasta 150 km por avería / 300 km por accidente"
+      },
+      {
+        "nombre": "Cobertura en países limítrofes",
+        "descripcion": "Cobertura válida en países del Mercosur.",
+        "limite": "Mercosur"
+      }
+    ]
+  },
+  "B1": {
+    "titulo": "B1 - Robo e Incendio Total",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil frente a terceros",
+        "descripcion": "Cubre lesiones o fallecimiento de terceros y daños a cosas de terceros.",
+        "limite": "Límite hasta $160.000.000"
+      },
+      {
+        "nombre": "Robo Total",
+        "descripcion": "Cobertura completa en caso de robo total del vehículo.",
+        "limite": "Si"
+      },
+      {
+        "nombre": "Incendio Total",
+        "descripcion": "Cobertura completa en caso de incendio total del vehículo.",
+        "limite": "Si"
+      },
+      {
+        "nombre": "Protección para el conductor",
+        "descripcion": "Cobertura de protección personal para el conductor del vehículo.",
+        "limite": "Hasta $200.000"
+      },
+      {
+        "nombre": "Remolque de vehículo por avería o accidente",
+        "descripcion": "Servicio de remolque incluido en caso de avería o accidente.",
+        "limite": "Hasta 150 km por avería / 300 km por accidente"
+      },
+      {
+        "nombre": "Cobertura en países limítrofes",
+        "descripcion": "Cobertura válida en países del Mercosur.",
+        "limite": "Mercosur"
+      }
+    ]
+  },
+  "CA7_B1": {
+    "titulo": "B1 - Robo e Incendio Total",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil frente a terceros",
+        "descripcion": "Cubre lesiones o fallecimiento de terceros y daños a cosas de terceros.",
+        "limite": "Límite hasta $160.000.000"
+      },
+      {
+        "nombre": "Robo Total",
+        "descripcion": "Cobertura completa en caso de robo total del vehículo.",
+        "limite": "Si"
+      },
+      {
+        "nombre": "Incendio Total",
+        "descripcion": "Cobertura completa en caso de incendio total del vehículo.",
+        "limite": "Si"
+      },
+      {
+        "nombre": "Protección para el conductor",
+        "descripcion": "Cobertura de protección personal para el conductor del vehículo.",
+        "limite": "Hasta $200.000"
+      },
+      {
+        "nombre": "Remolque de vehículo por avería o accidente",
+        "descripcion": "Servicio de remolque incluido en caso de avería o accidente.",
+        "limite": "Hasta 150 km por avería / 300 km por accidente"
+      },
+      {
+        "nombre": "Cobertura en países limítrofes",
+        "descripcion": "Cobertura válida en países del Mercosur.",
+        "limite": "Mercosur"
+      }
+    ]
+  },
+  "TERCEROS COMPLETOS PREMIUM": {
+    "titulo": "CM - Terceros Completos Premium",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil frente a terceros",
+        "descripcion": "Cubre lesiones o fallecimiento de terceros y daños a cosas de terceros.",
+        "limite": "Límite hasta $160.000.000"
+      },
+      {
+        "nombre": "Robo total y parcial",
+        "descripcion": "Cobertura completa en caso de robo total o parcial del vehículo.",
+        "limite": "Si"
+      },
+      {
+        "nombre": "Incendio total y parcial",
+        "descripcion": "Cobertura completa en caso de incendio total o parcial del vehículo.",
+        "limite": "Si"
+      },
+      {
+        "nombre": "Destrucción total",
+        "descripcion": "Cobertura en caso de destrucción total del vehículo.",
+        "limite": "Si"
+      },
+      {
+        "nombre": "Cristales laterales",
+        "descripcion": "Cobertura para rotura de cristales laterales del vehículo.",
+        "limite": "Sin límite"
+      },
+      {
+        "nombre": "Cerraduras",
+        "descripcion": "Cobertura para daños o rotura de cerraduras.",
+        "limite": "Sin límite"
+      },
+      {
+        "nombre": "Parabrisa y luneta",
+        "descripcion": "Cobertura para rotura de parabrisa y luneta.",
+        "limite": "Sin límite"
+      },
+      {
+        "nombre": "Cristales techo",
+        "descripcion": "Cobertura para rotura de cristales del techo.",
+        "limite": "Sin límite"
+      },
+      {
+        "nombre": "Daños parciales por inundación",
+        "descripcion": "Cobertura para daños causados por inundación.",
+        "limite": "Hasta 15% de suma asegurada"
+      },
+      {
+        "nombre": "Cubiertas (robo o hurto)",
+        "descripcion": "Cobertura para robo o hurto de cubiertas.",
+        "limite": "1 rueda por vigencia trimestral / 4 ruedas por vigencia anual"
+      },
+      {
+        "nombre": "Granizo",
+        "descripcion": "Cobertura para daños causados por granizo.",
+        "limite": "Sin límite"
+      },
+      {
+        "nombre": "Reposición 0 km",
+        "descripcion": "Reposición del vehículo por uno 0 km en caso de pérdida total.",
+        "limite": "Hasta 1 año de antigüedad"
+      },
+      {
+        "nombre": "Daños Parciales al amparo del Robo Total",
+        "descripcion": "Cobertura de daños parciales relacionados con robo total.",
+        "limite": "Hasta el 10% de la suma asegurada"
+      },
+      {
+        "nombre": "Protección para el conductor y familiares",
+        "descripcion": "Cobertura de protección personal para el conductor y sus familiares.",
+        "limite": "Hasta $200.000"
+      },
+      {
+        "nombre": "Remolque de vehículo por avería o accidente",
+        "descripcion": "Servicio de remolque incluido en caso de avería o accidente.",
+        "limite": "150 km por avería / 300 km por accidente"
+      },
+      {
+        "nombre": "Cobertura en exterior",
+        "descripcion": "Cobertura válida en países del Mercosur.",
+        "limite": "Mercosur"
+      }
+    ]
+  },
+  "CM": {
+    "titulo": "CM - Terceros Completos Premium",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil frente a terceros",
+        "descripcion": "Cubre lesiones o fallecimiento de terceros y daños a cosas de terceros.",
+        "limite": "Límite hasta $160.000.000"
+      },
+      {
+        "nombre": "Robo total y parcial",
+        "descripcion": "Cobertura completa en caso de robo total o parcial del vehículo.",
+        "limite": "Si"
+      },
+      {
+        "nombre": "Incendio total y parcial",
+        "descripcion": "Cobertura completa en caso de incendio total o parcial del vehículo.",
+        "limite": "Si"
+      },
+      {
+        "nombre": "Destrucción total",
+        "descripcion": "Cobertura en caso de destrucción total del vehículo.",
+        "limite": "Si"
+      },
+      {
+        "nombre": "Cristales laterales",
+        "descripcion": "Cobertura para rotura de cristales laterales del vehículo.",
+        "limite": "Sin límite"
+      },
+      {
+        "nombre": "Cerraduras",
+        "descripcion": "Cobertura para daños o rotura de cerraduras.",
+        "limite": "Sin límite"
+      },
+      {
+        "nombre": "Parabrisa y luneta",
+        "descripcion": "Cobertura para rotura de parabrisa y luneta.",
+        "limite": "Sin límite"
+      },
+      {
+        "nombre": "Cristales techo",
+        "descripcion": "Cobertura para rotura de cristales del techo.",
+        "limite": "Sin límite"
+      },
+      {
+        "nombre": "Daños parciales por inundación",
+        "descripcion": "Cobertura para daños causados por inundación.",
+        "limite": "Hasta 15% de suma asegurada"
+      },
+      {
+        "nombre": "Cubiertas (robo o hurto)",
+        "descripcion": "Cobertura para robo o hurto de cubiertas.",
+        "limite": "1 rueda por vigencia trimestral / 4 ruedas por vigencia anual"
+      },
+      {
+        "nombre": "Granizo",
+        "descripcion": "Cobertura para daños causados por granizo.",
+        "limite": "Sin límite"
+      },
+      {
+        "nombre": "Reposición 0 km",
+        "descripcion": "Reposición del vehículo por uno 0 km en caso de pérdida total.",
+        "limite": "Hasta 1 año de antigüedad"
+      },
+      {
+        "nombre": "Daños Parciales al amparo del Robo Total",
+        "descripcion": "Cobertura de daños parciales relacionados con robo total.",
+        "limite": "Hasta el 10% de la suma asegurada"
+      },
+      {
+        "nombre": "Protección para el conductor y familiares",
+        "descripcion": "Cobertura de protección personal para el conductor y sus familiares.",
+        "limite": "Hasta $200.000"
+      },
+      {
+        "nombre": "Remolque de vehículo por avería o accidente",
+        "descripcion": "Servicio de remolque incluido en caso de avería o accidente.",
+        "limite": "150 km por avería / 300 km por accidente"
+      },
+      {
+        "nombre": "Cobertura en exterior",
+        "descripcion": "Cobertura válida en países del Mercosur.",
+        "limite": "Mercosur"
+      }
+    ]
+  },
+  "CA7_CM": {
+    "titulo": "CM - Terceros Completos Premium",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil frente a terceros",
+        "descripcion": "Cubre lesiones o fallecimiento de terceros y daños a cosas de terceros.",
+        "limite": "Límite hasta $160.000.000"
+      },
+      {
+        "nombre": "Robo total y parcial",
+        "descripcion": "Cobertura completa en caso de robo total o parcial del vehículo.",
+        "limite": "Si"
+      },
+      {
+        "nombre": "Incendio total y parcial",
+        "descripcion": "Cobertura completa en caso de incendio total o parcial del vehículo.",
+        "limite": "Si"
+      },
+      {
+        "nombre": "Destrucción total",
+        "descripcion": "Cobertura en caso de destrucción total del vehículo.",
+        "limite": "Si"
+      },
+      {
+        "nombre": "Cristales laterales",
+        "descripcion": "Cobertura para rotura de cristales laterales del vehículo.",
+        "limite": "Sin límite"
+      },
+      {
+        "nombre": "Cerraduras",
+        "descripcion": "Cobertura para daños o rotura de cerraduras.",
+        "limite": "Sin límite"
+      },
+      {
+        "nombre": "Parabrisa y luneta",
+        "descripcion": "Cobertura para rotura de parabrisa y luneta.",
+        "limite": "Sin límite"
+      },
+      {
+        "nombre": "Cristales techo",
+        "descripcion": "Cobertura para rotura de cristales del techo.",
+        "limite": "Sin límite"
+      },
+      {
+        "nombre": "Daños parciales por inundación",
+        "descripcion": "Cobertura para daños causados por inundación.",
+        "limite": "Hasta 15% de suma asegurada"
+      },
+      {
+        "nombre": "Cubiertas (robo o hurto)",
+        "descripcion": "Cobertura para robo o hurto de cubiertas.",
+        "limite": "1 rueda por vigencia trimestral / 4 ruedas por vigencia anual"
+      },
+      {
+        "nombre": "Granizo",
+        "descripcion": "Cobertura para daños causados por granizo.",
+        "limite": "Sin límite"
+      },
+      {
+        "nombre": "Reposición 0 km",
+        "descripcion": "Reposición del vehículo por uno 0 km en caso de pérdida total.",
+        "limite": "Hasta 1 año de antigüedad"
+      },
+      {
+        "nombre": "Daños Parciales al amparo del Robo Total",
+        "descripcion": "Cobertura de daños parciales relacionados con robo total.",
+        "limite": "Hasta el 10% de la suma asegurada"
+      },
+      {
+        "nombre": "Protección para el conductor y familiares",
+        "descripcion": "Cobertura de protección personal para el conductor y sus familiares.",
+        "limite": "Hasta $200.000"
+      },
+      {
+        "nombre": "Remolque de vehículo por avería o accidente",
+        "descripcion": "Servicio de remolque incluido en caso de avería o accidente.",
+        "limite": "150 km por avería / 300 km por accidente"
+      },
+      {
+        "nombre": "Cobertura en exterior",
+        "descripcion": "Cobertura válida en países del Mercosur.",
+        "limite": "Mercosur"
+      }
+    ]
+  },
+  "PREMIUM": {
+    "titulo": "CM - Terceros Completos Premium",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil frente a terceros",
+        "descripcion": "Cubre lesiones o fallecimiento de terceros y daños a cosas de terceros.",
+        "limite": "Límite hasta $160.000.000"
+      },
+      {
+        "nombre": "Robo total y parcial",
+        "descripcion": "Cobertura completa en caso de robo total o parcial del vehículo.",
+        "limite": "Si"
+      },
+      {
+        "nombre": "Incendio total y parcial",
+        "descripcion": "Cobertura completa en caso de incendio total o parcial del vehículo.",
+        "limite": "Si"
+      },
+      {
+        "nombre": "Destrucción total",
+        "descripcion": "Cobertura en caso de destrucción total del vehículo.",
+        "limite": "Si"
+      },
+      {
+        "nombre": "Cristales laterales",
+        "descripcion": "Cobertura para rotura de cristales laterales del vehículo.",
+        "limite": "Sin límite"
+      },
+      {
+        "nombre": "Cerraduras",
+        "descripcion": "Cobertura para daños o rotura de cerraduras.",
+        "limite": "Sin límite"
+      },
+      {
+        "nombre": "Parabrisa y luneta",
+        "descripcion": "Cobertura para rotura de parabrisa y luneta.",
+        "limite": "Sin límite"
+      },
+      {
+        "nombre": "Cristales techo",
+        "descripcion": "Cobertura para rotura de cristales del techo.",
+        "limite": "Sin límite"
+      },
+      {
+        "nombre": "Daños parciales por inundación",
+        "descripcion": "Cobertura para daños causados por inundación.",
+        "limite": "Hasta 15% de suma asegurada"
+      },
+      {
+        "nombre": "Cubiertas (robo o hurto)",
+        "descripcion": "Cobertura para robo o hurto de cubiertas.",
+        "limite": "1 rueda por vigencia trimestral / 4 ruedas por vigencia anual"
+      },
+      {
+        "nombre": "Granizo",
+        "descripcion": "Cobertura para daños causados por granizo.",
+        "limite": "Sin límite"
+      },
+      {
+        "nombre": "Reposición 0 km",
+        "descripcion": "Reposición del vehículo por uno 0 km en caso de pérdida total.",
+        "limite": "Hasta 1 año de antigüedad"
+      },
+      {
+        "nombre": "Daños Parciales al amparo del Robo Total",
+        "descripcion": "Cobertura de daños parciales relacionados con robo total.",
+        "limite": "Hasta el 10% de la suma asegurada"
+      },
+      {
+        "nombre": "Protección para el conductor y familiares",
+        "descripcion": "Cobertura de protección personal para el conductor y sus familiares.",
+        "limite": "Hasta $200.000"
+      },
+      {
+        "nombre": "Remolque de vehículo por avería o accidente",
+        "descripcion": "Servicio de remolque incluido en caso de avería o accidente.",
+        "limite": "150 km por avería / 300 km por accidente"
+      },
+      {
+        "nombre": "Cobertura en exterior",
+        "descripcion": "Cobertura válida en países del Mercosur.",
+        "limite": "Mercosur"
+      }
+    ]
+  },
+  "TODO RIESGO": {
+    "titulo": "Todo Riesgo",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil frente a terceros",
+        "descripcion": "Cubre lesiones o fallecimiento de terceros y daños a cosas de terceros.",
+        "limite": "Límite hasta $160.000.000"
+      },
+      {
+        "nombre": "Robo Total y Parcial",
+        "descripcion": "Cobertura completa en caso de robo total o parcial del vehículo.",
+        "limite": "Si"
+      },
+      {
+        "nombre": "Incendio Total y Parcial",
+        "descripcion": "Cobertura completa en caso de incendio total o parcial del vehículo.",
+        "limite": "Si"
+      },
+      {
+        "nombre": "Destrucción Total y Parcial por accidente",
+        "descripcion": "Cobertura completa en caso de destrucción total o parcial por accidente.",
+        "limite": "Si"
+      },
+      {
+        "nombre": "Cristales laterales",
+        "descripcion": "Cobertura para rotura de cristales laterales del vehículo.",
+        "limite": "Sin límite"
+      },
+      {
+        "nombre": "Cerraduras",
+        "descripcion": "Cobertura para daños o rotura de cerraduras.",
+        "limite": "Sin límite"
+      },
+      {
+        "nombre": "Parabrisa y luneta",
+        "descripcion": "Cobertura para rotura de parabrisa y luneta.",
+        "limite": "Sin límite"
+      },
+      {
+        "nombre": "Cristales techo",
+        "descripcion": "Cobertura para rotura de cristales del techo.",
+        "limite": "Sin límite"
+      },
+      {
+        "nombre": "Daños parciales por inundación",
+        "descripcion": "Cobertura para daños causados por inundación.",
+        "limite": "Hasta 15% de suma asegurada"
+      },
+      {
+        "nombre": "Cubiertas (robo o hurto)",
+        "descripcion": "Cobertura para robo o hurto de cubiertas.",
+        "limite": "Sin límite"
+      },
+      {
+        "nombre": "Granizo",
+        "descripcion": "Cobertura para daños causados por granizo.",
+        "limite": "Sin límite"
+      },
+      {
+        "nombre": "Reposición 0 km",
+        "descripcion": "Reposición del vehículo por uno 0 km en caso de pérdida total.",
+        "limite": "Hasta 1 año de antigüedad"
+      },
+      {
+        "nombre": "Daños Parciales al amparo del Robo Total",
+        "descripcion": "Cobertura de daños parciales relacionados con robo total.",
+        "limite": "Hasta el 10% de la suma asegurada"
+      },
+      {
+        "nombre": "Protección para el conductor y familiares",
+        "descripcion": "Cobertura de protección personal para el conductor y sus familiares.",
+        "limite": "Hasta $200.000"
+      },
+      {
+        "nombre": "Remolque de vehículo por avería o accidente",
+        "descripcion": "Servicio de remolque incluido en caso de avería o accidente.",
+        "limite": "300 km lineales"
+      },
+      {
+        "nombre": "Cobertura en exterior",
+        "descripcion": "Cobertura válida en países del Mercosur.",
+        "limite": "Mercosur"
+      }
+    ]
+  },
+  "CA7_D": {
+    "titulo": "Todo Riesgo",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil frente a terceros",
+        "descripcion": "Cubre lesiones o fallecimiento de terceros y daños a cosas de terceros.",
+        "limite": "Límite hasta $160.000.000"
+      },
+      {
+        "nombre": "Robo Total y Parcial",
+        "descripcion": "Cobertura completa en caso de robo total o parcial del vehículo.",
+        "limite": "Si"
+      },
+      {
+        "nombre": "Incendio Total y Parcial",
+        "descripcion": "Cobertura completa en caso de incendio total o parcial del vehículo.",
+        "limite": "Si"
+      },
+      {
+        "nombre": "Destrucción Total y Parcial por accidente",
+        "descripcion": "Cobertura completa en caso de destrucción total o parcial por accidente.",
+        "limite": "Si"
+      },
+      {
+        "nombre": "Cristales laterales",
+        "descripcion": "Cobertura para rotura de cristales laterales del vehículo.",
+        "limite": "Sin límite"
+      },
+      {
+        "nombre": "Cerraduras",
+        "descripcion": "Cobertura para daños o rotura de cerraduras.",
+        "limite": "Sin límite"
+      },
+      {
+        "nombre": "Parabrisa y luneta",
+        "descripcion": "Cobertura para rotura de parabrisa y luneta.",
+        "limite": "Sin límite"
+      },
+      {
+        "nombre": "Cristales techo",
+        "descripcion": "Cobertura para rotura de cristales del techo.",
+        "limite": "Sin límite"
+      },
+      {
+        "nombre": "Daños parciales por inundación",
+        "descripcion": "Cobertura para daños causados por inundación.",
+        "limite": "Hasta 15% de suma asegurada"
+      },
+      {
+        "nombre": "Cubiertas (robo o hurto)",
+        "descripcion": "Cobertura para robo o hurto de cubiertas.",
+        "limite": "Sin límite"
+      },
+      {
+        "nombre": "Granizo",
+        "descripcion": "Cobertura para daños causados por granizo.",
+        "limite": "Sin límite"
+      },
+      {
+        "nombre": "Reposición 0 km",
+        "descripcion": "Reposición del vehículo por uno 0 km en caso de pérdida total.",
+        "limite": "Hasta 1 año de antigüedad"
+      },
+      {
+        "nombre": "Daños Parciales al amparo del Robo Total",
+        "descripcion": "Cobertura de daños parciales relacionados con robo total.",
+        "limite": "Hasta el 10% de la suma asegurada"
+      },
+      {
+        "nombre": "Protección para el conductor y familiares",
+        "descripcion": "Cobertura de protección personal para el conductor y sus familiares.",
+        "limite": "Hasta $200.000"
+      },
+      {
+        "nombre": "Remolque de vehículo por avería o accidente",
+        "descripcion": "Servicio de remolque incluido en caso de avería o accidente.",
+        "limite": "300 km lineales"
+      },
+      {
+        "nombre": "Cobertura en exterior",
+        "descripcion": "Cobertura válida en países del Mercosur.",
+        "limite": "Mercosur"
+      }
+    ]
+  }
+}

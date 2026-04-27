@@ -34,7 +34,7 @@ const hogarFAQ = [
 ];
 
 const hogarApi = axios.create({
-  baseURL: 'http://localhost:3000/api', // Apunta al backend de Hogar-Yuju
+  baseURL: `${import.meta.env.VITE_HOGAR_API_URL || 'http://localhost:3000'}/api`, // Apunta al backend de Hogar-Yuju
   timeout: 35000 // Agregamos un timeout más flexible por los 504 de RUS
 });
 
@@ -101,8 +101,8 @@ export const HogarCotizador = () => {
     fechaNacimientoDia: '', fechaNacimientoMes: '', fechaNacimientoAno: ''
   });
   const [addressData, setAddressData] = useState({
-    calle: '', numero: '', piso: '', departamento: '', localidad: '', codigoPostal: '',
-    tipoVivienda: 'casss', muros: 'trad', caracter: 'VIVIENDA_COMBINADOFAMILIAR_CARACTER1'
+    calle: '', numero: '', piso: '', dpto: '', localidad: '', codigoPostal: '',
+    tipoVivienda: 'jous', muros: 'trad', caracter: 'VIVIENDA_COMBINADOFAMILIAR_CARACTER1'
   });
   const [paymentData, setPaymentData] = useState({
     method: 'TARJETA_CREDITO' as 'TARJETA_CREDITO' | 'DEBITO_AUTOMATICO',
@@ -170,7 +170,8 @@ export const HogarCotizador = () => {
       setOrderVentaId(res.data.rusOrder.ordenVentaID);
       setCurrentStep(4);
     } catch (err: any) {
-      setError(err.response?.data?.error || "Error al procesar datos personales. Verificá si la plataforma de RUS responde.");
+      const detailsError = err.response?.data?.details?.errores?.[0]?.mensaje;
+      setError(detailsError || err.response?.data?.error || "Error al procesar datos personales. Verificá si la plataforma de RUS responde.");
     } finally {
       setIsProcessing(false);
     }
@@ -181,36 +182,37 @@ export const HogarCotizador = () => {
     setError(null);
     try {
       const answersList = [
-        { codigoPregunta: 'CALLE_CF', valores: [addressData.calle || 'SN'] },
-        { codigoPregunta: 'ALT_CF', valores: [addressData.numero || '0'] },
-        { codigoPregunta: 'CPPPP', valores: [addressData.codigoPostal || '0000'] },
-        { codigoPregunta: 'tipoo', valores: [addressData.tipoVivienda] },
+        { codigoPregunta: 'CALLE_CF', valores: [addressData.calle] },
+        { codigoPregunta: 'ALT_CF', valores: [addressData.numero] },
+        { codigoPregunta: 'CPPPP', valores: [addressData.codigoPostal] },
+        { codigoPregunta: 'tipooo', valores: [addressData.tipoVivienda] },
         { codigoPregunta: 'matconst', valores: [addressData.muros] },
         { codigoPregunta: 'VIVIENDA_COMBINADOFAMILIAR_CARACTER', valores: [addressData.caracter] },
         { codigoPregunta: 'VIVIENDA_COMBINADOFAMILIAR_PREGUNTATIPOVIVIENDA_PACK', valores: ['VIVIENDA_COMBINADOFAMILIAR_PREGUNTATIPOVIVIENDA_PACK1'] }
       ];
       
-      if (addressData.tipoVivienda === 'dptoopo') {
-          if (addressData.piso) answersList.push({ codigoPregunta: 'PISO_CF', valores: [addressData.piso] });
-          if (addressData.departamento) answersList.push({ codigoPregunta: 'DPTO_CF', valores: [addressData.departamento] });
+      if (addressData.tipoVivienda === 'apartament') {
+          answersList.push({ codigoPregunta: 'PISO_CF', valores: [addressData.piso] });
+          answersList.push({ codigoPregunta: 'DPTO_CF', valores: [addressData.dpto] });
       }
 
-      const addressPayload = { ...addressData, dpto: addressData.departamento };
       const personalPayload = { 
         ...personalData, 
         telefono_codigo_area: personalData.codArea, 
         telefono_numero: personalData.telefono, 
-        numeroDocumento: personalData.dni 
+        numeroDocumento: personalData.dni,
+        fechaNacimiento: `${personalData.fechaNacimientoDia}/${personalData.fechaNacimientoMes}/${personalData.fechaNacimientoAno}`
       };
 
       await hogarApi.post(`/insurance/home/orders/${orderVentaId}/form/submit`, {
         answers: answersList,
-        addressData: addressPayload,
+        addressData: addressData,
         personalData: personalPayload
       });
       setCurrentStep(5);
     } catch (err: any) {
-      setError(err.response?.data?.error || "Error al guardar domicilio. Verificá los campos o estado de red.");
+      const detailsError = err.response?.data?.details?.errores?.[0]?.mensaje;
+      setError(detailsError || err.response?.data?.error || "Error al guardar domicilio. Verificá los campos o estado de red.");
     } finally {
       setIsProcessing(false);
     }
@@ -236,7 +238,11 @@ export const HogarCotizador = () => {
     } catch (err: any) {
       // Manejo específico del Gateway Timeout 504 u otros errores
       let msg = err.response?.data?.error || err.message;
-      if (err.response?.status === 504 || msg.includes('504')) {
+      const detailsError = err.response?.data?.details?.errores?.[0]?.mensaje;
+      
+      if (detailsError) {
+         msg = detailsError;
+      } else if (err.response?.status === 504 || msg.includes('504')) {
          msg = "El servidor de la aseguradora está demorando en responder (Timeout). Por favor, aguardá unos minutos y volvé a intentarlo.";
       }
       setError(msg);
@@ -670,11 +676,11 @@ export const HogarCotizador = () => {
                                 value={addressData.tipoVivienda}
                                 onChange={(e) => setAddressData({...addressData, tipoVivienda: e.target.value})}
                             >
-                                <option value="casss">Casa</option>
-                                <option value="dptoopo">Departamento</option>
+                                <option value="jous">Casa</option>
+                                <option value="apartament">Departamento</option>
                             </select>
                         </div>
-                        {addressData.tipoVivienda === 'dptoopo' && (
+                        {addressData.tipoVivienda === 'apartament' && (
                            <div className="grid grid-cols-2 gap-3">
                               <div className="space-y-1.5">
                                   <label className="text-[9px] font-black uppercase text-text-secondary tracking-widest pl-1">Piso</label>
@@ -682,7 +688,7 @@ export const HogarCotizador = () => {
                               </div>
                               <div className="space-y-1.5">
                                   <label className="text-[9px] font-black uppercase text-text-secondary tracking-widest pl-1">Depto</label>
-                                  <input type="text" className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold outline-none focus:border-emerald-500 transition-all" value={addressData.departamento} onChange={(e) => setAddressData({...addressData, departamento: e.target.value})}/>
+                                  <input type="text" className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold outline-none focus:border-emerald-500 transition-all" value={addressData.dpto} onChange={(e) => setAddressData({...addressData, dpto: e.target.value})}/>
                               </div>
                            </div>
                         )}
@@ -855,15 +861,13 @@ export const HogarCotizador = () => {
                        <span className="text-[10px] font-black uppercase tracking-[0.3em]">Emisión Exitosa</span>
                     </div>
                     <h2 className="text-4xl font-black text-text-primary font-accent tracking-tighter whitespace-pre-wrap">¡Ya estás protegido!</h2>
-                    <p className="text-xs text-text-secondary font-medium max-w-sm mx-auto">
-                        Hemos enviado el certificado de cobertura y la póliza digital a tu casilla de correo. 
+                    <p className="text-xs text-text-secondary font-medium max-w-[400px] mx-auto leading-relaxed">
+                        Nuestros asesores comerciales se comunicarán a la brevedad para enviarle el detalle de su póliza y ayudarlo con cualquier otra duda o consulta que necesite.
                     </p>
                   </div>
 
                   <div className="flex flex-col gap-3 max-w-xs mx-auto pt-4">
-                    <Button className="bg-bg-secondary text-text-primary font-black uppercase h-12 rounded-xl border-border-primary hover:border-emerald-500 transition-all text-xs">
-                        Descargar Póliza
-                    </Button>
+
                     <Button variant="ghost" className="font-black uppercase text-[10px] tracking-widest text-text-secondary" onClick={() => window.location.href = '/'}>
                         Volver al inicio
                     </Button>
