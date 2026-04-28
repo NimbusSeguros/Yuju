@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { createPropuesta, getPropuestaStatus, getPolizaPdf } from '../../services/motoApi';
 import { getInsurerLogo } from '../../utils/insurerLogos';
 
-function ProposalModal({ isOpen, onClose, quote, quotationContext, vehicleInfo, payWithCard }) {
+function ProposalModal({ isOpen, onClose, quote, quotationContext, vehicleInfo, payWithCard, onSuccess }) {
     if (!isOpen) return null;
 
     const { vigencias, selectedVigencia, selectedLocality, year, selectedVersionId } = quotationContext;
@@ -129,8 +129,16 @@ function ProposalModal({ isOpen, onClose, quote, quotationContext, vehicleInfo, 
             ...(quote.codigoCasco ? { coberturaCasco: quote.codigoCasco } : {}),
             codigoTipoInteres: "MOTOVEHICULO",
             medioCobro: parseInt(paymentMethod),
-            ...(paymentMethod === '3' && { numeroTarjeta: cardNumber, tipoTarjeta: parseInt(cardType), renovacionAutomatica: autoRenewal }),
-            ...(paymentMethod === '4' && { cbu, renovacionAutomatica: autoRenewal }),
+            renovacionAutomatica: autoRenewal,
+            ...(paymentMethod === '3' ? {
+                tarjeta: {
+                    marca: cardType,
+                    numero: cardNumber,
+                    vencimiento: "12/2028" // Hardcoded placeholder for now
+                }
+            } : {
+                cbu: cbu
+            }),
             tomadores: [{
                 apellidoRazonSocial: proposalData.apellido.trim().toUpperCase(),
                 nombre: proposalData.nombre.trim().toUpperCase(),
@@ -160,12 +168,14 @@ function ProposalModal({ isOpen, onClose, quote, quotationContext, vehicleInfo, 
         try {
             const result = await createPropuesta(payload);
             setProposalResponse(result);
-            if (result.estado && result.estado.toUpperCase() === 'PROPUESTA') {
-                setProposalSuccess('Su solicitud quedó en estado PENDIENTE. Un asesor la revisará en breve para finalizar la emisión.');
+            if (result.success || (result.estado && result.estado.toUpperCase() === 'PROPUESTA')) {
+                setProposalSuccess('¡Propuesta generada con éxito! Ya podés descargar tu comprobante.');
+                if (onSuccess) onSuccess();
             } else {
-                setProposalSuccess("¡Póliza generada con éxito!");
+                setProposalSuccess("¡Solicitud enviada con éxito!");
+                if (onSuccess) onSuccess();
             }
-            setProposalId(result.numeroPropuesta || result.numero || (result.body ? result.body.numeroPropuesta : null));
+            setProposalId(result.numeroPropuesta || result.numero || (result.body ? result.body.numeroPropuesta : 'PENDIENTE'));
         } catch (err) {
             console.error("Proposal Error:", err);
             let errorMsg = "Hubo un error al generar la propuesta.";
@@ -289,12 +299,8 @@ function ProposalModal({ isOpen, onClose, quote, quotationContext, vehicleInfo, 
                             {proposalResponse?.numero && (
                                 <div className="w-full p-4 rounded-2xl bg-bg-secondary border border-border-primary text-left space-y-2">
                                     <div className="flex justify-between text-sm">
-                                        <span className="text-text-secondary">Póliza N°:</span>
-                                        <span className="font-bold text-text-primary">{proposalResponse.numero}</span>
-                                    </div>
-                                    <div className="flex justify-between text-sm">
                                         <span className="text-text-secondary">Estado:</span>
-                                        <span className="font-bold text-orange-500">{proposalResponse.estado?.toUpperCase() || 'EMITIDA'}</span>
+                                        <span className="font-bold text-orange-500">PENDIENTE DE ASESOR</span>
                                     </div>
                                     <div className="flex justify-between text-sm">
                                         <span className="text-text-secondary">Titular:</span>
@@ -302,9 +308,9 @@ function ProposalModal({ isOpen, onClose, quote, quotationContext, vehicleInfo, 
                                     </div>
                                 </div>
                             )}
-                            <button onClick={handleDownloadPdf} disabled={pdfLoading}
-                                className="w-full h-12 rounded-2xl bg-gradient-to-r from-orange-600 to-orange-500 text-white font-black text-sm tracking-wider hover:shadow-[0_0_20px_rgba(249,115,22,0.4)] transition-all disabled:opacity-50">
-                                {pdfLoading ? 'Descargando...' : 'DESCARGAR PÓLIZA PDF'}
+                            <button onClick={onClose}
+                                className="w-full h-12 rounded-2xl bg-gradient-to-r from-orange-600 to-orange-500 text-white font-black text-sm tracking-wider hover:shadow-[0_0_20px_rgba(249,115,22,0.4)] transition-all">
+                                ENTENDIDO
                             </button>
                             <button onClick={onClose} className="w-full h-11 rounded-2xl border border-border-primary text-text-secondary font-semibold text-sm hover:bg-bg-secondary transition-all">
                                 Cerrar
@@ -418,55 +424,26 @@ function ProposalModal({ isOpen, onClose, quote, quotationContext, vehicleInfo, 
                                         ))}
                                     </div>
 
-                                    {isFullOnline ? (
-                                        <>
-                                            {paymentMethod === '3' && (
-                                                <div className="space-y-3">
-                                                    <Field label="Tipo de tarjeta *">
-                                                        <select className={inputCls} value={cardType} onChange={e => setCardType(e.target.value)}>
-                                                            <option value="" disabled>Seleccioná una...</option>
-                                                            <option value="1">VISA</option>
-                                                            <option value="3">MASTERCARD</option>
-                                                            <option value="11">AMEX</option>
-                                                            <option value="11">CABAL</option>
-                                                        </select>
-                                                    </Field>
-                                                    <Field label="Número de tarjeta *">
-                                                        <div className="relative">
-                                                            <input className={inputCls} required type="text"
-                                                                value={cardNumber}
-                                                                onChange={e => {
-                                                                    const val = e.target.value.replace(/\D/g, '');
-                                                                    setCardNumber(val);
-                                                                    let code = '';
-                                                                    if (/^4/.test(val)) code = '1';
-                                                                    else if (/^5[0-5]/.test(val) || /^2[2-7]/.test(val)) code = '3';
-                                                                    else if (/^3[47]/.test(val)) code = '11';
-                                                                    else if (/^(5896|60|63)/.test(val)) code = '11';
-                                                                    if (code) setCardType(code);
-                                                                }}
-                                                                placeholder="XXXX XXXX XXXX XXXX" maxLength={19} />
-                                                            {cardNumber && (
-                                                                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-black text-orange-500 bg-orange-500/10 px-2 py-0.5 rounded-full">
-                                                                    {/^4/.test(cardNumber) ? 'VISA' : /^5[0-5]/.test(cardNumber) ? 'MASTERCARD' : /^3[47]/.test(cardNumber) ? 'AMEX' : /^(5896|60|63)/.test(cardNumber) ? 'CABAL' : ''}
-                                                                </span>
-                                                            )}
-                                                        </div>
-                                                    </Field>
-                                                </div>
-                                            )}
-                                            {paymentMethod === '4' && (
-                                                <Field label="CBU *">
-                                                    <input className={inputCls} required type="text"
-                                                        value={cbu} onChange={e => setCbu(e.target.value.replace(/\D/g, ''))}
-                                                        placeholder="22 dígitos de tu CBU" maxLength={22} />
-                                                </Field>
-                                            )}
-                                        </>
+                                    {/* Payment inputs */}
+                                    {paymentMethod === '4' ? (
+                                        <Field label="CBU (22 dígitos) *">
+                                            <input className={inputCls} required maxLength={22} value={cbu}
+                                                onChange={e => setCbu(e.target.value.replace(/\D/g, ''))} placeholder="0000000000000000000000" />
+                                        </Field>
                                     ) : (
-                                        <div className="flex items-start gap-3 p-3 rounded-2xl bg-orange-500/5 border border-orange-500/15">
-                                            <svg className="shrink-0 mt-0.5" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f97316" strokeWidth="2"><circle cx="12" cy="12" r="10" /><line x1="12" y1="16" x2="12" y2="12" /><line x1="12" y1="8" x2="12.01" y2="8" /></svg>
-                                            <p className="text-xs text-text-secondary">Los datos de pago los coordinarás con un asesor vía WhatsApp.</p>
+                                        <div className="grid grid-cols-2 gap-3">
+                                            <Field label="Número de Tarjeta *">
+                                                <input className={inputCls} required maxLength={16} value={cardNumber}
+                                                    onChange={e => setCardNumber(e.target.value.replace(/\D/g, ''))} placeholder="4500..." />
+                                            </Field>
+                                            <Field label="Marca *">
+                                                <select className={inputCls} required value={cardType} onChange={e => setCardType(e.target.value)}>
+                                                    <option value="">Seleccionar...</option>
+                                                    <option value="VISA">Visa</option>
+                                                    <option value="MASTERCARD">Mastercard</option>
+                                                    <option value="AMEX">Amex</option>
+                                                </select>
+                                            </Field>
                                         </div>
                                     )}
 
@@ -478,7 +455,7 @@ function ProposalModal({ isOpen, onClose, quote, quotationContext, vehicleInfo, 
                                         </button>
                                         <button type="submit" disabled={proposalLoading}
                                             className="flex-1 h-12 rounded-2xl bg-gradient-to-r from-orange-600 to-orange-500 text-white font-black text-sm tracking-wider hover:shadow-[0_0_20px_rgba(249,115,22,0.4)] transition-all active:scale-[0.98] disabled:opacity-50">
-                                            {isFullOnline ? 'Confirmar contratación' : 'Continuar por WhatsApp'}
+                                            Confirmar emisión
                                         </button>
                                     </div>
                                 </form>

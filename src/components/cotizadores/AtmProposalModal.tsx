@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { generarPropuestaATM, descargarPolizaATM } from '../../services/motoApi';
 import { getInsurerLogo } from '../../utils/insurerLogos';
 
-function ATMProposalModal({ isOpen, onClose, cobertura, atmOperacion, vehicleInfo, zipCode, payWithCard }) {
+function ATMProposalModal({ isOpen, onClose, cobertura, atmOperacion, vehicleInfo, zipCode, payWithCard, onSuccess }) {
     if (!isOpen) return null;
 
     /* --- UI Step State --- */
@@ -65,10 +65,9 @@ function ATMProposalModal({ isOpen, onClose, cobertura, atmOperacion, vehicleInf
     const fv = (k, v) => setVeh(p => ({ ...p, [k]: v }));
 
     /* --- Forma de pago --- */
-    const paymentOptions = cobertura?.paymentOptions || [];
-    const availableMethods = paymentOptions.map(po => po.formapago).filter(m => m !== 'EFVO');
-    const initialPago = availableMethods.includes('CBU') ? 'CBU' : (availableMethods[0] || 'EFVO');
-    const [pagoTipo, setPagoTipo] = useState(initialPago);
+    // ATM always supports both CBU and TARJETA regardless of what paymentOptions returns
+    const availableMethods = ['CBU', 'TARJETA'];
+    const [pagoTipo, setPagoTipo] = useState('CBU');
     const [cbuNum, setCbuNum] = useState('');
     const [tarjeta, setTarjeta] = useState({ numero: '', vcto: '', nombre: '2' });
     const ft = (k, v) => setTarjeta(p => ({ ...p, [k]: v }));
@@ -123,18 +122,19 @@ function ATMProposalModal({ isOpen, onClose, cobertura, atmOperacion, vehicleInf
             }
 
             const condPago = pagoTipo;
-            let formapagoPayload;
-            if (condPago === 'CBU') {
-                formapagoPayload = { tipo: 'cbu', forma: '4', cbu: { numero: cbuNum } };
-            } else if (condPago === 'TARJETA') {
-                let cleanVcto = tarjeta.vcto.replace(/\D/g, '');
-                if (cleanVcto.length === 4) {
-                    const mm = cleanVcto.substring(0, 2), yy = cleanVcto.substring(2, 4);
-                    cleanVcto = `${mm}20${yy}`;
-                }
-                formapagoPayload = { tipo: 'tarjeta', forma: '2', tarjeta: { nombre: tarjeta.nombre, numero: tarjeta.numero, vcto: cleanVcto } };
-            } else {
+            let formapagoPayload = {};
+            if (pagoTipo === 'EFVO') {
                 formapagoPayload = { tipo: 'efvo', forma: '1' };
+            } else if (pagoTipo === 'CBU') {
+                formapagoPayload = { tipo: 'cbu', forma: '4', cbu: pagoCbu };
+            } else {
+                formapagoPayload = {
+                    tipo: 'tarjeta',
+                    forma: '2',
+                    marcaTarjeta: pagoMarca,
+                    nroTarjeta: pagoTarjeta,
+                    vencTarjeta: '12/2028' // Placeholder
+                };
             }
 
             const payload = {
@@ -143,7 +143,7 @@ function ATMProposalModal({ isOpen, onClose, cobertura, atmOperacion, vehicleInf
                 condPago,
                 titular: titularPayload,
                 vehiculo: { patente: veh.patente.toUpperCase(), chasis: veh.chasis.toUpperCase(), motor: veh.motor.toUpperCase() },
-                formapago: formapagoPayload,
+                formapago: { ...formapagoPayload, marcaTarjeta: pagoTipo === 'TARJETA' ? tarjeta.nombre : null },
                 codpostal: zipCode
             };
 
@@ -151,10 +151,11 @@ function ATMProposalModal({ isOpen, onClose, cobertura, atmOperacion, vehicleInf
             const auto = result?.data?.auto ?? result?.auto ?? result;
 
             if (auto?.statusSuccess === 'TRUE') {
-                setSuccess(auto);
+                setSuccess({ ...auto, statusText: 'PENDIENTE DE ASESOR' });
+                if (onSuccess) onSuccess();
             } else {
                 const msg = typeof auto?.statusText === 'object' ? auto.statusText.msg : auto?.statusText;
-                setError(msg || 'ATM rechazó la propuesta. Revisá los datos.');
+                setError(msg || 'Error al procesar la solicitud.');
             }
         } catch (err) {
             setError(err.message || 'Error al generar la propuesta con ATM.');
@@ -260,19 +261,13 @@ function ATMProposalModal({ isOpen, onClose, cobertura, atmOperacion, vehicleInf
                                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#f97316" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                             </div>
                             <div>
-                                <h3 className="text-2xl font-black text-text-primary font-accent">¡Emisión exitosa!</h3>
-                                <p className="text-text-secondary text-sm mt-2 max-w-sm">Gracias por tu compra. La póliza se ha emitido correctamente.</p>
+                                <h3 className="text-2xl font-black text-text-primary font-accent">¡Solicitud enviada!</h3>
+                                <p className="text-text-secondary text-sm mt-2 max-w-sm">Su solicitud ha sido registrada correctamente. Un asesor se comunicará a la brevedad para finalizar la emisión.</p>
                             </div>
                             <div className="w-full p-4 rounded-2xl bg-bg-secondary border border-border-primary text-left space-y-2">
                                 <div className="flex justify-between text-sm">
-                                    <span className="text-text-secondary">Póliza N°:</span>
-                                    <span className="font-bold text-text-primary">{success.npoliza || success.npropuesta}</span>
-                                </div>
-                                <div className="flex justify-between text-sm">
                                     <span className="text-text-secondary">Estado:</span>
-                                    <span className="font-bold text-orange-500">
-                                        {success.statusText === 'POL' ? 'EMITIDA' : success.statusText === 'PRO' ? 'ACEPTADA' : success.statusText === 'INS' ? 'PEND. INSPECCIÓN' : 'PROCESADA'}
-                                    </span>
+                                    <span className="font-bold text-orange-500">PENDIENTE DE ASESOR</span>
                                 </div>
                                 <div className="flex justify-between text-sm">
                                     <span className="text-text-secondary">Titular:</span>
@@ -280,26 +275,9 @@ function ATMProposalModal({ isOpen, onClose, cobertura, atmOperacion, vehicleInf
                                 </div>
                             </div>
                             <div className="w-full space-y-2">
-                                {success.npoliza && (
-                                    <button onClick={() => handleDownload('POL')} disabled={downloading}
-                                        className="w-full h-12 rounded-2xl bg-gradient-to-r from-orange-600 to-orange-500 text-white font-black text-sm tracking-wider hover:shadow-[0_0_20px_rgba(249,115,22,0.4)] transition-all disabled:opacity-50">
-                                        {downloading ? 'Descargando...' : 'DESCARGAR PÓLIZA PDF'}
-                                    </button>
-                                )}
-                                {success.npoliza && (
-                                    <div className="flex gap-2">
-                                        <button onClick={() => handleDownload('MER')} className="flex-1 h-10 rounded-xl border border-border-primary text-text-secondary font-semibold text-xs hover:bg-bg-secondary transition-all">Mercosur</button>
-                                        <button onClick={() => handleDownload('TAR')} className="flex-1 h-10 rounded-xl border border-border-primary text-text-secondary font-semibold text-xs hover:bg-bg-secondary transition-all">Tarjeta Circ.</button>
-                                    </div>
-                                )}
-                                {success.InspeccionUrl && (
-                                    <button onClick={() => window.open(success.InspeccionUrl, '_blank')}
-                                        className="w-full h-11 rounded-2xl bg-yellow-500 text-black font-black text-sm hover:bg-yellow-400 transition-all">
-                                        REALIZAR INSPECCIÓN ONLINE
-                                    </button>
-                                )}
-                                <button onClick={onClose} className="w-full h-11 rounded-2xl border border-border-primary text-text-secondary font-semibold text-sm hover:bg-bg-secondary transition-all">
-                                    Cerrar
+                                <button onClick={onClose}
+                                    className="w-full h-12 rounded-2xl bg-gradient-to-r from-orange-600 to-orange-500 text-white font-black text-sm tracking-wider hover:shadow-[0_0_20px_rgba(249,115,22,0.4)] transition-all">
+                                    ENTENDIDO
                                 </button>
                             </div>
                         </div>
@@ -463,65 +441,54 @@ function ATMProposalModal({ isOpen, onClose, cobertura, atmOperacion, vehicleInf
 
                                     <SectionLabel>Forma de pago</SectionLabel>
 
-                                    {availableMethods.length > 1 ? (
-                                        <div className="flex rounded-2xl border border-border-primary overflow-hidden">
-                                            {availableMethods.map(tipo => (
-                                                <button key={tipo} type="button" onClick={() => setPagoTipo(tipo)}
-                                                    className={`flex-1 py-3 text-sm font-bold transition-all duration-200
-                                                        ${pagoTipo === tipo ? 'bg-orange-500 text-white shadow-[0_0_12px_rgba(249,115,22,0.3)]' : 'text-text-secondary hover:text-text-primary bg-transparent'}`}>
-                                                    {tipo === 'EFVO' ? 'Efectivo' : tipo === 'CBU' ? 'CBU / Débito' : 'Tarjeta'}
-                                                </button>
-                                            ))}
-                                        </div>
-                                    ) : (
-                                        <div className="px-3 py-2 rounded-xl bg-bg-secondary border border-border-primary text-text-secondary text-sm font-semibold">
-                                            {pagoTipo === 'EFVO' ? 'Efectivo' : pagoTipo === 'CBU' ? 'CBU / Débito automático' : 'Tarjeta de crédito'}
+                                    <div className="flex rounded-2xl border border-border-primary overflow-hidden mb-6">
+                                        {availableMethods.map(tipo => (
+                                            <button key={tipo} type="button" onClick={() => setPagoTipo(tipo)}
+                                                className={`flex-1 py-3 text-sm font-bold transition-all duration-200
+                                                    ${pagoTipo === tipo ? 'bg-orange-500 text-white shadow-[0_0_12px_rgba(249,115,22,0.3)]' : 'text-text-secondary hover:text-text-primary bg-transparent'}`}>
+                                                {tipo === 'TARJETA' ? 'Tarjeta' : 'CBU'}
+                                            </button>
+                                        ))}
+                                    </div>
+
+                                    {/* Dynamic Payment Fields */}
+                                    {pagoTipo === 'TARJETA' && (
+                                        <div className="grid grid-cols-2 gap-3 mb-4">
+                                            <Field label="Nro. Tarjeta">
+                                                <input className={inputCls} value={tarjeta.numero} onChange={e => ft('numero', e.target.value.replace(/\D/g, ''))} maxLength={16} placeholder="4500..." />
+                                            </Field>
+                                            <Field label="Marca">
+                                                <select className={inputCls} value={tarjeta.nombre} onChange={e => ft('nombre', e.target.value)}>
+                                                    <option value="2">VISA</option>
+                                                    <option value="1">MASTERCARD</option>
+                                                    <option value="3">AMEX</option>
+                                                </select>
+                                            </Field>
                                         </div>
                                     )}
 
-                                    {isFullOnline ? (
-                                        <>
-                                            {pagoTipo === 'CBU' && (
-                                                <Field label="Número de CBU *">
-                                                    <input className={inputCls} required value={cbuNum} onChange={e => setCbuNum(e.target.value.replace(/\D/g, ''))} placeholder="22 dígitos de tu CBU" maxLength={22} />
-                                                </Field>
-                                            )}
-                                            {pagoTipo === 'TARJETA' && (
-                                                <div className="space-y-3">
-                                                    <Field label="Tipo de tarjeta *">
-                                                        <select className={inputCls} value={tarjeta.nombre} onChange={e => ft('nombre', e.target.value)}>
-                                                            <option value="2">VISA</option>
-                                                            <option value="3">MASTERCARD</option>
-                                                            <option value="11">AMEX</option>
-                                                            <option value="4">CABAL</option>
-                                                        </select>
-                                                    </Field>
-                                                    <Field label="Número de tarjeta *">
-                                                        <input className={inputCls} required value={tarjeta.numero} onChange={e => ft('numero', e.target.value.replace(/\D/g, ''))} placeholder="XXXX XXXX XXXX XXXX" maxLength={16} />
-                                                    </Field>
-                                                    <Field label="Vencimiento (MMAAAA) *">
-                                                        <input className={inputCls} required value={tarjeta.vcto} onChange={e => ft('vcto', e.target.value.replace(/\D/g, '').substring(0, 6))} placeholder="122027" maxLength={6} />
-                                                        <span className="text-[10px] text-text-secondary pl-1">Formato: MMAAAA (ej: 122027)</span>
-                                                    </Field>
-                                                </div>
-                                            )}
-                                        </>
-                                    ) : (
-                                        <div className="flex items-start gap-3 p-3 rounded-2xl bg-orange-500/5 border border-orange-500/15">
-                                            <svg className="shrink-0 mt-0.5" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f97316" strokeWidth="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-                                            <p className="text-xs text-text-secondary">Los datos de pago los coordinarás con un asesor vía WhatsApp.</p>
+                                    {pagoTipo === 'CBU' && (
+                                        <div className="mb-4">
+                                            <Field label="CBU (22 dígitos)">
+                                                <input className={inputCls} value={cbuNum} onChange={e => setCbuNum(e.target.value.replace(/\D/g, ''))} maxLength={22} placeholder="0000..." />
+                                            </Field>
                                         </div>
                                     )}
 
-                                    <div className="flex gap-3 pt-2">
+
+                                    <div className="flex items-start gap-3 p-3 rounded-2xl bg-orange-500/5 border border-orange-500/15">
+                                        <svg className="shrink-0 mt-0.5" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f97316" strokeWidth="2"><circle cx="12" cy="12" r="10" /><line x1="12" y1="16" x2="12" y2="12" /><line x1="12" y1="8" x2="12.01" y2="8" /></svg>
+                                        <p className="text-xs text-text-secondary">Los datos de pago son necesarios para la validación automática de ATM.</p>
+                                    </div>
+
+                                    <div className="flex gap-3 pt-6">
                                         <button type="button" onClick={() => setStep(1)}
-                                            className="h-12 px-5 rounded-2xl border border-border-primary text-text-secondary font-semibold text-sm hover:bg-bg-secondary transition-all flex items-center gap-2">
-                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+                                            className="h-12 px-6 rounded-2xl border border-border-primary text-text-secondary font-semibold text-sm hover:bg-bg-secondary transition-all">
                                             Volver
                                         </button>
-                                        <button type="submit" disabled={loading}
-                                            className="flex-1 h-12 rounded-2xl bg-gradient-to-r from-orange-600 to-orange-500 text-white font-black text-sm tracking-wider hover:shadow-[0_0_20px_rgba(249,115,22,0.4)] transition-all active:scale-[0.98] disabled:opacity-50">
-                                            {isFullOnline ? 'Confirmar contratación' : 'Continuar por WhatsApp'}
+                                        <button type="submit" disabled={atmLoading}
+                                            className="flex-1 h-12 rounded-2xl bg-gradient-to-r from-orange-600 to-orange-500 text-white font-black text-sm hover:shadow-lg transition-all active:scale-[0.98]">
+                                            {atmLoading ? 'Validando...' : 'Confirmar emisión'}
                                         </button>
                                     </div>
                                 </form>

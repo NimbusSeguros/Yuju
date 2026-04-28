@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Car, Bike, Home, Menu, X, ChevronRight, Sun, Moon } from 'lucide-react';
+import { Car, Home, Menu, X, ChevronRight, Sun, Moon } from 'lucide-react';
+import { MotorbikeIcon } from '../components/icons/MotorbikeIcon';
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from '../utils/utils';
 import { useTheme } from '../hooks/useTheme';
@@ -16,7 +17,7 @@ const navItems = [
   },
   { 
     name: 'Seguro de Moto', 
-    icon: Bike, 
+    icon: MotorbikeIcon, 
     href: '/cotizar/seguro-moto',
     activeColor: 'text-orange-500',
     iconColor: 'text-orange-500',

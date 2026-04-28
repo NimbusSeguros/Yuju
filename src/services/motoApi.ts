@@ -68,7 +68,13 @@ export const getLocalities = async (zipCode: string | number) => {
     try {
         const response = await api.get(`localidades/${zipCode}`);
         return response.data;
-    } catch (error) {
+    } catch (error: any) {
+        // RUS returns 409 when its internal SIS system is down - fallback to local endpoint
+        if (error?.response?.status === 409 || error?.response?.data?.error?.httpStatusCode === 'CONFLICT') {
+            console.warn('RUS localidades unavailable (SIS down), falling back to local endpoint...');
+            const fallback = await axios.get(`${MOTO_API_BASE}/api/localidades/${zipCode}`);
+            return fallback.data;
+        }
         console.error("Error fetching localities:", error);
         throw error;
     }

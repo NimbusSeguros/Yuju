@@ -368,7 +368,7 @@
             {
                 "nombre": "Auxilio Mecánico y Remolque",
                 "descripcion": "Servicio de grúa y asistencia mecánica incluido.",
-                "limite": "1000 Km lineales / 2000 totales en Argentina y países limítrofes - Eventos ilimitados"
+                "limite": ""
             },
             {
                 "nombre": "Auto sustituto",
@@ -465,7 +465,7 @@
             {
                 "nombre": "Auxilio Mecánico y Remolque",
                 "descripcion": "Servicio de grúa y asistencia mecánica incluido.",
-                "limite": "1000 Km lineales / 2000 totales en Argentina y países limítrofes - Eventos ilimitados"
+                "limite": ""
             },
             {
                 "nombre": "Auto sustituto",
@@ -562,7 +562,7 @@
             {
                 "nombre": "Auxilio Mecánico y Remolque",
                 "descripcion": "Servicio de grúa y asistencia mecánica incluido.",
-                "limite": "1000 Km lineales / 2000 totales en Argentina y países limítrofes - Eventos ilimitados"
+                "limite": ""
             },
             {
                 "nombre": "Auto sustituto",
@@ -659,7 +659,7 @@
             {
                 "nombre": "Auxilio Mecánico y Remolque",
                 "descripcion": "Servicio de grúa y asistencia mecánica incluido.",
-                "limite": "1000 Km lineales / 2000 totales en Argentina y países limítrofes - Eventos ilimitados"
+                "limite": ""
             },
             {
                 "nombre": "Auto sustituto",

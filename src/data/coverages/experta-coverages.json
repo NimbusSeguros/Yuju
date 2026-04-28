@@ -555,8 +555,7 @@
       },
       {
         "nombre": "Daño parcial por accidente",
-        "descripcion": "Cobertura de daños parciales causados por accidentes con franquicia del 5%.",
-        "limite": "Franquicia a cargo del asegurado equivalente al porcentaje seleccionado calculado sobre el valor de la suma asegurada al momento del alta o renovación"
+        "descripcion": "Cobertura de daños parciales causados por accidentes con franquicia del 5%."
       },
       {
         "nombre": "Auxilio Mecánico y Remolque",
@@ -654,8 +653,7 @@
       },
       {
         "nombre": "Daño parcial por accidente",
-        "descripcion": "Cobertura de daños parciales causados por accidentes con franquicia del 2%.",
-        "limite": "Franquicia a cargo del asegurado equivalente al porcentaje seleccionado calculado sobre el valor de la suma asegurada al momento del alta o renovación"
+        "descripcion": "Cobertura de daños parciales causados por accidentes con franquicia del 2%."
       },
       {
         "nombre": "Auxilio Mecánico y Remolque",

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Bike, ShieldCheck, MapPin, AlertCircle, Search, Calendar, Tag, Zap, Loader2, Check, RefreshCw, ArrowLeft } from 'lucide-react';
+import { ShieldCheck, MapPin, AlertCircle, Search, Calendar, Tag, Zap, Loader2, Check, RefreshCw, ArrowLeft } from 'lucide-react';
+import { MotorbikeIcon } from '../../components/icons/MotorbikeIcon';
 import { GlassCard } from '../../components/ui/GlassCard';
 import { Button } from '../../components/ui/Button';
 import { Layout } from '../../layout/Layout';
@@ -9,6 +10,7 @@ import { MotoResultsGrid } from '../../components/MotoResultsGrid';
 import RusProposalModal from '../../components/cotizadores/RusProposalModal';
 import AtmProposalModal from '../../components/cotizadores/AtmProposalModal';
 import { FAQAccordion } from '../../components/cotizadores/FAQAccordion';
+import { SuccessStep } from '../../components/cotizadores/SuccessStep';
 import { createLead } from '../../services/motoApi';
 import { getInsurerLogo } from '../../utils/insurerLogos';
 
@@ -99,7 +101,28 @@ export const MotoCotizador = () => {
     if (selectedModel && activeStep === 3) setActiveStep(4);
   }, [selectedBrand, selectedYear, selectedModel, activeStep]);
 
+  const CACHE_KEY = "moto_brands_cache";
+  const CACHE_EXPIRY_KEY = "moto_brands_cache_expiry";
+  const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours
+
   const fetchBrands = async () => {
+    // 1. Try to get from cache first
+    try {
+      const cachedData = localStorage.getItem(CACHE_KEY);
+      const cacheExpiry = localStorage.getItem(CACHE_EXPIRY_KEY);
+      if (cachedData && cacheExpiry) {
+        if (new Date().getTime() < Number.parseInt(cacheExpiry)) {
+          const parsed = JSON.parse(cachedData);
+          setBrands(parsed);
+          // Still fetch in background to keep it fresh for next time
+          backgroundUpdateBrands();
+          return;
+        }
+      }
+    } catch (e) {
+      console.warn("Cache read error:", e);
+    }
+
     setBrandsLoading(true);
     setError(null);
     try {
@@ -107,10 +130,26 @@ export const MotoCotizador = () => {
       const list = Array.isArray(data) ? data : [];
       list.sort((a: any, b: any) => a.name.localeCompare(b.name));
       setBrands(list);
+      
+      // 2. Save to cache
+      localStorage.setItem(CACHE_KEY, JSON.stringify(list));
+      localStorage.setItem(CACHE_EXPIRY_KEY, (new Date().getTime() + CACHE_DURATION).toString());
     } catch (err: any) {
       setError(err.message || 'Error al cargar las marcas.');
     } finally {
       setBrandsLoading(false);
+    }
+  };
+
+  const backgroundUpdateBrands = async () => {
+    try {
+      const data = await getInfoautoAllBrands();
+      const list = Array.isArray(data) ? data : [];
+      list.sort((a: any, b: any) => a.name.localeCompare(b.name));
+      localStorage.setItem(CACHE_KEY, JSON.stringify(list));
+      localStorage.setItem(CACHE_EXPIRY_KEY, (new Date().getTime() + CACHE_DURATION).toString());
+    } catch (e) {
+      console.error("Background update failed:", e);
     }
   };
 
@@ -201,13 +240,38 @@ export const MotoCotizador = () => {
   const handleZipCodeSearch = async (val: string) => {
     setZipCode(val);
     if (val.length === 4) {
+      // 1. Check cache
+      const CACHE_KEY_PREFIX = "moto_loc_";
+      try {
+        const cached = localStorage.getItem(`${CACHE_KEY_PREFIX}${val}`);
+        if (cached) {
+          const parsed = JSON.parse(cached);
+          setLocalities(parsed);
+          if (parsed.length === 1) setSelectedLocality(parsed[0]);
+          return;
+        }
+      } catch (e) {}
+
       setLocalitiesLoading(true);
       setLocalities([]);
       setSelectedLocality(null);
       try {
         const data = await getLocalities(val);
-        let locList = Array.isArray(data) ? data : (data.dtoList || data.message || []);
+        // Handle both RUS format (array/dtoList) and local fallback format ({localidades:[...]})
+        const rawList = data.localidades || (Array.isArray(data) ? data : (data.dtoList || data.message || []));
+        const locList = rawList.map((loc: any) => ({
+          id: loc.id ?? loc.ID ?? loc.cp ?? loc.postalCode,
+          ID: loc.id ?? loc.ID ?? loc.cp ?? loc.postalCode,
+          descripcion: loc.descripcion ?? loc.description ?? loc.localidad ?? loc.place,
+          ...loc
+        }));
         setLocalities(locList);
+        
+        // 2. Save to cache
+        if (locList.length > 0) {
+          localStorage.setItem(`${CACHE_KEY_PREFIX}${val}`, JSON.stringify(locList));
+        }
+
         if (locList.length === 1) {
           setSelectedLocality(locList[0]);
         }
@@ -373,7 +437,7 @@ export const MotoCotizador = () => {
         provider: source,
         planName,
         precio,
-        sumaAsegurada: parseFloat(quote.sumaAsegurada || quote.SumaAsegurada || 0),
+        sumaAsegurada: parseFloat(quote.sumaAsegurada || quote.SumaAsegurada || quote.suma_asegurada || quote.capital || quote.suma || quote.valor_vehiculo || 0),
         phone: whatsappPhone,
         zipCode,
         wspText: text
@@ -381,6 +445,7 @@ export const MotoCotizador = () => {
 
       setWhatsappModalOpen(false);
       setThankYouOpen(true);
+      setActiveStep(6);
       setWhatsappPhone('');
     } catch (e) {
       console.error('Lead save failed:', e);
@@ -406,7 +471,8 @@ export const MotoCotizador = () => {
   const stepIndicators = [
     { id: 1, title: 'El Vehículo', status: activeStep < 4 ? 'active' : 'completed' },
     { id: 2, title: 'Ubicación', status: activeStep < 4 ? 'inactive' : activeStep === 4 ? 'active' : 'completed' },
-    { id: 3, title: 'Cotización', status: activeStep < 5 ? 'inactive' : 'active' },
+    { id: 3, title: 'Cotización', status: activeStep === 5 ? 'active' : activeStep > 5 ? 'completed' : 'inactive' },
+    { id: 4, title: 'Finalizado', status: activeStep === 6 ? 'active' : 'inactive' },
   ];
 
   return (
@@ -490,10 +556,10 @@ export const MotoCotizador = () => {
                 <div className="relative z-[40] space-y-3">
                   <div className="flex items-center gap-2">
                     <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-500 ${selectedBrand ? 'bg-orange-500 text-white' : 'bg-bg-secondary text-text-secondary opacity-40'}`}>
-                      <Bike size={16} />
+                      <MotorbikeIcon size={16} />
                     </div>
                     <div className="flex-1">
-                      <h2 className="text-sm font-black font-accent tracking-tighter leading-none">Marca de la Moto</h2>
+                      <h2 className="text-sm font-black font-accent uppercase tracking-tighter leading-none">Marca de la Moto</h2>
                       <p className="text-[10px] text-text-secondary font-bold uppercase tracking-widest opacity-50 mt-0.5">Seleccioná la marca</p>
                     </div>
                   </div>
@@ -504,15 +570,18 @@ export const MotoCotizador = () => {
                       type="text"
                       value={brandSearchTerm}
                       onChange={(e) => {
-                        setBrandSearchTerm(e.target.value);
+                        setBrandSearchTerm(e.target.value.toUpperCase());
                         if (!brandListOpen) setBrandListOpen(true);
                         if (selectedBrand) setSelectedBrand(null);
                       }}
                       onFocus={() => setBrandListOpen(true)}
-                      placeholder="Ej. Yamaha"
+                      placeholder="Ej. YAMAHA"
                       className="w-full bg-bg-secondary border border-border-primary rounded-2xl pl-12 pr-5 py-4 text-text-primary yuju-input-orange transition-all font-bold"
                     />
                     {brandsLoading && <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs text-orange-500 animate-pulse">Cargando...</span>}
+                    
+
+
                     {brandListOpen && (
                       <div className="absolute left-0 right-0 w-full z-50 mt-2 bg-bg-secondary border border-border-primary rounded-xl shadow-2xl max-h-60 overflow-y-auto custom-scrollbar">
                         {filteredBrandsList.length > 0 ? filteredBrandsList.map(b => (
@@ -553,7 +622,7 @@ export const MotoCotizador = () => {
                       <Calendar size={16} />
                     </div>
                     <div className="flex-1">
-                      <h2 className="text-sm font-black font-accent tracking-tighter leading-none">Año de Fabricación</h2>
+                      <h2 className="text-sm font-black font-accent uppercase tracking-tighter leading-none">Año de Fabricación</h2>
                       <p className="text-[10px] text-text-secondary font-bold uppercase tracking-widest opacity-50 mt-0.5">Modelo según cédula</p>
                     </div>
                   </div>
@@ -582,7 +651,7 @@ export const MotoCotizador = () => {
                       <Tag size={16} />
                     </div>
                     <div className="flex-1">
-                      <h2 className="text-sm font-black font-accent tracking-tighter leading-none">Modelo y Versión</h2>
+                      <h2 className="text-sm font-black font-accent uppercase tracking-tighter leading-none">Modelo y Versión</h2>
                       <p className="text-[10px] text-text-secondary font-bold uppercase tracking-widest opacity-50 mt-0.5">Buscá la versión específica</p>
                     </div>
                   </div>
@@ -616,7 +685,7 @@ export const MotoCotizador = () => {
                       <MapPin size={16} />
                     </div>
                     <div className="flex-1">
-                      <h2 className="text-sm font-black font-accent tracking-tighter leading-none">Lugar de Guarda</h2>
+                      <h2 className="text-sm font-black font-accent uppercase tracking-tighter leading-none">Lugar de Guarda</h2>
                       <p className="text-[10px] text-text-secondary font-bold uppercase tracking-widest opacity-50 mt-0.5">Código postal de residencia</p>
                     </div>
                   </div>
@@ -637,7 +706,7 @@ export const MotoCotizador = () => {
                       value={selectedLocality ? selectedLocality.id || selectedLocality.ID : ''}
                       onChange={(e) => {
                         const id = e.target.value;
-                        const loc = localities.find(l => (l.id == id || l.ID == id));
+                        const loc = localities.find((l: any) => (l.id == id || l.ID == id));
                         setSelectedLocality(loc);
                       }}
                       disabled={localities.length === 0}
@@ -690,18 +759,30 @@ export const MotoCotizador = () => {
                   className="space-y-8 w-full mt-8"
                 >
                   <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-4 border-b border-border-primary pb-6">
-                    <div className="flex items-start md:items-center gap-4 w-full">
+                    <div className="flex items-start md:items-center gap-4">
                       <button onClick={() => setActiveStep(prev => prev - 1)} className="p-2 bg-orange-500/10 hover:bg-orange-500/20 text-orange-500 rounded-xl transition-all cursor-pointer shrink-0 mt-1 md:mt-0">
                         <ArrowLeft size={24} />
                       </button>
-                      <div className="text-center md:text-left w-full">
+                      <div className="text-center md:text-left">
                         <div className="text-sm font-bold text-text-secondary uppercase tracking-widest mb-1">Resultados para tu</div>
                         <h2 className="text-2xl lg:text-3xl font-black font-accent tracking-tighter text-orange-500 leading-tight">
                           {selectedBrand?.name} {selectedModel?.group?.name} <span className="text-text-primary">{selectedModel?.description}</span> <span className="text-orange-400">({selectedYear})</span>
                         </h2>
                       </div>
                     </div>
-                    <div className="flex flex-wrap items-center justify-center gap-3">
+                    <div className="flex items-center shrink-0">
+                      {/* Selector de Medio de Pago - Cloned from Auto with Moto colors */}
+                      <div className="flex items-center gap-4 bg-bg-secondary px-6 py-3 rounded-full border border-border-primary shadow-sm min-w-fit">
+                        <span className="text-[11px] font-black text-text-secondary tracking-widest whitespace-nowrap">¿PAGÁS CON TARJETA?</span>
+                        <button 
+                          onClick={() => setPayWithCard(!payWithCard)}
+                          className={`relative inline-flex h-7 w-12 items-center rounded-full transition-colors duration-300 focus:outline-none ${payWithCard ? 'bg-orange-500' : 'bg-text-secondary/20'}`}
+                        >
+                          <span 
+                            className={`inline-block h-5 w-5 transform rounded-full bg-white transition-transform duration-300 shadow-sm ${payWithCard ? 'translate-x-6' : 'translate-x-1'}`}
+                          />
+                        </button>
+                      </div>
                     </div>
                   </div>
 
@@ -709,7 +790,20 @@ export const MotoCotizador = () => {
                     <div className="text-center py-16 space-y-10 w-full col-span-full">
                       <div className="w-24 h-24 bg-orange-500/20 rounded-full flex items-center justify-center mx-auto mb-6 relative">
                         <div className="absolute inset-0 bg-orange-500/10 blur-xl rounded-full animate-pulse" />
-                        <Zap className="text-orange-500 relative z-10 animate-float" size={48} />
+                        <div 
+                          className="w-16 h-16 relative z-10 animate-float" 
+                          style={{ 
+                            backgroundColor: '#F97316',
+                            maskImage: 'url("https://res.cloudinary.com/dewcgbpvp/image/upload/v1735836811/Yuju_Web_nfwvce.svg")',
+                            maskRepeat: 'no-repeat',
+                            maskPosition: 'center',
+                            maskSize: 'contain',
+                            WebkitMaskImage: 'url("https://res.cloudinary.com/dewcgbpvp/image/upload/v1735836811/Yuju_Web_nfwvce.svg")',
+                            WebkitMaskRepeat: 'no-repeat',
+                            WebkitMaskPosition: 'center',
+                            WebkitMaskSize: 'contain',
+                          }}
+                        />
                       </div>
                       <div className="space-y-3">
                         <h2 className="text-4xl font-black text-text-primary font-accent tracking-tighter whitespace-pre-wrap">Buscando la mejor cotización</h2>
@@ -740,6 +834,7 @@ export const MotoCotizador = () => {
       <RusProposalModal
         isOpen={emissionModalOpen && emissionModalSource === 'RUS'}
         onClose={() => setEmissionModalOpen(false)}
+        onSuccess={() => setActiveStep(6)}
         quote={selectedQuoteObj?.quote}
         quotationContext={{
           vigencias,
@@ -754,6 +849,7 @@ export const MotoCotizador = () => {
       <AtmProposalModal
         isOpen={emissionModalOpen && emissionModalSource === 'ATM'}
         onClose={() => setEmissionModalOpen(false)}
+        onSuccess={() => setActiveStep(6)}
         cobertura={selectedQuoteObj?.quote?.cobertura}
         atmOperacion={selectedQuoteObj?.quote?.operacion}
         vehicleInfo={getVehicleDetails()}
@@ -840,45 +936,16 @@ export const MotoCotizador = () => {
         </div>
       )}
 
-      {/* Thank You Modal */}
-      {thankYouOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
-          <GlassCard className="p-10 max-w-md w-full text-center relative overflow-hidden">
-            {/* Glow decoration */}
-            <div className="absolute -top-16 -right-16 w-48 h-48 bg-orange-500/20 rounded-full blur-3xl" />
-            <div className="absolute -bottom-16 -left-16 w-48 h-48 bg-amber-400/10 rounded-full blur-3xl" />
-
-            {/* Icon */}
-            <div className="relative w-20 h-20 mx-auto mb-6">
-              <div className="absolute inset-0 bg-orange-500/20 rounded-full blur-xl animate-pulse" />
-              <div className="relative w-20 h-20 bg-gradient-to-br from-orange-500 to-amber-400 rounded-full flex items-center justify-center shadow-2xl shadow-orange-500/30">
-                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
-              </div>
-            </div>
-
-            <h3 className="text-3xl font-black font-accent text-text-primary mb-2 tracking-tighter relative">
-              ¡Gracias por elegirnos!
-            </h3>
-            <p className="text-text-secondary mb-2 relative">
-              Tu cotización fue enviada con éxito.
-            </p>
-            <p className="text-text-secondary text-sm mb-8 relative">
-              Un asesor de <span className="text-orange-500 font-black">Yuju</span> se pondrá en contacto con vos a la brevedad para ayudarte a finalizar tu seguro.
-            </p>
-
-            <div className="bg-orange-500/10 border border-orange-500/20 rounded-2xl p-4 mb-8 relative text-left">
-              <p className="text-xs text-orange-400 font-bold uppercase tracking-widest mb-1">¿Querés agilizar?</p>
-              <p className="text-sm text-text-secondary">Podés escribirnos directamente al <span className="text-text-primary font-bold">+54 11 5630 7246</span> mencionando tu cotización.</p>
-            </div>
-
-            <Button
-              className="w-full bg-gradient-to-r from-orange-500 to-amber-500 border-none text-white font-black shadow-lg uppercase tracking-wider"
-              onClick={() => setThankYouOpen(false)}
-            >
-              Volver a cotizaciones
-            </Button>
-          </GlassCard>
-        </div>
+      {activeStep === 6 && (
+        <SuccessStep
+          onReset={() => {
+            handleResetAll();
+            setActiveStep(1);
+          }}
+          brand={selectedBrand?.name || ''}
+          model={`${selectedModel?.group?.name || ''} ${selectedModel?.description || ''}`}
+          insurer={selectedQuoteObj?.source || ''}
+        />
       )}
 
       <div className="relative z-0">

@@ -12,40 +12,146 @@ const COMPANY_DISCOUNTS: Record<string, Record<string, number>> = {
 
 const COVERAGE_FILTERS: any = {
   rus: {
-    rc: { include: ["rca s/grua", "s/grua", "sin grua"], exclude: ["con grua", "c/grua", "c/ grua"] },
-    terceros: { include: ["b1", "robo e incendio total"], exclude: [] },
-    tercerosCompleto: { include: ["tercero completo full (s0)", "tercero completo full", "full (s0)", "s0", "s - sigma", "sigma"], exclude: [] },
-    todoRiesgo: { include: ["tr franquicia del 2%", "franquicia del 2%", "2%", "t31 5% de la sa (t31)", "t31", "5% de la sa"], exclude: ["1.5%", "3%", "10%"] },
+    rc: {
+      include: ["rca s/grua", "s/grua", "sin grua"],
+      exclude: ["con grua", "c/grua", "c/ grua"],
+    },
+    terceros: {
+      include: ["b1", "robo e incendio total"],
+      exclude: [],
+    },
+    tercerosCompleto: {
+      include: ["tercero completo full (s0)", "tercero completo full", "full (s0)", "s0", "s - sigma", "sigma"],
+      exclude: [],
+    },
+    todoRiesgo: {
+      include: ["tr franquicia del 2%", "franquicia del 2%", "2%", "t31 5% de la sa (t31)", "t31", "5% de la sa"],
+      exclude: ["1.5%", "3%", "10%"],
+    },
   },
   integrity: {
-    rc: { include: ["0064"], exclude: [] },
-    terceros: { include: ["0050"], exclude: [] },
-    tercerosCompleto: { include: ["0054", "0053"], exclude: [] },
-    todoRiesgo: { include: ["0045"], exclude: [] },
+    rc: {
+      include: ["0064"],
+      exclude: [],
+    },
+    terceros: {
+      include: ["0050"],
+      exclude: [],
+    },
+    tercerosCompleto: {
+      include: ["0054", "0053"],
+      exclude: [],
+    },
+    todoRiesgo: {
+      include: ["0045"],
+      exclude: [],
+    },
   },
   "san cristóbal": {
-    rc: { include: ["cobertura a", "ca7_a"], exclude: ["b1", "b3", "cobertura b", "terceros", "todo riesgo"] },
-    terceros: { include: ["cobertura b1", "ca7_b1", "b1"], exclude: ["b3", "ca7_b3", "cobertura b3"] },
-    tercerosCompleto: { include: ["terceros completos premium", "ca7_cm", "cm", "premium"], exclude: ["c4", "ca7_c4", "terceros completos c4", "ca7_c1", "ca7_c ", "cplus", "ca7_cplus", "terceros completos plus"] },
-    todoRiesgo: { include: ["todo riesgo", "ca7_d"], exclude: [] },
+    rc: {
+      include: ["cobertura a", "ca7_a"],
+      exclude: ["b1", "b3", "cobertura b", "terceros", "todo riesgo"],
+    },
+    terceros: {
+      include: ["cobertura b1", "ca7_b1", "b1"],
+      exclude: ["b3", "ca7_b3", "cobertura b3"],
+    },
+    tercerosCompleto: {
+      include: ["terceros completos premium", "ca7_cm", "cm", "premium"],
+      exclude: [
+        "c4",
+        "ca7_c4",
+        "terceros completos c4",
+        "ca7_c1",
+        "ca7_c ",
+        "cplus",
+        "ca7_cplus",
+        "terceros completos plus",
+      ],
+    },
+    todoRiesgo: {
+      include: ["todo riesgo", "ca7_d"],
+      exclude: [],
+    },
   },
   experta: {
-    rc: { include: ["e", "responsabilidad civil"], exclude: ["completo", "granizo"] },
-    terceros: { include: ["b"], exclude: ["completo", "xl", "granizo"] },
-    tercerosCompleto: { include: ["terceros completo xl", "tercero completo xl", "completo xl"], exclude: ["granizo"] },
-    todoRiesgo: { include: ["todo riesgo xl - 2%", "todo riesgo xl - 5%", "todo riesgo xl – franquicia 2 %", "todo riesgo xl – franquicia 5 %", "franquicia 2 %", "franquicia 5 %"], exclude: [] },
+    rc: {
+      include: ["e", "responsabilidad civil"],
+      exclude: ["completo", "granizo"],
+    },
+    terceros: {
+      include: ["b"],
+      exclude: ["completo", "xl", "granizo"],
+    },
+    tercerosCompleto: {
+      include: ["terceros completo xl", "tercero completo xl", "completo xl"],
+      exclude: ["granizo"],
+    },
+    todoRiesgo: {
+      include: [
+        "todo riesgo xl - 2%",
+        "todo riesgo xl - 5%",
+        "todo riesgo xl – franquicia 2 %",
+        "todo riesgo xl – franquicia 5 %",
+        "franquicia 2 %",
+        "franquicia 5 %",
+      ],
+      exclude: [],
+    },
   },
   "mercantil andina": {
-    rc: { include: ["a"], exclude: [] },
-    terceros: { include: ["b  - r.c.l.- incendio, robo y accidente total", "b - r.c.l.", "r.c.l."], exclude: [] },
-    tercerosCompleto: { include: [], exclude: [] },
-    todoRiesgo: { include: ["tr franquicia del 5%", "franquicia del 5%", "5%"], exclude: ["3%", "10%"] },
+    rc: {
+      include: ["a"],
+      exclude: [],
+    },
+    terceros: {
+      include: ["b  - r.c.l.- incendio, robo y accidente total", "b - r.c.l.", "r.c.l."],
+      exclude: [],
+    },
+    tercerosCompleto: {
+      include: [],
+      exclude: [],
+    },
+    todoRiesgo: {
+      include: ["tr franquicia del 5%", "franquicia del 5%", "5%"],
+      exclude: ["3%", "10%"],
+    },
   },
   atm: {
-    rc: { include: ["responsabilidad civil"], exclude: ["robo", "incendio", "terceros", "todo riesgo"] },
-    terceros: { include: ["robo e incendio", "robo, incendio"], exclude: ["terceros completos", "todo riesgo"] },
-    tercerosCompleto: { include: ["terceros completos plus", "terceros completos premium", "terceros completos black"], exclude: [] },
-    todoRiesgo: { include: ["todo riesgo"], exclude: [] },
+    rc: {
+      include: ["responsabilidad civil"],
+      exclude: ["robo", "incendio", "terceros", "todo riesgo"],
+    },
+    terceros: {
+      include: ["robo e incendio", "robo, incendio"],
+      exclude: ["terceros completos", "todo riesgo"],
+    },
+    tercerosCompleto: {
+      include: ["terceros completos plus", "terceros completos premium", "terceros completos black"],
+      exclude: [],
+    },
+    todoRiesgo: {
+      include: ["todo riesgo"],
+      exclude: [],
+    },
+  },
+  meridional: {
+    rc: {
+      include: ["meridional_1", "1"],
+      exclude: [],
+    },
+    terceros: {
+      include: ["meridional_3", "meridional_2", "3", "2"],
+      exclude: [],
+    },
+    tercerosCompleto: {
+      include: ["meridional_14", "meridional_4", "14", "4"],
+      exclude: [],
+    },
+    todoRiesgo: {
+      include: ["meridional_67", "meridional_70", "67", "70"],
+      exclude: [],
+    }
   }
 };
 
@@ -134,26 +240,40 @@ function shouldShowPlan(plan: any, coverageType: InternalType, companyName: stri
 /**
  * Calculo oficial heredado de V1
  */
-function getCalculatedPrice(price: number, companyName: string, coverageType: InternalType, cuotas?: number): number {
-  if (typeof price !== "number" || !isFinite(price) || price <= 0) return 0;
+function getPriceBreakdown(rawPrice: number, companyName: string, coverageType: InternalType) {
+  if (typeof rawPrice !== "number" || !isFinite(rawPrice) || rawPrice <= 0) return { originalMonthly: 0, finalMonthly: 0, discountPercent: 0 };
 
   const companyKey = companyName?.toLowerCase() || "";
-  let adjustedPrice = price;
 
-  // Lógica de cuotas para Experta de V1
-  if (companyKey === "experta" && cuotas === 3) {
-    adjustedPrice = price * 3;
+  // Normalize company key for lookup (handles "La Meridional", "Meridional Seguros", etc.)
+  const normalizedKey = Object.keys(COMPANY_DISCOUNTS).find(k => companyKey.includes(k)) || companyKey;
+
+  let adjustedPrice = rawPrice;
+
+  // Lógica de cuotas para Experta: Siempre es * 3 según v1
+  if (companyKey.includes("experta")) {
+    adjustedPrice = rawPrice * 3;
   }
 
-  const multiplier = COMPANY_DISCOUNTS[companyKey]?.[coverageType] || 1.0;
-  let discountedPrice = adjustedPrice * multiplier;
+  // 1. Calcular el divisor por compañía (v1 logic)
+  let divisor = 1;
+  if (companyKey.includes("san cristóbal") || companyKey.includes("san cristobal")) divisor = 6;
+  else if (companyKey.includes("integrity")) divisor = 12;
+  else if (companyKey.includes("atm")) divisor = 3;
+  else if (companyKey.includes("meridional")) divisor = 4;
 
-  if (companyKey === "san cristóbal") discountedPrice = discountedPrice / 6;
-  else if (companyKey === "integrity") discountedPrice = discountedPrice / 12;
-  else if (companyKey === "atm") discountedPrice = discountedPrice / 3;
-  else if (companyKey === "meridional") discountedPrice = discountedPrice / 4;
+  const originalMonthly = adjustedPrice / divisor;
 
-  return discountedPrice;
+  // 2. Aplicar el multiplicador de descuento de Yuju
+  const multiplier = COMPANY_DISCOUNTS[normalizedKey]?.[coverageType] || 1.0;
+  const finalMonthly = originalMonthly * multiplier;
+  const discountPercent = Math.round((1 - multiplier) * 100);
+
+  return {
+    originalMonthly,
+    finalMonthly,
+    discountPercent
+  };
 }
 
 /**
@@ -162,9 +282,13 @@ function getCalculatedPrice(price: number, companyName: string, coverageType: In
 export function enrichAndValidateQuote(
   plan: any,
   companyName: string,
-  vehicleYear: number,
-  cuotas: number
-): { finalCategory: CoverageCategory, monthlyPrice: number } | null {
+  vehicleYear: number
+): { 
+  finalCategory: CoverageCategory, 
+  monthlyPrice: number, 
+  originalPrice: number,
+  discountPercent: number 
+} | null {
 
   const internalClass = classifyLegacy(plan, companyName);
   if (!internalClass) return null; // Compañías como Meridional filtran ciertos planes al retornar null desde classify
@@ -174,9 +298,9 @@ export function enrichAndValidateQuote(
   }
 
   const rawPrice = Number(plan.precio || plan.premio || plan.cuota || 0);
-  const monthlyPrice = getCalculatedPrice(rawPrice, companyName, internalClass, cuotas);
+  const { originalMonthly, finalMonthly, discountPercent } = getPriceBreakdown(rawPrice, companyName, internalClass);
 
-  if (monthlyPrice <= 0) return null;
+  if (finalMonthly <= 0) return null;
 
   let finalCategory: CoverageCategory;
   switch (internalClass) {
@@ -188,6 +312,8 @@ export function enrichAndValidateQuote(
 
   return {
     finalCategory,
-    monthlyPrice
+    monthlyPrice: finalMonthly,
+    originalPrice: originalMonthly,
+    discountPercent
   };
 }

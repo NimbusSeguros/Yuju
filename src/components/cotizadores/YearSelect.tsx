@@ -39,7 +39,7 @@ export const YearSelect: React.FC<YearSelectProps> = ({ value, onChange, hasErro
         onClick={() => setIsOpen(!isOpen)}
         className={`w-full h-[56px] bg-bg-secondary border ${hasError ? 'border-red-500' : 'border-border-primary'} rounded-2xl px-5 flex items-center justify-between group yuju-input-blue transition-all`}
       >
-        <span className={`${value ? 'text-text-primary font-bold' : 'text-text-secondary opacity-50'} text-base uppercase font-bold tracking-tight`}>
+        <span className={`${value ? 'text-text-primary font-bold' : 'text-text-secondary opacity-50'} text-base font-bold tracking-tight`}>
           {value || "Seleccioná el año"}
         </span>
         <ChevronDown className={`text-text-secondary transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} size={16} />

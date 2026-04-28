@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
-import { Car, Bike, Home, ArrowRight, ShieldCheck, ChevronRight, Activity, MousePointer2 } from 'lucide-react';
+import { Car, Home, ArrowRight, ShieldCheck, ChevronRight, Activity, MousePointer2 } from 'lucide-react';
+import { MotorbikeIcon } from '../../components/icons/MotorbikeIcon';
 import { Link } from 'react-router-dom';
 import { GlassCard } from '../../components/ui/GlassCard';
 import { Button } from '../../components/ui/Button';
@@ -18,7 +19,7 @@ const services = [
   },
   {
     title: 'Seguro de Moto',
-    icon: Bike,
+    icon: MotorbikeIcon,
     desc: 'Cobertura especializada para rodar con total libertad y tranquilidad.',
     href: '/cotizar/seguro-moto',
     color: 'from-orange-500 to-orange-400',

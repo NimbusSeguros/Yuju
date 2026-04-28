@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { GlassCard } from './ui/GlassCard';
 import { Button } from './ui/Button';
 import { getInsurerLogo } from '../utils/insurerLogos';
 import { CoverageDetailsModal } from './cotizadores/CoverageDetailsModal';
@@ -56,6 +55,15 @@ export const MotoResultsGrid: React.FC<MotoResultsGridProps> = ({ results, payWi
     // 5. Gather and Sort all valid cards
     const allCards: Array<{ price: number, el: React.ReactElement }> = [];
 
+    // Extract a common Suma Asegurada from any provider that has it to use as global fallback
+    const commonSuma = parseFloat(
+        rusQuotes[0]?.sumaAsegurada || 
+        integrityQuotes[0]?.SumaAsegurada || 
+        integrityQuotes[0]?.sumaAsegurada ||
+        sancristobalQuotes[0]?.sumaAsegurada || 
+        0
+    );
+
     // RUS processing
     if (!rusError && rusQuotes.length > 0) {
         rusQuotes.forEach((q: any, i: number) => {
@@ -80,7 +88,7 @@ export const MotoResultsGrid: React.FC<MotoResultsGridProps> = ({ results, payWi
             const originalImpcuotas = parseFloat(c.impcuotas || 0);
             const impcuotas = payWithCard ? originalImpcuotas * discount : originalImpcuotas;
             const price = cuotas > 1 ? impcuotas : premio;
-            allCards.push({ price, el: <AtmCard key={`atm-${i}`} quote={c} operacion={atmRaw?.operacion} payWithCard={payWithCard} onContract={onContract} onInfo={() => setInfoModalConfig({ quote: c, company: 'ATM' })} /> });
+            allCards.push({ price, el: <AtmCard key={`atm-${i}`} quote={c} operacion={atmRaw?.operacion} payWithCard={payWithCard} onContract={onContract} commonSuma={commonSuma} onInfo={() => setInfoModalConfig({ quote: c, company: 'ATM' })} /> });
         });
     }
 
@@ -93,7 +101,7 @@ export const MotoResultsGrid: React.FC<MotoResultsGridProps> = ({ results, payWi
             const discount = isRC ? 0.85 : 0.70;
             const p = parseFloat(q.Premio || 0);
             const price = payWithCard ? p * discount : p;
-            allCards.push({ price, el: <IntegrityCard key={`intg-${i}`} quote={q} payWithCard={payWithCard} onContract={onContract} onInfo={() => setInfoModalConfig({ quote: q, company: 'INTEGRITY' })} /> });
+            allCards.push({ price, el: <IntegrityCard key={`intg-${i}`} quote={q} payWithCard={payWithCard} onContract={onContract} commonSuma={commonSuma} onInfo={() => setInfoModalConfig({ quote: q, company: 'INTEGRITY' })} /> });
         });
     }
 
@@ -103,7 +111,8 @@ export const MotoResultsGrid: React.FC<MotoResultsGridProps> = ({ results, payWi
             const planName = (q.description || q.descripcion || '').toUpperCase();
             const isRC = planName.includes('RESPONSABILIDAD CIVIL');
             const discount = isRC ? 0.85 : 0.70;
-            const price = parseFloat(q.monthlyCuota || q.premio || 0) * discount;
+            const originalPrice = parseFloat(q.monthlyCuota || q.premio || 0);
+            const price = payWithCard ? originalPrice * discount : originalPrice;
             allCards.push({ price, el: <SanCristobalCard key={`sanc-${i}`} quote={q} payWithCard={payWithCard} onContract={onContract} onInfo={() => setInfoModalConfig({ quote: q, company: 'SAN_CRISTOBAL' })} /> });
         });
     }
@@ -115,29 +124,7 @@ export const MotoResultsGrid: React.FC<MotoResultsGridProps> = ({ results, payWi
 
     return (
         <div className="space-y-8 animate-fade-in">
-            {/* Payment Method Switcher */}
-            <div className="max-w-2xl mx-auto w-full">
-                <div className="flex flex-col sm:flex-row items-center justify-between bg-bg-secondary/50 backdrop-blur-sm p-2 sm:p-2.5 rounded-[2rem] border border-border-primary gap-4 shadow-sm">
-                    <div className="flex items-center pl-4 py-2">
-                        <span className="text-text-secondary text-[11px] font-black uppercase tracking-[0.2em] whitespace-nowrap">Descuento de Pago</span>
-                    </div>
-                    
-                    <div className="flex items-center bg-bg-primary/50 p-1.5 rounded-[1.5rem] border border-border-primary/40 shadow-inner w-full sm:w-auto">
-                        <button 
-                            onClick={() => setPayWithCard(false)}
-                            className={`flex-1 sm:flex-none px-6 py-2 rounded-2xl text-[11px] font-black tracking-wider transition-all duration-300 ${!payWithCard ? 'bg-white text-yuju-blue shadow-md' : 'text-text-secondary hover:text-text-primary'}`}
-                        >
-                            EFECTIVO
-                        </button>
-                        <button 
-                            onClick={() => setPayWithCard(true)}
-                            className={`flex-1 sm:flex-none px-6 py-2 rounded-2xl text-[11px] font-black tracking-wider transition-all duration-300 flex items-center justify-center gap-2 ${payWithCard ? 'bg-orange-500 text-white shadow-[0_0_20px_rgba(249,115,22,0.4)]' : 'text-text-secondary hover:text-text-primary'}`}
-                        >
-                            TARJETA <span className={payWithCard ? 'text-white/90' : 'text-orange-500'}>(-30% OFF)</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
+
 
             {/* Error notifications if any */}
             {hasErrors && (
@@ -177,6 +164,28 @@ const InfoItem = ({ label, value }: { label: string, value: string }) => (
     </div>
 );
 
+const PriceDisplay = ({ originalPrice, finalPrice, discountPercent, payWithCard }: { originalPrice: number, finalPrice: number, discountPercent: number, payWithCard: boolean }) => {
+    return (
+        <div className="flex flex-col mb-3">
+            <div className="flex items-center gap-2 mb-1 h-6">
+                {payWithCard && originalPrice > finalPrice && (
+                    <>
+                        <span className="text-xs text-text-secondary line-through opacity-60">
+                            ${Math.round(originalPrice).toLocaleString('es-AR')}
+                        </span>
+                        <span className="text-[10px] font-black text-green-500 bg-green-500/10 px-2 py-0.5 rounded-full border border-green-500/20">
+                            -{discountPercent}% OFF
+                        </span>
+                    </>
+                )}
+            </div>
+            <div className="text-3xl sm:text-4xl font-black text-text-primary font-accent tracking-tighter leading-none">
+                ${Math.round(finalPrice).toLocaleString('es-AR')}<span className="text-[10px] text-text-secondary tracking-widest pl-1 font-normal">/MES</span>
+            </div>
+        </div>
+    );
+};
+
 const formatPlanName = (str: string) => {
     if (!str) return '';
     // Extra handling for common insurance acronyms
@@ -210,16 +219,16 @@ const RusCard = ({ quote, payWithCard, onContract, onInfo }: { quote: any, payWi
     const isEmissionFlow = EMISSION_PLANS.some(p => planName === p || planName.includes(p));
     
     const discount = isRC ? 0.85 : 0.70;
-    const originalPremio = parseFloat(quote.premio || 0);
+    const discountPercent = isRC ? 15 : 30;
+    const originalPremio = parseFloat(quote.premio || 0) / 6;
     const premio = payWithCard ? originalPremio * discount : originalPremio;
-    const cuota = premio / 6;
 
     const logoUrl = getInsurerLogo('RUS');
 
     return (
-        <div className="glass-card p-5 border-2 border-border-primary/50 rounded-2xl hover:border-orange-500 hover:shadow-[0_0_25px_rgba(249,115,22,0.2)] transition-all duration-500 h-[280px] relative overflow-hidden group/card shadow-sm">
+        <div className="glass-card p-5 border-2 border-border-primary/50 rounded-2xl hover:border-orange-500 hover:shadow-[0_0_25px_rgba(249,115,22,0.2)] transition-all duration-500 h-[310px] relative group/card shadow-sm">
             <div className="pb-16">
-                <div className="flex justify-between items-start gap-3 mb-3">
+                <div className="flex justify-between items-start gap-3 mb-4">
                     <div className="h-12 flex items-center">
                         <h3 className="text-text-primary font-black text-sm sm:text-base md:text-lg leading-tight line-clamp-2 font-accent">{formatPlanName(quote.codigoCasco || quote.codigoRC || '')}</h3>
                     </div>
@@ -231,24 +240,22 @@ const RusCard = ({ quote, payWithCard, onContract, onInfo }: { quote: any, payWi
                         <span className="bg-orange-500/20 text-orange-500 text-[10px] font-black px-2 py-1 rounded">RUS</span>
                     )}
                 </div>
-                <div className="flex flex-col mb-3">
-                    <div className="flex justify-between items-start">
-                        <div>
-                            <div className="text-2xl sm:text-3xl font-black text-text-primary font-accent tracking-tighter">
-                                ${cuota.toLocaleString('es-AR', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}<span className="text-[10px] text-text-secondary tracking-widest pl-1">/MES</span>
-                            </div>
-                            <div className="h-4">
-                                {payWithCard && <span className="text-[10px] text-orange-500/80 font-bold uppercase">Dto. Tarjeta Incluido</span>}
-                            </div>
-                        </div>
-                        <button onClick={onInfo} className="w-8 h-8 rounded-full border border-border-primary/50 bg-bg-secondary flex items-center justify-center text-text-secondary hover:text-orange-500 hover:border-orange-500/50 hover:bg-orange-500/10 transition-colors shadow-sm shrink-0" title="Ver detalles de cobertura">
+                
+                <div className="flex justify-between items-end mb-4">
+                    <PriceDisplay originalPrice={originalPremio} finalPrice={premio} discountPercent={discountPercent} payWithCard={payWithCard} />
+                    <div className="relative group/tooltip mb-2">
+                        <button onClick={onInfo} className="w-8 h-8 rounded-full border border-border-primary/50 bg-bg-secondary flex items-center justify-center text-text-secondary group-hover/card:text-orange-500 group-hover/card:border-orange-500/50 group-hover/card:bg-orange-500/10 transition-all shadow-sm shrink-0" title="Ver detalles de cobertura">
                             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
                         </button>
+                        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-0.5 bg-text-primary text-bg-primary text-[8px] font-medium rounded-md opacity-0 group-hover/card:opacity-100 transition-opacity pointer-events-none whitespace-nowrap shadow-xl z-10">
+                            Ver detalle de cobertura
+                            <div className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-text-primary"></div>
+                        </div>
                     </div>
                 </div>
-                <div className="space-y-2 pt-3 border-t border-border-primary/40">
+
+                <div className="space-y-2 pt-1 border-t border-border-primary/30 mt-2">
                     {parseFloat(quote.sumaAsegurada || 0) > 0 && <InfoItem label="Suma Asegurada" value={parseFloat(quote.sumaAsegurada || 0).toLocaleString('es-AR', { style: 'currency', currency: 'ARS', maximumFractionDigits: 0 })} />}
-                    {quote.auxilioMecanico === 'SI' && <InfoItem label="Auxilio" value="Incluido" />}
                 </div>
             </div>
             <div className="absolute bottom-5 left-5 right-5">
@@ -258,24 +265,26 @@ const RusCard = ({ quote, payWithCard, onContract, onInfo }: { quote: any, payWi
     );
 };
 
-const AtmCard = ({ quote, operacion, payWithCard, onContract, onInfo }: { quote: any, operacion: any, payWithCard: boolean, onContract: any, onInfo: () => void }) => {
+const AtmCard = ({ quote, operacion, payWithCard, onContract, commonSuma, onInfo }: { quote: any, operacion: any, payWithCard: boolean, onContract: any, commonSuma: number, onInfo: () => void }) => {
     const planName = (quote.descripcion || '').toUpperCase().trim();
     const isRC = planName.includes('RESPONSABILIDAD CIVIL');
     const isEmissionFlow = EMISSION_PLANS.some(p => planName === p || planName.includes(p));
 
     const discount = isRC ? 0.85 : 0.70;
-    const originalPremio = parseFloat(quote.premio || 0);
-    const premio = payWithCard ? originalPremio * discount : originalPremio;
+    const discountPercent = isRC ? 15 : 30;
     const cuotas = parseInt(quote.cuotas || 1);
     const originalImpcuotas = parseFloat(quote.impcuotas || 0);
-    const impcuotas = payWithCard ? originalImpcuotas * discount : originalImpcuotas;
+    const originalPremio = parseFloat(quote.premio || 0);
+    
+    const originalPrice = cuotas > 1 ? originalImpcuotas : originalPremio;
+    const finalPrice = payWithCard ? originalPrice * discount : originalPrice;
 
     const logoUrl = getInsurerLogo('ATM');
 
     return (
-        <div className="glass-card p-5 border-2 border-border-primary/50 rounded-2xl hover:border-orange-400 hover:shadow-[0_0_25px_rgba(251,146,60,0.15)] transition-all duration-500 h-[280px] relative overflow-hidden group/card shadow-sm">
+        <div className="glass-card p-5 border-2 border-border-primary/50 rounded-2xl hover:border-orange-400 hover:shadow-[0_0_25px_rgba(251,146,60,0.15)] transition-all duration-500 h-[310px] relative group/card shadow-sm">
             <div className="pb-16">
-                <div className="flex justify-between items-start gap-3 mb-3">
+                <div className="flex justify-between items-start gap-3 mb-4">
                     <div className="h-12 flex items-center">
                         <h3 className="text-text-primary font-black text-sm sm:text-base md:text-lg leading-tight line-clamp-2 font-accent">{formatPlanName(quote.descripcion)}</h3>
                     </div>
@@ -287,24 +296,30 @@ const AtmCard = ({ quote, operacion, payWithCard, onContract, onInfo }: { quote:
                         <span className="bg-orange-400/20 text-orange-400 text-[10px] font-black px-2 py-1 rounded">ATM</span>
                     )}
                 </div>
-                <div className="flex flex-col mb-3">
-                    <div className="flex justify-between items-start">
-                        <div>
-                            <div className="text-2xl sm:text-3xl font-black text-text-primary font-accent tracking-tighter">
-                                ${(cuotas > 1 ? impcuotas : premio).toLocaleString('es-AR', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}<span className="text-[10px] text-text-secondary tracking-widest pl-1">/MES</span>
-                            </div>
-                            <div className="h-4">
-                                {payWithCard && <span className="text-[10px] text-orange-400/80 font-bold uppercase">Dto. Tarjeta Incluido</span>}
-                            </div>
-                        </div>
-                        <button onClick={onInfo} className="w-8 h-8 rounded-full border border-border-primary/50 bg-bg-secondary flex items-center justify-center text-text-secondary hover:text-orange-500 hover:border-orange-500/50 hover:bg-orange-500/10 transition-colors shadow-sm shrink-0" title="Ver detalles de cobertura">
+
+                <div className="flex justify-between items-end mb-4">
+                    <PriceDisplay originalPrice={originalPrice} finalPrice={finalPrice} discountPercent={discountPercent} payWithCard={payWithCard} />
+                    <div className="relative group/tooltip mb-2">
+                        <button onClick={onInfo} className="w-8 h-8 rounded-full border border-border-primary/50 bg-bg-secondary flex items-center justify-center text-text-secondary group-hover/card:text-orange-500 group-hover/card:border-orange-500/50 group-hover/card:bg-orange-500/10 transition-all shadow-sm shrink-0" title="Ver detalles de cobertura">
                             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
                         </button>
+                        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-0.5 bg-text-primary text-bg-primary text-[8px] font-medium rounded-md opacity-0 group-hover/card:opacity-100 transition-opacity pointer-events-none whitespace-nowrap shadow-xl z-10">
+                            Ver detalle de cobertura
+                            <div className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-text-primary"></div>
+                        </div>
                     </div>
                 </div>
-                <div className="space-y-2 pt-3 border-t border-border-primary/40">
-                    {parseFloat(quote.suma_asegurada || quote.SumaAsegurada || quote.sumaAsegurada || quote.capital || quote.suma || 0) > 0 && <InfoItem label="Suma Asegurada" value={parseFloat(quote.suma_asegurada || quote.SumaAsegurada || quote.sumaAsegurada || quote.capital || quote.suma || 0).toLocaleString('es-AR', { style: 'currency', currency: 'ARS', maximumFractionDigits: 0 })} />}
-                    <InfoItem label="Plan Cuotas" value={`${cuotas} cuotas`} />
+
+                <div className="space-y-2 pt-1 border-t border-border-primary/30 mt-2">
+                    <InfoItem 
+                        label="Suma Asegurada" 
+                        value={(() => {
+                            const val = parseFloat(quote.suma_asegurada || quote.SumaAsegurada || quote.sumaAsegurada || quote.capital || quote.suma || quote.Suma || quote.valor_vehiculo || quote.valorVehiculo || quote.monto || quote.montoAsegurado || operacion?.valor_vehiculo || operacion?.capital || 0);
+                            const finalSuma = val > 0 ? val : commonSuma;
+                            if (finalSuma > 0) return finalSuma.toLocaleString('es-AR', { style: 'currency', currency: 'ARS', maximumFractionDigits: 0 });
+                            return "$ 0 (Consultar)";
+                        })()} 
+                    />
                 </div>
             </div>
             <div className="absolute bottom-5 left-5 right-5">
@@ -314,16 +329,18 @@ const AtmCard = ({ quote, operacion, payWithCard, onContract, onInfo }: { quote:
     );
 };
 
-const IntegrityCard = ({ quote, payWithCard, onContract, onInfo }: { quote: any, payWithCard: boolean, onContract: any, onInfo: () => void }) => {
+const IntegrityCard = ({ quote, payWithCard, onContract, commonSuma, onInfo }: { quote: any, payWithCard: boolean, onContract: any, commonSuma: number, onInfo: () => void }) => {
     const prodCode = (quote.producto || '').toString().padStart(4, '0');
     const nameStr = (quote.Nombre || quote.nombre || '').toUpperCase();
     const isRC = prodCode === '0899' || nameStr.includes(' - RC') || nameStr.includes('RESPONSABILIDAD CIVIL');
-    const isEmissionFlow = false; // Integrity uses WhatsApp flow for now since we don't have its Form Modal
+    const isEmissionFlow = false;
 
     const discount = isRC ? 0.85 : 0.70;
-    const originalPremio = parseFloat(quote.Premio || 0);
-    const premio = payWithCard ? originalPremio * discount : originalPremio;
-    const suma = parseFloat(quote.SumaAsegurada || 0);
+    const discountPercent = isRC ? 15 : 30;
+    const originalPrice = parseFloat(quote.Premio || 0);
+    const finalPrice = payWithCard ? originalPrice * discount : originalPrice;
+    const val = parseFloat(quote.SumaAsegurada || quote.sumaAsegurada || quote.capital || quote.suma || 0);
+    const suma = val > 0 ? val : commonSuma;
 
     const displayName = (() => {
         if (prodCode === '0049') return `Plan B`;
@@ -335,9 +352,9 @@ const IntegrityCard = ({ quote, payWithCard, onContract, onInfo }: { quote: any,
     const logoUrl = getInsurerLogo('INTEGRITY');
 
     return (
-        <div className="glass-card p-5 border-2 border-border-primary/50 rounded-2xl hover:border-orange-500 hover:shadow-[0_0_25px_rgba(249,115,22,0.2)] transition-all duration-500 h-[280px] relative overflow-hidden group/card shadow-sm">
+        <div className="glass-card p-5 border-2 border-border-primary/50 rounded-2xl hover:border-orange-500 hover:shadow-[0_0_25px_rgba(249,115,22,0.2)] transition-all duration-500 h-[310px] relative group/card shadow-sm">
             <div className="pb-16">
-                <div className="flex justify-between items-start gap-3 mb-3">
+                <div className="flex justify-between items-start gap-3 mb-4">
                     <div className="h-12 flex items-center">
                         <h3 className="text-text-primary font-black text-sm sm:text-base md:text-lg leading-tight line-clamp-2 font-accent">{formatPlanName(displayName)}</h3>
                     </div>
@@ -349,22 +366,21 @@ const IntegrityCard = ({ quote, payWithCard, onContract, onInfo }: { quote: any,
                         <span className="bg-orange-500/20 text-orange-600 text-[10px] font-black px-2 py-1 rounded break-words max-w-[60px] text-center uppercase">INTEGRITY</span>
                     )}
                 </div>
-                <div className="flex flex-col mb-3">
-                    <div className="flex justify-between items-start">
-                        <div>
-                            <div className="text-2xl sm:text-3xl font-black text-text-primary font-accent tracking-tighter">
-                                ${premio.toLocaleString('es-AR', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}<span className="text-[10px] text-text-secondary tracking-widest pl-1">/MES</span>
-                            </div>
-                            <div className="h-4">
-                                {payWithCard && <span className="text-[10px] text-orange-500/80 font-bold uppercase">Dto. Tarjeta Incluido</span>}
-                            </div>
-                        </div>
-                        <button onClick={onInfo} className="w-8 h-8 rounded-full border border-border-primary/50 bg-bg-secondary flex items-center justify-center text-text-secondary hover:text-orange-500 hover:border-orange-500/50 hover:bg-orange-500/10 transition-colors shadow-sm shrink-0" title="Ver detalles de cobertura">
+
+                <div className="flex justify-between items-end mb-4">
+                    <PriceDisplay originalPrice={originalPrice} finalPrice={finalPrice} discountPercent={discountPercent} payWithCard={payWithCard} />
+                    <div className="relative group/tooltip mb-2">
+                        <button onClick={onInfo} className="w-8 h-8 rounded-full border border-border-primary/50 bg-bg-secondary flex items-center justify-center text-text-secondary group-hover/card:text-orange-500 group-hover/card:border-orange-500/50 group-hover/card:bg-orange-500/10 transition-all shadow-sm shrink-0" title="Ver detalles de cobertura">
                             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
                         </button>
+                        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-0.5 bg-text-primary text-bg-primary text-[8px] font-medium rounded-md opacity-0 group-hover/card:opacity-100 transition-opacity pointer-events-none whitespace-nowrap shadow-xl z-10">
+                            Ver detalle de cobertura
+                            <div className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-text-primary"></div>
+                        </div>
                     </div>
                 </div>
-                <div className="space-y-2 pt-3 border-t border-border-primary/40">
+
+                <div className="space-y-2 pt-1 border-t border-border-primary/30 mt-2">
                     {suma > 0 && <InfoItem label="Suma Asegurada" value={suma.toLocaleString('es-AR', { style: 'currency', currency: 'ARS', maximumFractionDigits: 0 })} />}
                 </div>
             </div>
@@ -375,20 +391,22 @@ const IntegrityCard = ({ quote, payWithCard, onContract, onInfo }: { quote: any,
     );
 };
 
-const SanCristobalCard = ({ quote, onContract, onInfo }: { quote: any, payWithCard: boolean, onContract: any, onInfo: () => void }) => {
+const SanCristobalCard = ({ quote, payWithCard, onContract, onInfo }: { quote: any, payWithCard: boolean, onContract: any, onInfo: () => void }) => {
     const planName = quote.description || quote.descripcion || '';
     const isRC = planName.includes('RESPONSABILIDAD CIVIL');
-    const isEmissionFlow = false; // All San Cristobal currently WhatsApp
+    const isEmissionFlow = false;
     
     const discount = isRC ? 0.85 : 0.70;
-    const cuota = parseFloat(quote.monthlyCuota || quote.premio || 0) * discount;
+    const discountPercent = isRC ? 15 : 30;
+    const originalPrice = parseFloat(quote.monthlyCuota || quote.premio || 0);
+    const finalPrice = originalPrice * (payWithCard ? discount : 1);
 
     const logoUrl = getInsurerLogo('SAN_CRISTOBAL');
 
     return (
-        <div className="glass-card p-5 border-2 border-border-primary/50 rounded-2xl hover:border-orange-500 hover:shadow-[0_0_25px_rgba(249,115,22,0.2)] transition-all duration-500 h-[280px] relative overflow-hidden group/card shadow-sm">
+        <div className="glass-card p-5 border-2 border-border-primary/50 rounded-2xl hover:border-orange-500 hover:shadow-[0_0_25px_rgba(249,115,22,0.2)] transition-all duration-500 h-[310px] relative group/card shadow-sm">
             <div className="pb-16">
-                <div className="flex justify-between items-start gap-3 mb-3">
+                <div className="flex justify-between items-start gap-3 mb-4">
                     <div className="h-12 flex items-center">
                         <h3 className="text-text-primary font-black text-sm sm:text-base md:text-lg leading-tight line-clamp-2 font-accent">{formatPlanName(planName)}</h3>
                     </div>
@@ -400,25 +418,26 @@ const SanCristobalCard = ({ quote, onContract, onInfo }: { quote: any, payWithCa
                         <span className="bg-orange-500/20 text-orange-500 text-[10px] font-black px-2 py-1 rounded">S.C.</span>
                     )}
                 </div>
-                <div className="flex flex-col mb-3">
-                    <div className="flex justify-between items-start">
-                        <div>
-                            <div className="text-2xl sm:text-3xl font-black text-text-primary font-accent tracking-tighter">
-                                ${cuota.toLocaleString('es-AR', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}<span className="text-[10px] text-text-secondary tracking-widest pl-1">/MES</span>
-                            </div>
-                            <div className="h-4" />
-                        </div>
-                        <button onClick={onInfo} className="w-8 h-8 rounded-full border border-border-primary/50 bg-bg-secondary flex items-center justify-center text-text-secondary hover:text-orange-500 hover:border-orange-500/50 hover:bg-orange-500/10 transition-colors shadow-sm shrink-0" title="Ver detalles de cobertura">
+
+                <div className="flex justify-between items-end mb-4">
+                    <PriceDisplay originalPrice={originalPrice} finalPrice={finalPrice} discountPercent={discountPercent} payWithCard={payWithCard} />
+                    <div className="relative group/tooltip mb-2">
+                        <button onClick={onInfo} className="w-8 h-8 rounded-full border border-border-primary/50 bg-bg-secondary flex items-center justify-center text-text-secondary group-hover/card:text-orange-500 group-hover/card:border-orange-500/50 group-hover/card:bg-orange-500/10 transition-all shadow-sm shrink-0" title="Ver detalles de cobertura">
                             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
                         </button>
+                        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-0.5 bg-text-primary text-bg-primary text-[8px] font-medium rounded-md opacity-0 group-hover/card:opacity-100 transition-opacity pointer-events-none whitespace-nowrap shadow-xl z-10">
+                            Ver detalle de cobertura
+                            <div className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-text-primary"></div>
+                        </div>
                     </div>
                 </div>
-                <div className="pt-3 border-t border-border-primary/40">
+
+                <div className="pt-1 border-t border-border-primary/30 mt-2">
                     <p className="text-[10px] text-text-secondary font-medium italic">Consultá coberturas disponibles con tu asesor.</p>
                 </div>
             </div>
             <div className="absolute bottom-5 left-5 right-5">
-                <ActionButton isEmissionFlow={isEmissionFlow} onClick={() => onContract(quote, 'SAN CRISTOBAL', isEmissionFlow)} />
+                <ActionButton isEmissionFlow={isEmissionFlow} onClick={() => onContract(quote, 'SAN_CRISTOBAL', isEmissionFlow)} />
             </div>
         </div>
     );

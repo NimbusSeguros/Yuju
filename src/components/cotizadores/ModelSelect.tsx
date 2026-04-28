@@ -7,6 +7,7 @@ interface Model {
   name: string;
   years: number[];
   codiaByYear: Record<string, any>;
+  photo_url?: string;
 }
 
 interface ModelSelectProps {
@@ -74,7 +75,11 @@ export const ModelSelect: React.FC<ModelSelectProps> = ({ value, marcaId, year, 
   }, [isOpen]);
 
   const handleSelect = (model: Model) => {
-    onChange(model.id.toString(), model.name, { years: model.years, codiaByYear: model.codiaByYear });
+    onChange(model.id.toString(), model.name, { 
+      years: model.years, 
+      codiaByYear: model.codiaByYear,
+      photoUrl: model.photo_url 
+    });
     setIsOpen(false);
     setSearchTerm("");
   };
@@ -93,8 +98,8 @@ export const ModelSelect: React.FC<ModelSelectProps> = ({ value, marcaId, year, 
         onClick={() => setIsOpen(!isOpen)}
         className={`w-full h-[56px] bg-bg-secondary border ${hasError ? 'border-red-500' : 'border-border-primary'} rounded-2xl px-5 flex items-center justify-between group yuju-input-blue transition-all`}
       >
-        <span className={`${value ? 'text-text-primary font-bold' : 'text-text-secondary opacity-50'} text-base uppercase font-bold tracking-tight truncate`}>
-          {selectedModel ? selectedModel.name.toUpperCase() : "Seleccioná el modelo"}
+        <span className={`${value ? 'text-text-primary font-bold' : 'text-text-secondary opacity-50'} text-base font-bold tracking-tight truncate`}>
+          {selectedModel ? selectedModel.name : "Seleccioná el modelo"}
         </span>
         <ChevronDown className={`text-text-secondary transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} size={16} />
       </button>

@@ -128,8 +128,8 @@ const getCachedBrands = () => {
         onClick={() => setIsOpen(!isOpen)}
         className={`w-full h-[56px] bg-bg-secondary border ${hasError ? 'border-red-500' : 'border-border-primary'} rounded-2xl px-5 flex items-center justify-between group yuju-input-blue transition-all`}
       >
-        <span className={`${value ? 'text-text-primary font-bold' : 'text-text-secondary opacity-50'} text-base uppercase font-bold tracking-tight`}>
-          {selectedBrand ? selectedBrand.name.toUpperCase() : "Seleccioná la marca"}
+        <span className={`${value ? 'text-text-primary font-bold' : 'text-text-secondary opacity-50'} text-base font-bold tracking-tight`}>
+          {selectedBrand ? selectedBrand.name : "Seleccioná la marca"}
         </span>
         <ChevronDown className={`text-text-secondary transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} size={16} />
       </button>
@@ -170,7 +170,7 @@ const getCachedBrands = () => {
                   >
                     <span>{brand.name}</span>
                     {PRIORITY_BRANDS.includes(brand.name.toUpperCase()) && (
-                      <span className="text-[8px] font-black uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity bg-white/20 px-2 py-1 rounded-md">Popular</span>
+                      <span className="text-[8px] font-black tracking-widest opacity-0 group-hover:opacity-100 transition-opacity bg-white/20 px-2 py-1 rounded-md">Popular</span>
                     )}
                   </button>
                 ))}

@@ -222,17 +222,12 @@ export const HogarCotizador = () => {
     setIsProcessing(true);
     setError(null);
     try {
-      const paymentInfo: any = { medioPago: paymentData.method };
-      if (paymentData.method === 'TARJETA_CREDITO') {
-        const rawNum = paymentData.numeroTarjeta.replace(/\s/g, '');
-        paymentInfo.numeroTarjeta = obfuscate(rawNum);
-        paymentInfo.marcaTarjeta = paymentData.marcaTarjeta;
-      } else {
-        const rawCbu = paymentData.cbu.replace(/\s/g, '');
-        paymentInfo.CBU = obfuscate(rawCbu);
-      }
+      const paymentInfo: any = { 
+        medioPago: paymentData.method,
+        marcaTarjeta: paymentData.method === 'TARJETA_CREDITO' ? paymentData.marcaTarjeta : null
+      };
 
-      await hogarApi.post(`/insurance/home/orders/${orderVentaId}/infopago`, { paymentInfo, _enc: true });
+      await hogarApi.post(`/insurance/home/orders/${orderVentaId}/infopago`, { paymentInfo });
       await hogarApi.post(`/insurance/home/orders/${orderVentaId}/confirm`);
       setCurrentStep(6);
     } catch (err: any) {
@@ -781,16 +776,6 @@ export const HogarCotizador = () => {
                                         <option value="CABAL">CABAL</option>
                                     </select>
                                 </div>
-                                <div className="space-y-1.5">
-                                    <label className="text-[9px] font-black uppercase text-text-secondary tracking-widest pl-1">Número de Tarjeta</label>
-                                    <input 
-                                        type="text" 
-                                        placeholder="0000 0000 0000 0000"
-                                        className="w-full h-12 bg-bg-primary border border-border-primary rounded-xl px-4 text-sm font-semibold outline-none focus:border-emerald-500"
-                                        value={paymentData.numeroTarjeta}
-                                        onChange={(e) => setPaymentData({...paymentData, numeroTarjeta: e.target.value})}
-                                    />
-                                </div>
                             </motion.div>
                         )}
                     </AnimatePresence>
@@ -814,14 +799,7 @@ export const HogarCotizador = () => {
                         {paymentData.method === 'DEBITO_AUTOMATICO' && (
                             <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} className="space-y-3 p-4 border border-emerald-500/20 bg-emerald-500/5 rounded-2xl">
                                 <div className="space-y-1.5">
-                                    <label className="text-[9px] font-black uppercase text-text-secondary tracking-widest pl-1">CBU (22 Dígitos)</label>
-                                    <input 
-                                        type="text" 
-                                        placeholder="0000000000000000000000"
-                                        className="w-full h-12 bg-bg-primary border border-border-primary rounded-xl px-4 text-sm font-semibold outline-none focus:border-emerald-500"
-                                        value={paymentData.cbu}
-                                        onChange={(e) => setPaymentData({...paymentData, cbu: e.target.value})}
-                                    />
+                                    <p className="text-[10px] text-emerald-600 font-bold px-2">Seleccionaste Débito Bancario. Un asesor solicitará los datos para completar la adhesión.</p>
                                 </div>
                             </motion.div>
                         )}
@@ -858,11 +836,11 @@ export const HogarCotizador = () => {
                   <div className="space-y-2">
                     <div className="flex items-center justify-center gap-2 text-emerald-500 mb-1">
                        <CheckCircle2 size={20} />
-                       <span className="text-[10px] font-black uppercase tracking-[0.3em]">Emisión Exitosa</span>
+                       <span className="text-[10px] font-black uppercase tracking-[0.3em]">Solicitud Registrada</span>
                     </div>
-                    <h2 className="text-4xl font-black text-text-primary font-accent tracking-tighter whitespace-pre-wrap">¡Ya estás protegido!</h2>
+                    <h2 className="text-4xl font-black text-text-primary font-accent tracking-tighter whitespace-pre-wrap">¡Ya casi estamos!</h2>
                     <p className="text-xs text-text-secondary font-medium max-w-[400px] mx-auto leading-relaxed">
-                        Nuestros asesores comerciales se comunicarán a la brevedad para enviarle el detalle de su póliza y ayudarlo con cualquier otra duda o consulta que necesite.
+                        Tu solicitud ha sido enviada con éxito. Nuestros asesores comerciales se comunicarán a la brevedad para completar la emisión de tu póliza y despejar cualquier duda.
                     </p>
                   </div>
 

@@ -9,7 +9,36 @@
       {
         "nombre": "Auxilio Mecánico y Remolque",
         "descripcion": "Servicio de asistencia mecánica y remolque en caso de desperfectos.",
-        "limite": "300 Km lineales - 600 km totales en Argentina. 300 Km lineales - 600 km totales en países limítrofes. Hasta 12 eventos anuales (Máximo 2 mensuales)"
+        "limite": ""
+      },
+      {
+        "nombre": "Cobertura en exterior",
+        "descripcion": "Cobertura válida en países del Mercosur.",
+        "limite": "Mercosur"
+      },
+      {
+        "nombre": "Seguro de muerte del conductor/ocupante",
+        "descripcion": "Indemnización en caso de fallecimiento del conductor u ocupantes.",
+        "limite": "$1.500.000"
+      },
+      {
+        "nombre": "Refacturación",
+        "descripcion": "Modalidad de pago mensual.",
+        "limite": "Mensual"
+      }
+    ]
+  },
+  "RESPONSABILIDAD CIVIL": {
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil frente a terceros",
+        "descripcion": "Cobertura de responsabilidad civil ante daños causados a terceros.",
+        "limite": "Hasta $160.000.000"
+      },
+      {
+        "nombre": "Auxilio Mecánico y Remolque",
+        "descripcion": "Servicio de asistencia mecánica y remolque en caso de desperfectos.",
+        "limite": ""
       },
       {
         "nombre": "Cobertura en exterior",
@@ -555,8 +584,7 @@
       },
       {
         "nombre": "Daño parcial por accidente",
-        "descripcion": "Cobertura de daños parciales causados por accidentes con franquicia del 5%.",
-        "limite": "Franquicia a cargo del asegurado equivalente al porcentaje seleccionado calculado sobre el valor de la suma asegurada al momento del alta o renovación"
+        "descripcion": "Cobertura de daños parciales causados por accidentes con franquicia del 5%."
       },
       {
         "nombre": "Auxilio Mecánico y Remolque",
@@ -654,13 +682,11 @@
       },
       {
         "nombre": "Daño parcial por accidente",
-        "descripcion": "Cobertura de daños parciales causados por accidentes con franquicia del 2%.",
-        "limite": "Franquicia a cargo del asegurado equivalente al porcentaje seleccionado calculado sobre el valor de la suma asegurada al momento del alta o renovación"
+        "descripcion": "Cobertura de daños parciales causados por accidentes con franquicia del 2%."
       },
       {
         "nombre": "Auxilio Mecánico y Remolque",
-        "descripcion": "Servicio de asistencia mecánica y remolque en caso de desperfectos.",
-        "limite": "1000 Km Lineales - 2000 totales en Argentina. 1000 Km Lineales - 2000 totales en países limítrofes. Cantidad de eventos ilimitado"
+        "descripcion": "Servicio de asistencia mecánica y remolque en caso de desperfectos."
       },
       {
         "nombre": "Auto sustituto",

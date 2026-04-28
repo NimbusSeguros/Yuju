@@ -1,0 +1,362 @@
+{
+    "RESPONSABILIDAD CIVIL SIN ASISTENCIA": {
+        "titulo": "RC – Responsabilidad Civil A1",
+        "subtitulo": "Sin Asistencia Mecánica y Remolque",
+        "coberturas": [
+            {
+                "nombre": "Responsabilidad Civil frente a terceros",
+                "descripcion": "Cubre lesiones o fallecimiento de terceros y daños a cosas de terceros.",
+                "limite": "hasta $160.000.000"
+            },
+            {
+                "nombre": "Extensión de cobertura",
+                "descripcion": "Extensión automática de cobertura en países del Mercosur y limítrofes."
+            }
+        ]
+    },
+    "RESPONSABILIDAD CIVIL": {
+        "titulo": "RC – Responsabilidad Civil B1",
+        "coberturas": [
+            {
+                "nombre": "Responsabilidad Civil frente a terceros",
+                "descripcion": "Cubre lesiones o fallecimiento de terceros y daños a cosas de terceros.",
+                "limite": "hasta $160.000.000"
+            },
+            {
+                "nombre": "Robo y/o Hurto Total",
+                "descripcion": "Cobertura total por robo o hurto del vehículo asegurado."
+            },
+            {
+                "nombre": "Incendio Total",
+                "descripcion": "Cobertura total por pérdida del vehículo debido a incendio."
+            },
+            {
+                "nombre": "Auxilio mecánico y remolque",
+                "descripcion": "Hasta 3 eventos, con 100 km lineales / 200 km totales."
+            },
+            {
+                "nombre": "Cobertura en países limítrofes",
+                "descripcion": "Mercosur."
+            }
+        ]
+    },
+    "ROBO E INCENDIO TOTAL": {
+        "titulo": "Terceros – B1",
+        "coberturas": [
+            {
+                "nombre": "Responsabilidad Civil frente a terceros",
+                "descripcion": "Cubre lesiones o fallecimiento de terceros y daños a cosas de terceros.",
+                "limite": "hasta $160.000.000"
+            },
+            {
+                "nombre": "Robo y/o Hurto Total",
+                "descripcion": "Cobertura total por robo o hurto del vehículo asegurado."
+            },
+            {
+                "nombre": "Incendio Total",
+                "descripcion": "Cobertura total por pérdida del vehículo debido a incendio."
+            },
+            {
+                "nombre": "Auxilio mecánico y remolque",
+                "descripcion": "Hasta 3 eventos, con 100 km lineales / 200 km totales."
+            },
+            {
+                "nombre": "Cobertura en países limítrofes",
+                "descripcion": "Mercosur."
+            }
+        ]
+    },
+    "TERCEROS COMPLETOS PLUS": {
+        "titulo": "Terceros Completo Full – C Plus (C3)",
+        "subtitulo": "Vehículos hasta 20 años de antigüedad",
+        "coberturas": [
+            {
+                "nombre": "Responsabilidad Civil frente a terceros",
+                "descripcion": "Cubre lesiones o fallecimiento de terceros y daños a cosas de terceros.",
+                "limite": "hasta $160.000.000"
+            },
+            {
+                "nombre": "Robo Total y Parcial",
+                "descripcion": "Cobertura completa por robo o hurto, tanto total como parcial."
+            },
+            {
+                "nombre": "Incendio Total y Parcial",
+                "descripcion": "Cobertura completa por incendio, tanto total como parcial."
+            },
+            {
+                "nombre": "Destrucción total por accidente",
+                "descripcion": "Cobertura por pérdida total del vehículo debido a accidente."
+            },
+            {
+                "nombre": "Daños parciales por granizo",
+                "descripcion": "Hasta 10% de la suma asegurada."
+            },
+            {
+                "nombre": "Cerraduras, Parabrisas, Lunetas y Cristales",
+                "descripcion": "Hasta 5% de la suma asegurada. Un evento por año."
+            },
+            {
+                "nombre": "Daño parcial al amparo del Robo o Hurto aparecido",
+                "descripcion": "Hasta el 10% de la suma asegurada."
+            },
+            {
+                "nombre": "Cubiertas",
+                "descripcion": "Robo de una rueda por año."
+            },
+            {
+                "nombre": "Auxilio mecánico y remolque",
+                "descripcion": "Hasta 3 eventos, con 100 km lineales / 200 km totales."
+            },
+            {
+                "nombre": "Cobertura en países limítrofes",
+                "descripcion": "Mercosur."
+            },
+            {
+                "nombre": "Reposición de llave física o electrónica",
+                "descripcion": "En caso de Robo Total aparecido."
+            }
+        ]
+    },
+    "TERCEROS COMPLETOS PREMIUM": {
+        "titulo": "Terceros Completo Full – C Premium (C2)",
+        "subtitulo": "Vehículos hasta 15 años de antigüedad",
+        "coberturas": [
+            {
+                "nombre": "Responsabilidad Civil frente a terceros",
+                "descripcion": "Cubre lesiones o fallecimiento de terceros y daños a cosas de terceros.",
+                "limite": "hasta $160.000.000"
+            },
+            {
+                "nombre": "Robo Total y Parcial",
+                "descripcion": "Cobertura completa por robo o hurto, tanto total como parcial."
+            },
+            {
+                "nombre": "Incendio Total y Parcial",
+                "descripcion": "Cobertura completa por incendio, tanto total como parcial."
+            },
+            {
+                "nombre": "Destrucción total por accidente",
+                "descripcion": "Cobertura por pérdida total del vehículo debido a accidente."
+            },
+            {
+                "nombre": "Granizo",
+                "descripcion": "2 eventos por año hasta la suma asegurada."
+            },
+            {
+                "nombre": "Cerraduras, Parabrisas, Lunetas y Cristales",
+                "descripcion": "Hasta 2 eventos por año."
+            },
+            {
+                "nombre": "Daño parcial al amparo del Robo Total",
+                "descripcion": "Hasta el 10% de la suma asegurada."
+            },
+            {
+                "nombre": "Daños parciales por inundación",
+                "descripcion": "Hasta $500.000."
+            },
+            {
+                "nombre": "Cubiertas",
+                "descripcion": "Hasta 10 años: 4 ruedas/año. Más de 10 años: 2 ruedas/año."
+            },
+            {
+                "nombre": "Auxilio mecánico y remolque",
+                "descripcion": "Hasta 3 eventos, con 100 km lineales / 200 km totales."
+            },
+            {
+                "nombre": "Cobertura en países limítrofes",
+                "descripcion": "Mercosur."
+            },
+            {
+                "nombre": "Reposición de llave física o electrónica",
+                "descripcion": "En caso de Robo Total aparecido."
+            },
+            {
+                "nombre": "Reposición 0 km en caso de pérdida total",
+                "descripcion": "Para unidades aseguradas desde 0KM con certificado de no rodamiento, durante el primer año."
+            }
+        ]
+    },
+    "TERCEROS COMPLETOS BLACK": {
+        "titulo": "Terceros Completo Full – C Black (C4)",
+        "subtitulo": "Vehículos hasta 10 años de antigüedad",
+        "coberturas": [
+            {
+                "nombre": "Responsabilidad Civil frente a terceros",
+                "descripcion": "Cubre lesiones o fallecimiento de terceros y daños a cosas de terceros.",
+                "limite": "hasta $160.000.000"
+            },
+            {
+                "nombre": "Robo Total y Parcial",
+                "descripcion": "Cobertura completa por robo o hurto, tanto total como parcial."
+            },
+            {
+                "nombre": "Incendio Total y Parcial",
+                "descripcion": "Cobertura completa por incendio, tanto total como parcial."
+            },
+            {
+                "nombre": "Destrucción total por accidente",
+                "descripcion": "Cobertura por pérdida total del vehículo debido a accidente."
+            },
+            {
+                "nombre": "Granizo",
+                "descripcion": "Sin límite de eventos hasta la suma asegurada."
+            },
+            {
+                "nombre": "Cerraduras, Parabrisas, Lunetas y Cristales",
+                "descripcion": "Sin límite de eventos hasta la suma asegurada."
+            },
+            {
+                "nombre": "Daño parcial al amparo del Robo Total",
+                "descripcion": "Sin límite de eventos hasta la suma asegurada."
+            },
+            {
+                "nombre": "Daños parciales por inundación",
+                "descripcion": "Sin límite de eventos hasta la suma asegurada."
+            },
+            {
+                "nombre": "Cubiertas",
+                "descripcion": "Reposición ilimitada a nuevo."
+            },
+            {
+                "nombre": "Auxilio mecánico y remolque",
+                "descripcion": "Hasta 6 eventos, con 300 km lineales / 600 km totales."
+            },
+            {
+                "nombre": "Cobertura en países limítrofes",
+                "descripcion": "Mercosur."
+            },
+            {
+                "nombre": "Reposición de llave física o electrónica",
+                "descripcion": "En caso de Robo Total aparecido."
+            },
+            {
+                "nombre": "Reposición 0 km en caso de pérdida total",
+                "descripcion": "Para unidades aseguradas desde 0KM con certificado de no rodamiento, durante el primer año."
+            }
+        ]
+    },
+    "TODO RIESGO C/FCIA.VARIABLE 3% SUMA ASEGURADA": {
+        "titulo": "Todo Riesgo – Franquicia 3% (D2)",
+        "coberturas": [
+            {
+                "nombre": "Responsabilidad Civil frente a terceros",
+                "descripcion": "Cubre lesiones o fallecimiento de terceros y daños a cosas de terceros.",
+                "limite": "hasta $160.000.000"
+            },
+            {
+                "nombre": "Robo Total y Parcial",
+                "descripcion": "Cobertura completa por robo o hurto, tanto total como parcial."
+            },
+            {
+                "nombre": "Incendio Total y Parcial",
+                "descripcion": "Cobertura completa por incendio, tanto total como parcial."
+            },
+            {
+                "nombre": "Destrucción total por accidente",
+                "descripcion": "Cobertura por pérdida total del vehículo debido a accidente."
+            },
+            {
+                "nombre": "Daños parciales por accidente",
+                "descripcion": "Con franquicia del 3% sobre valor 0km."
+            },
+            {
+                "nombre": "Daño parcial al amparo del Robo Total",
+                "descripcion": "Sin límite de eventos hasta la suma asegurada."
+            },
+            {
+                "nombre": "Granizo",
+                "descripcion": "Sin límite de eventos hasta la suma asegurada."
+            },
+            {
+                "nombre": "Cerraduras, Parabrisas, Lunetas y Cristales",
+                "descripcion": "Sin límite de eventos hasta la suma asegurada."
+            },
+            {
+                "nombre": "Daños parciales por inundación",
+                "descripcion": "Sin límite de eventos hasta la suma asegurada."
+            },
+            {
+                "nombre": "Cubiertas",
+                "descripcion": "Reposición ilimitada a nuevo."
+            },
+            {
+                "nombre": "Auxilio mecánico y remolque",
+                "descripcion": "Hasta 6 eventos, con 300 km lineales / 600 km totales."
+            },
+            {
+                "nombre": "Cobertura en países limítrofes",
+                "descripcion": "Mercosur."
+            },
+            {
+                "nombre": "Reposición de llave física o electrónica",
+                "descripcion": "En caso de Robo Total aparecido."
+            },
+            {
+                "nombre": "Reposición 0 km en caso de pérdida total",
+                "descripcion": "Para unidades aseguradas desde 0KM con certificado de no rodamiento, durante el primer año."
+            }
+        ]
+    },
+    "TODO RIESGO C/FCIA.VARIABLE 6% SUMA ASEGURADA": {
+        "titulo": "Todo Riesgo – Franquicia 6% (D3)",
+        "coberturas": [
+            {
+                "nombre": "Responsabilidad Civil frente a terceros",
+                "descripcion": "Cubre lesiones o fallecimiento de terceros y daños a cosas de terceros.",
+                "limite": "hasta $160.000.000"
+            },
+            {
+                "nombre": "Robo Total y Parcial",
+                "descripcion": "Cobertura completa por robo o hurto, tanto total como parcial."
+            },
+            {
+                "nombre": "Incendio Total y Parcial",
+                "descripcion": "Cobertura completa por incendio, tanto total como parcial."
+            },
+            {
+                "nombre": "Destrucción total por accidente",
+                "descripcion": "Cobertura por pérdida total del vehículo debido a accidente."
+            },
+            {
+                "nombre": "Daños parciales por accidente",
+                "descripcion": "Con franquicia del 6% sobre valor 0km."
+            },
+            {
+                "nombre": "Daño parcial al amparo del Robo Total",
+                "descripcion": "Sin límite de eventos hasta la suma asegurada."
+            },
+            {
+                "nombre": "Granizo",
+                "descripcion": "Sin límite de eventos hasta la suma asegurada."
+            },
+            {
+                "nombre": "Cerraduras, Parabrisas, Lunetas y Cristales",
+                "descripcion": "Sin límite de eventos hasta la suma asegurada."
+            },
+            {
+                "nombre": "Daños parciales por inundación",
+                "descripcion": "Sin límite de eventos hasta la suma asegurada."
+            },
+            {
+                "nombre": "Cubiertas",
+                "descripcion": "Reposición ilimitada a nuevo."
+            },
+            {
+                "nombre": "Auxilio mecánico y remolque",
+                "descripcion": "Hasta 6 eventos, con 300 km lineales / 600 km totales."
+            },
+            {
+                "nombre": "Cobertura en países limítrofes",
+                "descripcion": "Mercosur."
+            },
+            {
+                "nombre": "Reposición de llave física o electrónica",
+                "descripcion": "En caso de Robo Total aparecido."
+            },
+            {
+                "nombre": "Reposición 0 km en caso de pérdida total",
+                "descripcion": "Para unidades aseguradas desde 0KM con certificado de no rodamiento, durante el primer año."
+            }
+        ]
+    }
+}

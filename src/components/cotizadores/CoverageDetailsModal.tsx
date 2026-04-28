@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
 import { getInsurerLogo } from '../../utils/insurerLogos';
 
@@ -81,7 +80,7 @@ export const CoverageDetailsModal = ({ isOpen, onClose, company, quote }: { isOp
         const isBlack = planName.includes('BLACK');
         const isPremium = code === 'C' && !isBlack;
         const isClasico = code === 'B2' || code === 'B3';
-        const isRC = code === 'A0' || code === 'A1';
+        // const isRC = code === 'A0' || code === 'A1';
 
         content = (
             <div className="space-y-4 mt-2">
@@ -196,7 +195,7 @@ export const CoverageDetailsModal = ({ isOpen, onClose, company, quote }: { isOp
                         <div className="pr-4">
                             {getInsurerLogo(company) ? (
                                 <img 
-                                    src={getInsurerLogo(company)} 
+                                    src={getInsurerLogo(company) ?? undefined} 
                                     alt={company} 
                                     className="h-6 w-auto object-contain mb-1" 
                                     style={{ filter: 'var(--logo-filter)' }} 
