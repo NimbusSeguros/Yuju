@@ -100,7 +100,7 @@ export const HomePage = () => {
           <div className="absolute inset-0 z-10 pointer-events-none">
             <div className="absolute inset-y-0 right-0 w-full lg:w-3/5 bg-cover bg-center lg:rounded-l-[80px] opacity-40 lg:opacity-100"
               style={{
-                backgroundImage: `url('file:///C:/Users/schut/.gemini/antigravity/brain/864463c5-3699-4436-912c-8ec06fa1c974/premium_yuju_hero_family_car_2026_1775603137026.png')`,
+                backgroundImage: `url('/hero.png')`,
                 maskImage: 'linear-gradient(to left, black 60%, transparent 100%)',
                 WebkitMaskImage: 'linear-gradient(to left, black 60%, transparent 100%)'
               }} />
