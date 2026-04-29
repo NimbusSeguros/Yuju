@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Car, Home, ArrowRight, ShieldCheck, ChevronRight, Activity, MousePointer2 } from 'lucide-react';
+import { Car, Home, ArrowRight, ShieldCheck, ChevronRight, MousePointer2 } from 'lucide-react';
 import { MotorbikeIcon } from '../../components/icons/MotorbikeIcon';
 import { Link } from 'react-router-dom';
 import { GlassCard } from '../../components/ui/GlassCard';

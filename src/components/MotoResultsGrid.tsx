@@ -9,7 +9,7 @@ const toArray = (v: any) => (Array.isArray(v) ? v : v ? [v] : []);
 interface MotoResultsGridProps {
     results: any;
     payWithCard: boolean;
-    setPayWithCard: (val: boolean) => void;
+    setPayWithCard: React.Dispatch<React.SetStateAction<boolean>>;
     onContract: (quote: any, source: string, isEmissionFlow: boolean) => void;
     vehicleInfo?: any;
     zipCode?: string;
@@ -18,7 +18,7 @@ interface MotoResultsGridProps {
 const EMISSION_PLANS = ['RCM C/GRUA', 'RCM', 'RESPONSABILIDAD CIVIL SIN ASISTENCIA', 'RESPONSABILIDAD CIVIL'];
 
 
-export const MotoResultsGrid: React.FC<MotoResultsGridProps> = ({ results, payWithCard, setPayWithCard, onContract }) => {
+export const MotoResultsGrid: React.FC<MotoResultsGridProps> = ({ results, payWithCard, onContract }) => {
     const [infoModalConfig, setInfoModalConfig] = useState<{ quote: any, company: string } | null>(null);
 
     // 1. Process RUS

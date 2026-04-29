@@ -589,7 +589,7 @@
       {
         "nombre": "Auxilio Mecánico y Remolque",
         "descripcion": "Servicio de asistencia mecánica y remolque en caso de desperfectos.",
-        "limite": "1000 Km Lineales - 2000 totales en Argentina. 1000 Km Lineales - 2000 totales en países limítrofes. Cantidad de eventos ilimitado"
+        "limite": ""
       },
       {
         "nombre": "Auto sustituto",

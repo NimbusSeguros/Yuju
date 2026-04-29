@@ -202,17 +202,6 @@ export const HogarCotizador = () => {
             )}
           </AnimatePresence>
           
-          {/* Branch Indicator Witness */}
-          <div className="flex justify-center mb-4">
-            <motion.div 
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="bg-emerald-500/10 backdrop-blur-md border border-emerald-500/20 rounded-full px-4 py-1.5 flex items-center gap-2 shadow-lg shadow-emerald-500/5"
-            >
-              <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="text-[10px] font-black text-emerald-500 uppercase tracking-[0.2em]">Hogar Branch: V1.5-supabase</span>
-            </motion.div>
-          </div>
           
           {/* Progress Stepper */}
           <div className="flex justify-between items-center px-4 md:px-8 relative mb-12">

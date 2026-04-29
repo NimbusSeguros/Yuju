@@ -121,8 +121,8 @@ export const InstitutionalPage = () => {
                 className="relative glass-card aspect-square rounded-[60px] flex items-center justify-center p-1"
               >
                 <div className="w-full h-full rounded-[58px] overflow-hidden">
-                  <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1000"
-                    alt="Tech Evolution" className="w-full h-full object-cover" />
+                  <img src="https://res.cloudinary.com/dr8n9s55i/image/upload/f_auto,q_auto,c_fill,g_auto,z_0.7,ar_1:1/v1/IMG_9520_fhxyd0.jpg"
+                    alt="Equipo Yuju Seguros" className="w-full h-full object-cover" />
                 </div>
                 {/* Floating elements */}
                 <div className="absolute -top-10 -right-10 w-32 h-32 bg-yuju-blue/20 blur-2xl rounded-full" />

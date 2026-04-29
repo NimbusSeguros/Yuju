@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Info, Shield, Check, Zap, Image as ImageIcon } from 'lucide-react';
-import { GlassCard } from '../ui/GlassCard';
 
 // Import coverages data from the new location
 import rusCoverages from './data/rus-coverages.json';
