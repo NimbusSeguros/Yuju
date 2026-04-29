@@ -344,8 +344,8 @@ export const MotoCotizador = () => {
       // 1. Define independent promises with their own state updates
       const pRus = fetch(`${BASE_URL}/rus/cotizaciones/motos`, { method: "PUT", headers, body: JSON.stringify(payloadRus) })
         .then(res => res.json())
-        .then(data => setQuotationResult(prev => ({ ...prev, rus: data })))
-        .catch(err => setQuotationResult(prev => ({ ...prev, rusError: err.message })));
+        .then(data => setQuotationResult((prev: any) => ({ ...prev, rus: data })))
+        .catch(err => setQuotationResult((prev: any) => ({ ...prev, rusError: err.message })));
 
       const pAtm = fetch(`${BASE_URL}/atm/cotizar`, { 
         method: "POST", 
@@ -353,8 +353,8 @@ export const MotoCotizador = () => {
         body: JSON.stringify({ codia: String(selectedModel.codia), anio: parseInt(selectedYear), codpostal: parseInt(zipCode) }) 
       })
         .then(res => res.json())
-        .then(data => setQuotationResult(prev => ({ ...prev, atm: data })))
-        .catch(err => setQuotationResult(prev => ({ ...prev, atmError: err.message })));
+        .then(data => setQuotationResult((prev: any) => ({ ...prev, atm: data })))
+        .catch(err => setQuotationResult((prev: any) => ({ ...prev, atmError: err.message })));
 
       const pIntegrity = fetch(`${BASE_URL}/integrity/cotizar`, { 
         method: "POST", 
@@ -368,8 +368,8 @@ export const MotoCotizador = () => {
         }) 
       })
         .then(res => res.json())
-        .then(data => setQuotationResult(prev => ({ ...prev, integrity: data })))
-        .catch(err => setQuotationResult(prev => ({ ...prev, integrityError: err.message })));
+        .then(data => setQuotationResult((prev: any) => ({ ...prev, integrity: data })))
+        .catch(err => setQuotationResult((prev: any) => ({ ...prev, integrityError: err.message })));
 
       // 2. Fire all and wait for all to settle
       await Promise.allSettled([pRus, pAtm, pIntegrity]);
