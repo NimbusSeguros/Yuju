@@ -13,8 +13,8 @@ export const Footer = () => {
             <a href="https://yuju.com.ar" target="_blank" rel="noopener noreferrer" className="flex items-center group">
               <img
                 src={theme === 'dark'
-                  ? "https://yuju.com.ar/assets/webBlanco-SASFsG6e.png"
-                  : "https://yuju.com.ar/assets/logoYujuAzul-DE5urkwK.png"
+                  ? "https://res.cloudinary.com/dewcgbpvp/image/upload/v1777053184/webBlanco-SASFsG6e_xkuubw.png"
+                  : "https://res.cloudinary.com/dewcgbpvp/image/upload/v1777053220/logoYujuAzul-DE5urkwK_io55ss.png"
                 }
                 alt="Yuju Logo"
                 className="h-9 md:h-10 w-auto object-contain transition-all hover:scale-105"
