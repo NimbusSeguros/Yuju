@@ -4,7 +4,7 @@ import {
   Home, ChevronRight, Zap, ShieldCheck,
   Building2, Star, CheckCircle2, User,
   ChevronDown, ChevronUp, Loader2, ArrowLeft,
-  Check
+  Check, MapPin, CreditCard
 } from 'lucide-react';
 import { GlassCard } from '../../components/ui/GlassCard';
 import { Button } from '../../components/ui/Button';
@@ -61,8 +61,9 @@ interface Plan {
 const steps = [
   { id: 1, title: 'Tu Hogar', desc: 'Vivienda' },
   { id: 2, title: 'Planes', desc: 'Coberturas' },
-  { id: 3, title: 'Tus Datos', desc: 'Confirmar' },
-  { id: 4, title: 'Finalizado', desc: 'Éxito' },
+  { id: 3, title: 'Datos', desc: 'Identidad' },
+  { id: 4, title: 'Ubicación', desc: 'Propiedad' },
+  { id: 5, title: 'Pago', desc: 'Financiero' },
 ];
 
 const INDICIO = 'CF_PACK_FREESTYLE';
@@ -86,10 +87,24 @@ export const HogarCotizador = () => {
     codArea: '', telefono: '',
     fechaNacimientoDia: '', fechaNacimientoMes: '', fechaNacimientoAno: ''
   });
+
   const [addressData, setAddressData] = useState({
     calle: '', numero: '', piso: '', dpto: '', localidad: '', codigoPostal: '',
-    tipoVivienda: 'jous', muros: 'trad', caracter: 'VIVIENDA_COMBINADOFAMILIAR_CARACTER1'
+    tipoVivienda: 'tipooo1', // tipooo1 = Casa, tipooo2 = Depto
+    muros: 'matconst1', // matconst1 = Ladrillo/Hormigon
+    caracter: 'VIVIENDA_COMBINADOFAMILIAR_CARACTER1' // 1=Propietario, 2=Inquilino
   });
+
+  const [paymentData, setPaymentData] = useState({
+    metodo: 'TARJETA_CREDITO',
+    marca: 'VISA',
+    numero: '',
+    vencimiento: '',
+    titular: '',
+    cbu: ''
+  });
+
+  const [consultaId, setConsultaId] = useState<string | null>(null);
 
   useEffect(() => {
     fetchInitialForm();
@@ -115,6 +130,7 @@ export const HogarCotizador = () => {
       const cId = res.data?.consultaId;
       if (!cId) throw new Error("No se recibió consultaId");
       
+      setConsultaId(cId);
       const plansRes = await hogarApi.get(`/insurance/home/consultas/${cId}/planes`);
       setPlans(plansRes.data);
       if (plansRes.data.length > 0) setSelectedPlanCode(plansRes.data[0].codigo);
@@ -127,32 +143,69 @@ export const HogarCotizador = () => {
   };
 
   const handleStep3Submit = async () => {
-    if (!personalData.nombre || !personalData.apellido || !personalData.dni || !personalData.email || !personalData.codArea || !personalData.telefono || !addressData.calle || !addressData.numero || 
-        !personalData.fechaNacimientoDia || !personalData.fechaNacimientoMes || !personalData.fechaNacimientoAno) {
-      setError("Por favor completa los campos obligatorios (*)");
-      return;
-    }
-    
     setIsProcessing(true);
     setError(null);
     try {
       const planObj = plans.find(p => p.codigo === selectedPlanCode);
-      await hogarApi.post('/insurance/home/orders/create', {
+      const isCard = paymentData.metodo === 'TARJETA_CREDITO';
+      const selectedMedio = isCard ? 'TARJETA_CREDITO' : 'DEBITO_AUTOMATICO';
+      
+      // 1. Create Order
+      const orderRes = await hogarApi.post('/insurance/home/orders/create', {
+        idConsulta: consultaId,
         plan: planObj,
-        formaPago: planObj?.formasPagos?.[0],
+        formaPago: {
+            ...planObj?.formasPagos?.[0],
+            medioPago: selectedMedio
+        },
         personalData: {
           ...personalData,
           numeroDocumento: personalData.dni,
-          telefono_codigo_area: personalData.codArea,
-          telefono_numero: personalData.telefono.replace(/\D/g, ''),
-          fechaNacimiento: `${personalData.fechaNacimientoDia}/${personalData.fechaNacimientoMes}/${personalData.fechaNacimientoAno}`
+        }
+      });
+
+      const ordenVentaId = orderRes.data.rusOrder?.ordenVentaID || orderRes.data.rusOrder?.ordenVentaId;
+      if (!ordenVentaId) throw new Error("No se pudo obtener el ID de la orden de venta.");
+
+      // 2. Submit Client Data & Emission Form (Backend unifies this)
+      await hogarApi.post(`/insurance/home/orders/${ordenVentaId}/form/submit`, {
+        personalData: {
+            ...personalData,
+            telefono_codigo_area: personalData.codArea,
+            telefono_numero: personalData.telefono.replace(/\D/g, ''),
+            fechaNacimientoAno: personalData.fechaNacimientoAno,
+            fechaNacimientoMes: personalData.fechaNacimientoMes,
+            fechaNacimientoDia: personalData.fechaNacimientoDia
         },
         addressData: addressData,
-        paymentData: { method: 'DEBITO_AUTOMATICO' } // Default value since it's removed from UI
+        answers: [
+            { codigoPregunta: 'VIVIENDA_COMBINADOFAMILIAR_CARACTER', valores: [addressData.caracter] }
+        ]
       });
-      setCurrentStep(4); // Success is now Step 4
+
+      // 3. Submit Payment Info
+      const paymentPayload: any = {
+          medioPago: isCard ? 'TARJETA_CREDITO' : 'DEBITO_AUTOMATICO'
+      };
+
+      if (isCard) {
+          paymentPayload.marcaTarjeta = paymentData.marca; // Already VISA, MASTERCARD, etc.
+          paymentPayload.numeroTarjeta = paymentData.numero;
+          paymentPayload.vencimiento = "12/29"; 
+          paymentPayload.titular = `${personalData.nombre} ${personalData.apellido}`;
+      } else {
+          paymentPayload.CBU = paymentData.cbu;
+      }
+      
+      await hogarApi.post(`/insurance/home/orders/${ordenVentaId}/infopago`, { paymentInfo: paymentPayload });
+
+      // 4. Confirm Order (Real Emission)
+      await hogarApi.post(`/insurance/home/orders/${ordenVentaId}/confirm`);
+
+      setCurrentStep(6); 
     } catch (err: any) {
-      setError(err.response?.data?.error || "Error al procesar la solicitud. Reintentá en unos momentos.");
+      console.error('Emission Error:', err.response?.data || err.message);
+      setError(err.response?.data?.error || err.response?.data?.details?.errores?.[0]?.mensaje || "Error al procesar la emisión. Verificá los datos.");
     } finally {
       setIsProcessing(false);
     }
@@ -232,8 +285,7 @@ export const HogarCotizador = () => {
             ))}
           </div>
 
-
-          <GlassCard className="p-6 md:p-10 border-border-primary bg-bg-primary/70 rounded-[28px] shadow-2xl relative !overflow-visible backdrop-blur-3xl">
+  <GlassCard className="p-6 md:p-10 border-border-primary bg-bg-primary/70 rounded-[28px] shadow-2xl relative !overflow-visible backdrop-blur-3xl">
             {loading ? (
                 <div className="py-16 flex flex-col items-center justify-center gap-3">
                     <Loader2 className="animate-spin text-emerald-500" size={40} />
@@ -241,13 +293,14 @@ export const HogarCotizador = () => {
                 </div>
             ) : (
             <div className="relative">
-              {currentStep > 1 && currentStep < 4 && (
+              {/* Standard Horizontal Back Navigation Bar */}
+              {currentStep > 1 && currentStep < 6 && (
                 <div className="-mt-6 md:-mt-10 -mx-6 md:-mx-10 px-6 md:px-10 pt-4 md:pt-5 pb-5 mb-4 border-b border-border-primary/40">
                   <button onClick={() => setCurrentStep(prev => prev - 1)} className="flex items-center gap-2.5 group cursor-pointer">
                     <div className="p-2 bg-emerald-500/10 group-hover:bg-emerald-500/20 text-emerald-500 rounded-xl transition-all">
                       <ArrowLeft size={20} />
                     </div>
-                    <span className="text-xs font-black uppercase tracking-[0.2em] text-emerald-500">Atrás</span>
+                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-emerald-500">Volver</span>
                   </button>
                 </div>
               )}
@@ -404,7 +457,7 @@ export const HogarCotizador = () => {
                 </motion.div>
               )}
 
-              {/* STEP 3: DATOS UNIFICADOS */}
+              {/* STEP 3: DATOS PERSONALES */}
               {currentStep === 3 && (
                 <motion.div
                   key="step3"
@@ -418,102 +471,242 @@ export const HogarCotizador = () => {
                           <User size={24} />
                       </div>
                       <div>
-                        <h2 className="text-2xl font-black font-accent tracking-tighter">Finalizar Solicitud</h2>
-                        <p className="text-xs text-text-secondary font-medium">Completá tus datos para que un asesor te contacte.</p>
+                        <h2 className="text-2xl font-black font-accent tracking-tighter">Tus Datos</h2>
+                        <p className="text-xs text-text-secondary font-medium">Necesitamos identificarte para generar la póliza.</p>
                       </div>
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {/* Personal Data */}
-                    <div className="space-y-4">
-                        <h3 className="text-[10px] font-black uppercase text-emerald-500 tracking-widest pl-1">Datos Personales</h3>
-                        <div className="grid grid-cols-2 gap-3">
-                            <div className="space-y-1.5">
-                                <label className="text-[9px] font-black uppercase text-text-secondary tracking-widest pl-1">Nombre *</label>
-                                <input type="text" className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold" value={personalData.nombre} onChange={(e) => setPersonalData({...personalData, nombre: e.target.value})}/>
-                            </div>
-                            <div className="space-y-1.5">
-                                <label className="text-[9px] font-black uppercase text-text-secondary tracking-widest pl-1">Apellido *</label>
-                                <input type="text" className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold" value={personalData.apellido} onChange={(e) => setPersonalData({...personalData, apellido: e.target.value})}/>
-                            </div>
-                        </div>
-                        <div className="space-y-1.5">
-                            <label className="text-[9px] font-black uppercase text-text-secondary tracking-widest pl-1">Email *</label>
-                            <input type="email" className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold" value={personalData.email} onChange={(e) => setPersonalData({...personalData, email: e.target.value})}/>
-                        </div>
-                        <div className="grid grid-cols-2 gap-3">
-                            <div className="space-y-1.5">
-                                <label className="text-[9px] font-black uppercase text-text-secondary tracking-widest pl-1">DNI *</label>
-                                <input type="text" className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold" value={personalData.dni} onChange={(e) => setPersonalData({...personalData, dni: e.target.value})}/>
-                            </div>
-                            <div className="space-y-1.5">
-                                <label className="text-[9px] font-black uppercase text-text-secondary tracking-widest pl-1">Fecha Nac. *</label>
-                                <div className="grid grid-cols-3 gap-1">
-                                    <input type="text" placeholder="DD" maxLength={2} className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-2 text-center text-sm font-semibold" value={personalData.fechaNacimientoDia} onChange={(e) => setPersonalData({...personalData, fechaNacimientoDia: e.target.value.replace(/\D/g, '')})} />
-                                    <input type="text" placeholder="MM" maxLength={2} className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-2 text-center text-sm font-semibold" value={personalData.fechaNacimientoMes} onChange={(e) => setPersonalData({...personalData, fechaNacimientoMes: e.target.value.replace(/\D/g, '')})} />
-                                    <input type="text" placeholder="AAAA" maxLength={4} className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-1 text-center text-sm font-semibold" value={personalData.fechaNacimientoAno} onChange={(e) => setPersonalData({...personalData, fechaNacimientoAno: e.target.value.replace(/\D/g, '')})} />
-                                </div>
-                            </div>
-                        </div>
+                      <div className="space-y-1.5">
+                          <label className="text-[9px] font-black uppercase text-text-secondary tracking-widest pl-1">Nombre</label>
+                          <input type="text" className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold" value={personalData.nombre} onChange={(e) => setPersonalData({...personalData, nombre: e.target.value})}/>
+                      </div>
+                      <div className="space-y-1.5">
+                          <label className="text-[9px] font-black uppercase text-text-secondary tracking-widest pl-1">Apellido</label>
+                          <input type="text" className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold" value={personalData.apellido} onChange={(e) => setPersonalData({...personalData, apellido: e.target.value})}/>
+                      </div>
+                      <div className="space-y-1.5">
+                          <label className="text-[9px] font-black uppercase text-text-secondary tracking-widest pl-1">Email</label>
+                          <input type="email" className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold" value={personalData.email} onChange={(e) => setPersonalData({...personalData, email: e.target.value})}/>
+                      </div>
+                      <div className="space-y-1.5">
+                          <label className="text-[9px] font-black uppercase text-text-secondary tracking-widest pl-1 text-center w-full">Fecha de nacimiento (dd/mm/aaaa)</label>
+                          <div className="grid grid-cols-3 gap-2">
+                              <input type="text" placeholder="DD" maxLength={2} className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-2 text-center text-sm font-semibold" value={personalData.fechaNacimientoDia} onChange={(e) => setPersonalData({...personalData, fechaNacimientoDia: e.target.value.replace(/\D/g, '')})} />
+                              <input type="text" placeholder="MM" maxLength={2} className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-2 text-center text-sm font-semibold" value={personalData.fechaNacimientoMes} onChange={(e) => setPersonalData({...personalData, fechaNacimientoMes: e.target.value.replace(/\D/g, '')})} />
+                              <input type="text" placeholder="AAAA" maxLength={4} className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-1 text-center text-sm font-semibold" value={personalData.fechaNacimientoAno} onChange={(e) => setPersonalData({...personalData, fechaNacimientoAno: e.target.value.replace(/\D/g, '')})} />
+                          </div>
+                      </div>
+                      <div className="space-y-1.5">
+                          <label className="text-[9px] font-black uppercase text-text-secondary tracking-widest pl-1">Tipo Doc.</label>
+                          <select className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold outline-none" value={personalData.tipoDocumento} onChange={(e) => setPersonalData({...personalData, tipoDocumento: e.target.value})}>
+                              <option value="DNI">DNI</option>
+                              <option value="CUIL">CUIL</option>
+                          </select>
+                      </div>
+                      <div className="space-y-1.5">
+                          <label className="text-[9px] font-black uppercase text-text-secondary tracking-widest pl-1">Nro. Documento</label>
+                          <input type="text" className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold" value={personalData.dni} onChange={(e) => setPersonalData({...personalData, dni: e.target.value.replace(/\D/g, '')})}/>
+                      </div>
+                      <div className="space-y-1.5 col-span-full">
+                          <label className="text-[9px] font-black uppercase text-text-secondary tracking-widest pl-1">Teléfono Móvil</label>
+                          <div className="flex gap-3">
+                              <div className="flex w-1/3 bg-bg-secondary border border-border-primary rounded-xl overflow-hidden h-12">
+                                  <span className="h-full flex items-center justify-center bg-bg-primary/50 px-3 text-text-secondary text-xs font-bold border-r border-border-primary">0</span>
+                                  <input type="text" placeholder="Cód. área" maxLength={4} className="w-full bg-transparent px-3 text-sm font-semibold outline-none" value={personalData.codArea} onChange={(e) => setPersonalData({...personalData, codArea: e.target.value.replace(/\D/g, '')})} />
+                              </div>
+                              <div className="flex w-2/3 bg-bg-secondary border border-border-primary rounded-xl overflow-hidden h-12">
+                                  <span className="h-full flex items-center justify-center bg-bg-primary/50 px-3 text-text-secondary text-xs font-bold border-r border-border-primary">15</span>
+                                  <input type="text" placeholder="Número" maxLength={8} className="w-full bg-transparent px-3 text-sm font-semibold outline-none" value={personalData.telefono} onChange={(e) => setPersonalData({...personalData, telefono: e.target.value.replace(/\D/g, '')})} />
+                              </div>
+                          </div>
+                      </div>
+                  </div>
 
-                        <div className="space-y-1.5">
-                            <label className="text-[9px] font-black uppercase text-text-secondary tracking-widest pl-1">Teléfono Móvil *</label>
-                            <div className="flex gap-3">
-                                <div className="flex w-1/3 bg-bg-secondary border border-border-primary rounded-xl overflow-hidden h-12">
-                                    <span className="h-full flex items-center justify-center bg-bg-primary/50 px-3 text-text-secondary text-xs font-bold border-r border-border-primary">0</span>
-                                    <input type="text" placeholder="Cód. área" maxLength={4} className="w-full bg-transparent px-3 text-sm font-semibold outline-none" value={personalData.codArea} onChange={(e) => setPersonalData({...personalData, codArea: e.target.value.replace(/\D/g, '')})} />
-                                </div>
-                                <div className="flex w-2/3 bg-bg-secondary border border-border-primary rounded-xl overflow-hidden h-12">
-                                    <span className="h-full flex items-center justify-center bg-bg-primary/50 px-3 text-text-secondary text-xs font-bold border-r border-border-primary">15</span>
-                                    <input type="text" placeholder="Número" maxLength={8} className="w-full bg-transparent px-3 text-sm font-semibold outline-none" value={personalData.telefono} onChange={(e) => setPersonalData({...personalData, telefono: e.target.value.replace(/\D/g, '')})} />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Address Data */}
-                    <div className="space-y-4">
-                        <h3 className="text-[10px] font-black uppercase text-emerald-500 tracking-widest pl-1">Domicilio de la Propiedad</h3>
-                        <div className="grid grid-cols-3 gap-3">
-                            <div className="col-span-2 space-y-1.5">
-                                <label className="text-[9px] font-black uppercase text-text-secondary tracking-widest pl-1">Calle *</label>
-                                <input type="text" className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold" value={addressData.calle} onChange={(e) => setAddressData({...addressData, calle: e.target.value})}/>
-                            </div>
-                            <div className="space-y-1.5">
-                                <label className="text-[9px] font-black uppercase text-text-secondary tracking-widest pl-1">Nro *</label>
-                                <input type="text" className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold" value={addressData.numero} onChange={(e) => setAddressData({...addressData, numero: e.target.value})}/>
-                            </div>
-                        </div>
-                        <div className="grid grid-cols-2 gap-3">
-                            <div className="space-y-1.5">
-                                <label className="text-[9px] font-black uppercase text-text-secondary tracking-widest pl-1">Localidad</label>
-                                <input type="text" className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold" value={addressData.localidad} onChange={(e) => setAddressData({...addressData, localidad: e.target.value})}/>
-                            </div>
-                            <div className="space-y-1.5">
-                                <label className="text-[9px] font-black uppercase text-text-secondary tracking-widest pl-1">Cod. Postal</label>
-                                <input type="text" className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold" value={addressData.codigoPostal} onChange={(e) => setAddressData({...addressData, codigoPostal: e.target.value})}/>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-
-                  {error && <p className="text-xs text-red-500 font-bold bg-red-500/10 p-3 rounded-lg border border-red-500/20">{error}</p>}
-
-                  <div className="pt-2">
+                  <div className="pt-4">
                      <Button 
-                       onClick={handleStep3Submit}
-                       isLoading={isProcessing}
-                       className="w-full h-14 rounded-xl bg-emerald-500 font-black text-base border-none shadow-lg shadow-emerald-500/20 cursor-pointer"
+                       onClick={() => {
+                          if (!personalData.nombre || !personalData.apellido || !personalData.dni || !personalData.email) {
+                             setError("Completá todos los campos de identidad.");
+                             return;
+                          }
+                          setError(null);
+                          setCurrentStep(4);
+                       }}
+                       className="w-full h-14 rounded-xl bg-emerald-500 font-black text-sm uppercase tracking-widest border-none shadow-lg shadow-emerald-500/20 cursor-pointer"
                      >
-                       Finalizar Solicitud
+                       Confirmar Identidad
                      </Button>
                   </div>
                 </motion.div>
               )}
 
-              {/* STEP 4: SUCCESS */}
+              {/* STEP 4: UBICACIÓN Y DETALLES DE VIVIENDA */}
               {currentStep === 4 && (
+                <motion.div
+                  key="step4"
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  className="max-w-3xl mx-auto space-y-8"
+                >
+                  <div className="space-y-2 text-center">
+                    <div className="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center mx-auto mb-2">
+                        <MapPin size={24} />
+                    </div>
+                    <h2 className="text-2xl font-black font-accent tracking-tighter">Domicilio</h2>
+                    <p className="text-xs text-text-secondary font-medium">¿Dónde está ubicada la propiedad?</p>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                      <div className="md:col-span-2 space-y-1.5">
+                          <label className="text-[9px] font-black uppercase text-text-secondary tracking-widest pl-1">Calle</label>
+                          <input type="text" className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold" value={addressData.calle} onChange={(e) => setAddressData({...addressData, calle: e.target.value})}/>
+                      </div>
+                      <div className="space-y-1.5">
+                          <label className="text-[9px] font-black uppercase text-text-secondary tracking-widest pl-1">Nro</label>
+                          <input type="text" className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold" value={addressData.numero} onChange={(e) => setAddressData({...addressData, numero: e.target.value})}/>
+                      </div>
+                      <div className="space-y-1.5">
+                          <label className="text-[9px] font-black uppercase text-text-secondary tracking-widest pl-1">Localidad</label>
+                          <input type="text" className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold" value={addressData.localidad} onChange={(e) => setAddressData({...addressData, localidad: e.target.value})}/>
+                      </div>
+                      <div className="space-y-1.5">
+                          <label className="text-[9px] font-black uppercase text-text-secondary tracking-widest pl-1">Código Postal</label>
+                          <input type="text" className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold" value={addressData.codigoPostal} onChange={(e) => setAddressData({...addressData, codigoPostal: e.target.value.replace(/\D/g, '')})}/>
+                      </div>
+                      <div className="space-y-1.5">
+                          <label className="text-[9px] font-black uppercase text-text-secondary tracking-widest pl-1">Su vivienda es</label>
+                          <select className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold outline-none" value={addressData.tipoVivienda} onChange={(e) => setAddressData({...addressData, tipoVivienda: e.target.value})}>
+                              <option value="tipooo1">Casa</option>
+                              <option value="tipooo2">Departamento</option>
+                          </select>
+                      </div>
+                      <div className="space-y-1.5">
+                          <label className="text-[9px] font-black uppercase text-text-secondary tracking-widest pl-1">Muros</label>
+                          <select className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold outline-none" value={addressData.muros} onChange={(e) => setAddressData({...addressData, muros: e.target.value})}>
+                              <option value="matconst1">Ladrillo / Hormigón</option>
+                              <option value="matconst2">Madera / Otros</option>
+                          </select>
+                      </div>
+                      <div className="space-y-1.5 md:col-span-2">
+                          <label className="text-[9px] font-black uppercase text-text-secondary tracking-widest pl-1">Carácter</label>
+                          <select className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold outline-none" value={addressData.caracter} onChange={(e) => setAddressData({...addressData, caracter: e.target.value})}>
+                              <option value="VIVIENDA_COMBINADOFAMILIAR_CARACTER1">Propietario</option>
+                              <option value="VIVIENDA_COMBINADOFAMILIAR_CARACTER2">Inquilino</option>
+                          </select>
+                      </div>
+                  </div>
+
+                  {error && <p className="text-xs text-red-500 font-bold bg-red-500/10 p-3 rounded-lg border border-red-500/20">{error}</p>}
+
+                  <div className="pt-4">
+                     <Button 
+                       onClick={() => {
+                          if (!addressData.calle || !addressData.numero || !addressData.codigoPostal) {
+                             setError("Completá los datos de ubicación.");
+                             return;
+                          }
+                          setError(null);
+                          setCurrentStep(5);
+                       }}
+                       className="w-full h-14 rounded-xl bg-emerald-500 font-black text-sm uppercase tracking-widest border-none shadow-lg shadow-emerald-500/20 cursor-pointer"
+                     >
+                       Continuar al Pago
+                     </Button>
+                  </div>
+                </motion.div>
+              )}
+
+              {/* STEP 5: MÉTODO DE PAGO */}
+              {currentStep === 5 && (
+                <motion.div
+                  key="step5"
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  className="max-w-xl mx-auto space-y-8"
+                >
+                  <div className="space-y-2 text-center">
+                    <div className="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center mx-auto mb-2">
+                        <CreditCard size={24} />
+                    </div>
+                    <h2 className="text-2xl font-black font-accent tracking-tighter">Método de Pago</h2>
+                    <p className="text-xs text-text-secondary font-medium">Último paso para estar protegido.</p>
+                  </div>
+
+                  <div className="space-y-4">
+                      {/* Tarjeta Selector */}
+                      <div 
+                        onClick={() => setPaymentData({...paymentData, metodo: 'TARJETA_CREDITO'})}
+                        className={`p-5 rounded-2xl border-2 transition-all cursor-pointer flex items-center gap-4 ${paymentData.metodo === 'TARJETA_CREDITO' ? 'border-emerald-500 bg-emerald-500/5 shadow-lg shadow-emerald-500/5' : 'border-border-primary bg-bg-secondary'}`}
+                      >
+                          <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${paymentData.metodo === 'TARJETA_CREDITO' ? 'bg-emerald-500 text-white' : 'bg-bg-primary text-text-secondary'}`}>
+                              <CreditCard size={20} />
+                          </div>
+                          <div>
+                              <h3 className="font-black text-sm">Tarjeta de Crédito</h3>
+                              <p className="text-[10px] text-text-secondary font-bold">VISA, MasterCard, AMEX, CABAL</p>
+                          </div>
+                      </div>
+
+                      {paymentData.metodo === 'TARJETA_CREDITO' && (
+                          <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} className="space-y-4 pt-2">
+                              <div className="space-y-1.5">
+                                  <label className="text-[9px] font-black uppercase text-text-secondary tracking-widest pl-1">Marca de Tarjeta</label>
+                                  <select className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold outline-none" value={paymentData.marca} onChange={(e) => setPaymentData({...paymentData, marca: e.target.value})}>
+                                      <option value="VISA">VISA</option>
+                                      <option value="MASTERCARD">MASTERCARD</option>
+                                      <option value="AMEX">AMEX</option>
+                                      <option value="CABAL">CABAL</option>
+                                  </select>
+                              </div>
+                              <div className="space-y-1.5">
+                                  <label className="text-[9px] font-black uppercase text-text-secondary tracking-widest pl-1">Número de Tarjeta</label>
+                                  <input type="text" placeholder="XXXX XXXX XXXX XXXX" className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold" value={paymentData.numero} onChange={(e) => setPaymentData({...paymentData, numero: e.target.value.replace(/\D/g, '')})}/>
+                              </div>
+                          </motion.div>
+                      )}
+
+                      {/* CBU Selector */}
+                      <div 
+                        onClick={() => setPaymentData({...paymentData, metodo: 'CBU'})}
+                        className={`p-5 rounded-2xl border-2 transition-all cursor-pointer flex items-center gap-4 ${paymentData.metodo === 'CBU' ? 'border-emerald-500 bg-emerald-500/5 shadow-lg shadow-emerald-500/5' : 'border-border-primary bg-bg-secondary'}`}
+                      >
+                          <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${paymentData.metodo === 'CBU' ? 'bg-emerald-500 text-white' : 'bg-bg-primary text-text-secondary'}`}>
+                              <Building2 size={20} />
+                          </div>
+                          <div>
+                              <h3 className="font-black text-sm">CBU / Débito Bancario</h3>
+                              <p className="text-[10px] text-text-secondary font-bold">Bancos oficiales de Argentina</p>
+                          </div>
+                      </div>
+
+                      {paymentData.metodo === 'CBU' && (
+                          <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} className="space-y-4 pt-2">
+                              <div className="space-y-1.5">
+                                  <label className="text-[9px] font-black uppercase text-text-secondary tracking-widest pl-1">CBU (22 dígitos)</label>
+                                  <input type="text" placeholder="0000000000000000000000" maxLength={22} className="w-full h-12 bg-bg-secondary border border-border-primary rounded-xl px-4 text-sm font-semibold" value={paymentData.cbu} onChange={(e) => setPaymentData({...paymentData, cbu: e.target.value.replace(/\D/g, '')})}/>
+                              </div>
+                          </motion.div>
+                      )}
+                  </div>
+
+                  {error && <p className="text-xs text-red-500 font-bold bg-red-500/10 p-3 rounded-lg border border-red-500/20">{error}</p>}
+
+                  <div className="pt-4">
+                     <Button 
+                       onClick={handleStep3Submit}
+                       isLoading={isProcessing}
+                       className="w-full h-14 rounded-xl bg-emerald-500 font-black text-sm uppercase tracking-widest border-none shadow-lg shadow-emerald-500/20 cursor-pointer"
+                     >
+                       Emitir Póliza
+                     </Button>
+                  </div>
+                </motion.div>
+              )}
+
+              {/* STEP 6: SUCCESS (Previously Step 4) */}
+              {currentStep === 6 && (
                 <motion.div
                   key="step4"
                   initial={{ opacity: 0, scale: 0.9 }}
@@ -532,7 +725,7 @@ export const HogarCotizador = () => {
                     </div>
                     <h2 className="text-4xl font-black text-text-primary font-accent tracking-tighter whitespace-pre-wrap">¡Ya casi estamos!</h2>
                     <p className="text-xs text-text-secondary font-medium max-w-[400px] mx-auto leading-relaxed">
-                        Tu solicitud ha sido enviada con éxito. Nuestros asesores comerciales se comunicarán a la brevedad para completar la emisión de tu póliza y despejar cualquier duda.
+                        ¡Tu solicitud fue enviada con éxito! Te enviamos un mail de confirmación a tu casilla. En breve, nuestro equipo se pondrá en contacto con vos para entregarte la póliza y darte la bienvenida.
                     </p>
                   </div>
 
