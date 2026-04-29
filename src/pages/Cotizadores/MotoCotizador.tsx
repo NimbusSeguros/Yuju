@@ -6,7 +6,7 @@ import { GlassCard } from '../../components/ui/GlassCard';
 import { Button } from '../../components/ui/Button';
 import { Layout } from '../../layout/Layout';
 import { SEOHelmet } from '../../components/SEO/SEOHelmet';
-import { MotoResultsGrid } from '../../components/MotoResultsGrid';
+import { MotoResultsGrid } from "../../components/MotoResultsGrid";
 import RusProposalModal from '../../components/cotizadores/RusProposalModal';
 import AtmProposalModal from '../../components/cotizadores/AtmProposalModal';
 import { FAQAccordion } from '../../components/cotizadores/FAQAccordion';
@@ -35,15 +35,11 @@ const motoFAQ = [
 ];
 
 // API Imports
-import {
+import { 
+  getVigencias, 
   getInfoautoAllBrands,
   getInfoautoAllModels,
-  getLocalities,
-  getVigencias,
-  cotizar,
-  cotizarATM,
-  cotizarIntegrity,
-  cotizarSanCristobal
+  getLocalities
 } from '../../services/motoApi';
 
 export const MotoCotizador = () => {
@@ -310,11 +306,12 @@ export const MotoCotizador = () => {
     }
     setActiveStep(5);
     setQuotationLoading(true);
-    setQuotationResult(null);
+    setQuotationResult({ rus: null, atm: null, integrity: null, rusError: null, atmError: null, integrityError: null });
 
     const { vigenciaDesde, vigenciaHasta, tipoVigencia } = calculateDatesForQuote();
+    const BASE_URL = 'https://apiyujumotos.com/api';
 
-    const payload = {
+    const payloadRus = {
       codigoTipoInteres: "MOTOVEHICULO",
       condicionFiscal: "CF",
       cuotas: 3,
@@ -337,41 +334,49 @@ export const MotoCotizador = () => {
     };
 
     try {
-      const [rusResult, atmResult, integrityResult, sancristobalResult] = await Promise.allSettled([
-        cotizar(payload),
-        cotizarATM({
-          codia: String(selectedModel.codia),
-          anio: parseInt(selectedYear),
-          codpostal: parseInt(zipCode)
-        }),
-        cotizarIntegrity({
-          codia: String(selectedModel.codia),
-          brandId: String(selectedBrand.id),
-          anio: parseInt(selectedYear),
-          codigoPostal: zipCode,
-          localidad: selectedLocality ? (selectedLocality.id || selectedLocality.ID) : ""
-        }),
-        cotizarSanCristobal({
-          codia: String(selectedModel.codia),
-          anio: parseInt(selectedYear),
-          localidad: selectedLocality ? (selectedLocality.id || selectedLocality.ID) : "",
-          sumaAsegurada: null
-        })
-      ]);
+      const { getAccessToken } = await import('../../services/apiClient');
+      const token = await getAccessToken();
+      const headers = { 
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      };
 
-      const combined: any = { rus: null, atm: null, integrity: null, sancristobal: null };
-      if (rusResult.status === 'fulfilled') combined.rus = rusResult.value;
-      if (atmResult.status === 'fulfilled') combined.atm = atmResult.value;
-      if (integrityResult.status === 'fulfilled') combined.integrity = integrityResult.value;
-      if (sancristobalResult.status === 'fulfilled') combined.sancristobal = sancristobalResult.value;
+      // 1. Define independent promises with their own state updates
+      const pRus = fetch(`${BASE_URL}/rus/cotizaciones/motos`, { method: "PUT", headers, body: JSON.stringify(payloadRus) })
+        .then(res => res.json())
+        .then(data => setQuotationResult(prev => ({ ...prev, rus: data })))
+        .catch(err => setQuotationResult(prev => ({ ...prev, rusError: err.message })));
 
-      setQuotationResult(combined);
+      const pAtm = fetch(`${BASE_URL}/atm/cotizar`, { 
+        method: "POST", 
+        headers, 
+        body: JSON.stringify({ codia: String(selectedModel.codia), anio: parseInt(selectedYear), codpostal: parseInt(zipCode) }) 
+      })
+        .then(res => res.json())
+        .then(data => setQuotationResult(prev => ({ ...prev, atm: data })))
+        .catch(err => setQuotationResult(prev => ({ ...prev, atmError: err.message })));
+
+      const pIntegrity = fetch(`${BASE_URL}/integrity/cotizar`, { 
+        method: "POST", 
+        headers, 
+        body: JSON.stringify({ 
+          codia: String(selectedModel.codia), 
+          brandId: String(selectedBrand.id), 
+          anio: parseInt(selectedYear), 
+          codigoPostal: zipCode, 
+          localidad: selectedLocality ? (selectedLocality.id || selectedLocality.ID) : "" 
+        }) 
+      })
+        .then(res => res.json())
+        .then(data => setQuotationResult(prev => ({ ...prev, integrity: data })))
+        .catch(err => setQuotationResult(prev => ({ ...prev, integrityError: err.message })));
+
+      // 2. Fire all and wait for all to settle
+      await Promise.allSettled([pRus, pAtm, pIntegrity]);
+
     } catch (err: any) {
-      if (err.response && err.response.status === 409) {
-        setConflictModalOpen(true);
-      } else {
-        setError(err.message || "Error al realizar la cotización.");
-      }
+      console.error("Parallel quotation error:", err);
+      setError(err.message || "Error al realizar la cotización.");
     } finally {
       setQuotationLoading(false);
     }
@@ -800,7 +805,7 @@ export const MotoCotizador = () => {
                     </div>
                   </div>
 
-                  {quotationLoading ? (
+                  {!Object.values(quotationResult || {}).some(v => v !== null) && quotationLoading ? (
                     <div className="text-center py-16 space-y-10 w-full col-span-full">
                       <div className="w-24 h-24 bg-orange-500/20 rounded-full flex items-center justify-center mx-auto mb-6 relative">
                         <div className="absolute inset-0 bg-orange-500/10 blur-xl rounded-full animate-pulse" />
@@ -827,14 +832,16 @@ export const MotoCotizador = () => {
                       </div>
                     </div>
                   ) : (
-                    <MotoResultsGrid
-                      results={quotationResult}
-                      payWithCard={payWithCard}
-                      setPayWithCard={setPayWithCard}
-                      onContract={handleContractClick}
-                      vehicleInfo={getVehicleDetails()}
-                      zipCode={zipCode}
-                    />
+                    <div className="space-y-6">
+                      <MotoResultsGrid
+                        results={quotationResult}
+                        payWithCard={payWithCard}
+                        onContract={handleContractClick}
+                        vehicleInfo={getVehicleDetails()}
+                        zipCode={zipCode}
+                        quotationLoading={quotationLoading}
+                      />
+                    </div>
                   )}
                 </motion.div>
               )}

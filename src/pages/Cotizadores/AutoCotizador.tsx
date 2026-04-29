@@ -18,6 +18,40 @@ import { AutoCoverageDetailsModal } from '../../components/cotizadores/AutoCover
 import { SuccessStep } from '../../components/cotizadores/SuccessStep';
 import { apiClient } from '../../services/apiClient';
 
+// Componente Skeleton para Autos
+const AutoCardSkeleton = () => (
+  <div className="bg-bg-primary border-2 border-border-primary/50 rounded-3xl p-5 transition-all duration-500 relative flex flex-col min-h-[240px] overflow-hidden">
+    {/* Shimmer Effect */}
+    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full animate-shimmer" />
+    
+    <div className="flex justify-between items-start mb-6">
+      <div className="space-y-2 flex-1 pr-6">
+        <div className="h-4 bg-border-primary/40 rounded-full w-full animate-pulse" />
+        <div className="h-3 bg-border-primary/20 rounded-full w-2/3 animate-pulse" />
+      </div>
+      <div className="h-8 w-16 bg-border-primary/20 rounded-lg animate-pulse" />
+    </div>
+
+    <div className="space-y-4 mb-6">
+      <div className="space-y-2">
+        <div className="h-10 bg-border-primary/30 rounded-xl w-1/2 animate-pulse" />
+        <div className="h-2 bg-border-primary/10 rounded-full w-1/4 animate-pulse" />
+      </div>
+    </div>
+
+    <div className="space-y-3 mb-6">
+      <div className="flex justify-between">
+        <div className="h-2 bg-border-primary/20 rounded-full w-1/3 animate-pulse" />
+        <div className="h-2 bg-border-primary/30 rounded-full w-1/4 animate-pulse" />
+      </div>
+    </div>
+
+    <div className="mt-auto">
+      <div className="h-11 bg-border-primary/30 rounded-xl w-full animate-pulse" />
+    </div>
+  </div>
+);
+
 // Componente para manejar cada card agrupada de forma independiente
 const GroupedQuoteCard = ({ group, isCreditCard, getInsurerLogo, onInfo, onContract }: any) => {
   const [selectedIdx, setSelectedIdx] = useState(() => {
@@ -394,65 +428,53 @@ export const AutoCotizador = () => {
                   </div>
                 </div>
 
-                {isProcessing && cotizaciones.length === 0 ? (
-                  <div className="text-center py-16 space-y-10 w-full col-span-full">
-                    <div className="w-24 h-24 bg-yuju-blue/20 rounded-full flex items-center justify-center mx-auto mb-6 relative">
-                      <div className="absolute inset-0 bg-yuju-blue/10 blur-xl rounded-full animate-pulse" />
-                      <div
-                        className="w-16 h-16 relative z-10 animate-float"
-                        style={{
-                          backgroundColor: '#3369ff',
-                          maskImage: 'url("https://res.cloudinary.com/dewcgbpvp/image/upload/v1735836811/Yuju_Web_nfwvce.svg")',
-                          maskRepeat: 'no-repeat',
-                          maskPosition: 'center',
-                          maskSize: 'contain',
-                          WebkitMaskImage: 'url("https://res.cloudinary.com/dewcgbpvp/image/upload/v1735836811/Yuju_Web_nfwvce.svg")',
-                          WebkitMaskRepeat: 'no-repeat',
-                          WebkitMaskPosition: 'center',
-                          WebkitMaskSize: 'contain',
-                        }}
-                      />
-                    </div>
-                    <div className="space-y-3">
-                      <h2 className="text-4xl font-black text-text-primary font-accent tracking-tighter whitespace-pre-wrap">Buscando la mejor cotización</h2>
-                      <p className="text-text-secondary font-medium max-w-xs mx-auto">
-                        Estamos comparando las mejores tasas de aseguradoras especializadas.
-                      </p>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 items-start">
-                    {['Responsabilidad Civil', 'Terceros Completo', 'Terceros Completo Full', 'Todo Riesgo'].map((category) => {
-                      const categoryQuotes = cotizaciones.filter(c => c.category === category);
-                      const groupedQuotes = groupQuotes(categoryQuotes);
-                      const isHiddenOnMobile = selectedCategory !== category;
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 items-start">
+                  {['Responsabilidad Civil', 'Terceros Completo', 'Terceros Completo Full', 'Todo Riesgo'].map((category) => {
+                    const categoryQuotes = cotizaciones.filter(c => c.category === category);
+                    const groupedQuotes = groupQuotes(categoryQuotes);
+                    const isHiddenOnMobile = selectedCategory !== category;
 
-                      return (
-                        <div key={category} className={`space-y-4 ${isHiddenOnMobile ? 'hidden md:block' : 'block'}`}>
-                          <h3 className="text-sm font-black text-center tracking-widest text-text-secondary opacity-60 py-2 border-b border-border-primary mb-2">{category}</h3>
-                          {groupedQuotes.map((group, groupIdx) => (
-                            <GroupedQuoteCard 
-                              key={`${category}-${groupIdx}`}
-                              group={group}
-                              isCreditCard={isCreditCard}
-                              getInsurerLogo={getInsurerLogo}
-                              onInfo={(cot: any) => {
-                                const finalQuote = { ...cot, precio: isCreditCard ? cot.precio : cot.originalPrice };
-                                setSelectedQuoteForModal(finalQuote);
-                                setModalOpen(true);
-                              }}
-                              onContract={(cot: any) => {
-                                setSelectedQuoteForLead(cot);
-                                setLeadModalOpen(true);
-                              }}
-                            />
-                          ))}
-                        </div>
-                      )
-                    })}
-                  </div>
-                )
-                }
+                    return (
+                      <div key={category} className={`space-y-4 ${isHiddenOnMobile ? 'hidden md:block' : 'block'}`}>
+                        <h3 className="text-sm font-black text-center tracking-widest text-text-secondary opacity-60 py-2 border-b border-border-primary mb-2">{category}</h3>
+                        
+                        {/* Real Quotes */}
+                        {groupedQuotes.map((group, groupIdx) => (
+                          <GroupedQuoteCard 
+                            key={`${category}-${groupIdx}`}
+                            group={group}
+                            isCreditCard={isCreditCard}
+                            getInsurerLogo={getInsurerLogo}
+                            onInfo={(cot: any) => {
+                              const finalQuote = { ...cot, precio: isCreditCard ? cot.precio : cot.originalPrice };
+                              setSelectedQuoteForModal(finalQuote);
+                              setModalOpen(true);
+                            }}
+                            onContract={(cot: any) => {
+                              setSelectedQuoteForLead(cot);
+                              setLeadModalOpen(true);
+                            }}
+                          />
+                        ))}
+
+                        {/* Category Skeletons while processing */}
+                        {isProcessing && groupedQuotes.length < 3 && (
+                          <>
+                            <AutoCardSkeleton />
+                            {groupedQuotes.length < 2 && <AutoCardSkeleton />}
+                          </>
+                        )}
+
+                        {/* No results state for this category specifically */}
+                        {!isProcessing && groupedQuotes.length === 0 && (
+                          <div className="text-center py-10 opacity-30">
+                            <p className="text-[10px] font-black uppercase tracking-widest">Sin resultados</p>
+                          </div>
+                        )}
+                      </div>
+                    )
+                  })}
+                </div>
               </div>
             )}
           </GlassCard>

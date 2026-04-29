@@ -9,16 +9,17 @@ const toArray = (v: any) => (Array.isArray(v) ? v : v ? [v] : []);
 interface MotoResultsGridProps {
     results: any;
     payWithCard: boolean;
-    setPayWithCard: React.Dispatch<React.SetStateAction<boolean>>;
+    setPayWithCard?: React.Dispatch<React.SetStateAction<boolean>>;
     onContract: (quote: any, source: string, isEmissionFlow: boolean) => void;
     vehicleInfo?: any;
     zipCode?: string;
+    quotationLoading?: boolean;
 }
 
 const EMISSION_PLANS = ['RCM C/GRUA', 'RCM', 'RESPONSABILIDAD CIVIL SIN ASISTENCIA', 'RESPONSABILIDAD CIVIL'];
 
 
-export const MotoResultsGrid: React.FC<MotoResultsGridProps> = ({ results, payWithCard, onContract }) => {
+export const MotoResultsGrid: React.FC<MotoResultsGridProps> = ({ results, payWithCard, onContract, quotationLoading }) => {
     const [infoModalConfig, setInfoModalConfig] = useState<{ quote: any, company: string } | null>(null);
 
     // 1. Process RUS
@@ -48,20 +49,15 @@ export const MotoResultsGrid: React.FC<MotoResultsGridProps> = ({ results, payWi
     const integrityQuotes = Array.isArray(integrityData) ? integrityData.filter((q: any) => q.ok) : [];
     const integrityError = results?.integrityError;
 
-    // 4. Process San Cristobal
-    const sancristobalQuotes = Array.isArray(results?.sancristobal) ? results.sancristobal : results?.sancristobal?.data || [];
-    const sancristobalError = results?.sancristobalError;
-
-    // 5. Gather and Sort all valid cards
+    // 4. Gather and Sort all valid cards
     const allCards: Array<{ price: number, el: React.ReactElement }> = [];
 
     // Extract a common Suma Asegurada from any provider that has it to use as global fallback
     const commonSuma = parseFloat(
         rusQuotes[0]?.sumaAsegurada || 
-        integrityQuotes[0]?.SumaAsegurada || 
-        integrityQuotes[0]?.sumaAsegurada ||
-        sancristobalQuotes[0]?.sumaAsegurada || 
-        0
+        atmCoberturas[0]?.sumaaseg || 
+        integrityQuotes[0]?.suma_asegurada || 
+        '0'
     );
 
     // RUS processing
@@ -105,43 +101,38 @@ export const MotoResultsGrid: React.FC<MotoResultsGridProps> = ({ results, payWi
         });
     }
 
-    // San Cristobal processing
-    if (!sancristobalError && sancristobalQuotes.length > 0) {
-        sancristobalQuotes.forEach((q: any, i: number) => {
-            const planName = (q.description || q.descripcion || '').toUpperCase();
-            const isRC = planName.includes('RESPONSABILIDAD CIVIL');
-            const discount = isRC ? 0.85 : 0.70;
-            const originalPrice = parseFloat(q.monthlyCuota || q.premio || 0);
-            const price = payWithCard ? originalPrice * discount : originalPrice;
-            allCards.push({ price, el: <SanCristobalCard key={`sanc-${i}`} quote={q} payWithCard={payWithCard} onContract={onContract} onInfo={() => setInfoModalConfig({ quote: q, company: 'SAN_CRISTOBAL' })} /> });
-        });
-    }
+
 
     // Sort by price
     allCards.sort((a, b) => a.price - b.price);
 
-    const hasErrors = rusError || (atmError && !atmSuccess) || integrityError || sancristobalError;
+    const hasErrors = rusError || (atmError && !atmSuccess) || integrityError;
 
     return (
         <div className="space-y-8 animate-fade-in">
-
-
             {/* Error notifications if any */}
             {hasErrors && (
                <div className="flex flex-col gap-2">
                    {rusError && <div className="text-center text-xs text-red-400 bg-red-500/10 p-2 rounded-xl border border-red-500/20">No pudimos obtener información de RUS.</div>}
                    {atmError && !atmSuccess && <div className="text-center text-xs text-red-400 bg-red-500/10 p-2 rounded-xl border border-red-500/20">No pudimos obtener información de ATM.</div>}
                    {integrityError && <div className="text-center text-xs text-red-400 bg-red-500/10 p-2 rounded-xl border border-red-500/20">No pudimos obtener información de Integrity.</div>}
-                   {sancristobalError && <div className="text-center text-xs text-red-400 bg-red-500/10 p-2 rounded-xl border border-red-500/20">No pudimos obtener información de San Cristóbal.</div>}
                </div>
             )}
 
             {/* Unified Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {allCards.length === 0 ? (
+                {allCards.length === 0 && !quotationLoading ? (
                     <div className="col-span-full text-center text-text-secondary py-10">No encontramos resultados para esta búsqueda.</div>
                 ) : (
-                    allCards.map(c => c.el)
+                    <>
+                        {allCards.map(c => c.el)}
+                        {quotationLoading && Object.entries(results || {})
+                            .filter(([key, value]) => !key.endsWith('Error') && value === null)
+                            .map(([key]) => (
+                                <MotoCardSkeleton key={`skeleton-${key}`} />
+                            ))
+                        }
+                    </>
                 )}
             </div>
 
@@ -154,6 +145,43 @@ export const MotoResultsGrid: React.FC<MotoResultsGridProps> = ({ results, payWi
         </div>
     );
 };
+
+export const MotoCardSkeleton = () => (
+    <div className="glass-card p-5 border-2 border-border-primary/50 rounded-2xl transition-all duration-500 h-[310px] relative shadow-sm overflow-hidden">
+        {/* Breathing overlay effect */}
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full animate-shimmer" />
+        
+        <div className="flex justify-between items-start gap-3 mb-6">
+            <div className="space-y-2 flex-1">
+                <div className="h-4 bg-border-primary/40 rounded-full w-3/4 animate-pulse" />
+                <div className="h-3 bg-border-primary/30 rounded-full w-1/2 animate-pulse" />
+            </div>
+            <div className="h-10 w-20 bg-border-primary/20 rounded-lg animate-pulse shrink-0" />
+        </div>
+
+        <div className="space-y-4 mb-6">
+            <div className="space-y-2">
+                <div className="h-8 bg-border-primary/40 rounded-xl w-2/3 animate-pulse" />
+                <div className="h-3 bg-border-primary/20 rounded-full w-1/4 animate-pulse" />
+            </div>
+        </div>
+
+        <div className="space-y-3 mb-6">
+            <div className="flex justify-between">
+                <div className="h-2 bg-border-primary/20 rounded-full w-1/3 animate-pulse" />
+                <div className="h-2 bg-border-primary/30 rounded-full w-1/4 animate-pulse" />
+            </div>
+            <div className="flex justify-between">
+                <div className="h-2 bg-border-primary/20 rounded-full w-1/2 animate-pulse" />
+                <div className="h-2 bg-border-primary/30 rounded-full w-1/6 animate-pulse" />
+            </div>
+        </div>
+
+        <div className="absolute bottom-5 left-5 right-5">
+            <div className="h-11 bg-border-primary/30 rounded-xl w-full animate-pulse" />
+        </div>
+    </div>
+);
 
 // --- CARDS ---
 
@@ -391,54 +419,4 @@ const IntegrityCard = ({ quote, payWithCard, onContract, commonSuma, onInfo }: {
     );
 };
 
-const SanCristobalCard = ({ quote, payWithCard, onContract, onInfo }: { quote: any, payWithCard: boolean, onContract: any, onInfo: () => void }) => {
-    const planName = quote.description || quote.descripcion || '';
-    const isRC = planName.includes('RESPONSABILIDAD CIVIL');
-    const isEmissionFlow = false;
-    
-    const discount = isRC ? 0.85 : 0.70;
-    const discountPercent = isRC ? 15 : 30;
-    const originalPrice = parseFloat(quote.monthlyCuota || quote.premio || 0);
-    const finalPrice = originalPrice * (payWithCard ? discount : 1);
 
-    const logoUrl = getInsurerLogo('SAN_CRISTOBAL');
-
-    return (
-        <div className="glass-card p-5 border-2 border-border-primary/50 rounded-2xl hover:border-orange-500 hover:shadow-[0_0_25px_rgba(249,115,22,0.2)] transition-all duration-500 h-[310px] relative group/card shadow-sm">
-            <div className="pb-16">
-                <div className="flex justify-between items-start gap-3 mb-4">
-                    <div className="h-12 flex items-center">
-                        <h3 className="text-text-primary font-black text-sm sm:text-base md:text-lg leading-tight line-clamp-2 font-accent">{formatPlanName(planName)}</h3>
-                    </div>
-                    {logoUrl ? (
-                        <div className="flex items-center h-10 w-24 shrink-0 bg-white/10 rounded-lg px-2 py-1">
-                            <img src={logoUrl} alt="San Cristobal" className="max-h-full max-w-full object-contain" style={{ filter: 'var(--logo-filter)' }} />
-                        </div>
-                    ) : (
-                        <span className="bg-orange-500/20 text-orange-500 text-[10px] font-black px-2 py-1 rounded">S.C.</span>
-                    )}
-                </div>
-
-                <div className="flex justify-between items-end mb-4">
-                    <PriceDisplay originalPrice={originalPrice} finalPrice={finalPrice} discountPercent={discountPercent} payWithCard={payWithCard} />
-                    <div className="relative group/tooltip mb-2">
-                        <button onClick={onInfo} className="w-8 h-8 rounded-full border border-border-primary/50 bg-bg-secondary flex items-center justify-center text-text-secondary group-hover/card:text-orange-500 group-hover/card:border-orange-500/50 group-hover/card:bg-orange-500/10 transition-all shadow-sm shrink-0" title="Ver detalles de cobertura">
-                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-                        </button>
-                        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-0.5 bg-text-primary text-bg-primary text-[8px] font-medium rounded-md opacity-0 group-hover/card:opacity-100 transition-opacity pointer-events-none whitespace-nowrap shadow-xl z-10">
-                            Ver detalle de cobertura
-                            <div className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-text-primary"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="pt-1 border-t border-border-primary/30 mt-2">
-                    <p className="text-[10px] text-text-secondary font-medium italic">Consultá coberturas disponibles con tu asesor.</p>
-                </div>
-            </div>
-            <div className="absolute bottom-5 left-5 right-5">
-                <ActionButton isEmissionFlow={isEmissionFlow} onClick={() => onContract(quote, 'SAN_CRISTOBAL', isEmissionFlow)} />
-            </div>
-        </div>
-    );
-};

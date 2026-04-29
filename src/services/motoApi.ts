@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // API instances configured to use the production URL or proxy
-const MOTO_API_BASE = import.meta.env.VITE_MOTO_API_URL || '';
+const MOTO_API_BASE = import.meta.env.VITE_MOTO_API_URL || 'https://apiyujumotos.com';
 
 const api = axios.create({
     baseURL: `${MOTO_API_BASE}/api/rus/`,

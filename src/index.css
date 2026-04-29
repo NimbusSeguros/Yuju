@@ -19,6 +19,7 @@
   --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   --animate-float: float 6s ease-in-out infinite;
   --animate-scroll: scroll 120s linear infinite;
+  --animate-shimmer: shimmer 2.5s infinite;
 
   @keyframes float {
     0%, 100% { transform: translateY(0); }
@@ -28,6 +29,10 @@
   @keyframes scroll {
     from { transform: translateX(0); }
     to { transform: translateX(-50%); }
+  }
+
+  @keyframes shimmer {
+    100% { transform: translateX(100%); }
   }
 }
 
