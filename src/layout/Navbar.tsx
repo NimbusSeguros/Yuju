@@ -13,7 +13,7 @@ const navItems = [
     href: '/cotizar/seguro-auto',
     activeColor: 'text-yuju-blue',
     iconColor: 'text-yuju-blue',
-    indicatorColor: 'from-yuju-blue to-yuju-cyan'
+    indicatorColor: 'from-yuju-blue to-yuju-blue'
   },
   { 
     name: 'Seguro de Moto', 
@@ -101,11 +101,11 @@ export const Navbar = () => {
                       : (location.pathname === item.href ? item.activeColor : "text-text-secondary hover:text-text-primary")
                   )}
                 >
-                  <item.icon size={18} className={cn(
+                  <item.icon size={18} strokeWidth={2.5} className={cn(
                     "transition-all duration-300 group-hover:scale-110 group-hover:rotate-6",
                     (!scrolled && isHomePage)
                       ? "text-white/40 group-hover:text-white/70" 
-                      : (location.pathname === item.href ? item.iconColor : `${item.iconColor}/40`)
+                      : (location.pathname === item.href ? item.iconColor : "text-text-secondary/50")
                   )} />
                   <span className="flex items-center gap-1">
                     <span className="hidden xl:inline whitespace-nowrap">Seguro de</span>
@@ -152,7 +152,7 @@ export const Navbar = () => {
                 { 
                   icon: (props: any) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>, 
                   name: 'Instagram', 
-                  href: 'https://www.instagram.com/segurosyuju?igsh=djkyZWxkZ3pvcXJn' 
+                  href: 'https://www.instagram.com/yujuseguros/' 
                 },
                 { 
                   icon: (props: any) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>, 
@@ -258,7 +258,7 @@ export const Navbar = () => {
                           ? `bg-${item.iconColor.split('-')[1] === 'yuju' ? 'yuju-blue' : (item.iconColor.split('-')[1] === 'orange' ? 'orange-500' : 'emerald-500')} text-white` 
                           : "bg-bg-primary text-text-secondary opacity-40"
                       )}>
-                        <item.icon size={20} />
+                        <item.icon size={20} strokeWidth={2.5} />
                       </div>
                       <span className="text-lg font-bold tracking-tight">{item.name}</span>
                     </div>
@@ -279,7 +279,7 @@ export const Navbar = () => {
                 { 
                   icon: (props: any) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>, 
                   name: 'Instagram', 
-                  href: 'https://www.instagram.com/segurosyuju?igsh=djkyZWxkZ3pvcXJn',
+                  href: 'https://www.instagram.com/yujuseguros/',
                   activeClass: "hover:bg-gradient-to-tr hover:from-[#f09433] hover:via-[#dc2743] hover:to-[#bc1888]"
                 },
                 { 

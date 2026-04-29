@@ -87,7 +87,6 @@ export const MotoCotizador = () => {
   const [selectedQuoteObj, setSelectedQuoteObj] = useState<any>(null);
   const [whatsappPhone, setWhatsappPhone] = useState('');
   const [whatsappSending, setWhatsappSending] = useState(false);
-  const [thankYouOpen, setThankYouOpen] = useState(false);
 
   useEffect(() => {
     fetchBrands();
@@ -444,7 +443,6 @@ export const MotoCotizador = () => {
       });
 
       setWhatsappModalOpen(false);
-      setThankYouOpen(true);
       setActiveStep(6);
       setWhatsappPhone('');
     } catch (e) {
@@ -488,6 +486,34 @@ export const MotoCotizador = () => {
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-orange-400/5 blur-[120px] rounded-full -z-10" />
 
         <div className={`mx-auto space-y-10 relative z-20 transition-all duration-700 ${activeStep === 5 ? 'max-w-[100%] xl:max-w-[98%] 2xl:max-w-[1500px]' : 'max-w-4xl'}`}>
+          
+          {/* Premium Header Section */}
+          <AnimatePresence>
+            {activeStep < 5 && (
+              <motion.div 
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                className="text-center space-y-6 mb-16"
+              >
+                <div className="px-4 py-2 bg-orange-500/10 backdrop-blur-md border border-orange-500/20 rounded-full inline-flex items-center gap-3 shadow-xl shadow-orange-500/5">
+                  <div className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                  </div>
+                  <span className="text-orange-600 text-[11px] font-bold uppercase tracking-wider">100% digital</span>
+                </div>
+                
+                <h1 className="text-5xl md:text-7xl font-black font-accent text-text-primary tracking-tighter leading-none">
+                  Seguro de moto
+                </h1>
+                
+                <p className="text-text-secondary font-medium text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+                  Encontrás opciones para proteger tu moto ante robo, incendio y daños a terceros.
+                </p>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* Multi-step indicator */}
           <div className="flex justify-between items-center px-4 md:px-8 relative mb-8">
@@ -518,37 +544,11 @@ export const MotoCotizador = () => {
             ))}
           </div>
 
-          {/* Mobile/Tablet Back Button - shown between stepper and card */}
-          {activeStep > 1 && activeStep < 5 && (
-            <motion.button
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              onClick={() => setActiveStep(prev => prev - 1)}
-              className="flex lg:hidden items-center gap-3 group px-2 py-1 -mt-2 mb-2 cursor-pointer"
-            >
-              <div className="w-9 h-9 rounded-xl bg-orange-500/10 flex items-center justify-center group-hover:bg-orange-500/20 transition-all shadow-sm">
-                <ArrowLeft size={18} className="text-orange-500" />
-              </div>
-              <span className="text-[11px] font-black uppercase tracking-[0.2em] text-orange-500">Volver</span>
-            </motion.button>
-          )}
 
           <GlassCard className="p-4 md:p-8 border-border-primary bg-bg-primary/70 rounded-[28px] shadow-2xl relative !overflow-visible backdrop-blur-3xl">
 
             <div className="relative">
-              {activeStep > 1 && activeStep < 5 && (
-                <motion.button
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  onClick={() => setActiveStep(prev => prev - 1)}
-                  className="hidden lg:flex absolute top-0 -left-20 xl:-left-52 2xl:-left-60 items-center gap-3 group z-50 px-2 py-1 cursor-pointer"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center group-hover:bg-orange-500/20 transition-all shadow-lg backdrop-blur-sm">
-                    <ArrowLeft size={20} className="text-orange-500" />
-                  </div>
-                  <span className="text-[11px] font-black uppercase tracking-[0.2em] text-orange-500 drop-shadow-sm">Volver</span>
-                </motion.button>
-              )}
+
               {/* Form Section */}
               <div className={`transition-all duration-700 ${activeStep === 5 ? 'max-w-3xl mx-auto opacity-40 hover:opacity-100 mb-12 h-0 overflow-hidden py-0' : 'space-y-6'}`}>
 
@@ -758,20 +758,24 @@ export const MotoCotizador = () => {
                   animate={{ opacity: 1, y: 0 }}
                   className="space-y-8 w-full mt-8"
                 >
-                  <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-4 border-b border-border-primary pb-6">
-                    <div className="flex items-start md:items-center gap-4">
-                      <button onClick={() => setActiveStep(prev => prev - 1)} className="p-2 bg-orange-500/10 hover:bg-orange-500/20 text-orange-500 rounded-xl transition-all cursor-pointer shrink-0 mt-1 md:mt-0">
-                        <ArrowLeft size={24} />
-                      </button>
-                      <div className="text-center md:text-left">
-                        <div className="text-sm font-bold text-text-secondary uppercase tracking-widest mb-1">Resultados para tu</div>
-                        <h2 className="text-2xl lg:text-3xl font-black font-accent tracking-tighter text-orange-500 leading-tight">
-                          {selectedBrand?.name} {selectedModel?.group?.name} <span className="text-text-primary">{selectedModel?.description}</span> <span className="text-orange-400">({selectedYear})</span>
-                        </h2>
+                  {/* Atrás button ABOVE title, inside card */}
+                  <div className="-mt-8 -mx-8 px-8 pt-5 pb-5 mb-4 border-b border-border-primary/40">
+                    <button onClick={() => setActiveStep(prev => prev - 1)} className="flex items-center gap-2.5 group cursor-pointer">
+                      <div className="p-2 bg-orange-500/10 group-hover:bg-orange-500/20 text-orange-500 rounded-xl transition-all">
+                        <ArrowLeft size={20} />
                       </div>
+                      <span className="text-xs font-black uppercase tracking-[0.2em] text-orange-500">Atrás</span>
+                    </button>
+                  </div>
+
+                  <div className="flex flex-col md:flex-row justify-between items-start gap-4 mb-4 border-b border-border-primary pb-6">
+                    <div className="text-left">
+                      <div className="text-sm font-bold text-text-secondary uppercase tracking-widest mb-1">Resultados para tu</div>
+                      <h2 className="text-2xl lg:text-3xl font-black font-accent tracking-tighter text-orange-500 leading-tight">
+                        {selectedBrand?.name} {selectedModel?.group?.name} <span className="text-text-primary">{selectedModel?.description}</span> <span className="text-orange-400">({selectedYear})</span>
+                      </h2>
                     </div>
                     <div className="flex items-center shrink-0">
-                      {/* Selector de Medio de Pago - Cloned from Auto with Moto colors */}
                       <div className="flex items-center gap-4 bg-bg-secondary px-6 py-3 rounded-full border border-border-primary shadow-sm min-w-fit">
                         <span className="text-[11px] font-black text-text-secondary tracking-widest whitespace-nowrap">¿PAGÁS CON TARJETA?</span>
                         <button 
@@ -885,56 +889,101 @@ export const MotoCotizador = () => {
 
       {whatsappModalOpen && selectedQuoteObj && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
-          <GlassCard className="p-8 max-w-md w-full relative">
-            <button className="absolute top-4 right-4 text-text-secondary hover:text-text-primary" onClick={() => { setWhatsappModalOpen(false); setWhatsappPhone(''); }}>✕</button>
-            <div className="flex justify-center mb-4 text-orange-500">
-              <ShieldCheck size={48} />
-            </div>
-            <h3 className="text-2xl font-black font-accent text-center mb-1">¡Un paso más!</h3>
-            <p className="text-center text-text-secondary mb-5 text-sm">
-              Dejanos tu número y un asesor de <strong className="text-orange-500">Yuju</strong> te va a contactar para ayudarte a cerrar tu seguro con {getInsurerLogo(selectedQuoteObj.source) ? (
-                <img
-                  src={getInsurerLogo(selectedQuoteObj.source)!}
-                  alt={selectedQuoteObj.source}
-                  className="inline-block h-6 ml-2 align-middle object-contain"
-                  style={{ filter: 'var(--logo-filter)' }}
-                />
-              ) : (
-                <strong className="text-text-primary uppercase ml-1">{selectedQuoteObj.source}</strong>
-              )}.
-            </p>
-            <div className="bg-bg-secondary p-4 rounded-xl border border-border-primary mb-5">
-              <p className="text-xs font-bold text-text-secondary uppercase tracking-widest mb-2">Resumen</p>
-              <ul className="text-sm text-text-primary space-y-1">
-                <li><span className="text-text-secondary">Moto:</span> {selectedBrand?.name} {selectedModel?.group?.name} ({selectedYear})</li>
-                <li><span className="text-text-secondary">Pago:</span> {payWithCard ? 'Tarjeta' : 'Efectivo'}</li>
-              </ul>
-            </div>
-            <div className="mb-5">
-              <label className="block text-sm font-bold text-text-primary mb-2">Tu número de WhatsApp <span className="text-red-400">*</span></label>
-              <div className="relative">
-                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary font-bold text-sm">🇦🇷 +54</span>
-                <input
-                  type="tel"
-                  value={whatsappPhone}
-                  onChange={(e) => setWhatsappPhone(e.target.value.replace(/[^0-9]/g, ''))}
-                  placeholder="Ej: 1156307246"
-                  maxLength={12}
-                  className="w-full bg-bg-secondary border border-border-primary rounded-xl pl-20 pr-4 py-3 text-text-primary font-bold yuju-input-orange transition-all shadow-sm"
-                />
+          <GlassCard className="p-0 max-w-md w-full relative overflow-hidden rounded-[28px] border border-border-primary shadow-2xl">
+
+            {/* Top accent bar */}
+            <div className="h-1.5 w-full bg-gradient-to-r from-orange-400 via-orange-500 to-amber-400" />
+
+            <div className="p-8">
+              {/* Close */}
+              <button
+                className="absolute top-5 right-5 w-8 h-8 flex items-center justify-center rounded-full bg-bg-secondary hover:bg-orange-500/10 text-text-secondary hover:text-orange-500 transition-all"
+                onClick={() => { setWhatsappModalOpen(false); setWhatsappPhone(''); }}
+              >
+                ✕
+              </button>
+
+              {/* Icon */}
+              <div className="flex justify-center mb-5">
+                <div className="w-16 h-16 rounded-2xl bg-orange-500/10 flex items-center justify-center">
+                  <ShieldCheck size={36} className="text-orange-500" />
+                </div>
               </div>
-              <p className="text-[10px] text-text-secondary mt-1.5 opacity-60">Tu asesor se va a comunicar por este número.</p>
+
+              {/* Title */}
+              <h3 className="text-3xl font-black font-accent text-center tracking-tighter mb-2">¡Un paso más!</h3>
+
+              {/* Subtitle */}
+              <p className="text-center text-text-secondary text-sm leading-relaxed mb-6">
+                Un asesor de <span className="text-orange-500 font-black">Yuju</span> te va a contactar para terminar de configurar tu seguro de{' '}
+                {getInsurerLogo(selectedQuoteObj.source) ? (
+                  <img
+                    src={getInsurerLogo(selectedQuoteObj.source)!}
+                    alt={selectedQuoteObj.source}
+                    className="inline-block h-5 ml-1 align-middle object-contain"
+                    style={{ filter: 'var(--logo-filter)' }}
+                  />
+                ) : (
+                  <strong className="text-text-primary font-black">{selectedQuoteObj.source}</strong>
+                )}.
+              </p>
+
+              {/* Summary card */}
+              <div className="bg-bg-secondary rounded-2xl border border-border-primary p-4 mb-6 space-y-2">
+                <p className="text-[9px] font-black text-text-secondary uppercase tracking-[0.2em] mb-1">Resumen</p>
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-text-secondary font-medium">Moto</span>
+                  <span className="text-xs font-black text-text-primary">{selectedBrand?.name} {selectedModel?.group?.name} ({selectedYear})</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-text-secondary font-medium">Pago</span>
+                  <span className="text-xs font-black text-text-primary">{payWithCard ? 'Tarjeta de crédito' : 'Efectivo'}</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-text-secondary font-medium">Plan</span>
+                  <span className="text-xs font-black text-orange-500">{selectedQuoteObj.planName || selectedQuoteObj.source}</span>
+                </div>
+              </div>
+
+              {/* Phone input */}
+              <div className="mb-6">
+                <label className="block text-xs font-black text-text-primary uppercase tracking-widest mb-2">
+                  Tu número de WhatsApp <span className="text-orange-400">*</span>
+                </label>
+                <div className="relative flex items-center">
+                  <div className="absolute left-0 h-full flex items-center px-4 border-r border-border-primary">
+                    <span className="text-sm font-black text-text-secondary whitespace-nowrap">🇦🇷 +54</span>
+                  </div>
+                  <input
+                    type="tel"
+                    value={whatsappPhone}
+                    onChange={(e) => setWhatsappPhone(e.target.value.replace(/[^0-9]/g, ''))}
+                    placeholder="Ej: 1156307246"
+                    maxLength={12}
+                    className="w-full bg-bg-secondary border border-border-primary rounded-2xl pl-24 pr-4 py-3.5 text-text-primary font-bold yuju-input-orange transition-all shadow-sm focus:ring-2 focus:ring-orange-500/20"
+                  />
+                </div>
+                <p className="text-[10px] text-text-secondary mt-1.5 opacity-60">Tu asesor se va a comunicar por este número.</p>
+              </div>
+
+              {/* CTA */}
+              <Button
+                className="w-full h-14 rounded-2xl bg-gradient-to-r from-orange-500 to-amber-500 border-none text-white font-black text-sm shadow-xl shadow-orange-500/20 uppercase tracking-wider flex items-center justify-center gap-3"
+                onClick={handleWhatsAppRedirect}
+                isLoading={whatsappSending}
+              >
+                {!whatsappSending && (
+                  <>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.888-.788-1.489-1.761-1.663-2.06-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+                    Ir a WhatsApp
+                  </>
+                )}
+              </Button>
             </div>
-            <Button
-              className="w-full bg-gradient-to-r from-orange-500 to-amber-500 hover:shadow-orange-400/30 border-none text-white font-black shadow-lg uppercase tracking-wider"
-              onClick={handleWhatsAppRedirect}
-              isLoading={whatsappSending}
-            >
-              {!whatsappSending && 'Enviar Cotización'}
-            </Button>
           </GlassCard>
         </div>
       )}
+
 
       {activeStep === 6 && (
         <SuccessStep
@@ -945,6 +994,8 @@ export const MotoCotizador = () => {
           brand={selectedBrand?.name || ''}
           model={`${selectedModel?.group?.name || ''} ${selectedModel?.description || ''}`}
           insurer={selectedQuoteObj?.source || ''}
+          accentColor="orange"
+          type="moto"
         />
       )}
 

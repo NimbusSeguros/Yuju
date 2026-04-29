@@ -11,7 +11,8 @@ const services = [
   {
     title: 'Seguro de Auto',
     icon: Car,
-    desc: 'Protección inteligente para tu vehículo con asistencia mecánica 24/7.',
+    desc: 'Comparás los precios de las mejores compañías y elegís la cobertura que más te sirve.',
+    cta: 'Cotizar auto',
     href: '/cotizar/seguro-auto',
     color: 'from-[#3369ff] to-[#60a5fa]',
     hoverColor: 'border-yuju-blue/20',
@@ -20,7 +21,8 @@ const services = [
   {
     title: 'Seguro de Moto',
     icon: MotorbikeIcon,
-    desc: 'Cobertura especializada para rodar con total libertad y tranquilidad.',
+    desc: 'Protegé tu moto ante robo, incendio y daños a terceros.',
+    cta: 'Cotizar moto',
     href: '/cotizar/seguro-moto',
     color: 'from-orange-500 to-orange-400',
     hoverColor: 'border-orange-500/20',
@@ -29,7 +31,8 @@ const services = [
   {
     title: 'Seguro de Hogar',
     icon: Home,
-    desc: 'Tu refugio, protegido con la mayor seguridad y beneficios exclusivos.',
+    desc: 'Cobertura completa para tu casa y tus bienes. Contratación 100% online.',
+    cta: 'Cotizar hogar',
     href: '/cotizar/seguro-hogar',
     color: 'from-emerald-500 to-emerald-400',
     hoverColor: 'border-emerald-500/20',
@@ -105,28 +108,33 @@ export const HomePage = () => {
           </div>
         </div>
 
-        <div className="max-w-5xl mx-auto w-full relative z-20 flex flex-col items-center text-center space-y-8 py-6 md:py-8">
-          <div className="space-y-4 md:space-y-6">
+        <div className="max-w-6xl mx-auto w-full relative z-20 flex flex-col items-center text-center space-y-8 py-6 md:py-8">
+          <div className="space-y-6 md:space-y-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="px-4 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full inline-flex items-center gap-3 mb-8 shadow-xl shadow-white/5"
+            >
+              <div className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </div>
+              <span className="text-white text-[11px] md:text-xs font-bold tracking-wide">Cotizá gratis • Hasta 30% de descuento</span>
+            </motion.div>
+
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="space-y-3"
+              className="space-y-6"
             >
-              <h1 className="text-4xl md:text-5xl lg:text-7xl font-black leading-tight text-white font-accent tracking-tighter">
-                Conectá con la alegría <br /> de estar protegido.
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-black leading-[1.1] text-white font-accent tracking-tighter max-w-5xl mx-auto">
+                Conocé el precio de tu seguro <br className="hidden md:block" /> sin dar tus datos.
               </h1>
 
-              <div className="pt-1">
-                <div className="hero-box-highlight">
-                  <span className="text-xl md:text-3xl lg:text-4xl  tracking-tighter">
-                    Elegí, cotizá y viví seguro,
-                  </span>
-                </div>
-              </div>
-
-              <p className="text-2xl md:text-3xl lg:text-4xl text-white font-medium tracking-tight">
-                en unos simples pasos
+              <p className="text-lg md:text-2xl text-white/80 font-medium tracking-tight max-w-3xl mx-auto leading-relaxed">
+                Comparás coberturas reales, elegís la que más te conviene <br className="hidden md:block" /> y decidís cómo contratar.
               </p>
             </motion.div>
 
@@ -134,11 +142,14 @@ export const HomePage = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="flex flex-wrap items-center justify-center pt-4"
+              className="flex flex-wrap items-center justify-center pt-6"
             >
               <a href="#seguros" className="w-full sm:w-auto">
-                <Button size="lg" className="w-full bg-white/10 hover:bg-white text-white hover:text-yuju-blue border-white/20 px-12 h-16 rounded-2xl font-black uppercase tracking-widest text-xs transition-all duration-500 backdrop-blur-md">
-                  Cotizá ahora <ArrowRight size={20} className="ml-3" />
+                <Button 
+                  size="lg" 
+                  className="w-full bg-white/10 hover:bg-emerald-500 text-white border-white/20 px-12 h-16 rounded-2xl font-black uppercase tracking-widest text-xs transition-all duration-500 backdrop-blur-md hover:border-transparent hover:shadow-[0_0_30px_rgba(16,185,129,0.4)] group"
+                >
+                  Cotizá ahora <ArrowRight size={20} className="ml-3 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </a>
             </motion.div>
@@ -192,11 +203,11 @@ export const HomePage = () => {
           <div className="mb-24 flex flex-col md:flex-row md:items-end justify-between gap-12">
             <div className="space-y-6">
               <div className="px-4 py-1 bg-yuju-blue/10 text-yuju-blue inline-block rounded-full text-xs font-black uppercase tracking-widest">
-                Coberturas Inteligentes
+                Nuestros seguros
               </div>
-              <h2 className="section-title tracking-[ -0.05em]">Elegí tu Tranquilidad</h2>
-              <p className="section-subtitle">
-                Descubrí seguros diseñados para tu estilo de vida. Cotización instantánea e inteligente para personas que valoran su tiempo.
+              <h2 className="section-title tracking-[ -0.05em]">Elegí qué querés proteger</h2>
+              <p className="section-subtitle max-w-2xl">
+                Si valorás tu tiempo, acá podés comparar opciones reales de las mejores compañías y decidir con información clara.
               </p>
             </div>
           </div>
@@ -223,7 +234,7 @@ export const HomePage = () => {
                       service.color
                     )}
                   >
-                    <service.icon size={32} className="text-white" />
+                    <service.icon size={32} strokeWidth={2.5} className="text-white" />
                   </motion.div>
                   {/* Subtle soft shadow/glow behind icon */}
                   <div className={cn("absolute inset-0 blur-xl opacity-40 scale-110", service.color)} />
@@ -241,7 +252,7 @@ export const HomePage = () => {
                       service.btnHover,
                       "hover:text-white"
                     )}>
-                      <span>Ver detalles</span>
+                      <span>{service.cta}</span>
                       <ArrowRight size={16} className="translate-x-0 group-hover/btn:translate-x-1.5 transition-transform" />
                     </Button>
                   </Link>
@@ -267,12 +278,12 @@ export const HomePage = () => {
 
               {/* Floating Tech Badge */}
               <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 4, repeat: Infinity }} className="absolute -bottom-10 -right-10 glass-card p-6 rounded-3xl border-yuju-blue/20 bg-bg-primary/90 flex items-center gap-4 shadow-2xl">
-                <div className="w-12 h-12 bg-yuju-cyan/20 text-yuju-cyan flex items-center justify-center rounded-2xl">
-                  <Activity size={24} />
+                <div className="w-12 h-12 bg-emerald-500/20 text-emerald-500 flex items-center justify-center rounded-2xl">
+                  <ShieldCheck size={24} />
                 </div>
                 <div className="flex flex-col pr-10">
-                  <span className="text-[10px] font-black uppercase tracking-widest text-text-secondary">Monitoreo</span>
-                  <span className="text-sm font-black text-text-primary font-accent">Tecnología Activa</span>
+                  <span className="text-[10px] font-black uppercase tracking-widest text-emerald-500">Sin datos personales</span>
+                  <span className="text-sm font-black text-text-primary font-accent">Mirás precios y después decidís.</span>
                 </div>
               </motion.div>
             </motion.div>
@@ -280,32 +291,32 @@ export const HomePage = () => {
 
           <div className="space-y-10">
             <div className="space-y-4">
-              <h2 className="section-title">Nacimos para<br />simplificar el futuro</h2>
+              <h2 className="section-title">Una nueva forma de<br />asegurar lo tuyo.</h2>
               <p className="text-text-secondary leading-relaxed font-medium">
-                Somos una empresa joven, dinámica y comprometida con la innovación y la sostenibilidad. Nacimos como la evolución digital de Nimbus Bróker, integrando 15 años de trayectoria con la agilidad del mañana.
+                Somos el canal digital de Nimbus Bróker. Integramos 15 años de trayectoria en el mercado para que puedas cotizar y comparar coberturas con total claridad.
               </p>
             </div>
 
-            <div className="grid grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="space-y-3">
                 <div className="flex items-center gap-2 text-yuju-blue">
-                  <MousePointer2 size={16} />
-                  <span className="text-xs font-black uppercase tracking-widest">Digital First</span>
+                  <MousePointer2 size={18} strokeWidth={3} />
+                  <span className="text-xs font-black uppercase tracking-widest">Vos elegís</span>
                 </div>
-                <p className="text-sm font-bold text-text-primary">Experiencia 100% online, sin papeles ni complicaciones.</p>
+                <p className="text-sm font-bold text-text-primary leading-snug">Comparás opciones de forma digital y decidís si preferís avanzar por tu cuenta o con nuestra ayuda.</p>
               </div>
               <div className="space-y-3">
-                <div className="flex items-center gap-2 text-yuju-cyan">
-                  <ShieldCheck size={16} />
-                  <span className="text-xs font-black uppercase tracking-widest">Respaldo Total</span>
+                <div className="flex items-center gap-2 text-yuju-blue">
+                  <ShieldCheck size={18} strokeWidth={3} />
+                  <span className="text-xs font-black uppercase tracking-widest">Respaldo real</span>
                 </div>
-                <p className="text-sm font-bold text-text-primary">Las aseguradoras más solventes del mercado argentino.</p>
+                <p className="text-sm font-bold text-text-primary leading-snug">Trabajamos con las aseguradoras más importantes del país para que siempre estés protegido.</p>
               </div>
             </div>
 
             <Link to="/institucional">
-              <Button variant="outline" className="group">
-                Conocé nuestra historia <ChevronRight size={18} className="ml-2 group-hover:translate-x-1.5 transition-transform" />
+              <Button variant="outline" className="group px-8 h-12 rounded-xl font-black uppercase tracking-widest text-[10px]">
+                Quiénes somos <ChevronRight size={16} className="ml-2 group-hover:translate-x-1.5 transition-transform" />
               </Button>
             </Link>
           </div>
