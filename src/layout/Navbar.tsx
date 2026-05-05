@@ -217,13 +217,13 @@ export const Navbar = () => {
             className="fixed inset-0 bg-bg-primary/60 backdrop-blur-2xl z-[60] md:hidden p-8 flex flex-col"
           >
             <div className="flex items-center justify-between mb-12">
-              <div className="flex items-center gap-3">
-                <img 
-                  src={theme === 'dark' ? "https://res.cloudinary.com/dewcgbpvp/image/upload/v1777053184/webBlanco-SASFsG6e_xkuubw.png" : "https://res.cloudinary.com/dewcgbpvp/image/upload/v1777053220/logoYujuAzul-DE5urkwK_io55ss.png"} 
-                  alt="Yuju Logo" 
-                  className="h-8 w-auto object-contain"
-                />
-              </div>
+            <Link to="/" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-3">
+              <img 
+                src={theme === 'dark' ? "https://res.cloudinary.com/dewcgbpvp/image/upload/v1777053184/webBlanco-SASFsG6e_xkuubw.png" : "https://res.cloudinary.com/dewcgbpvp/image/upload/v1777053220/logoYujuAzul-DE5urkwK_io55ss.png"} 
+                alt="Yuju Logo" 
+                className="h-8 w-auto object-contain"
+              />
+            </Link>
               <motion.button 
                 whileTap={{ scale: 0.9 }}
                 onClick={() => setMobileMenuOpen(false)} 

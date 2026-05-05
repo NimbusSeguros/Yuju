@@ -88,24 +88,22 @@ export const HomePage = () => {
       {/* SECTION: HERO - Reworked for Yuju Blue style + Real Image */}
       <section className="relative min-h-screen flex items-center pt-20 md:pt-24 pb-8 overflow-hidden px-6">
         {/* Background Base (Yuju Blue) */}
-        <div className="absolute inset-0 bg-yuju-blue z-0 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-yuju-blue via-yuju-blue to-[#1e40af] z-0 overflow-hidden">
           {/* Subtle tech patterns overlay */}
           <div className="absolute inset-0 opacity-15" style={{ backgroundImage: 'radial-gradient(circle, white 1.5px, transparent 1.5px)', backgroundSize: '48px 48px' }} />
-          {/* Floating animated blobs for futuristic touch */}
-          <motion.div animate={{ scale: [1, 1.2, 1], rotate: [0, 90, 0] }} transition={{ duration: 20, repeat: Infinity, ease: "linear" }} className="absolute -top-1/4 -left-1/4 w-[800px] h-[800px] bg-yuju-cyan blur-[180px] rounded-full opacity-50" />
-          <motion.div animate={{ scale: [1, 1.4, 1], rotate: [0, -120, 0] }} transition={{ duration: 30, repeat: Infinity, ease: "linear" }} className="absolute -bottom-1/4 -right-1/6 w-[700px] h-[700px] bg-yuju-cyan blur-[200px] rounded-full opacity-40" />
-          <motion.div animate={{ scale: [1, 1.3, 1], rotate: [0, -90, 0] }} transition={{ duration: 25, repeat: Infinity, ease: "linear" }} className="absolute -bottom-1/4 -right-1/4 w-[600px] h-[600px] bg-[#3369ff] blur-[150px] rounded-full opacity-40 border border-white/5" />
+          
+          {/* Rotating green spheres as requested */}
+          <motion.div 
+            animate={{ scale: [1, 1.2, 1], rotate: [0, 90, 0] }} 
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }} 
+            className="absolute -top-1/4 -left-1/4 w-[800px] h-[800px] bg-yuju-cyan blur-[180px] rounded-full opacity-40" 
+          />
+          <motion.div 
+            animate={{ scale: [1, 1.3, 1], rotate: [0, -120, 0] }} 
+            transition={{ duration: 35, repeat: Infinity, ease: "linear" }} 
+            className="absolute -bottom-1/6 -right-1/6 w-[800px] h-[800px] bg-yuju-cyan blur-[220px] rounded-full opacity-40" 
+          />
 
-          {/* Real Background Image Overlay (Right Side) */}
-          <div className="absolute inset-0 z-10 pointer-events-none">
-            <div className="absolute inset-y-0 right-0 w-full lg:w-3/5 bg-cover bg-center lg:rounded-l-[80px] opacity-40 lg:opacity-100"
-              style={{
-                backgroundImage: `url('/hero.png')`,
-                maskImage: 'linear-gradient(to left, black 60%, transparent 100%)',
-                WebkitMaskImage: 'linear-gradient(to left, black 60%, transparent 100%)'
-              }} />
-            <div className="absolute inset-0 bg-gradient-to-r from-yuju-blue via-yuju-blue/40 to-transparent lg:hidden" />
-          </div>
         </div>
 
         <div className="max-w-6xl mx-auto w-full relative z-20 flex flex-col items-center text-center space-y-8 py-6 md:py-8">

@@ -82,7 +82,6 @@ export const MotoCotizador = () => {
   const [selectedQuoteObj, setSelectedQuoteObj] = useState<any>(null);
   const [whatsappPhone, setWhatsappPhone] = useState('');
   const [whatsappSending, setWhatsappSending] = useState(false);
-  const [vigenciasError, setVigenciasError] = useState(false);
 
   useEffect(() => {
     fetchBrands();
@@ -166,7 +165,6 @@ export const MotoCotizador = () => {
       console.error("Error fetching vigencias:", err);
       setVigencias([{ id: 65, descripcion: "SEMESTRAL" }]);
       setSelectedVigencia("65");
-      setVigenciasError(true);
     }
   };
 
@@ -309,7 +307,7 @@ export const MotoCotizador = () => {
     setQuotationResult({ rus: null, atm: null, integrity: null, rusError: null, atmError: null, integrityError: null });
 
     const { vigenciaDesde, vigenciaHasta, tipoVigencia } = calculateDatesForQuote();
-    const BASE_URL = 'https://apiyujumotos.com/api';
+    const BASE_URL = import.meta.env.VITE_MOTO_API_URL ? `${import.meta.env.VITE_MOTO_API_URL}/api` : 'https://apiyujumotos.com/api';
 
     const payloadRus = {
       codigoTipoInteres: "MOTOVEHICULO",
@@ -784,11 +782,7 @@ export const MotoCotizador = () => {
                       <h2 className="text-2xl lg:text-3xl font-black font-accent tracking-tighter text-orange-500 leading-tight">
                         {selectedBrand?.name} {selectedModel?.group?.name} <span className="text-text-primary">{selectedModel?.description}</span> <span className="text-orange-400">({selectedYear})</span>
                       </h2>
-                      {vigenciasError && (
-                        <p className="text-[10px] text-orange-500 font-bold mt-2 bg-orange-500/5 px-3 py-1 rounded-lg border border-orange-500/10 inline-block">
-                          * El sistema de RUS presenta demoras. Mostrando vigencia semestral por defecto.
-                        </p>
-                      )}
+
                     </div>
                     <div className="flex items-center shrink-0">
                       <div className="flex items-center gap-4 bg-bg-secondary px-6 py-3 rounded-full border border-border-primary shadow-sm min-w-fit">
