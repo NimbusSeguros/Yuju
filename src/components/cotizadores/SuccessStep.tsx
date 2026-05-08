@@ -88,7 +88,7 @@ export const SuccessStep: React.FC<SuccessStepProps> = ({ onReset, brand, model,
     : [allProducts.hogar, allProducts.moto]; // auto (default)
 
   return (
-    <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4 md:p-12 overflow-hidden">
+    <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4 md:p-8 overflow-hidden no-scrollbar">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -98,7 +98,7 @@ export const SuccessStep: React.FC<SuccessStepProps> = ({ onReset, brand, model,
       <motion.div
         initial={{ opacity: 0, scale: 0.95, y: 30 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
-        className="relative w-full max-w-xl bg-yuju-dark rounded-[48px] p-8 md:p-12 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.8)] border border-white/5"
+        className="relative w-full max-w-sm md:max-w-md bg-yuju-dark rounded-[32px] md:rounded-[40px] p-6 md:p-10 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.8)] border border-white/5 my-auto overflow-y-auto max-h-[90vh] no-scrollbar"
       >
         <div className={`absolute -top-32 -right-32 w-80 h-80 ${c.glow} rounded-full blur-[100px]`} />
         <div className={`absolute -bottom-32 -left-32 w-80 h-80 ${c.glowSecondary} rounded-full blur-[100px]`} />
@@ -115,18 +115,18 @@ export const SuccessStep: React.FC<SuccessStepProps> = ({ onReset, brand, model,
             </motion.div>
           </div>
 
-          <div className="space-y-3">
-            <h1 className="text-4xl md:text-5xl font-black font-accent text-white tracking-tighter leading-none">
+          <div className="space-y-2">
+            <h1 className="text-3xl md:text-4xl font-black font-accent text-white tracking-tighter leading-none">
               ¡Solicitud <span className={c.titleSpan}>Enviada!</span>
             </h1>
-            <p className="text-slate-400 font-bold text-base md:text-lg max-w-lg mx-auto">
+            <p className="text-slate-400 font-bold text-sm md:text-base max-w-md mx-auto">
               Gracias por elegir <span className={c.nameSpan}>Yuju</span> para asegurar tu{' '}
               <span className="text-white">{brand} {model}</span>.{' '}
               Un asesor te contactará en breve.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-2xl mx-auto">
             {otherProducts.map((product, idx) => (
               <GlassCard
                 key={idx}

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getAccessToken } from './apiClient';
 
 // API instances configured to use the production URL or proxy
 const MOTO_API_BASE = import.meta.env.VITE_MOTO_API_URL || 'https://apiyujumotos.com';
@@ -14,6 +15,26 @@ const infoautoApi = axios.create({
 const atmApi = axios.create({
     baseURL: `${MOTO_API_BASE}/api/atm/`,
 });
+
+// Helper to add auth interceptor
+const addAuthInterceptor = (instance: any) => {
+    instance.interceptors.request.use(async (config: any) => {
+        try {
+            const token = await getAccessToken();
+            if (token) {
+                config.headers.Authorization = `Bearer ${token}`;
+            }
+        } catch (error) {
+            console.error('Error adding token to request:', error);
+        }
+        return config;
+    });
+};
+
+// Apply auth to all instances
+addAuthInterceptor(api);
+addAuthInterceptor(infoautoApi);
+addAuthInterceptor(atmApi);
 
 // Global Error Interceptor
 api.interceptors.response.use(
@@ -207,19 +228,42 @@ export const createLead = async (payload: {
     wspText: string;
     isMoto?: boolean;
 }) => {
-    // If isMoto is not provided, default to true (Moto)
+    // Aligned with the new backend structure on apiyujumotos.com
     const body = {
-        ...payload,
-        isMoto: payload.isMoto !== undefined ? payload.isMoto : true
+        leadData: {
+            nombre: "Cliente Moto", // Opcional, podríamos pasarle el nombre si lo tuviéramos
+            telefono: payload.phone,
+            plan: payload.planName,
+            provider: payload.provider,
+            precio: payload.precio,
+            localidad: payload.zipCode // Usamos zipCode como localidad por ahora
+        },
+        vehicleInfo: {
+            brand: payload.vehicleInfo?.brand,
+            model: payload.vehicleInfo?.model,
+            version: payload.vehicleInfo?.version,
+            year: Number(payload.vehicleInfo?.year)
+        }
     };
-    const response = await axios.post(`${MOTO_API_BASE}/api/leads`, body);
+    
+    const token = await getAccessToken();
+    const response = await axios.post(`${MOTO_API_BASE}/api/leads`, body, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    });
     return response.data;
 };
 
 // --- San Cristobal Seguros ---
 export const cotizarSanCristobal = async (payload: any) => {
     // Aligned with backend: router.post('/san-cristobal/cotizacion-auto', ...)
-    const response = await axios.post(`${MOTO_API_BASE}/api/san-cristobal/cotizacion-auto`, payload);
+    const token = await getAccessToken();
+    const response = await axios.post(`${MOTO_API_BASE}/api/san-cristobal/cotizacion-auto`, payload, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    });
     return response.data;
 };
 

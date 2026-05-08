@@ -156,3 +156,12 @@ h1, h2, h3, .font-accent {
 .logo-track {
   @apply flex gap-8 w-fit animate-scroll;
 }
+
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
