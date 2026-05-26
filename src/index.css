@@ -157,7 +157,6 @@ h1, h2, h3, .font-accent {
   @apply flex gap-8 w-fit animate-scroll;
 }
 
-<<<<<<< HEAD
 /* Hide scrollbar utility */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
@@ -165,7 +164,8 @@ h1, h2, h3, .font-accent {
 .no-scrollbar {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
-=======
+}
+
 /* Custom Premium Range Input Slider */
 input[type="range"] {
   -webkit-appearance: none;
@@ -213,5 +213,5 @@ input[type="range"]::-moz-range-thumb:hover {
 
 input[type="range"]::-moz-range-thumb:active {
   transform: scale(0.9);
->>>>>>> 3e1d263 (feat: security hardening + migrate to pnpm + build fixes)
 }
+
