@@ -176,12 +176,26 @@ export const AutoCotizador = () => {
         fechaVigencia: formatTodayDDMMYYYY(), cityCode: formData.sancorCityCode
       };
 
-      const API_URL = import.meta.env.VITE_API_BASE_URL ? `${import.meta.env.VITE_API_BASE_URL}/api` : 'https://api-yuju.com.ar/api';
-      const response = await fetch(`${API_URL}/cotizar-stream`, {
+      const API_URL = import.meta.env.VITE_API_BASE_URL 
+        ? `${import.meta.env.VITE_API_BASE_URL}/api` 
+        : (import.meta.env.DEV ? '/api' : 'https://api-yuju.com.ar/api');
+
+      // Helper para hacer la request con el token indicado
+      const doStreamRequest = (tkn: string) => fetch(`${API_URL}/cotizar-stream`, {
         method: "POST",
-        headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+        headers: { "Content-Type": "application/json", "Authorization": `Bearer ${tkn}` },
         body: JSON.stringify(payload),
       });
+
+      let response = await doStreamRequest(token!);
+
+      // Si el token guardado es inválido (p.ej. de producción), lo limpiamos y reintentamos
+      if (response.status === 401 || response.status === 403) {
+        sessionStorage.removeItem('auth_token');
+        const { getAccessToken: freshGet } = await import('../../services/apiClient');
+        const freshToken = await freshGet();
+        response = await doStreamRequest(freshToken!);
+      }
 
       const reader = response.body?.getReader();
       if (!reader) return;

@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_BASE_URL ? `${import.meta.env.VITE_API_BASE_URL}/api` : 'https://api-yuju.com.ar/api';
+const API_URL = import.meta.env.VITE_API_BASE_URL
+    ? `${import.meta.env.VITE_API_BASE_URL}/api`
+    : '/api'; // En dev, Vite proxy redirige /api → localhost:3000
 const API_KEY = import.meta.env.VITE_API_KEY;
 
 // 1. Create Axios instance
@@ -11,7 +13,8 @@ export const apiClient = axios.create({
     }
 });
 
-let token: string | null = localStorage.getItem('auth_token');
+// ⚠️ SECURITY: Usar sessionStorage en vez de localStorage para reducir impacto de XSS
+let token: string | null = sessionStorage.getItem('auth_token');
 
 // 2. Function to get backend token
 export const getAccessToken = async () => {
@@ -19,16 +22,25 @@ export const getAccessToken = async () => {
     return await fetchToken();
 };
 
+// Helper: limpia el token cacheado y del sessionStorage
+const clearToken = () => {
+    token = null;
+    sessionStorage.removeItem('auth_token');
+};
+
 const fetchToken = async () => {
     try {
         const response = await axios.post(`${API_URL}/auth/token`, {}, {
             headers: {
-                'x-api-key': API_KEY 
+                'x-api-key': API_KEY
             }
         });
         token = response.data.token;
         if (token) {
-            localStorage.setItem('auth_token', token);
+            // ⚠️ SECURITY: Usar sessionStorage en vez de localStorage
+            // sessionStorage se limpia al cerrar el navegador
+            // Para mayor seguridad, usar httpOnly cookies del backend
+            sessionStorage.setItem('auth_token', token);
         }
         return token;
     } catch (error) {
@@ -62,6 +74,8 @@ apiClient.interceptors.response.use((response) => {
         originalRequest._retry = true;
 
         try {
+            // Limpiamos el token viejo (puede ser de producción o expirado)
+            clearToken();
             await fetchToken();
             if (token) {
                 originalRequest.headers.Authorization = `Bearer ${token}`;

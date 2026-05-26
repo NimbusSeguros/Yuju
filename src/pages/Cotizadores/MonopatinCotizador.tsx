@@ -1,5 +1,5 @@
 import { GenericTechHomeCotizador } from '../../components/cotizadores/GenericTechHomeCotizador';
 
-export const HogarCotizador = () => {
-  return <GenericTechHomeCotizador type="hogar" />;
+export const MonopatinCotizador = () => {
+  return <GenericTechHomeCotizador type="monopatin" />;
 };

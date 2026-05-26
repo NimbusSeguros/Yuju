@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Car, Home, ArrowRight, ShieldCheck, ChevronRight, MousePointer2 } from 'lucide-react';
+import { Car, Home, ArrowRight, ChevronRight, MousePointer2, Laptop, Bike, ShieldCheck } from 'lucide-react';
 import { MotorbikeIcon } from '../../components/icons/MotorbikeIcon';
+import { MonopatinIcon } from '../../components/icons/MonopatinIcon';
 import { Link } from 'react-router-dom';
 import { GlassCard } from '../../components/ui/GlassCard';
 import { Button } from '../../components/ui/Button';
@@ -37,6 +39,36 @@ const services = [
     color: 'from-emerald-500 to-emerald-400',
     hoverColor: 'border-emerald-500/20',
     btnHover: 'hover:bg-emerald-500 shadow-emerald-500/20'
+  },
+  {
+    title: 'Seguro de Monopatín',
+    icon: MonopatinIcon,
+    desc: 'Protegé tu monopatín eléctrico contra robos, daños a terceros y accidentes.',
+    cta: 'Cotizar monopatín',
+    href: '/cotizar/seguro-monopatin',
+    color: 'from-cyan-500 to-cyan-400',
+    hoverColor: 'border-cyan-500/20',
+    btnHover: 'hover:bg-cyan-500 shadow-cyan-500/20'
+  },
+  {
+    title: 'Seguro de Bicicleta',
+    icon: Bike,
+    desc: 'Cuidá tu bici en la vía pública ante robos y accidentes, con asistencia 24 horas.',
+    cta: 'Cotizar bicicleta',
+    href: '/cotizar/seguro-bicicleta',
+    color: 'from-amber-500 to-amber-400',
+    hoverColor: 'border-amber-500/20',
+    btnHover: 'hover:bg-amber-500 shadow-amber-500/20'
+  },
+  {
+    title: 'Seguro de Notebook',
+    icon: Laptop,
+    desc: 'Llevá tu computadora portátil a cualquier lado con la tranquilidad de estar protegido.',
+    cta: 'Cotizar notebook',
+    href: '/cotizar/seguro-notebook',
+    color: 'from-indigo-500 to-indigo-400',
+    hoverColor: 'border-indigo-500/20',
+    btnHover: 'hover:bg-indigo-500 shadow-indigo-500/20'
   },
 ];
 
@@ -81,6 +113,8 @@ const testimonials = [
 
 export const HomePage = () => {
   const { theme } = useTheme();
+  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
+  const [hoveredBtn, setHoveredBtn] = useState<string | null>(null);
 
   return (
     <div className="relative overflow-hidden bg-bg-primary transition-colors duration-500">
@@ -218,24 +252,35 @@ export const HomePage = () => {
                   "group p-6 border-border-primary bg-bg-primary transition-all duration-700 relative overflow-hidden flex flex-col h-full min-h-[340px] rounded-[32px]",
                   `hover:${service.hoverColor}`
                 )}
+                onMouseEnter={() => setHoveredCard(service.title)}
+                onMouseLeave={() => setHoveredCard(null)}
+                style={service.title === 'Seguro de Bicicleta' && hoveredCard === 'Seguro de Bicicleta' ? { borderColor: 'oklch(85.2% 0.199 91.936 / 0.3)' } : {}}
               >
                 {/* Background glow per service color */}
-                <div className={cn("absolute -bottom-20 -right-20 w-48 h-48 blur-3xl opacity-0 group-hover:opacity-25 transition-opacity rounded-full bg-gradient-to-tr", service.color)} />
+                <div 
+                  style={service.title === 'Seguro de Bicicleta' ? { background: 'radial-gradient(circle, oklch(85.2% 0.199 91.936) 0%, transparent 70%)' } : {}} 
+                  className={cn("absolute -bottom-20 -right-20 w-48 h-48 blur-3xl opacity-0 group-hover:opacity-25 transition-opacity rounded-full bg-gradient-to-tr", service.title === 'Seguro de Bicicleta' ? '' : service.color)} 
+                />
 
                 <div className="relative mb-6">
                   <motion.div
                     animate={{ y: [0, -5, 0] }}
                     transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                    style={service.title === 'Seguro de Bicicleta' ? { background: 'oklch(85.2% 0.199 91.936)' } : {}}
                     className={cn(
                       "w-16 h-16 rounded-2xl flex items-center justify-center relative z-10",
                       "bg-gradient-to-br border border-white/20 shadow-xl",
-                      service.color
+                      service.title === 'Seguro de Bicicleta' ? '' : service.color
                     )}
                   >
                     <service.icon size={32} strokeWidth={2.5} className="text-white" />
                   </motion.div>
                   {/* Subtle soft shadow/glow behind icon */}
-                  <div className={cn("absolute inset-0 blur-xl opacity-40 scale-110", service.color)} />
+                  {service.title !== 'Seguro de Bicicleta' && (
+                    <div 
+                      className={cn("absolute inset-0 blur-xl opacity-40 scale-110", service.color)} 
+                    />
+                  )}
                 </div>
 
                 <h3 className="text-2xl font-black text-text-primary mb-3 font-accent tracking-tighter whitespace-pre-wrap leading-tight min-h-[4rem] flex items-center">{service.title}</h3>
@@ -244,12 +289,21 @@ export const HomePage = () => {
                 </p>
 
                 <div className="mt-auto">
-                  <Link to={service.href} className="block group/btn">
-                    <Button variant="ghost" className={cn(
-                      "w-full text-text-primary font-black uppercase tracking-widest text-[10px] flex items-center justify-between px-6 py-4 rounded-2xl bg-bg-secondary transition-all duration-300",
-                      service.btnHover,
-                      "hover:text-white"
-                    )}>
+                  <Link 
+                    to={service.href} 
+                    className="block group/btn"
+                    onMouseEnter={() => setHoveredBtn(service.title)}
+                    onMouseLeave={() => setHoveredBtn(null)}
+                  >
+                    <Button 
+                      variant="ghost" 
+                      className={cn(
+                        "w-full text-text-primary font-black uppercase tracking-widest text-[10px] flex items-center justify-between px-6 py-4 rounded-2xl bg-bg-secondary transition-all duration-300",
+                        service.title === 'Seguro de Bicicleta' ? '' : service.btnHover,
+                        service.title === 'Seguro de Bicicleta' ? '' : "hover:text-white"
+                      )}
+                      style={service.title === 'Seguro de Bicicleta' && hoveredBtn === 'Seguro de Bicicleta' ? { backgroundColor: 'oklch(85.2% 0.199 91.936)', color: '#fff', boxShadow: '0 10px 15px -3px oklch(85.2% 0.199 91.936 / 0.3)' } : {}}
+                    >
                       <span>{service.cta}</span>
                       <ArrowRight size={16} className="translate-x-0 group-hover/btn:translate-x-1.5 transition-transform" />
                     </Button>

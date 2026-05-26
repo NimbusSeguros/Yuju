@@ -12,6 +12,7 @@ import AtmProposalModal from '../../components/cotizadores/AtmProposalModal';
 import { FAQAccordion } from '../../components/cotizadores/FAQAccordion';
 import { SuccessStep } from '../../components/cotizadores/SuccessStep';
 import { createLead } from '../../services/motoApi';
+import type { VehicleBrand, VehicleModel, Localidad, Vigencia, Quote, QuotationResult } from '../../types';
 
 const motoFAQ = [
   { id: 1, title: "¿Es obligatorio contratar un seguro de moto?", subtitle: "Sí, es obligatorio. En Argentina, la ley exige que todo vehículo que circule por las calles tenga un seguro de responsabilidad civil, que cubre los daños que puedas ocasionar a terceros con tu moto. Así, podés manejar con tranquilidad y seguridad, sabiendo que estás cumpliendo con la normativa vigente." },
@@ -46,30 +47,30 @@ export const MotoCotizador = () => {
   const [activeStep, setActiveStep] = useState(1); // 1: Marca, 2: Año, 3: Modelo, 4: CP/Loc, 5: Results
 
   // --- API State ---
-  const [brands, setBrands] = useState<any[]>([]);
-  const [selectedBrand, setSelectedBrand] = useState<any>(null);
+  const [brands, setBrands] = useState<VehicleBrand[]>([]);
+  const [selectedBrand, setSelectedBrand] = useState<VehicleBrand | null>(null);
   const [brandSearchTerm, setBrandSearchTerm] = useState('');
   const [brandListOpen, setBrandListOpen] = useState(false);
   const [brandsLoading, setBrandsLoading] = useState(false);
 
-  const [allModels, setAllModels] = useState<any[]>([]);
+  const [allModels, setAllModels] = useState<VehicleModel[]>([]);
   const [allModelsLoading, setAllModelsLoading] = useState(false);
 
   const [availableYears, setAvailableYears] = useState<number[]>([]);
   const [selectedYear, setSelectedYear] = useState('');
 
-  const [filteredModels, setFilteredModels] = useState<any[]>([]);
-  const [selectedModel, setSelectedModel] = useState<any>(null);
+  const [filteredModels, setFilteredModels] = useState<VehicleModel[]>([]);
+  const [selectedModel, setSelectedModel] = useState<VehicleModel | null>(null);
 
   const [zipCode, setZipCode] = useState('');
-  const [localities, setLocalities] = useState<any[]>([]);
-  const [selectedLocality, setSelectedLocality] = useState<any>(null);
+  const [localities, setLocalities] = useState<Localidad[]>([]);
+  const [selectedLocality, setSelectedLocality] = useState<Localidad | null>(null);
   const [localitiesLoading, setLocalitiesLoading] = useState(false);
 
-  const [vigencias, setVigencias] = useState<any[]>([]);
+  const [vigencias, setVigencias] = useState<Vigencia[]>([]);
   const [selectedVigencia, setSelectedVigencia] = useState('');
 
-  const [quotationResult, setQuotationResult] = useState<any>(null);
+  const [quotationResult, setQuotationResult] = useState<QuotationResult | null>(null);
   const [quotationLoading, setQuotationLoading] = useState(false);
   const [, setError] = useState<string | null>(null);
 
@@ -122,7 +123,7 @@ export const MotoCotizador = () => {
     try {
       const data = await getInfoautoAllBrands();
       const list = Array.isArray(data) ? data : [];
-      list.sort((a: any, b: any) => a.name.localeCompare(b.name));
+      list.sort((a: VehicleBrand, b: VehicleBrand) => a.name.localeCompare(b.name));
       setBrands(list);
       
       // 2. Save to cache
@@ -139,7 +140,7 @@ export const MotoCotizador = () => {
     try {
       const data = await getInfoautoAllBrands();
       const list = Array.isArray(data) ? data : [];
-      list.sort((a: any, b: any) => a.name.localeCompare(b.name));
+      list.sort((a: VehicleBrand, b: VehicleBrand) => a.name.localeCompare(b.name));
       localStorage.setItem(CACHE_KEY, JSON.stringify(list));
       localStorage.setItem(CACHE_EXPIRY_KEY, (new Date().getTime() + CACHE_DURATION).toString());
     } catch (e) {
@@ -152,14 +153,14 @@ export const MotoCotizador = () => {
       const data = await getVigencias(20);
       let list = Array.isArray(data) ? data : (data.dtoList || data.message || []);
       setVigencias(list);
-      const semestralVig = list.find((v: any) =>
+      const semestralVig = list.find((v: Vigencia) =>
         (v.descripcion || v.description || '').toUpperCase().includes("SEMESTRAL")
       );
       if (semestralVig) {
-        setSelectedVigencia(semestralVig.id || semestralVig.ID);
+        setSelectedVigencia(String(semestralVig.id));
       } else {
-        const fallback = list.find((v: any) => (v.id == 65 || v.ID == 65));
-        if (fallback) setSelectedVigencia(fallback.id || fallback.ID);
+        const fallback = list.find((v: Vigencia) => (v.id == 65));
+        if (fallback) setSelectedVigencia(String(fallback.id));
       }
     } catch (err) { 
       console.error("Error fetching vigencias:", err);
@@ -183,8 +184,8 @@ export const MotoCotizador = () => {
       const yearsSet = new Set<number>();
       let maxYearInModels = 0;
 
-      list.forEach((m: any) => {
-        if (m.prices_from && m.prices_to) {
+      list.forEach((m: VehicleModel) => {
+        if (m.prices_from != null && m.prices_to != null) {
           for (let y = m.prices_from; y <= m.prices_to; y++) {
             yearsSet.add(y);
             if (y > maxYearInModels) maxYearInModels = y;
@@ -198,7 +199,7 @@ export const MotoCotizador = () => {
           yearsSet.add(y);
         }
       }
-      const sortedYears = Array.from(yearsSet).sort((a: any, b: any) => b - a) as number[];
+      const sortedYears = Array.from(yearsSet).sort((a, b) => b - a);
       setAvailableYears(sortedYears);
     } catch (err) {
       console.error("Error fetching models:", err);
@@ -207,11 +208,11 @@ export const MotoCotizador = () => {
     }
   };
 
-  const handleBrandSelect = (brand: any) => {
+  const handleBrandSelect = (brand: VehicleBrand) => {
     setSelectedBrand(brand);
     setBrandSearchTerm(brand.name);
     setBrandListOpen(false);
-    fetchAllModels(brand.id);
+    fetchAllModels(String(brand.id));
   };
 
   const handleYearSelect = (year: string) => {
@@ -220,14 +221,14 @@ export const MotoCotizador = () => {
     const targetYear = parseInt(year);
 
     let filtered = allModels.filter(m =>
-      m.prices_from <= targetYear && m.prices_to >= targetYear
+      (m.prices_from ?? 0) <= targetYear && (m.prices_to ?? 0) >= targetYear
     );
 
     if (filtered.length === 0) {
       for (let fallbackOffsets = 1; fallbackOffsets <= 2; fallbackOffsets++) {
         const fallbackYear = targetYear - fallbackOffsets;
-        filtered = allModels.filter(m =>
-          m.prices_from <= fallbackYear && m.prices_to >= fallbackYear
+      filtered = allModels.filter(m =>
+          (m.prices_from ?? 0) <= fallbackYear && (m.prices_to ?? 0) >= fallbackYear
         );
         if (filtered.length > 0) break;
       }
@@ -257,11 +258,15 @@ export const MotoCotizador = () => {
         const data = await getLocalities(val);
         // Handle both RUS format (array/dtoList) and local fallback format ({localidades:[...]})
         const rawList = data.localidades || (Array.isArray(data) ? data : (data.dtoList || data.message || []));
-        const locList = rawList.map((loc: any) => ({
-          id: loc.id ?? loc.ID ?? loc.cp ?? loc.postalCode,
-          ID: loc.id ?? loc.ID ?? loc.cp ?? loc.postalCode,
+        const locList: Localidad[] = rawList.map((loc: Localidad) => ({
+          ...loc,
+          id: loc.id ?? loc.ID ?? loc.postalCode,
+          ID: loc.id ?? loc.ID ?? loc.postalCode,
           descripcion: loc.descripcion ?? loc.description ?? loc.localidad ?? loc.place,
-          ...loc
+          postalCode: String(loc.id ?? loc.ID ?? loc.postalCode ?? ''),
+          place: loc.descripcion ?? loc.description ?? loc.localidad ?? loc.place ?? '',
+          cityCode: String(loc.id ?? loc.ID ?? loc.postalCode ?? ''),
+          admin1: loc.admin1 ?? '',
         }));
         setLocalities(locList);
         
@@ -280,7 +285,7 @@ export const MotoCotizador = () => {
 
   const calculateDatesForQuote = () => {
     const today = new Date();
-    const vigenciaObj = vigencias.find(v => (v.id || v.ID) == selectedVigencia);
+    const vigenciaObj = vigencias.find(v => v.id == selectedVigencia);
     let monthsToAdd = 6;
     let tipoVigenciaStr = "SEMESTRAL";
 
@@ -304,7 +309,7 @@ export const MotoCotizador = () => {
     }
     setActiveStep(5);
     setQuotationLoading(true);
-    setQuotationResult({ rus: null, atm: null, integrity: null, rusError: null, atmError: null, integrityError: null });
+    setQuotationResult({ rus: undefined, atm: undefined, integrity: undefined, rusError: undefined, atmError: undefined, integrityError: undefined });
 
     const { vigenciaDesde, vigenciaHasta, tipoVigencia } = calculateDatesForQuote();
     const BASE_URL = import.meta.env.VITE_MOTO_API_URL ? `${import.meta.env.VITE_MOTO_API_URL}/api` : 'https://apiyujumotos.com/api';
@@ -321,7 +326,7 @@ export const MotoCotizador = () => {
         cpLocalidadGuarda: parseInt(zipCode),
         gnc: "NO",
         localidadGuarda: selectedLocality ? (selectedLocality.id || selectedLocality.ID) : "",
-        codia: selectedModel.codia.toString(),
+        codia: (selectedModel.codia ?? '').toString(),
         rastreadorSatelital: "NO",
         rastreoACargoRUS: "NO",
         uso: "PARTICULAR"
@@ -342,8 +347,8 @@ export const MotoCotizador = () => {
       // 1. Define independent promises with their own state updates
       const pRus = fetch(`${BASE_URL}/rus/cotizaciones/motos`, { method: "PUT", headers, body: JSON.stringify(payloadRus) })
         .then(res => res.json())
-        .then(data => setQuotationResult((prev: any) => ({ ...prev, rus: data })))
-        .catch(err => setQuotationResult((prev: any) => ({ ...prev, rusError: err.message })));
+        .then(data => setQuotationResult((prev: QuotationResult | null) => prev ? { ...prev, rus: data } : null))
+        .catch(err => setQuotationResult((prev: QuotationResult | null) => prev ? { ...prev, rusError: err.message } : null));
 
       const pAtm = fetch(`${BASE_URL}/atm/cotizar`, { 
         method: "POST", 
@@ -351,8 +356,8 @@ export const MotoCotizador = () => {
         body: JSON.stringify({ codia: String(selectedModel.codia), anio: parseInt(selectedYear), codpostal: parseInt(zipCode) }) 
       })
         .then(res => res.json())
-        .then(data => setQuotationResult((prev: any) => ({ ...prev, atm: data })))
-        .catch(err => setQuotationResult((prev: any) => ({ ...prev, atmError: err.message })));
+        .then(data => setQuotationResult((prev: QuotationResult | null) => prev ? { ...prev, atm: data } : null))
+        .catch(err => setQuotationResult((prev: QuotationResult | null) => prev ? { ...prev, atmError: err.message } : null));
 
       const pIntegrity = fetch(`${BASE_URL}/integrity/cotizar`, { 
         method: "POST", 
@@ -366,8 +371,8 @@ export const MotoCotizador = () => {
         }) 
       })
         .then(res => res.json())
-        .then(data => setQuotationResult((prev: any) => ({ ...prev, integrity: data })))
-        .catch(err => setQuotationResult((prev: any) => ({ ...prev, integrityError: err.message })));
+        .then(data => setQuotationResult((prev: QuotationResult | null) => prev ? { ...prev, integrity: data } : null))
+        .catch(err => setQuotationResult((prev: QuotationResult | null) => prev ? { ...prev, integrityError: err.message } : null));
 
       // 2. Fire all and wait for all to settle
       await Promise.allSettled([pRus, pAtm, pIntegrity]);
@@ -391,7 +396,7 @@ export const MotoCotizador = () => {
     };
   };
 
-  const handleContractClick = (quote: any, source: string, isEmissionFlow: boolean) => {
+  const handleContractClick = (quote: Quote, source: string, isEmissionFlow: boolean) => {
     setSelectedQuoteObj({ quote, source });
     if (isEmissionFlow) {
       setEmissionModalSource(source);
@@ -669,7 +674,7 @@ export const MotoCotizador = () => {
                       value={selectedModel ? selectedModel.codia : ''}
                       onChange={(e) => {
                         const mod = filteredModels.find(m => m.codia == e.target.value);
-                        setSelectedModel(mod);
+                        setSelectedModel(mod ?? null);
                       }}
                       disabled={!selectedYear}
                       className="w-full bg-bg-secondary border border-border-primary rounded-2xl px-5 py-4 text-text-primary yuju-input-orange transition-all disabled:opacity-50 appearance-none cursor-pointer font-bold"
@@ -714,8 +719,8 @@ export const MotoCotizador = () => {
                       value={selectedLocality ? selectedLocality.id || selectedLocality.ID : ''}
                       onChange={(e) => {
                         const id = e.target.value;
-                        const loc = localities.find((l: any) => (l.id == id || l.ID == id));
-                        setSelectedLocality(loc);
+                        const loc = localities.find((l: Localidad) => (l.id == id || l.ID == id));
+                        setSelectedLocality(loc ?? null);
                       }}
                       disabled={localities.length === 0}
                       className="w-full bg-bg-secondary border border-border-primary rounded-2xl px-5 py-4 text-text-primary yuju-input-orange transition-all cursor-pointer disabled:opacity-50 font-bold shadow-sm"
@@ -725,7 +730,7 @@ export const MotoCotizador = () => {
                       ) : (
                         <>
                           <option value="" disabled>Seleccioná tu localidad</option>
-                          {localities.map((loc: any) => (
+                          {localities.map((loc: Localidad) => (
                             <option key={loc.id || loc.ID} value={loc.id || loc.ID}>
                               {loc.descripcion || loc.description}
                             </option>

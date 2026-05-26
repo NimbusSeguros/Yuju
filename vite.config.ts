@@ -9,7 +9,8 @@ export default defineConfig({
     tailwindcss(),
   ],
   server: {
-    allowedHosts: true,
+    // ⚠️ SECURITY: Especificar hosts permitidos explícitamente
+    allowedHosts: ['localhost', '127.0.0.1'],
     proxy: {
       // Rutas de Moto
       '/api/rus': { target: 'https://apiyujumotos.com', changeOrigin: true },
@@ -29,3 +30,4 @@ export default defineConfig({
     }
   }
 })
+
