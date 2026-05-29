@@ -33,11 +33,6 @@ export const PostalCodeSelect: React.FC<PostalCodeSelectProps> = ({ value, local
     setInputValue(value || "");
   }, [value]);
 
-  // Postal code validation helper
-  const isValidPostalCode = (val: string): boolean => {
-    // Argentine postal codes are exactly 4 digits
-    return /^\d{4}$/.test(val);
-  };
 
   const handleInputChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value.replace(/\D/g, "").substring(0, 4);
@@ -76,11 +71,11 @@ export const PostalCodeSelect: React.FC<PostalCodeSelectProps> = ({ value, local
           placeholder="Ej. 1425 o 3260"
           aria-label="Código postal de Argentina"
           aria-describedby={hasError ? 'postal-code-error' : undefined}
-          aria-invalid={hasError || (inputValue.length > 0 && !isValidPostalCode(inputValue))}
+          aria-invalid={hasError}
           aria-autocomplete="list"
           aria-controls="postal-code-listbox"
           aria-expanded={showDropdown && matches.length > 0}
-          className={`w-full h-[56px] bg-bg-secondary border ${hasError || (inputValue.length > 0 && !isValidPostalCode(inputValue)) ? 'border-red-500' : 'border-border-primary'} rounded-2xl pl-10 pr-10 text-base font-bold text-text-primary yuju-input-blue transition-all placeholder:opacity-20`}
+          className={`w-full h-[56px] bg-bg-secondary border ${hasError ? 'border-red-500' : 'border-border-primary'} rounded-2xl pl-10 pr-10 text-base font-bold text-text-primary yuju-input-blue transition-all placeholder:opacity-20`}
           value={inputValue}
           onChange={handleInputChange}
           onFocus={() => inputValue.length > 0 && setShowDropdown(true)}
@@ -119,14 +114,16 @@ export const PostalCodeSelect: React.FC<PostalCodeSelectProps> = ({ value, local
               <button
                 key={`${match.postalCode}-${match.place}-${idx}`}
                 type="button"
-                onClick={() => handleSelect(match)}
-                className="w-full text-left px-4 py-3 rounded-lg hover:bg-yuju-blue hover:text-white transition-all flex items-center justify-between group"
+                onMouseDown={(e) => { e.preventDefault(); handleSelect(match); }}
+                onTouchStart={(e) => { e.preventDefault(); handleSelect(match); }}
+                onClick={(e) => { e.preventDefault(); handleSelect(match); }}
+                className="w-full text-left px-4 py-3 rounded-lg hover:bg-yuju-blue hover:text-white transition-all flex items-center justify-between group cursor-pointer"
                 role="option"
                 aria-selected={inputValue === match.postalCode}
               >
-                <div className="flex flex-col">
-                  <span className="text-sm font-black tracking-tight">{match.postalCode}</span>
-                  <span className="text-[9px] font-medium opacity-60 group-hover:opacity-100">{match.admin1} - {match.place}</span>
+                <div className="flex flex-col pointer-events-none">
+                  <span className="text-sm font-black tracking-tight pointer-events-none">{match.postalCode}</span>
+                  <span className="text-[9px] font-medium opacity-60 group-hover:opacity-100 pointer-events-none">{match.admin1} - {match.place}</span>
                 </div>
               </button>
             ))}

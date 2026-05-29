@@ -56,6 +56,16 @@ const bicicletaFAQ = [
   { id: 7, title: "¿Qué exclusiones de cobertura tiene el seguro de bici de Yuju Seguros?", subtitle: "El seguro de bici de Yuju Seguros no cubre el hurto de la bicicleta. Es decir, si te la llevan sin que te des cuenta o sin ejercer violencia. Tampoco cubre los daños parciales de la bicicleta, salvo que sean consecuencia de un incendio o de un accidente personal. Además, no cubre los daños causados por el uso indebido, el desgaste, la falta de mantenimiento o la modificación de la bicicleta. Para conocer todas las exclusiones de cobertura, te recomendamos leer las condiciones generales y particulares de la póliza." }
 ];
 
+const monopatinFAQ = [
+  { id: 1, title: "¿En qué consiste el seguro de monopatín eléctrico de Yuju Seguros?", subtitle: "Este seguro te cubre en caso de robo, incendio o destrucción total de tu monopatín eléctrico. Además, te protege ante accidentes personales y Responsabilidad Civil por posibles daños a terceros que puedas ocasionar mientras circulas." },
+  { id: 2, title: "¿Se pueden asegurar monopatines usados para delivery?", subtitle: "¡Sí! Podés asegurar tu monopatín aunque lo uses para trabajar en aplicaciones de reparto o mensajería." },
+  { id: 3, title: "¿Cuál es la documentación necesaria para emitir el seguro?", subtitle: "Para emitir necesitamos los datos del tomador, medio de pago, y los datos específicos del monopatín (marca, modelo y número de serie). Tené a mano tu factura de compra o un comprobante que acredite su valor comercial." },
+  { id: 4, title: "¿Qué antigüedad puede tener mi monopatín?", subtitle: "Aseguramos monopatines eléctricos de cualquier marca o modelo. Solo tenés que declarar el año de fabricación, y si es un modelo muy antiguo lo evaluamos de manera particular." },
+  { id: 5, title: "¿Cuál es la franquicia del seguro de monopatín?", subtitle: "La franquicia es un monto a cargo tuyo en caso de siniestro (generalmente un 10% de la suma asegurada). Significa que si tu monopatín se daña o es robado, te descontamos ese pequeño porcentaje y nosotros cubrimos el resto de la indemnización." },
+  { id: 6, title: "¿Dónde tiene validez mi seguro?", subtitle: "La cobertura tiene validez en todo el territorio de la República Argentina." },
+  { id: 7, title: "¿Qué no me cubre el seguro?", subtitle: "El seguro no cubre hurtos (es decir, robos sin violencia ni intimidación, por ejemplo si lo dejas apoyado sin candado y te lo llevan). Tampoco cubre desgastes normales por el uso o daños por falta de mantenimiento." }
+];
+
 // Axios client with localized auth token handling
 const hogarApi = axios.create({
   baseURL: `${import.meta.env.VITE_HOGAR_API_URL || 'http://localhost:3000'}/api`,
@@ -575,7 +585,35 @@ export const GenericTechHomeCotizador = ({ type }: Props) => {
         const fileToBase64 = (file: File): Promise<string> => new Promise((resolve, reject) => {
           const reader = new FileReader();
           reader.readAsDataURL(file);
-          reader.onload = () => resolve(reader.result as string);
+          reader.onload = (e) => {
+            const img = new Image();
+            img.src = e.target?.result as string;
+            img.onload = () => {
+              const canvas = document.createElement('canvas');
+              const MAX_WIDTH = 1200;
+              const MAX_HEIGHT = 1200;
+              let width = img.width;
+              let height = img.height;
+
+              if (width > height) {
+                if (width > MAX_WIDTH) {
+                  height *= MAX_WIDTH / width;
+                  width = MAX_WIDTH;
+                }
+              } else {
+                if (height > MAX_HEIGHT) {
+                  width *= MAX_HEIGHT / height;
+                  height = MAX_HEIGHT;
+                }
+              }
+              canvas.width = width;
+              canvas.height = height;
+              const ctx = canvas.getContext('2d');
+              ctx?.drawImage(img, 0, 0, width, height);
+              resolve(canvas.toDataURL('image/jpeg', 0.6)); // Compress to 60% JPEG
+            };
+            img.onerror = (err) => reject(err);
+          };
           reader.onerror = error => reject(error);
         });
 
@@ -1590,7 +1628,7 @@ export const GenericTechHomeCotizador = ({ type }: Props) => {
           {/* Premium FAQ Section */}
           {!isSuccessStep && (
             <FAQAccordion 
-              items={config.type === 'notebook' ? notebookFAQ : config.type === 'bicicleta' ? bicicletaFAQ : hogarFAQ} 
+              items={config.type === 'notebook' ? notebookFAQ : config.type === 'bicicleta' ? bicicletaFAQ : config.type === 'monopatin' ? monopatinFAQ : hogarFAQ} 
               accentColor={isBici ? 'text-amber-500' : config.themeText}
               borderColor={isBici ? 'border-amber-500/20' : config.themeBorder}
               bgColor={isBici ? 'bg-amber-500/10' : config.themeBg}
