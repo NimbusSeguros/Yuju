@@ -4,11 +4,11 @@ export const Footer = () => {
   const { theme } = useTheme();
 
   return (
-    <footer className="relative bg-bg-secondary pt-24 pb-12 overflow-hidden border-t border-border-primary transition-colors duration-500">
+    <footer className="relative bg-bg-secondary pt-14 pb-8 overflow-hidden border-t border-border-primary transition-colors duration-500">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-px bg-gradient-to-r from-transparent via-yuju-blue/20 to-transparent" />
 
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12 relative z-10">
-        <div className="space-y-6">
+      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-5 gap-12 relative z-10">
+        <div className="space-y-6 md:col-span-2">
           <div className="flex items-center gap-6">
             <a href="https://yuju.com.ar" target="_blank" rel="noopener noreferrer" className="flex items-center group">
               <img
@@ -35,8 +35,8 @@ export const Footer = () => {
         </div>
 
         <div>
-          <h4 className="text-text-primary font-bold mb-8 font-accent tracking-widest text-xs">Asegurá tu mundo</h4>
-          <ul className="space-y-4 text-text-secondary text-sm font-medium">
+          <h4 className="text-text-primary font-bold mb-4 font-accent tracking-widest text-xs">Asegurá tu mundo</h4>
+          <ul className="space-y-2.5 text-text-secondary text-sm font-medium">
             <li><a href="/cotizar/seguro-auto" className="hover:text-yuju-blue transition-colors flex items-center gap-2 group"><div className="w-1.5 h-1.5 rounded-full bg-yuju-blue opacity-0 group-hover:opacity-100 transition-opacity" /> Seguro de Auto</a></li>
             <li><a href="/cotizar/seguro-moto" className="hover:text-orange-500 transition-colors flex items-center gap-2 group"><div className="w-1.5 h-1.5 rounded-full bg-orange-500 opacity-0 group-hover:opacity-100 transition-opacity" /> Seguro de Moto</a></li>
             <li><a href="/cotizar/seguro-hogar" className="hover:text-emerald-500 transition-colors flex items-center gap-2 group"><div className="w-1.5 h-1.5 rounded-full bg-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity" /> Seguro de Hogar</a></li>
@@ -44,8 +44,18 @@ export const Footer = () => {
         </div>
 
         <div>
-          <h4 className="text-text-primary font-bold mb-8 font-accent tracking-widest text-xs">Sobre Nosotros</h4>
-          <ul className="space-y-4 text-text-secondary text-sm font-medium">
+          {/* Spacer for desktop alignment */}
+          <h4 className="text-text-primary font-bold mb-4 font-accent tracking-widest text-xs opacity-0 hidden md:block">&nbsp;</h4>
+          <ul className="space-y-2.5 text-text-secondary text-sm font-medium">
+            <li><a href="/cotizar/seguro-monopatin" className="hover:text-cyan-500 transition-colors flex items-center gap-2 group"><div className="w-1.5 h-1.5 rounded-full bg-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity" /> Seguro de Monopatín</a></li>
+            <li><a href="/cotizar/seguro-bicicleta" className="hover:text-amber-500 transition-colors flex items-center gap-2 group"><div className="w-1.5 h-1.5 rounded-full bg-amber-500 opacity-0 group-hover:opacity-100 transition-opacity" /> Seguro de Bicicleta</a></li>
+            <li><a href="/cotizar/seguro-notebook" className="hover:text-indigo-500 transition-colors flex items-center gap-2 group"><div className="w-1.5 h-1.5 rounded-full bg-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity" /> Seguro de Notebook</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 className="text-text-primary font-bold mb-4 font-accent tracking-widest text-xs">Sobre Nosotros</h4>
+          <ul className="space-y-2.5 text-text-secondary text-sm font-medium">
             <li><a href="/institucional" className="hover:text-yuju-blue transition-colors">Institucional</a></li>
             <li><a href="/institucional#mision" className="hover:text-yuju-blue transition-colors">Misión y Visión</a></li>
           </ul>
@@ -55,8 +65,8 @@ export const Footer = () => {
       </div>
 
       {/* REGULATORY COMPLIANCE BAR */}
-      <div className="max-w-7xl mx-auto px-6 mt-20 pt-10 border-t border-border-primary">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 items-center py-8 border-b border-border-primary/50 text-center md:text-left">
+      <div className="max-w-7xl mx-auto px-6 mt-10 pt-6 border-t border-border-primary">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-6 items-center py-5 border-b border-border-primary/50 text-center md:text-left">
           <div className="flex flex-col gap-1">
             <span className="text-[10px] font-black text-text-secondary/40 uppercase tracking-widest leading-none">Inscripción</span>
             <span className="text-sm font-bold text-text-primary">SSN 1347</span>
@@ -77,7 +87,7 @@ export const Footer = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 py-8">
           <div className="lg:col-span-2">
             <div className="p-8 rounded-3xl bg-bg-primary border border-border-primary shadow-sm relative group overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-yuju-blue/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
@@ -105,7 +115,7 @@ export const Footer = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 mt-10 pt-8 border-t border-border-primary text-center text-text-secondary text-[11px] font-bold uppercase tracking-widest">
+      <div className="max-w-7xl mx-auto px-6 mt-6 pt-5 border-t border-border-primary text-center text-text-secondary text-[11px] font-bold uppercase tracking-widest">
         <p>&copy; 2026 Yuju Seguros.</p>
       </div>
     </footer>

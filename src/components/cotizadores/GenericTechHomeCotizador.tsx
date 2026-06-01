@@ -243,7 +243,12 @@ const PRODUCT_CONFIGS: Record<'hogar' | 'monopatin' | 'bicicleta' | 'notebook', 
     initialFormDesc: 'Contanos los detalles de tu monopatín eléctrico.',
     addressFieldsTitle: 'Datos de la Unidad & Domicilio',
     addressFieldsDesc: 'Ingresá los datos del monopatín y el domicilio de resguardo.',
-    hasPhotosStep: false
+    hasPhotosStep: true,
+    photoRequirements: [
+      { key: 'foto_monopatin', label: 'Foto del Monopatín', placeholder: 'Vista lateral completa del monopatín' },
+      { key: 'foto_display', label: 'Foto del Display', placeholder: 'Display encendido' },
+      { key: 'foto_serie', label: 'Foto del Nro. de Serie', placeholder: 'Etiqueta con el número de serie' }
+    ]
   },
   bicicleta: {
     type: 'bicicleta',
@@ -659,6 +664,19 @@ export const GenericTechHomeCotizador = ({ type }: Props) => {
             answersArray.push({ codigoPregunta: 'MODELO', valores: [addressData.modelo] });
             answersArray.push({ codigoPregunta: 'SERIE1', valores: [addressData.serie] });
             answersArray.push({ codigoPregunta: 'MONOPATIN_AÑO', valores: [Number(addressData.anio) || 0] });
+            
+            if (uploadedPhotos['foto_monopatin']?.file) {
+                const b64 = await fileToBase64(uploadedPhotos['foto_monopatin'].file);
+                answersArray.push({ codigoPregunta: 'MONOPATIN_FOTO', valores: [b64] });
+            }
+            if (uploadedPhotos['foto_display']?.file) {
+                const b64 = await fileToBase64(uploadedPhotos['foto_display'].file);
+                answersArray.push({ codigoPregunta: 'MONOPATIN_DISPLAY', valores: [b64] });
+            }
+            if (uploadedPhotos['foto_serie']?.file) {
+                const b64 = await fileToBase64(uploadedPhotos['foto_serie'].file);
+                answersArray.push({ codigoPregunta: 'MONOPATIN_FOTO_SERIE', valores: [b64] });
+            }
         }
       }
 
