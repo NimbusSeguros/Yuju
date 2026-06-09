@@ -458,7 +458,7 @@ const SanCristobalCard = ({ quote, payWithCard, onContract, commonSuma, onInfo }
     const logoUrl = getInsurerLogo('SAN CRISTOBAL');
 
     return (
-        <div className="glass-card p-5 border-2 border-border-primary/50 rounded-2xl hover:border-purple-500 hover:shadow-[0_0_25px_rgba(168,85,247,0.2)] transition-all duration-500 h-[310px] relative group/card shadow-sm">
+        <div className="glass-card p-5 border-2 border-border-primary/50 rounded-2xl hover:border-orange-500 hover:shadow-[0_0_25px_rgba(249,115,22,0.2)] transition-all duration-500 h-[310px] relative group/card shadow-sm">
             <div className="pb-16">
                 <div className="flex justify-between items-start gap-3 mb-4">
                     <div className="h-12 flex items-center">
@@ -469,14 +469,14 @@ const SanCristobalCard = ({ quote, payWithCard, onContract, commonSuma, onInfo }
                             <img src={logoUrl} alt="SAN CRISTOBAL" className="max-h-full max-w-full object-contain" style={{ filter: 'var(--logo-filter)' }} />
                         </div>
                     ) : (
-                        <span className="bg-purple-500/20 text-purple-500 text-[10px] font-black px-2 py-1 rounded break-words max-w-[60px] text-center uppercase">SANC</span>
+                        <span className="bg-orange-500/20 text-orange-500 text-[10px] font-black px-2 py-1 rounded break-words max-w-[60px] text-center uppercase">SANC</span>
                     )}
                 </div>
 
                 <div className="flex justify-between items-end mb-4">
                     <PriceDisplay originalPrice={totalCostAmount} finalPrice={finalPrice} discountPercent={discountPercent} payWithCard={payWithCard} />
                     <div className="relative group/tooltip mb-2">
-                        <button onClick={onInfo} className="w-8 h-8 rounded-full border border-border-primary/50 bg-bg-secondary flex items-center justify-center text-text-secondary group-hover/card:text-purple-500 group-hover/card:border-purple-500/50 group-hover/card:bg-purple-500/10 transition-all shadow-sm shrink-0" title="Ver detalles de cobertura">
+                        <button onClick={onInfo} className="w-8 h-8 rounded-full border border-border-primary/50 bg-bg-secondary flex items-center justify-center text-text-secondary group-hover/card:text-orange-500 group-hover/card:border-orange-500/50 group-hover/card:bg-orange-500/10 transition-all shadow-sm shrink-0" title="Ver detalles de cobertura">
                             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
                         </button>
                         <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-0.5 bg-text-primary text-bg-primary text-[8px] font-medium rounded-md opacity-0 group-hover/card:opacity-100 transition-opacity pointer-events-none whitespace-nowrap shadow-xl z-10">
