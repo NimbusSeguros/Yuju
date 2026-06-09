@@ -101,6 +101,20 @@ export const MotoResultsGrid: React.FC<MotoResultsGridProps> = ({ results, payWi
         });
     }
 
+    // San Cristobal processing
+    const scData = results?.sanCristobal?.rawResponse?.Summaries || [];
+    const scError = results?.sanCristobalError || (results?.sanCristobal?.ok === false ? results?.sanCristobal?.error : null);
+    if (!scError && scData.length > 0) {
+        scData.forEach((q: any, i: number) => {
+            const prodCode = q.ProductCode || 'CA7_A';
+            const isRC = prodCode.includes('_A');
+            const discount = isRC ? 0.85 : 0.70;
+            const discountPercent = isRC ? 15 : 30;
+            const totalCostAmount = parseFloat(q.TotalCost?.Amount || 0);
+            const price = payWithCard ? totalCostAmount * discount : totalCostAmount;
+            allCards.push({ price, el: <SanCristobalCard key={`sc-${i}`} quote={q} payWithCard={payWithCard} onContract={onContract} commonSuma={commonSuma} onInfo={() => setInfoModalConfig({ quote: q, company: 'SAN CRISTOBAL' })} /> });
+        });
+    }
 
 
     // Sort by price
@@ -423,6 +437,61 @@ const IntegrityCard = ({ quote, payWithCard, onContract, commonSuma, onInfo }: {
             </div>
             <div className="absolute bottom-5 left-5 right-5">
                 <ActionButton isEmissionFlow={isEmissionFlow} onClick={() => onContract({ ...quote, source: 'INTEGRITY' }, 'INTEGRITY', isEmissionFlow)} />
+            </div>
+        </div>
+    );
+};
+
+const SanCristobalCard = ({ quote, payWithCard, onContract, commonSuma, onInfo }: { quote: any, payWithCard: boolean, onContract: any, commonSuma: number, onInfo: () => void }) => {
+    const prodCode = quote.ProductCode || 'CA7_A';
+    const isRC = prodCode.includes('_A');
+    const isEmissionFlow = false;
+
+    const discount = isRC ? 0.85 : 0.70;
+    const discountPercent = isRC ? 15 : 30;
+    const totalCostAmount = parseFloat(quote.TotalCost?.Amount || 0);
+    const finalPrice = payWithCard ? totalCostAmount * discount : totalCostAmount;
+    const val = parseFloat(quote.SumaAsegurada || quote.suma_asegurada || 0);
+    const suma = val > 0 ? val : commonSuma;
+
+    const displayName = `San Cristóbal - Plan ${quote.ProductOffering || prodCode}`;
+    const logoUrl = getInsurerLogo('SAN CRISTOBAL');
+
+    return (
+        <div className="glass-card p-5 border-2 border-border-primary/50 rounded-2xl hover:border-purple-500 hover:shadow-[0_0_25px_rgba(168,85,247,0.2)] transition-all duration-500 h-[310px] relative group/card shadow-sm">
+            <div className="pb-16">
+                <div className="flex justify-between items-start gap-3 mb-4">
+                    <div className="h-12 flex items-center">
+                        <h3 className="text-text-primary font-black text-sm sm:text-base md:text-lg leading-tight line-clamp-2 font-accent">{displayName}</h3>
+                    </div>
+                    {logoUrl ? (
+                        <div className="flex items-center h-10 w-24 shrink-0">
+                            <img src={logoUrl} alt="SAN CRISTOBAL" className="max-h-full max-w-full object-contain" style={{ filter: 'var(--logo-filter)' }} />
+                        </div>
+                    ) : (
+                        <span className="bg-purple-500/20 text-purple-500 text-[10px] font-black px-2 py-1 rounded break-words max-w-[60px] text-center uppercase">SANC</span>
+                    )}
+                </div>
+
+                <div className="flex justify-between items-end mb-4">
+                    <PriceDisplay originalPrice={totalCostAmount} finalPrice={finalPrice} discountPercent={discountPercent} payWithCard={payWithCard} />
+                    <div className="relative group/tooltip mb-2">
+                        <button onClick={onInfo} className="w-8 h-8 rounded-full border border-border-primary/50 bg-bg-secondary flex items-center justify-center text-text-secondary group-hover/card:text-purple-500 group-hover/card:border-purple-500/50 group-hover/card:bg-purple-500/10 transition-all shadow-sm shrink-0" title="Ver detalles de cobertura">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                        </button>
+                        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-0.5 bg-text-primary text-bg-primary text-[8px] font-medium rounded-md opacity-0 group-hover/card:opacity-100 transition-opacity pointer-events-none whitespace-nowrap shadow-xl z-10">
+                            Ver detalle de cobertura
+                            <div className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-text-primary"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="space-y-2 pt-1 border-t border-border-primary/30 mt-2">
+                    {suma > 0 && <InfoItem label="Suma Asegurada" value={suma.toLocaleString('es-AR', { style: 'currency', currency: 'ARS', maximumFractionDigits: 0 })} />}
+                </div>
+            </div>
+            <div className="absolute bottom-5 left-5 right-5">
+                <ActionButton isEmissionFlow={isEmissionFlow} onClick={() => onContract({ ...quote, source: 'SAN CRISTOBAL' }, 'SAN CRISTOBAL', isEmissionFlow)} />
             </div>
         </div>
     );

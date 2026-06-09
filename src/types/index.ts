@@ -72,9 +72,11 @@ export interface QuotationResult {
   rus?: Quote[];
   atm?: Quote[];
   integrity?: Quote[];
+  sanCristobal?: any;
   rusError?: string;
   atmError?: string;
   integrityError?: string;
+  sanCristobalError?: string;
 }
 
 // ----------------------------------------------------------------------------

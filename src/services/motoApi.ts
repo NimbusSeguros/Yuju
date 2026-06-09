@@ -216,6 +216,27 @@ export const cotizarIntegrity = async ({ codia, brandId, anio, codigoPostal, loc
     return response.data;
 };
 
+// --- San Cristobal Seguros ---
+export const cotizarSanCristobal = async ({ codia, anio, localidad, numeroDocumento, sexo, es0Km, sumaAsegurada }: any) => {
+    const response = await axios.post(`${MOTO_API_BASE}/api/sancristobal/cotizaciones/motos`, {
+        codia,
+        anio,
+        localidad,
+        numeroDocumento,
+        sexo,
+        es0Km,
+        sumaAsegurada
+    });
+    return response.data;
+};
+
+export const getMotoValueSanCristobal = async (codigoInfomoto: string | number, anio: string | number) => {
+    const response = await axios.get(`${MOTO_API_BASE}/api/sancristobal/moto-value`, {
+        params: { codigoInfomoto, anio }
+    });
+    return response.data;
+};
+
 // --- Leads / Supabase ---
 export const createLead = async (payload: {
     vehicleInfo: any;
@@ -228,15 +249,14 @@ export const createLead = async (payload: {
     wspText: string;
     isMoto?: boolean;
 }) => {
-    // Aligned with the new backend structure on apiyujumotos.com
     const body = {
         leadData: {
-            nombre: "Cliente Moto", // Opcional, podríamos pasarle el nombre si lo tuviéramos
+            nombre: "Cliente Moto",
             telefono: payload.phone,
             plan: payload.planName,
             provider: payload.provider,
             precio: payload.precio,
-            localidad: payload.zipCode // Usamos zipCode como localidad por ahora
+            localidad: payload.zipCode
         },
         vehicleInfo: {
             brand: payload.vehicleInfo?.brand,
@@ -248,18 +268,6 @@ export const createLead = async (payload: {
     
     const token = await getAccessToken();
     const response = await axios.post(`${MOTO_API_BASE}/api/leads`, body, {
-        headers: {
-            'Authorization': `Bearer ${token}`
-        }
-    });
-    return response.data;
-};
-
-// --- San Cristobal Seguros ---
-export const cotizarSanCristobal = async (payload: any) => {
-    // Aligned with backend: router.post('/san-cristobal/cotizacion-auto', ...)
-    const token = await getAccessToken();
-    const response = await axios.post(`${MOTO_API_BASE}/api/san-cristobal/cotizacion-auto`, payload, {
         headers: {
             'Authorization': `Bearer ${token}`
         }

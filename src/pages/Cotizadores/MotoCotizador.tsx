@@ -40,7 +40,8 @@ import {
   getVigencias, 
   getInfoautoAllBrands,
   getInfoautoAllModels,
-  getLocalities
+  getLocalities,
+  cotizarSanCristobal
 } from '../../services/motoApi';
 
 export const MotoCotizador = () => {
@@ -309,7 +310,7 @@ export const MotoCotizador = () => {
     }
     setActiveStep(5);
     setQuotationLoading(true);
-    setQuotationResult({ rus: undefined, atm: undefined, integrity: undefined, rusError: undefined, atmError: undefined, integrityError: undefined });
+    setQuotationResult({ rus: undefined, atm: undefined, integrity: undefined, sanCristobal: undefined, rusError: undefined, atmError: undefined, integrityError: undefined, sanCristobalError: undefined });
 
     const { vigenciaDesde, vigenciaHasta, tipoVigencia } = calculateDatesForQuote();
     const BASE_URL = import.meta.env.VITE_MOTO_API_URL ? `${import.meta.env.VITE_MOTO_API_URL}/api` : 'https://apiyujumotos.com/api';
@@ -374,8 +375,20 @@ export const MotoCotizador = () => {
         .then(data => setQuotationResult((prev: QuotationResult | null) => prev ? { ...prev, integrity: data } : null))
         .catch(err => setQuotationResult((prev: QuotationResult | null) => prev ? { ...prev, integrityError: err.message } : null));
 
+      const pSanCristobal = cotizarSanCristobal({
+        codia: String(selectedModel.codia),
+        anio: parseInt(selectedYear),
+        localidad: zipCode,
+        numeroDocumento: '38771028',
+        sexo: 'M',
+        es0Km: parseInt(selectedYear) >= new Date().getFullYear(),
+        sumaAsegurada: 1500000
+      })
+        .then(data => setQuotationResult((prev: QuotationResult | null) => prev ? { ...prev, sanCristobal: data } : null))
+        .catch(err => setQuotationResult((prev: QuotationResult | null) => prev ? { ...prev, sanCristobalError: err.message } : null));
+
       // 2. Fire all and wait for all to settle
-      await Promise.allSettled([pRus, pAtm, pIntegrity]);
+      await Promise.allSettled([pRus, pAtm, pIntegrity, pSanCristobal]);
 
     } catch (err: any) {
       console.error("Parallel quotation error:", err);
