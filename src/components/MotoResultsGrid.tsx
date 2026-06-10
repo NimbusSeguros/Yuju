@@ -109,7 +109,6 @@ export const MotoResultsGrid: React.FC<MotoResultsGridProps> = ({ results, payWi
             const prodCode = q.ProductCode || 'CA7_A';
             const isRC = prodCode.includes('_A');
             const discount = isRC ? 0.85 : 0.70;
-            const discountPercent = isRC ? 15 : 30;
             const totalCostAmount = parseFloat(q.TotalCost?.Amount || 0);
             const price = payWithCard ? totalCostAmount * discount : totalCostAmount;
             allCards.push({ price, el: <SanCristobalCard key={`sc-${i}`} quote={q} payWithCard={payWithCard} onContract={onContract} commonSuma={commonSuma} onInfo={() => setInfoModalConfig({ quote: q, company: 'SAN CRISTOBAL' })} /> });
