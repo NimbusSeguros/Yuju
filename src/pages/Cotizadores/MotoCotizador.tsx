@@ -107,7 +107,7 @@ export const MotoCotizador = () => {
     
     const fetchScMotoValue = async () => {
       try {
-        const result = await getMotoValueSanCristobal(selectedModel.codia, parseInt(selectedYear || '0'));
+        const result = await getMotoValueSanCristobal(selectedModel.codia || '', parseInt(selectedYear || '0'));
         if (result?.ok && result.precio) {
           setScSumaAsegurada(result.precio);
         }
