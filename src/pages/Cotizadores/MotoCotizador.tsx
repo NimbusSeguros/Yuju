@@ -41,7 +41,8 @@ import {
   getInfoautoAllBrands,
   getInfoautoAllModels,
   getLocalities,
-  cotizarSanCristobal
+  cotizarSanCristobal,
+  getMotoValueSanCristobal
 } from '../../services/motoApi';
 
 export const MotoCotizador = () => {
@@ -75,6 +76,9 @@ export const MotoCotizador = () => {
   const [quotationLoading, setQuotationLoading] = useState(false);
   const [, setError] = useState<string | null>(null);
 
+  // San Cristobal suma asegurada (se obtiene del API antes de cotizar)
+  const [scSumaAsegurada, setScSumaAsegurada] = useState<number | null>(null);
+
   // Modals state
   const [conflictModalOpen, setConflictModalOpen] = useState(false);
   const [whatsappModalOpen, setWhatsappModalOpen] = useState(false);
@@ -96,6 +100,24 @@ export const MotoCotizador = () => {
     if (selectedYear && activeStep === 2) setActiveStep(3);
     if (selectedModel && activeStep === 3) setActiveStep(4);
   }, [selectedBrand, selectedYear, selectedModel, activeStep]);
+
+  // Fetch San Cristobal moto value when model changes
+  useEffect(() => {
+    if (!selectedModel || !selectedYear) return;
+    
+    const fetchScMotoValue = async () => {
+      try {
+        const result = await getMotoValueSanCristobal(selectedModel.codia, parseInt(selectedYear));
+        if (result?.ok && result.precio) {
+          setScSumaAsegurada(result.precio);
+        }
+      } catch (err) {
+        console.warn('Error fetching San Cristobal moto value:', err);
+      }
+    };
+    
+    fetchScMotoValue();
+  }, [selectedModel, selectedYear]);
 
   const CACHE_KEY = "moto_brands_cache";
   const CACHE_EXPIRY_KEY = "moto_brands_cache_expiry";
@@ -382,7 +404,7 @@ export const MotoCotizador = () => {
         numeroDocumento: '38771028',
         sexo: 'M',
         es0Km: parseInt(selectedYear) >= new Date().getFullYear(),
-        sumaAsegurada: 1500000
+        sumaAsegurada: scSumaAsegurada || 1500000
       })
         .then(data => setQuotationResult((prev: QuotationResult | null) => prev ? { ...prev, sanCristobal: data } : null))
         .catch(err => setQuotationResult((prev: QuotationResult | null) => prev ? { ...prev, sanCristobalError: err.message } : null));
