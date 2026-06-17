@@ -1,9 +1,7 @@
 import axios from 'axios';
 import { initAuth } from './auth';
 
-const API_URL = import.meta.env.VITE_API_BASE_URL
-    ? `${import.meta.env.VITE_API_BASE_URL}/api`
-    : '/api'; // En dev, Vite proxy redirige /api → localhost:3000
+const API_URL = import.meta.env.VITE_API_BASE_URL || '/api'; // Si no hay base URL, usa /api (será proxiado por Nginx)
 
 // 1. Create Axios instance with credentials (para enviar cookies)
 export const apiClient = axios.create({
