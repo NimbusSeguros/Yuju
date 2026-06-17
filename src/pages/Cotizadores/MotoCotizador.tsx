@@ -335,7 +335,6 @@ export const MotoCotizador = () => {
     setQuotationResult({ rus: undefined, atm: undefined, integrity: undefined, sanCristobal: undefined, rusError: undefined, atmError: undefined, integrityError: undefined, sanCristobalError: undefined });
 
     const { vigenciaDesde, vigenciaHasta, tipoVigencia } = calculateDatesForQuote();
-    const BASE_URL = import.meta.env.VITE_MOTO_API_URL ? `${import.meta.env.VITE_MOTO_API_URL}/api` : 'https://apiyujumotos.com/api';
 
     const payloadRus = {
       codigoTipoInteres: "MOTOVEHICULO",

@@ -354,7 +354,7 @@ export const ResponseValidator = {
     /**
      * Validar que la respuesta viene del servidor esperado
      */
-    validateOrigin: (response: any): boolean => {
+    validateOrigin: (_response: unknown): boolean => {
         // El backend debería incluir un header con su identificador
         // Validar en interceptor de axios
         return true;
@@ -366,7 +366,7 @@ export const ResponseValidator = {
 // ============================================================
 export const initializeSecurity = () => {
     // Forzar HTTPS en producción
-    if (process.env.NODE_ENV === 'production' && window.location.protocol === 'http:') {
+    if (import.meta.env.PROD && window.location.protocol === 'http:') {
         window.location.protocol = 'https:';
     }
 
@@ -413,7 +413,7 @@ export const setupSecurityInterceptors = () => {
         (response) => {
             // Validar content-type
             const contentType = response.headers['content-type'];
-            if (contentType && !contentType.includes('application/json')) {
+            if (contentType && typeof contentType === 'string' && !contentType.includes('application/json')) {
                 console.warn('Unexpected content-type:', contentType);
             }
 

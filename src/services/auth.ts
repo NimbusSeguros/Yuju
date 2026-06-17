@@ -130,12 +130,13 @@ export const login = async (email: string, password: string): Promise<{ user: Au
     });
 
     if (error) throw new Error(error.message);
+    if (!data.user) throw new Error('User not found');
 
     return {
         user: {
             id: data.user.id,
-            email: data.user.email,
-            role: data.user.role || 'authenticated'
+            email: data.user.email || email,
+            role: (data.user as any).role || 'authenticated'
         }
     };
 };
@@ -154,12 +155,13 @@ export const register = async (email: string, password: string): Promise<{ user:
     if (!data.session) {
         return { needsEmailConfirmation: true };
     }
+    if (!data.user) throw new Error('User not found');
 
     return {
         user: {
             id: data.user.id,
-            email: data.user.email,
-            role: data.user.role || 'authenticated'
+            email: data.user.email || email,
+            role: (data.user as any).role || 'authenticated'
         }
     };
 };
