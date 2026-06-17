@@ -1,0 +1,814 @@
+{
+  "RCA S/GRUA": {
+    "titulo": "RCA S/GRUA – Responsabilidad Civil",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil",
+        "descripcion": "Cubre lesiones o fallecimiento de terceros transportados y no transportados, y daños a cosas de terceros no transportados.",
+        "limite": "hasta $160.000.000"
+      },
+      {
+        "nombre": "Cobertura en exterior",
+        "descripcion": "Mercosur"
+      },
+      {
+        "nombre": "Sistema CLEAS",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Refacturación",
+        "descripcion": "Mensual"
+      }
+    ]
+  },
+  "B1": {
+    "titulo": "B1-80 – Terceros Completo",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil",
+        "descripcion": "Cubre lesiones o fallecimiento de terceros transportados y no transportados, y daños a cosas de terceros no transportados.",
+        "limite": "hasta $160.000.000"
+      },
+      {
+        "nombre": "Cobertura en exterior",
+        "descripcion": "Mercosur"
+      },
+      {
+        "nombre": "Sistema CLEAS",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Refacturación",
+        "descripcion": "Mensual"
+      },
+      {
+        "nombre": "Pérdida Total por Incendio",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Pérdida Total por Robo o Hurto",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Auxilio Mecánico y Remolque",
+        "descripcion": "Hasta 15 años de antigüedad: 12 servicios anuales de 250 km lineales (1 por mes). Entre 16 y 30 años de antigüedad: 6 servicios anuales de 50 km lineales (1 por mes)"
+      }
+    ]
+  },
+  "ROBO E INCENDIO TOTAL": {
+    "titulo": "B1-80 – Terceros Completo",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil",
+        "descripcion": "Cubre lesiones o fallecimiento de terceros transportados y no transportados, y daños a cosas de terceros no transportados.",
+        "limite": "hasta $160.000.000"
+      },
+      {
+        "nombre": "Cobertura en exterior",
+        "descripcion": "Mercosur"
+      },
+      {
+        "nombre": "Sistema CLEAS",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Refacturación",
+        "descripcion": "Mensual"
+      },
+      {
+        "nombre": "Pérdida Total por Incendio",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Pérdida Total por Robo o Hurto",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Auxilio Mecánico y Remolque",
+        "descripcion": "Hasta 15 años de antigüedad: 12 servicios anuales de 250 km lineales (1 por mes). Entre 16 y 30 años de antigüedad: 6 servicios anuales de 50 km lineales (1 por mes)"
+      }
+    ]
+  },
+  "TERCERO COMPLETO FULL (S)": {
+    "titulo": "SIGMA CERO – Terceros Completo Full (S)",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil",
+        "descripcion": "Cubre lesiones o fallecimiento de terceros transportados y no transportados, y daños a cosas de terceros no transportados.",
+        "limite": "hasta $160.000.000"
+      },
+      {
+        "nombre": "Pérdida Total por Daños, Incendio y Robo o Hurto",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Pérdida Parcial por Incendio y Robo o Hurto",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Destrucción Total",
+        "descripcion": "80/20"
+      },
+      {
+        "nombre": "Rotura de Cristales Laterales del Vehículo",
+        "descripcion": "Sin límites"
+      },
+      {
+        "nombre": "Rotura de Parabrisas",
+        "descripcion": "Sin límites"
+      },
+      {
+        "nombre": "Rotura de Luneta",
+        "descripcion": "Sin límites"
+      },
+      {
+        "nombre": "Rotura de Cristales de Techo",
+        "descripcion": "Sin límites"
+      },
+      {
+        "nombre": "Rotura de Cerraduras",
+        "descripcion": "Hasta $300.000"
+      },
+      {
+        "nombre": "Daños Parciales a Consecuencia de Granizo",
+        "descripcion": "Sin límite de acontecimientos por vigencia anual. Sin límites"
+      },
+      {
+        "nombre": "Ruedas",
+        "descripcion": "4 acontecimientos por vigencia anual"
+      },
+      {
+        "nombre": "Daños Parciales por Accidente al Amparo del Robo Total",
+        "descripcion": "Hasta el 10% de la suma asegurada (máx. $890.000)"
+      },
+      {
+        "nombre": "Ajuste Automático de Suma Asegurada",
+        "descripcion": "20%"
+      },
+      {
+        "nombre": "Asistencia Mecánica",
+        "descripcion": "250 km"
+      },
+      {
+        "nombre": "Asistencia Penal Primaria",
+        "descripcion": "Sí"
+      },
+      {
+        "nombre": "Asistencia Médica",
+        "descripcion": "Sí"
+      }
+    ]
+  },
+  "FULL (S)": {
+    "titulo": "SIGMA CERO – Terceros Completo Full (S)",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil",
+        "descripcion": "Cubre lesiones o fallecimiento de terceros transportados y no transportados, y daños a cosas de terceros no transportados.",
+        "limite": "hasta $160.000.000"
+      },
+      {
+        "nombre": "Pérdida Total por Daños, Incendio y Robo o Hurto",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Pérdida Parcial por Incendio y Robo o Hurto",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Destrucción Total",
+        "descripcion": "80/20"
+      },
+      {
+        "nombre": "Rotura de Cristales Laterales del Vehículo",
+        "descripcion": "Sin límites"
+      },
+      {
+        "nombre": "Rotura de Parabrisas",
+        "descripcion": "Sin límites"
+      },
+      {
+        "nombre": "Rotura de Luneta",
+        "descripcion": "Sin límites"
+      },
+      {
+        "nombre": "Rotura de Cristales de Techo",
+        "descripcion": "Sin límites"
+      },
+      {
+        "nombre": "Rotura de Cerraduras",
+        "descripcion": "Hasta $300.000"
+      },
+      {
+        "nombre": "Daños Parciales a Consecuencia de Granizo",
+        "descripcion": "Sin límite de acontecimientos por vigencia anual. Sin límites"
+      },
+      {
+        "nombre": "Ruedas",
+        "descripcion": "4 acontecimientos por vigencia anual"
+      },
+      {
+        "nombre": "Daños Parciales por Accidente al Amparo del Robo Total",
+        "descripcion": "Hasta el 10% de la suma asegurada (máx. $890.000)"
+      },
+      {
+        "nombre": "Ajuste Automático de Suma Asegurada",
+        "descripcion": "20%"
+      },
+      {
+        "nombre": "Asistencia Mecánica",
+        "descripcion": "250 km"
+      },
+      {
+        "nombre": "Asistencia Penal Primaria",
+        "descripcion": "Sí"
+      },
+      {
+        "nombre": "Asistencia Médica",
+        "descripcion": "Sí"
+      }
+    ]
+  },
+  "S0": {
+    "titulo": "SIGMA CERO – Terceros Completo Full (S)",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil",
+        "descripcion": "Cubre lesiones o fallecimiento de terceros transportados y no transportados, y daños a cosas de terceros no transportados.",
+        "limite": "hasta $160.000.000"
+      },
+      {
+        "nombre": "Pérdida Total por Daños, Incendio y Robo o Hurto",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Pérdida Parcial por Incendio y Robo o Hurto",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Destrucción Total",
+        "descripcion": "80/20"
+      },
+      {
+        "nombre": "Rotura de Cristales Laterales del Vehículo",
+        "descripcion": "Sin límites"
+      },
+      {
+        "nombre": "Rotura de Parabrisas",
+        "descripcion": "Sin límites"
+      },
+      {
+        "nombre": "Rotura de Luneta",
+        "descripcion": "Sin límites"
+      },
+      {
+        "nombre": "Rotura de Cristales de Techo",
+        "descripcion": "Sin límites"
+      },
+      {
+        "nombre": "Rotura de Cerraduras",
+        "descripcion": "Hasta $300.000"
+      },
+      {
+        "nombre": "Daños Parciales a Consecuencia de Granizo",
+        "descripcion": "Sin límite de acontecimientos por vigencia anual. Sin límites"
+      },
+      {
+        "nombre": "Ruedas",
+        "descripcion": "4 acontecimientos por vigencia anual"
+      },
+      {
+        "nombre": "Daños Parciales por Accidente al Amparo del Robo Total",
+        "descripcion": "Hasta el 10% de la suma asegurada (máx. $890.000)"
+      },
+      {
+        "nombre": "Ajuste Automático de Suma Asegurada",
+        "descripcion": "20%"
+      },
+      {
+        "nombre": "Asistencia Mecánica",
+        "descripcion": "250 km"
+      },
+      {
+        "nombre": "Asistencia Penal Primaria",
+        "descripcion": "Sí"
+      },
+      {
+        "nombre": "Asistencia Médica",
+        "descripcion": "Sí"
+      }
+    ]
+  },
+  "S - SIGMA": {
+    "titulo": "SIGMA CERO – Terceros Completo Full (SO)",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil",
+        "descripcion": "Cubre lesiones o fallecimiento de terceros transportados y no transportados, y daños a cosas de terceros no transportados.",
+        "limite": "hasta $160.000.000"
+      },
+      {
+        "nombre": "Pérdida Total por Daños, Incendio y Robo o Hurto",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Pérdida Parcial por Incendio y Robo o Hurto",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Destrucción Total",
+        "descripcion": "80/20"
+      },
+      {
+        "nombre": "Rotura de Cristales Laterales del Vehículo",
+        "descripcion": "Sin límites"
+      },
+      {
+        "nombre": "Rotura de Parabrisas",
+        "descripcion": "Sin límites"
+      },
+      {
+        "nombre": "Rotura de Luneta",
+        "descripcion": "Sin límites"
+      },
+      {
+        "nombre": "Rotura de Cristales de Techo",
+        "descripcion": "Sin límites"
+      },
+      {
+        "nombre": "Rotura de Cerraduras",
+        "descripcion": "Hasta $300.000"
+      },
+      {
+        "nombre": "Daños Parciales a Consecuencia de Granizo",
+        "descripcion": "Sin límite de acontecimientos por vigencia anual. Sin límites"
+      },
+      {
+        "nombre": "Ruedas",
+        "descripcion": "4 acontecimientos por vigencia anual"
+      },
+      {
+        "nombre": "Daños Parciales por Accidente al Amparo del Robo Total",
+        "descripcion": "Hasta el 10% de la suma asegurada (máx. $890.000)"
+      },
+      {
+        "nombre": "Ajuste Automático de Suma Asegurada",
+        "descripcion": "20%"
+      },
+      {
+        "nombre": "Asistencia Mecánica",
+        "descripcion": "250 km"
+      },
+      {
+        "nombre": "Asistencia Penal Primaria",
+        "descripcion": "Sí"
+      },
+      {
+        "nombre": "Asistencia Médica",
+        "descripcion": "Sí"
+      }
+    ]
+  },
+  "SIGMA": {
+    "titulo": "SIGMA CERO – Terceros Completo Full (SO)",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil",
+        "descripcion": "Cubre lesiones o fallecimiento de terceros transportados y no transportados, y daños a cosas de terceros no transportados.",
+        "limite": "hasta $160.000.000"
+      },
+      {
+        "nombre": "Pérdida Total por Daños, Incendio y Robo o Hurto",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Pérdida Parcial por Incendio y Robo o Hurto",
+        "descripcion": "Si"
+      },
+      {
+        "nombre": "Destrucción Total",
+        "descripcion": "80/20"
+      },
+      {
+        "nombre": "Rotura de Cristales Laterales del Vehículo",
+        "descripcion": "Sin límites"
+      },
+      {
+        "nombre": "Rotura de Parabrisas",
+        "descripcion": "Sin límites"
+      },
+      {
+        "nombre": "Rotura de Luneta",
+        "descripcion": "Sin límites"
+      },
+      {
+        "nombre": "Rotura de Cristales de Techo",
+        "descripcion": "Sin límites"
+      },
+      {
+        "nombre": "Rotura de Cerraduras",
+        "descripcion": "Hasta $300.000"
+      },
+      {
+        "nombre": "Daños Parciales a Consecuencia de Granizo",
+        "descripcion": "Sin límite de acontecimientos por vigencia anual. Sin límites"
+      },
+      {
+        "nombre": "Ruedas",
+        "descripcion": "4 acontecimientos por vigencia anual"
+      },
+      {
+        "nombre": "Daños Parciales por Accidente al Amparo del Robo Total",
+        "descripcion": "Hasta el 10% de la suma asegurada (máx. $890.000)"
+      },
+      {
+        "nombre": "Ajuste Automático de Suma Asegurada",
+        "descripcion": "20%"
+      },
+      {
+        "nombre": "Asistencia Mecánica",
+        "descripcion": "250 km"
+      },
+      {
+        "nombre": "Asistencia Penal Primaria",
+        "descripcion": "Sí"
+      },
+      {
+        "nombre": "Asistencia Médica",
+        "descripcion": "Sí"
+      }
+    ]
+  },
+  "TR FRANQUICIA DEL 2%": {
+    "titulo": "TODO RIESGO – Franquicia 2% T34",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil",
+        "descripcion": "Cubre lesiones o fallecimiento de terceros transportados y no transportados, y daños a cosas de terceros no transportados.",
+        "limite": "hasta $160.000.000"
+      },
+      {
+        "nombre": "Pérdida Total y Parcial por Daños, Incendio y Robo o Hurto",
+        "descripcion": "Franquicia 2% de la suma asegurada"
+      },
+      {
+        "nombre": "Rotura de Cristales Laterales del Vehículo",
+        "descripcion": "3 acontecimientos por vigencia anual. Sin límites (sin franquicia)"
+      },
+      {
+        "nombre": "Rotura de Parabrisas",
+        "descripcion": "3 acontecimientos por vigencia anual. Sin límites (sin franquicia)"
+      },
+      {
+        "nombre": "Rotura de Luneta",
+        "descripcion": "3 acontecimientos por vigencia anual. Sin límites (sin franquicia)"
+      },
+      {
+        "nombre": "Rotura de Cristales de Techo",
+        "descripcion": "2 acontecimientos por vigencia anual. Sin límites (sin franquicia)"
+      },
+      {
+        "nombre": "Daños Parciales a Consecuencia de Granizo",
+        "descripcion": "2 acontecimientos por vigencia anual. Sin límites (sin franquicia)"
+      },
+      {
+        "nombre": "Ruedas",
+        "descripcion": "4 acontecimientos por vigencia anual"
+      },
+      {
+        "nombre": "Rotura de Cerraduras",
+        "descripcion": "3 acontecimientos por vigencia anual. $300.000"
+      },
+      {
+        "nombre": "Daños Parciales por Accidente al Amparo del Robo Total",
+        "descripcion": "Hasta el 10% de la suma asegurada (máx. $890.000)"
+      },
+      {
+        "nombre": "Ajuste Automático de Suma Asegurada",
+        "descripcion": "20%"
+      },
+      {
+        "nombre": "Asistencia Mecánica",
+        "descripcion": "250 km (uso particular)"
+      },
+      {
+        "nombre": "Asistencia Penal Primaria",
+        "descripcion": "Sí"
+      },
+      {
+        "nombre": "Asistencia Médica",
+        "descripcion": "Sí"
+      }
+    ]
+  },
+  "FRANQUICIA DEL 2%": {
+    "titulo": "TODO RIESGO – Franquicia 2% T34 2%",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil",
+        "descripcion": "Cubre lesiones o fallecimiento de terceros transportados y no transportados, y daños a cosas de terceros no transportados.",
+        "limite": "hasta $160.000.000"
+      },
+      {
+        "nombre": "Pérdida Total y Parcial por Daños, Incendio y Robo o Hurto",
+        "descripcion": "Franquicia 2% de la suma asegurada"
+      },
+      {
+        "nombre": "Rotura de Cristales Laterales del Vehículo",
+        "descripcion": "3 acontecimientos por vigencia anual. Sin límites (sin franquicia)"
+      },
+      {
+        "nombre": "Rotura de Parabrisas",
+        "descripcion": "3 acontecimientos por vigencia anual. Sin límites (sin franquicia)"
+      },
+      {
+        "nombre": "Rotura de Luneta",
+        "descripcion": "3 acontecimientos por vigencia anual. Sin límites (sin franquicia)"
+      },
+      {
+        "nombre": "Rotura de Cristales de Techo",
+        "descripcion": "2 acontecimientos por vigencia anual. Sin límites (sin franquicia)"
+      },
+      {
+        "nombre": "Daños Parciales a Consecuencia de Granizo",
+        "descripcion": "2 acontecimientos por vigencia anual. Sin límites (sin franquicia)"
+      },
+      {
+        "nombre": "Ruedas",
+        "descripcion": "4 acontecimientos por vigencia anual"
+      },
+      {
+        "nombre": "Rotura de Cerraduras",
+        "descripcion": "3 acontecimientos por vigencia anual. $300.000"
+      },
+      {
+        "nombre": "Daños Parciales por Accidente al Amparo del Robo Total",
+        "descripcion": "Hasta el 10% de la suma asegurada (máx. $890.000)"
+      },
+      {
+        "nombre": "Ajuste Automático de Suma Asegurada",
+        "descripcion": "20%"
+      },
+      {
+        "nombre": "Asistencia Mecánica",
+        "descripcion": "250 km (uso particular)"
+      },
+      {
+        "nombre": "Asistencia Penal Primaria",
+        "descripcion": "Sí"
+      },
+      {
+        "nombre": "Asistencia Médica",
+        "descripcion": "Sí"
+      }
+    ]
+  },
+  "2%": {
+    "titulo": "TODO RIESGO – Franquicia 2% T34 2%",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil",
+        "descripcion": "Cubre lesiones o fallecimiento de terceros transportados y no transportados, y daños a cosas de terceros no transportados.",
+        "limite": "hasta $160.000.000"
+      },
+      {
+        "nombre": "Pérdida Total y Parcial por Daños, Incendio y Robo o Hurto",
+        "descripcion": "Franquicia 2% de la suma asegurada"
+      },
+      {
+        "nombre": "Rotura de Cristales Laterales del Vehículo",
+        "descripcion": "3 acontecimientos por vigencia anual. Sin límites (sin franquicia)"
+      },
+      {
+        "nombre": "Rotura de Parabrisas",
+        "descripcion": "3 acontecimientos por vigencia anual. Sin límites (sin franquicia)"
+      },
+      {
+        "nombre": "Rotura de Luneta",
+        "descripcion": "3 acontecimientos por vigencia anual. Sin límites (sin franquicia)"
+      },
+      {
+        "nombre": "Rotura de Cristales de Techo",
+        "descripcion": "2 acontecimientos por vigencia anual. Sin límites (sin franquicia)"
+      },
+      {
+        "nombre": "Daños Parciales a Consecuencia de Granizo",
+        "descripcion": "2 acontecimientos por vigencia anual. Sin límites (sin franquicia)"
+      },
+      {
+        "nombre": "Ruedas",
+        "descripcion": "4 acontecimientos por vigencia anual"
+      },
+      {
+        "nombre": "Rotura de Cerraduras",
+        "descripcion": "3 acontecimientos por vigencia anual. $300.000"
+      },
+      {
+        "nombre": "Daños Parciales por Accidente al Amparo del Robo Total",
+        "descripcion": "Hasta el 10% de la suma asegurada (máx. $890.000)"
+      },
+      {
+        "nombre": "Ajuste Automático de Suma Asegurada",
+        "descripcion": "20%"
+      },
+      {
+        "nombre": "Asistencia Mecánica",
+        "descripcion": "250 km (uso particular)"
+      },
+      {
+        "nombre": "Asistencia Penal Primaria",
+        "descripcion": "Sí"
+      },
+      {
+        "nombre": "Asistencia Médica",
+        "descripcion": "Sí"
+      }
+    ]
+  },
+  "T31 5% DE LA SA (T31)": {
+    "titulo": "TODO RIESGO – Franquicia 5% T31 5%",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil",
+        "descripcion": "Cubre lesiones o fallecimiento de terceros transportados y no transportados, y daños a cosas de terceros no transportados.",
+        "limite": "hasta $160.000.000"
+      },
+      {
+        "nombre": "Pérdida Total y Parcial por Daños, Incendio y Robo o Hurto",
+        "descripcion": "Franquicia 5% de la suma asegurada"
+      },
+      {
+        "nombre": "Rotura de Cristales Laterales del Vehículo",
+        "descripcion": "3 acontecimientos por vigencia anual. Sin límites (sin franquicia)"
+      },
+      {
+        "nombre": "Rotura de Parabrisas",
+        "descripcion": "3 acontecimientos por vigencia anual. Sin límites (sin franquicia)"
+      },
+      {
+        "nombre": "Rotura de Luneta",
+        "descripcion": "3 acontecimientos por vigencia anual. Sin límites (sin franquicia)"
+      },
+      {
+        "nombre": "Rotura de Cristales de Techo",
+        "descripcion": "2 acontecimientos por vigencia anual. Sin límites (sin franquicia)"
+      },
+      {
+        "nombre": "Daños Parciales a Consecuencia de Granizo",
+        "descripcion": "2 acontecimientos por vigencia anual. Sin límites (sin franquicia)"
+      },
+      {
+        "nombre": "Ruedas",
+        "descripcion": "4 acontecimientos por vigencia anual"
+      },
+      {
+        "nombre": "Rotura de Cerraduras",
+        "descripcion": "3 acontecimientos por vigencia anual. $300.000"
+      },
+      {
+        "nombre": "Daños Parciales por Accidente al Amparo del Robo Total",
+        "descripcion": "Hasta el 10% de la suma asegurada (máx. $890.000)"
+      },
+      {
+        "nombre": "Ajuste Automático de Suma Asegurada",
+        "descripcion": "20%"
+      },
+      {
+        "nombre": "Asistencia Mecánica",
+        "descripcion": "250 km (uso particular)"
+      },
+      {
+        "nombre": "Asistencia Penal Primaria",
+        "descripcion": "Sí"
+      },
+      {
+        "nombre": "Asistencia Médica",
+        "descripcion": "Sí"
+      }
+    ]
+  },
+  "T31": {
+    "titulo": "TODO RIESGO – Franquicia 5% T31 5%",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil",
+        "descripcion": "Cubre lesiones o fallecimiento de terceros transportados y no transportados, y daños a cosas de terceros no transportados.",
+        "limite": "hasta $160.000.000"
+      },
+      {
+        "nombre": "Pérdida Total y Parcial por Daños, Incendio y Robo o Hurto",
+        "descripcion": "Franquicia 5% de la suma asegurada"
+      },
+      {
+        "nombre": "Rotura de Cristales Laterales del Vehículo",
+        "descripcion": "3 acontecimientos por vigencia anual. Sin límites (sin franquicia)"
+      },
+      {
+        "nombre": "Rotura de Parabrisas",
+        "descripcion": "3 acontecimientos por vigencia anual. Sin límites (sin franquicia)"
+      },
+      {
+        "nombre": "Rotura de Luneta",
+        "descripcion": "3 acontecimientos por vigencia anual. Sin límites (sin franquicia)"
+      },
+      {
+        "nombre": "Rotura de Cristales de Techo",
+        "descripcion": "2 acontecimientos por vigencia anual. Sin límites (sin franquicia)"
+      },
+      {
+        "nombre": "Daños Parciales a Consecuencia de Granizo",
+        "descripcion": "2 acontecimientos por vigencia anual. Sin límites (sin franquicia)"
+      },
+      {
+        "nombre": "Ruedas",
+        "descripcion": "4 acontecimientos por vigencia anual"
+      },
+      {
+        "nombre": "Rotura de Cerraduras",
+        "descripcion": "3 acontecimientos por vigencia anual. $300.000"
+      },
+      {
+        "nombre": "Daños Parciales por Accidente al Amparo del Robo Total",
+        "descripcion": "Hasta el 10% de la suma asegurada (máx. $890.000)"
+      },
+      {
+        "nombre": "Ajuste Automático de Suma Asegurada",
+        "descripcion": "20%"
+      },
+      {
+        "nombre": "Asistencia Mecánica",
+        "descripcion": "250 km (uso particular)"
+      },
+      {
+        "nombre": "Asistencia Penal Primaria",
+        "descripcion": "Sí"
+      },
+      {
+        "nombre": "Asistencia Médica",
+        "descripcion": "Sí"
+      }
+    ]
+  },
+  "5% DE LA SA": {
+    "titulo": "TODO RIESGO – Franquicia 5% T31 5%",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil",
+        "descripcion": "Cubre lesiones o fallecimiento de terceros transportados y no transportados, y daños a cosas de terceros no transportados.",
+        "limite": "hasta $160.000.000"
+      },
+      {
+        "nombre": "Pérdida Total y Parcial por Daños, Incendio y Robo o Hurto",
+        "descripcion": "Franquicia 5% de la suma asegurada"
+      },
+      {
+        "nombre": "Rotura de Cristales Laterales del Vehículo",
+        "descripcion": "3 acontecimientos por vigencia anual. Sin límites (sin franquicia)"
+      },
+      {
+        "nombre": "Rotura de Parabrisas",
+        "descripcion": "3 acontecimientos por vigencia anual. Sin límites (sin franquicia)"
+      },
+      {
+        "nombre": "Rotura de Luneta",
+        "descripcion": "3 acontecimientos por vigencia anual. Sin límites (sin franquicia)"
+      },
+      {
+        "nombre": "Rotura de Cristales de Techo",
+        "descripcion": "2 acontecimientos por vigencia anual. Sin límites (sin franquicia)"
+      },
+      {
+        "nombre": "Daños Parciales a Consecuencia de Granizo",
+        "descripcion": "2 acontecimientos por vigencia anual. Sin límites (sin franquicia)"
+      },
+      {
+        "nombre": "Ruedas",
+        "descripcion": "4 acontecimientos por vigencia anual"
+      },
+      {
+        "nombre": "Rotura de Cerraduras",
+        "descripcion": "3 acontecimientos por vigencia anual. $300.000"
+      },
+      {
+        "nombre": "Daños Parciales por Accidente al Amparo del Robo Total",
+        "descripcion": "Hasta el 10% de la suma asegurada (máx. $890.000)"
+      },
+      {
+        "nombre": "Ajuste Automático de Suma Asegurada",
+        "descripcion": "20%"
+      },
+      {
+        "nombre": "Asistencia Mecánica",
+        "descripcion": "250 km (uso particular)"
+      },
+      {
+        "nombre": "Asistencia Penal Primaria",
+        "descripcion": "Sí"
+      },
+      {
+        "nombre": "Asistencia Médica",
+        "descripcion": "Sí"
+      }
+    ]
+  }
+}

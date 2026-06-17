@@ -1,0 +1,220 @@
+{
+  "RC": {
+    "titulo": "RC – Responsabilidad Civil",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil frente a terceros",
+        "descripcion": "Cubre lesiones o fallecimiento de terceros y daños a cosas de terceros.",
+        "limite": "hasta $160.000.000"
+      },
+      {
+        "nombre": "Protección para el conductor",
+        "descripcion": "Cobertura de protección para el conductor del vehículo asegurado.",
+        "limite": "$200.000"
+      }
+    ]
+  },
+  "COBERTURA RC": {
+    "titulo": "RC – Responsabilidad Civil",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil frente a terceros",
+        "descripcion": "Cubre lesiones o fallecimiento de terceros y daños a cosas de terceros.",
+        "limite": "hasta $160.000.000"
+      },
+      {
+        "nombre": "Protección para el conductor",
+        "descripcion": "Cobertura de protección para el conductor del vehículo asegurado.",
+        "limite": "$200.000"
+      }
+    ]
+  },
+  "B": {
+    "titulo": "B – Terceros Completo",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil frente a terceros",
+        "descripcion": "Cubre lesiones o fallecimiento de terceros y daños a cosas de terceros.",
+        "limite": "hasta $160.000.000"
+      },
+      {
+        "nombre": "Incendio Total",
+        "descripcion": "Cobertura total por pérdida del vehículo debido a incendio."
+      },
+      {
+        "nombre": "Robo y/o Hurto Total",
+        "descripcion": "Cobertura total por robo o hurto del vehículo asegurado."
+      }
+    ]
+  },
+  "COBERTURA B": {
+    "titulo": "B – Terceros Completo",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil frente a terceros",
+        "descripcion": "Cubre lesiones o fallecimiento de terceros y daños a cosas de terceros.",
+        "limite": "hasta $160.000.000"
+      },
+      {
+        "nombre": "Incendio Total",
+        "descripcion": "Cobertura total por pérdida del vehículo debido a incendio."
+      },
+      {
+        "nombre": "Robo y/o Hurto Total",
+        "descripcion": "Cobertura total por robo o hurto del vehículo asegurado."
+      }
+    ]
+  },
+  "C": {
+    "titulo": "C – Terceros Completo Full",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil frente a terceros",
+        "descripcion": "Cubre lesiones o fallecimiento de terceros y daños a cosas de terceros.",
+        "limite": "hasta $160.000.000"
+      },
+      {
+        "nombre": "Daño parcial al amparo del Robo Total",
+        "descripcion": "Cobertura de daños parciales en caso de robo total del vehículo."
+      },
+      {
+        "nombre": "Incendio Total y Parcial",
+        "descripcion": "Cobertura completa por incendio, tanto total como parcial."
+      },
+      {
+        "nombre": "Robo Total y Parcial",
+        "descripcion": "Cobertura completa por robo o hurto, tanto total como parcial."
+      },
+      {
+        "nombre": "Daño Total por Accidente",
+        "descripcion": "Cobertura por destrucción total del vehículo debido a accidente."
+      },
+      {
+        "nombre": "Granizo",
+        "descripcion": "Cobertura por daños causados por granizo."
+      },
+      {
+        "nombre": "Cerraduras, Parabrisas, Lunetas y Cristales laterales",
+        "descripcion": "Cobertura para reemplazo de cerraduras y todos los cristales del vehículo."
+      },
+      {
+        "nombre": "Asistencia al vehículo (SOS o IKE)",
+        "descripcion": "Por accidente 600 km / Por avería 400 km (hasta 20 años de antigüedad)."
+      }
+    ]
+  },
+  "COBERTURA C": {
+    "titulo": "C – Terceros Completo Full",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil frente a terceros",
+        "descripcion": "Cubre lesiones o fallecimiento de terceros y daños a cosas de terceros.",
+        "limite": "hasta $160.000.000"
+      },
+      {
+        "nombre": "Daño parcial al amparo del Robo Total",
+        "descripcion": "Cobertura de daños parciales en caso de robo total del vehículo."
+      },
+      {
+        "nombre": "Incendio Total y Parcial",
+        "descripcion": "Cobertura completa por incendio, tanto total como parcial."
+      },
+      {
+        "nombre": "Robo Total y Parcial",
+        "descripcion": "Cobertura completa por robo o hurto, tanto total como parcial."
+      },
+      {
+        "nombre": "Daño Total por Accidente",
+        "descripcion": "Cobertura por destrucción total del vehículo debido a accidente."
+      },
+      {
+        "nombre": "Granizo",
+        "descripcion": "Cobertura por daños causados por granizo."
+      },
+      {
+        "nombre": "Cerraduras, Parabrisas, Lunetas y Cristales laterales",
+        "descripcion": "Cobertura para reemplazo de cerraduras y todos los cristales del vehículo."
+      },
+      {
+        "nombre": "Asistencia al vehículo (SOS o IKE)",
+        "descripcion": "Por accidente 600 km / Por avería 400 km (hasta 20 años de antigüedad)."
+      }
+    ]
+  },
+  "TODO RIESGO 4%": {
+    "titulo": "Todo Riesgo – Franquicia 4%",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil frente a terceros",
+        "descripcion": "Cubre lesiones o fallecimiento de terceros y daños a cosas de terceros.",
+        "limite": "hasta $160.000.000"
+      },
+      {
+        "nombre": "Daño parcial al amparo del Robo Total",
+        "descripcion": "Cobertura de daños parciales en caso de robo total del vehículo."
+      },
+      {
+        "nombre": "Incendio Total y Parcial",
+        "descripcion": "Cobertura completa por incendio, tanto total como parcial."
+      },
+      {
+        "nombre": "Robo Total y Parcial",
+        "descripcion": "Cobertura completa por robo o hurto, tanto total como parcial."
+      },
+      {
+        "nombre": "Daño Total y Parcial por Accidente",
+        "descripcion": "Cobertura completa por daños al vehículo, tanto totales como parciales, con franquicia del 4%."
+      },
+      {
+        "nombre": "Granizo",
+        "descripcion": "Cobertura por daños causados por granizo."
+      },
+      {
+        "nombre": "Cerraduras, Parabrisas, Lunetas y Cristales laterales",
+        "descripcion": "Cobertura para reemplazo de cerraduras y todos los cristales del vehículo."
+      },
+      {
+        "nombre": "Asistencia al vehículo (SOS o IKE)",
+        "descripcion": "Por accidente o avería hasta 800 km totales (vehículos hasta 5 años de antigüedad)."
+      }
+    ]
+  },
+  "T. RIESGO INTEGRITY 4% S. ASEG": {
+    "titulo": "Todo Riesgo – Franquicia 4%",
+    "coberturas": [
+      {
+        "nombre": "Responsabilidad Civil frente a terceros",
+        "descripcion": "Cubre lesiones o fallecimiento de terceros y daños a cosas de terceros.",
+        "limite": "hasta $160.000.000"
+      },
+      {
+        "nombre": "Daño parcial al amparo del Robo Total",
+        "descripcion": "Cobertura de daños parciales en caso de robo total del vehículo."
+      },
+      {
+        "nombre": "Incendio Total y Parcial",
+        "descripcion": "Cobertura completa por incendio, tanto total como parcial."
+      },
+      {
+        "nombre": "Robo Total y Parcial",
+        "descripcion": "Cobertura completa por robo o hurto, tanto total como parcial."
+      },
+      {
+        "nombre": "Daño Total y Parcial por Accidente",
+        "descripcion": "Cobertura completa por daños al vehículo, tanto totales como parciales, con franquicia del 4%."
+      },
+      {
+        "nombre": "Granizo",
+        "descripcion": "Cobertura por daños causados por granizo."
+      },
+      {
+        "nombre": "Cerraduras, Parabrisas, Lunetas y Cristales laterales",
+        "descripcion": "Cobertura para reemplazo de cerraduras y todos los cristales del vehículo."
+      },
+      {
+        "nombre": "Asistencia al vehículo (SOS o IKE)",
+        "descripcion": "Por accidente o avería hasta 800 km totales (vehículos hasta 5 años de antigüedad)."
+      }
+    ]
+  }
+}

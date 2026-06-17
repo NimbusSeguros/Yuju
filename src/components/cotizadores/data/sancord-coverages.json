@@ -1,0 +1,848 @@
+{
+    "AUTO MAX 1": {
+        "titulo": "Auto Max 1 – Responsabilidad Civil",
+        "coberturas": [
+            {
+                "nombre": "Responsabilidad Civil frente a terceros",
+                "descripcion": "Cubre lesiones o fallecimiento de terceros y daños a cosas de terceros.",
+                "limite": "Límite según póliza"
+            }
+        ]
+    },
+    "AUTO MAX 3": {
+        "titulo": "Auto Max 3 – Terceros Completo",
+        "subtitulo": "Solo para Autos y Pick-Ups",
+        "coberturas": [
+            {
+                "nombre": "Responsabilidad Civil frente a terceros",
+                "descripcion": "Cubre lesiones o fallecimiento de terceros y daños a cosas de terceros.",
+                "limite": "Límite según póliza"
+            },
+            {
+                "nombre": "Incendio Parcial y Total",
+                "descripcion": "Cobertura completa en caso de incendio parcial o total del vehículo.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Robo Total",
+                "descripcion": "Cobertura completa en caso de robo total del vehículo.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Robo Parcial",
+                "descripcion": "Cobertura por robo parcial del vehículo (solo para Autos y Pick-Ups).",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Asistencia a Vehículos y Personas",
+                "descripcion": "Servicio de asistencia mecánica y remolque incluido."
+            },
+            {
+                "nombre": "Cláusula Destrucción Total",
+                "descripcion": "Destrucción total del vehículo.",
+                "limite": "80%"
+            }
+        ]
+    },
+    "AUTO MAX 6": {
+        "titulo": "Auto Max 6 – Terceros Completo Full",
+        "coberturas": [
+            {
+                "nombre": "Responsabilidad Civil frente a terceros",
+                "descripcion": "Cubre lesiones o fallecimiento de terceros y daños a cosas de terceros.",
+                "limite": "Límite según póliza"
+            },
+            {
+                "nombre": "Incendio Parcial y Total",
+                "descripcion": "Cobertura completa en caso de incendio parcial o total del vehículo.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Robo Parcial y Total",
+                "descripcion": "Cobertura completa en caso de robo parcial o total del vehículo.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Accidente Total",
+                "descripcion": "Cobertura por pérdida total del vehículo debido a accidente.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Granizo Total y Parcial",
+                "descripcion": "Cobertura completa por daños de granizo total y parcial.",
+                "limite": "Sin deducible"
+            },
+            {
+                "nombre": "Asistencia a Vehículos y Personas",
+                "descripcion": "Servicio de asistencia mecánica y remolque incluido."
+            },
+            {
+                "nombre": "Cláusula Destrucción Total",
+                "descripcion": "Destrucción total del vehículo.",
+                "limite": "80%"
+            }
+        ]
+    },
+    "AUTO MAX 13": {
+        "titulo": "Auto Max 13 – Terceros Totales",
+        "coberturas": [
+            {
+                "nombre": "Responsabilidad Civil frente a terceros",
+                "descripcion": "Cubre lesiones o fallecimiento de terceros y daños a cosas de terceros.",
+                "limite": "Límite según póliza"
+            },
+            {
+                "nombre": "Incendio Total",
+                "descripcion": "Cobertura completa en caso de incendio total del vehículo.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Robo Total",
+                "descripcion": "Cobertura completa en caso de robo total del vehículo.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Accidente Total",
+                "descripcion": "Cobertura por pérdida total del vehículo debido a accidente.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Asistencia a Vehículos y Personas",
+                "descripcion": "Servicio de asistencia mecánica y remolque incluido."
+            },
+            {
+                "nombre": "Cláusula Destrucción Total",
+                "descripcion": "Destrucción total del vehículo.",
+                "limite": "80%"
+            }
+        ]
+    },
+    "AUTO PREMIUM MAX": {
+        "titulo": "Auto Premium Max – Terceros Completo Full Premium",
+        "subtitulo": "Solo para automóviles o unidades 4x4 de uso particular exclusivo",
+        "coberturas": [
+            {
+                "nombre": "Responsabilidad Civil frente a terceros",
+                "descripcion": "Cubre lesiones o fallecimiento de terceros y daños a cosas de terceros.",
+                "limite": "Límite según póliza"
+            },
+            {
+                "nombre": "Incendio Parcial y Total",
+                "descripcion": "Cobertura completa en caso de incendio parcial o total del vehículo.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Robo Parcial y Total",
+                "descripcion": "Cobertura completa en caso de robo parcial o total del vehículo.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Accidente Total",
+                "descripcion": "Cobertura por pérdida total del vehículo debido a accidente.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Granizo Total y Parcial",
+                "descripcion": "Cobertura completa por daños de granizo total y parcial.",
+                "limite": "Sin deducible"
+            },
+            {
+                "nombre": "Asistencia Jurídica Integral",
+                "descripcion": "Cobertura de asistencia legal en caso de siniestros."
+            },
+            {
+                "nombre": "Cláusula Destrucción Total",
+                "descripcion": "Destrucción total del vehículo.",
+                "limite": "80%"
+            },
+            {
+                "nombre": "Asistencia a Vehículos y Personas",
+                "descripcion": "Servicio de asistencia mecánica y remolque incluido."
+            },
+            {
+                "nombre": "Cobertura de Cristales",
+                "descripcion": "Cobertura para rotura de parabrisas, luneta y cristales laterales.",
+                "limite": "Sin límite de suma asegurada"
+            },
+            {
+                "nombre": "Reintegro por Muerte e Invalidez",
+                "descripcion": "Reintegro para conductor y acompañante en caso de accidente del vehículo asegurado.",
+                "limite": "$5.000 por persona / Tope $25.000 por acontecimiento"
+            },
+            {
+                "nombre": "Roturas de Cerraduras",
+                "descripcion": "Cobertura por rotura de cerraduras por robo o intento de robo.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Gastos de Gestoría",
+                "descripcion": "Gastos de gestoría en caso de robo o hurto total.",
+                "limite": "Hasta $100.000"
+            },
+            {
+                "nombre": "Daños Parciales al amparo de Robo Total",
+                "descripcion": "Cobertura de daños parciales cuando el vehículo robado aparece con daños.",
+                "limite": "Sin deducible"
+            },
+            {
+                "nombre": "Reposición Vehículo 0 km",
+                "descripcion": "Reposición del vehículo por uno 0 km en caso de pérdida total.",
+                "limite": "Hasta 12 meses de fecha de factura"
+            }
+        ]
+    },
+    "AUTO MAX TODO RIESGO 1%": {
+        "titulo": "Auto Max Todo Riesgo – Franquicia 1%",
+        "subtitulo": "Autos y Pick-Ups",
+        "coberturas": [
+            {
+                "nombre": "Responsabilidad Civil frente a terceros",
+                "descripcion": "Cubre lesiones o fallecimiento de terceros y daños a cosas de terceros.",
+                "limite": "Límite según póliza"
+            },
+            {
+                "nombre": "Incendio Parcial y Total",
+                "descripcion": "Cobertura completa en caso de incendio parcial o total del vehículo.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Robo Parcial y Total",
+                "descripcion": "Cobertura completa en caso de robo parcial o total del vehículo.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Accidente Total",
+                "descripcion": "Cobertura por pérdida total del vehículo debido a accidente.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Granizo Total y Parcial",
+                "descripcion": "Cobertura completa por daños de granizo total y parcial.",
+                "limite": "Sin deducible"
+            },
+            {
+                "nombre": "Accidente Parcial",
+                "descripcion": "Cobertura por daños parciales del vehículo debido a accidente.",
+                "limite": "Franquicia 1% sobre suma asegurada"
+            },
+            {
+                "nombre": "Asistencia Jurídica Integral",
+                "descripcion": "Cobertura de asistencia legal en caso de siniestros."
+            },
+            {
+                "nombre": "Cláusula Destrucción Total",
+                "descripcion": "Destrucción total del vehículo.",
+                "limite": "80%"
+            },
+            {
+                "nombre": "Asistencia a Vehículos y Personas",
+                "descripcion": "Servicio de asistencia mecánica y remolque incluido."
+            },
+            {
+                "nombre": "Cobertura de Cristales",
+                "descripcion": "Cobertura para rotura de parabrisas, luneta y cristales laterales.",
+                "limite": "Sin límite de suma asegurada"
+            },
+            {
+                "nombre": "Reintegro por Muerte e Invalidez",
+                "descripcion": "Reintegro para conductor y acompañante en caso de accidente del vehículo asegurado.",
+                "limite": "$5.000 por persona / Tope $25.000 por acontecimiento"
+            },
+            {
+                "nombre": "Roturas de Cerraduras",
+                "descripcion": "Cobertura por rotura de cerraduras por robo o intento de robo.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Gastos de Gestoría",
+                "descripcion": "Gastos de gestoría en caso de robo o hurto total.",
+                "limite": "Hasta $100.000"
+            },
+            {
+                "nombre": "Daños Parciales al amparo de Robo Total",
+                "descripcion": "Cobertura de daños parciales cuando el vehículo robado aparece con daños.",
+                "limite": "Sin deducible"
+            },
+            {
+                "nombre": "Reposición Vehículo 0 km",
+                "descripcion": "Reposición del vehículo por uno 0 km en caso de pérdida total.",
+                "limite": "Hasta 12 meses de fecha de factura"
+            }
+        ]
+    },
+    "AUTO MAX TODO RIESGO 2%": {
+        "titulo": "Auto Max Todo Riesgo – Franquicia 2%",
+        "subtitulo": "Autos y Pick-Ups",
+        "coberturas": [
+            {
+                "nombre": "Responsabilidad Civil frente a terceros",
+                "descripcion": "Cubre lesiones o fallecimiento de terceros y daños a cosas de terceros.",
+                "limite": "Límite según póliza"
+            },
+            {
+                "nombre": "Incendio Parcial y Total",
+                "descripcion": "Cobertura completa en caso de incendio parcial o total del vehículo.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Robo Parcial y Total",
+                "descripcion": "Cobertura completa en caso de robo parcial o total del vehículo.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Accidente Total",
+                "descripcion": "Cobertura por pérdida total del vehículo debido a accidente.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Granizo Total y Parcial",
+                "descripcion": "Cobertura completa por daños de granizo total y parcial.",
+                "limite": "Sin deducible"
+            },
+            {
+                "nombre": "Accidente Parcial",
+                "descripcion": "Cobertura por daños parciales del vehículo debido a accidente.",
+                "limite": "Franquicia 2% sobre suma asegurada"
+            },
+            {
+                "nombre": "Asistencia Jurídica Integral",
+                "descripcion": "Cobertura de asistencia legal en caso de siniestros."
+            },
+            {
+                "nombre": "Cláusula Destrucción Total",
+                "descripcion": "Destrucción total del vehículo.",
+                "limite": "80%"
+            },
+            {
+                "nombre": "Asistencia a Vehículos y Personas",
+                "descripcion": "Servicio de asistencia mecánica y remolque incluido."
+            },
+            {
+                "nombre": "Cobertura de Cristales",
+                "descripcion": "Cobertura para rotura de parabrisas, luneta y cristales laterales.",
+                "limite": "Sin límite de suma asegurada"
+            },
+            {
+                "nombre": "Reintegro por Muerte e Invalidez",
+                "descripcion": "Reintegro para conductor y acompañante en caso de accidente del vehículo asegurado.",
+                "limite": "$5.000 por persona / Tope $25.000 por acontecimiento"
+            },
+            {
+                "nombre": "Roturas de Cerraduras",
+                "descripcion": "Cobertura por rotura de cerraduras por robo o intento de robo.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Gastos de Gestoría",
+                "descripcion": "Gastos de gestoría en caso de robo o hurto total.",
+                "limite": "Hasta $100.000"
+            },
+            {
+                "nombre": "Daños Parciales al amparo de Robo Total",
+                "descripcion": "Cobertura de daños parciales cuando el vehículo robado aparece con daños.",
+                "limite": "Sin deducible"
+            },
+            {
+                "nombre": "Reposición Vehículo 0 km",
+                "descripcion": "Reposición del vehículo por uno 0 km en caso de pérdida total.",
+                "limite": "Hasta 12 meses de fecha de factura"
+            }
+        ]
+    },
+    "AUTO MAX TODO RIESGO 3%": {
+        "titulo": "Auto Max Todo Riesgo – Franquicia 3%",
+        "subtitulo": "Autos y Pick-Ups",
+        "coberturas": [
+            {
+                "nombre": "Responsabilidad Civil frente a terceros",
+                "descripcion": "Cubre lesiones o fallecimiento de terceros y daños a cosas de terceros.",
+                "limite": "Límite según póliza"
+            },
+            {
+                "nombre": "Incendio Parcial y Total",
+                "descripcion": "Cobertura completa en caso de incendio parcial o total del vehículo.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Robo Parcial y Total",
+                "descripcion": "Cobertura completa en caso de robo parcial o total del vehículo.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Accidente Total",
+                "descripcion": "Cobertura por pérdida total del vehículo debido a accidente.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Granizo Total y Parcial",
+                "descripcion": "Cobertura completa por daños de granizo total y parcial.",
+                "limite": "Sin deducible"
+            },
+            {
+                "nombre": "Accidente Parcial",
+                "descripcion": "Cobertura por daños parciales del vehículo debido a accidente.",
+                "limite": "Franquicia 3% sobre suma asegurada"
+            },
+            {
+                "nombre": "Asistencia Jurídica Integral",
+                "descripcion": "Cobertura de asistencia legal en caso de siniestros."
+            },
+            {
+                "nombre": "Cláusula Destrucción Total",
+                "descripcion": "Destrucción total del vehículo.",
+                "limite": "80%"
+            },
+            {
+                "nombre": "Asistencia a Vehículos y Personas",
+                "descripcion": "Servicio de asistencia mecánica y remolque incluido."
+            },
+            {
+                "nombre": "Cobertura de Cristales",
+                "descripcion": "Cobertura para rotura de parabrisas, luneta y cristales laterales.",
+                "limite": "Sin límite de suma asegurada"
+            },
+            {
+                "nombre": "Reintegro por Muerte e Invalidez",
+                "descripcion": "Reintegro para conductor y acompañante en caso de accidente del vehículo asegurado.",
+                "limite": "$5.000 por persona / Tope $25.000 por acontecimiento"
+            },
+            {
+                "nombre": "Roturas de Cerraduras",
+                "descripcion": "Cobertura por rotura de cerraduras por robo o intento de robo.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Gastos de Gestoría",
+                "descripcion": "Gastos de gestoría en caso de robo o hurto total.",
+                "limite": "Hasta $100.000"
+            },
+            {
+                "nombre": "Daños Parciales al amparo de Robo Total",
+                "descripcion": "Cobertura de daños parciales cuando el vehículo robado aparece con daños.",
+                "limite": "Sin deducible"
+            },
+            {
+                "nombre": "Reposición Vehículo 0 km",
+                "descripcion": "Reposición del vehículo por uno 0 km en caso de pérdida total.",
+                "limite": "Hasta 12 meses de fecha de factura"
+            }
+        ]
+    },
+    "AUTO MAX TODO RIESGO 4%": {
+        "titulo": "Auto Max Todo Riesgo – Franquicia 4%",
+        "subtitulo": "Autos y Pick-Ups",
+        "coberturas": [
+            {
+                "nombre": "Responsabilidad Civil frente a terceros",
+                "descripcion": "Cubre lesiones o fallecimiento de terceros y daños a cosas de terceros.",
+                "limite": "Límite según póliza"
+            },
+            {
+                "nombre": "Incendio Parcial y Total",
+                "descripcion": "Cobertura completa en caso de incendio parcial o total del vehículo.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Robo Parcial y Total",
+                "descripcion": "Cobertura completa en caso de robo parcial o total del vehículo.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Accidente Total",
+                "descripcion": "Cobertura por pérdida total del vehículo debido a accidente.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Granizo Total y Parcial",
+                "descripcion": "Cobertura completa por daños de granizo total y parcial.",
+                "limite": "Sin deducible"
+            },
+            {
+                "nombre": "Accidente Parcial",
+                "descripcion": "Cobertura por daños parciales del vehículo debido a accidente.",
+                "limite": "Franquicia 4% sobre suma asegurada"
+            },
+            {
+                "nombre": "Asistencia Jurídica Integral",
+                "descripcion": "Cobertura de asistencia legal en caso de siniestros."
+            },
+            {
+                "nombre": "Cláusula Destrucción Total",
+                "descripcion": "Destrucción total del vehículo.",
+                "limite": "80%"
+            },
+            {
+                "nombre": "Asistencia a Vehículos y Personas",
+                "descripcion": "Servicio de asistencia mecánica y remolque incluido."
+            },
+            {
+                "nombre": "Cobertura de Cristales",
+                "descripcion": "Cobertura para rotura de parabrisas, luneta y cristales laterales.",
+                "limite": "Sin límite de suma asegurada"
+            },
+            {
+                "nombre": "Reintegro por Muerte e Invalidez",
+                "descripcion": "Reintegro para conductor y acompañante en caso de accidente del vehículo asegurado.",
+                "limite": "$5.000 por persona / Tope $25.000 por acontecimiento"
+            },
+            {
+                "nombre": "Roturas de Cerraduras",
+                "descripcion": "Cobertura por rotura de cerraduras por robo o intento de robo.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Gastos de Gestoría",
+                "descripcion": "Gastos de gestoría en caso de robo o hurto total.",
+                "limite": "Hasta $100.000"
+            },
+            {
+                "nombre": "Daños Parciales al amparo de Robo Total",
+                "descripcion": "Cobertura de daños parciales cuando el vehículo robado aparece con daños.",
+                "limite": "Sin deducible"
+            },
+            {
+                "nombre": "Reposición Vehículo 0 km",
+                "descripcion": "Reposición del vehículo por uno 0 km en caso de pérdida total.",
+                "limite": "Hasta 12 meses de fecha de factura"
+            }
+        ]
+    },
+    "AUTO MAX TODO RIESGO 5%": {
+        "titulo": "Auto Max Todo Riesgo – Franquicia 5%",
+        "subtitulo": "Autos y Pick-Ups",
+        "coberturas": [
+            {
+                "nombre": "Responsabilidad Civil frente a terceros",
+                "descripcion": "Cubre lesiones o fallecimiento de terceros y daños a cosas de terceros.",
+                "limite": "Límite según póliza"
+            },
+            {
+                "nombre": "Incendio Parcial y Total",
+                "descripcion": "Cobertura completa en caso de incendio parcial o total del vehículo.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Robo Parcial y Total",
+                "descripcion": "Cobertura completa en caso de robo parcial o total del vehículo.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Accidente Total",
+                "descripcion": "Cobertura por pérdida total del vehículo debido a accidente.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Granizo Total y Parcial",
+                "descripcion": "Cobertura completa por daños de granizo total y parcial.",
+                "limite": "Sin deducible"
+            },
+            {
+                "nombre": "Accidente Parcial",
+                "descripcion": "Cobertura por daños parciales del vehículo debido a accidente.",
+                "limite": "Franquicia 5% sobre suma asegurada"
+            },
+            {
+                "nombre": "Asistencia Jurídica Integral",
+                "descripcion": "Cobertura de asistencia legal en caso de siniestros."
+            },
+            {
+                "nombre": "Cláusula Destrucción Total",
+                "descripcion": "Destrucción total del vehículo.",
+                "limite": "80%"
+            },
+            {
+                "nombre": "Asistencia a Vehículos y Personas",
+                "descripcion": "Servicio de asistencia mecánica y remolque incluido."
+            },
+            {
+                "nombre": "Cobertura de Cristales",
+                "descripcion": "Cobertura para rotura de parabrisas, luneta y cristales laterales.",
+                "limite": "Sin límite de suma asegurada"
+            },
+            {
+                "nombre": "Reintegro por Muerte e Invalidez",
+                "descripcion": "Reintegro para conductor y acompañante en caso de accidente del vehículo asegurado.",
+                "limite": "$5.000 por persona / Tope $25.000 por acontecimiento"
+            },
+            {
+                "nombre": "Roturas de Cerraduras",
+                "descripcion": "Cobertura por rotura de cerraduras por robo o intento de robo.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Gastos de Gestoría",
+                "descripcion": "Gastos de gestoría en caso de robo o hurto total.",
+                "limite": "Hasta $100.000"
+            },
+            {
+                "nombre": "Daños Parciales al amparo de Robo Total",
+                "descripcion": "Cobertura de daños parciales cuando el vehículo robado aparece con daños.",
+                "limite": "Sin deducible"
+            },
+            {
+                "nombre": "Reposición Vehículo 0 km",
+                "descripcion": "Reposición del vehículo por uno 0 km en caso de pérdida total.",
+                "limite": "Hasta 12 meses de fecha de factura"
+            }
+        ]
+    },
+    "AUTO MAX TODO RIESGO 8%": {
+        "titulo": "Auto Max Todo Riesgo – Franquicia 8%",
+        "subtitulo": "Autos y Pick-Ups",
+        "coberturas": [
+            {
+                "nombre": "Responsabilidad Civil frente a terceros",
+                "descripcion": "Cubre lesiones o fallecimiento de terceros y daños a cosas de terceros.",
+                "limite": "Límite según póliza"
+            },
+            {
+                "nombre": "Incendio Parcial y Total",
+                "descripcion": "Cobertura completa en caso de incendio parcial o total del vehículo.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Robo Parcial y Total",
+                "descripcion": "Cobertura completa en caso de robo parcial o total del vehículo.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Accidente Total",
+                "descripcion": "Cobertura por pérdida total del vehículo debido a accidente.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Granizo Total y Parcial",
+                "descripcion": "Cobertura completa por daños de granizo total y parcial.",
+                "limite": "Sin deducible"
+            },
+            {
+                "nombre": "Accidente Parcial",
+                "descripcion": "Cobertura por daños parciales del vehículo debido a accidente.",
+                "limite": "Franquicia 8% sobre suma asegurada"
+            },
+            {
+                "nombre": "Asistencia Jurídica Integral",
+                "descripcion": "Cobertura de asistencia legal en caso de siniestros."
+            },
+            {
+                "nombre": "Cláusula Destrucción Total",
+                "descripcion": "Destrucción total del vehículo.",
+                "limite": "80%"
+            },
+            {
+                "nombre": "Asistencia a Vehículos y Personas",
+                "descripcion": "Servicio de asistencia mecánica y remolque incluido."
+            },
+            {
+                "nombre": "Cobertura de Cristales",
+                "descripcion": "Cobertura para rotura de parabrisas, luneta y cristales laterales.",
+                "limite": "Sin límite de suma asegurada"
+            },
+            {
+                "nombre": "Reintegro por Muerte e Invalidez",
+                "descripcion": "Reintegro para conductor y acompañante en caso de accidente del vehículo asegurado.",
+                "limite": "$5.000 por persona / Tope $25.000 por acontecimiento"
+            },
+            {
+                "nombre": "Roturas de Cerraduras",
+                "descripcion": "Cobertura por rotura de cerraduras por robo o intento de robo.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Gastos de Gestoría",
+                "descripcion": "Gastos de gestoría en caso de robo o hurto total.",
+                "limite": "Hasta $100.000"
+            },
+            {
+                "nombre": "Daños Parciales al amparo de Robo Total",
+                "descripcion": "Cobertura de daños parciales cuando el vehículo robado aparece con daños.",
+                "limite": "Sin deducible"
+            },
+            {
+                "nombre": "Reposición Vehículo 0 km",
+                "descripcion": "Reposición del vehículo por uno 0 km en caso de pérdida total.",
+                "limite": "Hasta 12 meses de fecha de factura"
+            }
+        ]
+    },
+    "TODO RIESGO RESTO 1%": {
+        "titulo": "Auto Max Todo Riesgo – Franquicia 1%",
+        "subtitulo": "Resto de Vehículos",
+        "coberturas": [
+            {
+                "nombre": "Responsabilidad Civil frente a terceros",
+                "descripcion": "Cubre lesiones o fallecimiento de terceros y daños a cosas de terceros.",
+                "limite": "Límite según póliza"
+            },
+            {
+                "nombre": "Incendio Parcial y Total",
+                "descripcion": "Cobertura completa en caso de incendio parcial o total del vehículo.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Robo Parcial y Total",
+                "descripcion": "Cobertura completa en caso de robo parcial o total del vehículo.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Accidente Total",
+                "descripcion": "Cobertura por pérdida total del vehículo debido a accidente.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Granizo Total y Parcial",
+                "descripcion": "Cobertura completa por daños de granizo total y parcial.",
+                "limite": "Sin deducible"
+            },
+            {
+                "nombre": "Accidente Parcial",
+                "descripcion": "Cobertura por daños parciales del vehículo debido a accidente.",
+                "limite": "Franquicia 1% sobre suma asegurada"
+            },
+            {
+                "nombre": "Asistencia Jurídica Integral",
+                "descripcion": "Cobertura de asistencia legal en caso de siniestros."
+            },
+            {
+                "nombre": "Cláusula Destrucción Total",
+                "descripcion": "Destrucción total del vehículo.",
+                "limite": "80%"
+            }
+        ]
+    },
+    "TODO RIESGO RESTO 2%": {
+        "titulo": "Auto Max Todo Riesgo – Franquicia 2%",
+        "subtitulo": "Resto de Vehículos",
+        "coberturas": [
+            {
+                "nombre": "Responsabilidad Civil frente a terceros",
+                "descripcion": "Cubre lesiones o fallecimiento de terceros y daños a cosas de terceros.",
+                "limite": "Límite según póliza"
+            },
+            {
+                "nombre": "Incendio Parcial y Total",
+                "descripcion": "Cobertura completa en caso de incendio parcial o total del vehículo.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Robo Parcial y Total",
+                "descripcion": "Cobertura completa en caso de robo parcial o total del vehículo.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Accidente Total",
+                "descripcion": "Cobertura por pérdida total del vehículo debido a accidente.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Granizo Total y Parcial",
+                "descripcion": "Cobertura completa por daños de granizo total y parcial.",
+                "limite": "Sin deducible"
+            },
+            {
+                "nombre": "Accidente Parcial",
+                "descripcion": "Cobertura por daños parciales del vehículo debido a accidente.",
+                "limite": "Franquicia 2% sobre suma asegurada"
+            },
+            {
+                "nombre": "Asistencia Jurídica Integral",
+                "descripcion": "Cobertura de asistencia legal en caso de siniestros."
+            },
+            {
+                "nombre": "Cláusula Destrucción Total",
+                "descripcion": "Destrucción total del vehículo.",
+                "limite": "80%"
+            }
+        ]
+    },
+    "TODO RIESGO RESTO 4%": {
+        "titulo": "Auto Max Todo Riesgo – Franquicia 4%",
+        "subtitulo": "Resto de Vehículos",
+        "coberturas": [
+            {
+                "nombre": "Responsabilidad Civil frente a terceros",
+                "descripcion": "Cubre lesiones o fallecimiento de terceros y daños a cosas de terceros.",
+                "limite": "Límite según póliza"
+            },
+            {
+                "nombre": "Incendio Parcial y Total",
+                "descripcion": "Cobertura completa en caso de incendio parcial o total del vehículo.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Robo Parcial y Total",
+                "descripcion": "Cobertura completa en caso de robo parcial o total del vehículo.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Accidente Total",
+                "descripcion": "Cobertura por pérdida total del vehículo debido a accidente.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Granizo Total y Parcial",
+                "descripcion": "Cobertura completa por daños de granizo total y parcial.",
+                "limite": "Sin deducible"
+            },
+            {
+                "nombre": "Accidente Parcial",
+                "descripcion": "Cobertura por daños parciales del vehículo debido a accidente.",
+                "limite": "Franquicia 4% sobre suma asegurada"
+            },
+            {
+                "nombre": "Asistencia Jurídica Integral",
+                "descripcion": "Cobertura de asistencia legal en caso de siniestros."
+            },
+            {
+                "nombre": "Cláusula Destrucción Total",
+                "descripcion": "Destrucción total del vehículo.",
+                "limite": "80%"
+            }
+        ]
+    },
+    "TODO RIESGO RESTO 6%": {
+        "titulo": "Auto Max Todo Riesgo – Franquicia 6%",
+        "subtitulo": "Resto de Vehículos",
+        "coberturas": [
+            {
+                "nombre": "Responsabilidad Civil frente a terceros",
+                "descripcion": "Cubre lesiones o fallecimiento de terceros y daños a cosas de terceros.",
+                "limite": "Límite según póliza"
+            },
+            {
+                "nombre": "Incendio Parcial y Total",
+                "descripcion": "Cobertura completa en caso de incendio parcial o total del vehículo.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Robo Parcial y Total",
+                "descripcion": "Cobertura completa en caso de robo parcial o total del vehículo.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Accidente Total",
+                "descripcion": "Cobertura por pérdida total del vehículo debido a accidente.",
+                "limite": "Sí"
+            },
+            {
+                "nombre": "Granizo Total y Parcial",
+                "descripcion": "Cobertura completa por daños de granizo total y parcial.",
+                "limite": "Sin deducible"
+            },
+            {
+                "nombre": "Accidente Parcial",
+                "descripcion": "Cobertura por daños parciales del vehículo debido a accidente.",
+                "limite": "Franquicia 6% sobre suma asegurada"
+            },
+            {
+                "nombre": "Asistencia Jurídica Integral",
+                "descripcion": "Cobertura de asistencia legal en caso de siniestros."
+            },
+            {
+                "nombre": "Cláusula Destrucción Total",
+                "descripcion": "Destrucción total del vehículo.",
+                "limite": "80%"
+            }
+        ]
+    }
+}

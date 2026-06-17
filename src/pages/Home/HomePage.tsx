@@ -1,0 +1,415 @@
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { Car, Home, ArrowRight, ChevronRight, MousePointer2, Laptop, Bike, ShieldCheck } from 'lucide-react';
+import { MotorbikeIcon } from '../../components/icons/MotorbikeIcon';
+import { MonopatinIcon } from '../../components/icons/MonopatinIcon';
+import { Link } from 'react-router-dom';
+import { GlassCard } from '../../components/ui/GlassCard';
+import { Button } from '../../components/ui/Button';
+import { cn } from '../../utils/utils';
+import { useTheme } from '../../hooks/useTheme';
+
+const services = [
+  {
+    title: 'Seguro de Auto',
+    icon: Car,
+    desc: 'Comparás los precios de las mejores compañías y elegís la cobertura que más te sirve.',
+    cta: 'Cotizar auto',
+    href: '/cotizar/seguro-auto',
+    color: 'from-[#3369ff] to-[#60a5fa]',
+    hoverColor: 'border-yuju-blue/20',
+    btnHover: 'hover:bg-yuju-blue shadow-yuju-blue/20'
+  },
+  {
+    title: 'Seguro de Moto',
+    icon: MotorbikeIcon,
+    desc: 'Protegé tu moto ante robo, incendio y daños a terceros.',
+    cta: 'Cotizar moto',
+    href: '/cotizar/seguro-moto',
+    color: 'from-orange-500 to-orange-400',
+    hoverColor: 'border-orange-500/20',
+    btnHover: 'hover:bg-orange-500 shadow-orange-500/20'
+  },
+  {
+    title: 'Seguro de Hogar',
+    icon: Home,
+    desc: 'Cobertura completa para tu casa y tus bienes. Contratación 100% online.',
+    cta: 'Cotizar hogar',
+    href: '/cotizar/seguro-hogar',
+    color: 'from-emerald-500 to-emerald-400',
+    hoverColor: 'border-emerald-500/20',
+    btnHover: 'hover:bg-emerald-500 shadow-emerald-500/20'
+  },
+  {
+    title: 'Seguro de Monopatín',
+    icon: MonopatinIcon,
+    desc: 'Protegé tu monopatín eléctrico contra robos, daños a terceros y accidentes.',
+    cta: 'Cotizar monopatín',
+    href: '/cotizar/seguro-monopatin',
+    color: 'from-cyan-500 to-cyan-400',
+    hoverColor: 'border-cyan-500/20',
+    btnHover: 'hover:bg-cyan-500 shadow-cyan-500/20'
+  },
+  {
+    title: 'Seguro de Bicicleta',
+    icon: Bike,
+    desc: 'Cuidá tu bici en la vía pública ante robos y accidentes, con asistencia 24 horas.',
+    cta: 'Cotizar bicicleta',
+    href: '/cotizar/seguro-bicicleta',
+    color: 'from-amber-500 to-amber-400',
+    hoverColor: 'border-amber-500/20',
+    btnHover: 'hover:bg-amber-500 shadow-amber-500/20'
+  },
+  {
+    title: 'Seguro de Notebook',
+    icon: Laptop,
+    desc: 'Llevá tu computadora portátil a cualquier lado con la tranquilidad de estar protegido.',
+    cta: 'Cotizar notebook',
+    href: '/cotizar/seguro-notebook',
+    color: 'from-indigo-500 to-indigo-400',
+    hoverColor: 'border-indigo-500/20',
+    btnHover: 'hover:bg-indigo-500 shadow-indigo-500/20'
+  },
+];
+
+const partners = [
+  "https://res.cloudinary.com/dewcgbpvp/image/upload/v1722988252/RUS_mqiqvz.png",
+  "https://res.cloudinary.com/dewcgbpvp/image/upload/v1722988252/SANCRISTOBAL_kazpdd.png",
+  "https://res.cloudinary.com/dewcgbpvp/image/upload/v1722988247/FEDPA_eq1khi.png",
+  "https://res.cloudinary.com/dewcgbpvp/image/upload/v1722988245/EXPERTA_n9hhnn.png",
+  "https://res.cloudinary.com/dewcgbpvp/image/upload/v1722988250/MERCANTIL_x2mdnw.png",
+  "https://res.cloudinary.com/dewcgbpvp/image/upload/v1722988250/MAPFRE_bxhq37.png",
+  "https://res.cloudinary.com/dewcgbpvp/image/upload/v1722988249/INTEGRITY_gjydc4.png",
+  "https://res.cloudinary.com/dewcgbpvp/image/upload/v1722988244/ATM_frtz71.png",
+];
+
+const testimonials = [
+  {
+    name: 'Lucía López',
+    date: '03/01/2024',
+    text: 'Estoy muy contenta con el servicio de Yuju seguros. La atención de Malena fue excelente. Los recomiendo 100%.'
+  },
+  {
+    name: 'Martín Fernández',
+    date: '21/12/2023',
+    text: 'Muy satisfecho con el servicio. Me ofrecieron el mejor precio y cobertura para mi seguro. Los recomiendo.'
+  },
+  {
+    name: 'Pablo Rodríguez',
+    date: '19/02/2024',
+    text: 'Me atendieron súper rápido y pude contratar de forma sencilla. Me explicaron todo con claridad y con paciencia.'
+  },
+  {
+    name: 'Laura González',
+    date: '10/03/2024',
+    text: 'Me está asesorando Malena. ¡Una genia! Me atendió de forma impecable y me dio el mejor precio.'
+  },
+  {
+    name: 'Carlos Mendez',
+    date: '15/03/2024',
+    text: 'Excelente atención y rapidez en la gestión. El precio fue el más competitivo que encontré.'
+  },
+];
+
+export const HomePage = () => {
+  const { theme } = useTheme();
+  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
+  const [hoveredBtn, setHoveredBtn] = useState<string | null>(null);
+
+  return (
+    <div className="relative overflow-hidden bg-bg-primary transition-colors duration-500">
+
+      {/* SECTION: HERO - Reworked for Yuju Blue style + Real Image */}
+      <section className="relative min-h-screen flex items-center pt-20 md:pt-24 pb-8 overflow-hidden px-6">
+        {/* Background Base (Yuju Blue) */}
+        <div className="absolute inset-0 bg-gradient-to-br from-yuju-blue via-yuju-blue to-[#1e40af] z-0 overflow-hidden">
+          {/* Subtle tech patterns overlay */}
+          <div className="absolute inset-0 opacity-15" style={{ backgroundImage: 'radial-gradient(circle, white 1.5px, transparent 1.5px)', backgroundSize: '48px 48px' }} />
+          
+          {/* Rotating green spheres as requested */}
+          <motion.div 
+            animate={{ scale: [1, 1.2, 1], rotate: [0, 90, 0] }} 
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }} 
+            className="absolute -top-1/4 -left-1/4 w-[800px] h-[800px] bg-yuju-cyan blur-[180px] rounded-full opacity-40" 
+          />
+          <motion.div 
+            animate={{ scale: [1, 1.3, 1], rotate: [0, -120, 0] }} 
+            transition={{ duration: 35, repeat: Infinity, ease: "linear" }} 
+            className="absolute -bottom-1/6 -right-1/6 w-[800px] h-[800px] bg-yuju-cyan blur-[220px] rounded-full opacity-40" 
+          />
+
+        </div>
+
+        <div className="max-w-6xl mx-auto w-full relative z-20 flex flex-col items-center text-center space-y-8 py-6 md:py-8">
+          <div className="space-y-6 md:space-y-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="px-4 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full inline-flex items-center gap-3 mb-8 shadow-xl shadow-white/5"
+            >
+              <div className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </div>
+              <span className="text-white text-[11px] md:text-xs font-bold tracking-wide">Cotizá gratis • Hasta 30% de descuento</span>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="space-y-6"
+            >
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-black leading-[1.1] text-white font-accent tracking-tighter max-w-5xl mx-auto">
+                Conocé el precio de tu seguro <br className="hidden md:block" /> sin dar tus datos.
+              </h1>
+
+              <p className="text-lg md:text-2xl text-white/80 font-medium tracking-tight max-w-3xl mx-auto leading-relaxed">
+                Comparás coberturas reales, elegís la que más te conviene <br className="hidden md:block" /> y decidís cómo contratar.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="flex flex-wrap items-center justify-center pt-6"
+            >
+              <a href="#seguros" className="w-full sm:w-auto">
+                <Button 
+                  size="lg" 
+                  className="w-full bg-white/10 hover:bg-emerald-500 text-white border-white/20 px-12 h-16 rounded-2xl font-black uppercase tracking-widest text-xs transition-all duration-500 backdrop-blur-md hover:border-transparent hover:shadow-[0_0_30px_rgba(16,185,129,0.4)] group"
+                >
+                  Cotizá ahora <ArrowRight size={20} className="ml-3 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </a>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Scroll indicator for tech feel */}
+        <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-20 opacity-40">
+          <div className="w-5 h-8 border-2 border-white/20 rounded-full flex justify-center p-1">
+            <motion.div animate={{ y: [0, 6, 0] }} transition={{ duration: 2, repeat: Infinity }} className="w-1 h-1 bg-yuju-cyan rounded-full" />
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION: TRUST - Sourced from dev_v1 partners */}
+      <section className="py-8 bg-bg-primary overflow-hidden border-y border-border-primary/50 relative z-30">
+        <div className="logo-track-container relative">
+          <div className="logo-track grayscale-0 opacity-100 items-center">
+            {[...partners, ...partners, ...partners].map((logo, i) => {
+              const isMercantil = logo.includes('MERCANTIL');
+              const isFedPat = logo.includes('FEDPA');
+
+              let logoSrc = logo;
+              if (theme === 'dark') {
+                if (isMercantil) logoSrc = "https://res.cloudinary.com/dr8n9s55i/image/upload/v1755863727/mercantil_xhcmdc.png";
+                if (isFedPat) logoSrc = "https://res.cloudinary.com/dr8n9s55i/image/upload/v1758284666/Logo_FedPat_-_Blanco_myusp4.png";
+              }
+
+              return (
+                <div key={i} className="min-w-[180px] h-14 flex items-center justify-center px-4">
+                  <img
+                    src={logoSrc}
+                    alt="Partner"
+                    className={cn(
+                      "max-h-full w-auto object-contain filter drop-shadow-sm transition-all duration-700 hover:scale-105",
+                      theme === 'dark'
+                        ? ((isMercantil || isFedPat) ? "opacity-50 hover:opacity-100" : "brightness-0 invert opacity-40 hover:brightness-100 hover:invert-0 hover:opacity-100")
+                        : "grayscale opacity-50 hover:grayscale-0 hover:opacity-100"
+                    )}
+                  />
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION: SERVICES - Unified Design */}
+      <section id="seguros" className="py-10 px-6 bg-bg-secondary scroll-mt-32">
+        <div className="max-w-7xl mx-auto">
+          <div className="mb-24 flex flex-col md:flex-row md:items-end justify-between gap-12">
+            <div className="space-y-6">
+              <div className="px-4 py-1 bg-yuju-blue/10 text-yuju-blue inline-block rounded-full text-xs font-black uppercase tracking-widest">
+                Nuestros seguros
+              </div>
+              <h2 className="section-title tracking-[ -0.05em]">Elegí qué querés proteger</h2>
+              <p className="section-subtitle max-w-2xl">
+                Si valorás tu tiempo, acá podés comparar opciones reales de las mejores compañías y decidir con información clara.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {services.map((service) => (
+              <GlassCard
+                key={service.title}
+                className={cn(
+                  "group p-6 border-border-primary bg-bg-primary transition-all duration-700 relative overflow-hidden flex flex-col h-full min-h-[340px] rounded-[32px]",
+                  `hover:${service.hoverColor}`
+                )}
+                onMouseEnter={() => setHoveredCard(service.title)}
+                onMouseLeave={() => setHoveredCard(null)}
+                style={service.title === 'Seguro de Bicicleta' && hoveredCard === 'Seguro de Bicicleta' ? { borderColor: 'oklch(85.2% 0.199 91.936 / 0.3)' } : {}}
+              >
+                {/* Background glow per service color */}
+                <div 
+                  style={service.title === 'Seguro de Bicicleta' ? { background: 'radial-gradient(circle, oklch(85.2% 0.199 91.936) 0%, transparent 70%)' } : {}} 
+                  className={cn("absolute -bottom-20 -right-20 w-48 h-48 blur-3xl opacity-0 group-hover:opacity-25 transition-opacity rounded-full bg-gradient-to-tr", service.title === 'Seguro de Bicicleta' ? '' : service.color)} 
+                />
+
+                <div className="relative mb-6">
+                  <motion.div
+                    animate={{ y: [0, -5, 0] }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                    style={service.title === 'Seguro de Bicicleta' ? { background: 'oklch(85.2% 0.199 91.936)' } : {}}
+                    className={cn(
+                      "w-16 h-16 rounded-2xl flex items-center justify-center relative z-10",
+                      "bg-gradient-to-br border border-white/20 shadow-xl",
+                      service.title === 'Seguro de Bicicleta' ? '' : service.color
+                    )}
+                  >
+                    <service.icon size={32} strokeWidth={2.5} className="text-white" />
+                  </motion.div>
+                  {/* Subtle soft shadow/glow behind icon */}
+                  {service.title !== 'Seguro de Bicicleta' && (
+                    <div 
+                      className={cn("absolute inset-0 blur-xl opacity-40 scale-110", service.color)} 
+                    />
+                  )}
+                </div>
+
+                <h3 className="text-2xl font-black text-text-primary mb-3 font-accent tracking-tighter whitespace-pre-wrap leading-tight min-h-[4rem] flex items-center">{service.title}</h3>
+                <p className="text-text-secondary mb-8 leading-relaxed font-medium text-sm min-h-[4.5rem]">
+                  {service.desc}
+                </p>
+
+                <div className="mt-auto">
+                  <Link 
+                    to={service.href} 
+                    className="block group/btn"
+                    onMouseEnter={() => setHoveredBtn(service.title)}
+                    onMouseLeave={() => setHoveredBtn(null)}
+                  >
+                    <Button 
+                      variant="ghost" 
+                      className={cn(
+                        "w-full text-text-primary font-black uppercase tracking-widest text-[10px] flex items-center justify-between px-6 py-4 rounded-2xl bg-bg-secondary transition-all duration-300",
+                        service.title === 'Seguro de Bicicleta' ? '' : service.btnHover,
+                        service.title === 'Seguro de Bicicleta' ? '' : "hover:text-white"
+                      )}
+                      style={service.title === 'Seguro de Bicicleta' && hoveredBtn === 'Seguro de Bicicleta' ? { backgroundColor: 'oklch(85.2% 0.199 91.936)', color: '#fff', boxShadow: '0 10px 15px -3px oklch(85.2% 0.199 91.936 / 0.3)' } : {}}
+                    >
+                      <span>{service.cta}</span>
+                      <ArrowRight size={16} className="translate-x-0 group-hover/btn:translate-x-1.5 transition-transform" />
+                    </Button>
+                  </Link>
+                </div>
+              </GlassCard>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION: EXPERIENCE REWORKED - The "Yuju v1" spirit modernized */}
+      <section className="py-10 px-6 relative bg-bg-primary overflow-hidden">
+        <div className="absolute top-0 right-0 w-[50%] h-full bg-yuju-blue/5 -skew-x-12 translate-x-1/2" />
+
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+          <div className="relative">
+            <motion.div initial={{ scale: 0.9, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} transition={{ duration: 1 }}>
+              <div className="relative rounded-[40px] overflow-hidden shadow-2xl border-4 border-white dark:border-white/10 aspect-video">
+                <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&q=80&w=1000"
+                  alt="Lifestyle" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000 duration-500" />
+                <div className="absolute inset-0 bg-yuju-blue/20 mix-blend-multiply" />
+              </div>
+
+              {/* Floating Tech Badge */}
+              <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 4, repeat: Infinity }} className="absolute -bottom-10 -right-10 glass-card p-6 rounded-3xl border-yuju-blue/20 bg-bg-primary/90 flex items-center gap-4 shadow-2xl">
+                <div className="w-12 h-12 bg-emerald-500/20 text-emerald-500 flex items-center justify-center rounded-2xl">
+                  <ShieldCheck size={24} />
+                </div>
+                <div className="flex flex-col pr-10">
+                  <span className="text-[10px] font-black uppercase tracking-widest text-emerald-500">Sin datos personales</span>
+                  <span className="text-sm font-black text-text-primary font-accent">Mirás precios y después decidís.</span>
+                </div>
+              </motion.div>
+            </motion.div>
+          </div>
+
+          <div className="space-y-10">
+            <div className="space-y-4">
+              <h2 className="section-title">Una nueva forma de<br />asegurar lo tuyo.</h2>
+              <p className="text-text-secondary leading-relaxed font-medium">
+                Somos el canal digital de Nimbus Bróker. Integramos 15 años de trayectoria en el mercado para que puedas cotizar y comparar coberturas con total claridad.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="space-y-3">
+                <div className="flex items-center gap-2 text-yuju-blue">
+                  <MousePointer2 size={18} strokeWidth={3} />
+                  <span className="text-xs font-black uppercase tracking-widest">Vos elegís</span>
+                </div>
+                <p className="text-sm font-bold text-text-primary leading-snug">Comparás opciones de forma digital y decidís si preferís avanzar por tu cuenta o con nuestra ayuda.</p>
+              </div>
+              <div className="space-y-3">
+                <div className="flex items-center gap-2 text-yuju-blue">
+                  <ShieldCheck size={18} strokeWidth={3} />
+                  <span className="text-xs font-black uppercase tracking-widest">Respaldo real</span>
+                </div>
+                <p className="text-sm font-bold text-text-primary leading-snug">Trabajamos con las aseguradoras más importantes del país para que siempre estés protegido.</p>
+              </div>
+            </div>
+
+            <Link to="/institucional">
+              <Button variant="outline" className="group px-8 h-12 rounded-xl font-black uppercase tracking-widest text-[10px]">
+                Quiénes somos <ChevronRight size={16} className="ml-2 group-hover:translate-x-1.5 transition-transform" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION: TESTIMONIALS - New Horizontal Scroll Section */}
+      <section className="py-10 bg-bg-secondary overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 mb-16">
+          <h2 className="text-yuju-blue font-black tracking-widest text-sm mb-4">Opiniones de nuestros clientes</h2>
+          <p className="section-title">Lo que dicen de nosotros</p>
+        </div>
+
+        <div className="relative flex overflow-hidden group">
+          <motion.div
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+            className="flex gap-8 px-4 py-8"
+          >
+            {[...testimonials, ...testimonials].map((t, i) => (
+              <GlassCard key={i} className="min-w-[350px] md:min-w-[450px] p-8 border-border-primary hover:border-yuju-blue/30 transition-all duration-500 bg-bg-primary">
+                <div className="flex justify-between items-start mb-6">
+                  <div>
+                    <h4 className="text-yuju-blue font-black text-lg font-accent">{t.name}</h4>
+                    <span className="text-text-secondary text-[11px] font-bold uppercase tracking-widest">{t.date}</span>
+                  </div>
+                  <div className="w-10 h-10 rounded-full bg-yuju-blue flex items-center justify-center text-white shadow-lg shadow-yuju-blue/20">
+                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+                      <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                    </svg>
+                  </div>
+                </div>
+                <p className="text-text-secondary leading-relaxed font-medium text-[15px]">
+                  "{t.text}"
+                </p>
+              </GlassCard>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+    </div>
+  );
+};
