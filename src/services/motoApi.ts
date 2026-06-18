@@ -3,41 +3,46 @@ import { initAuth } from './auth';
 
 // API instances configured to use the production URL or proxy
 // IMPORTANTE: withCredentials: true para enviar cookies httpOnly automáticamente
-// Si no se define VITE_MOTO_API_URL, usa el mismo origen (Vite proxy redirige /api → localhost:3000)
-const MOTO_API_BASE = import.meta.env.VITE_MOTO_API_URL || '';
+// Normalizamos VITE_MOTO_API_URL para evitar duplicar "/api" en las rutas
+const rawMotoApiUrl = import.meta.env.VITE_MOTO_API_URL || '';
+const MOTO_API_BASE = rawMotoApiUrl
+    ? rawMotoApiUrl.replace(/\/$/, '').replace(/\/api$/, '')
+    : '';
+
+const apiBasePrefix = MOTO_API_BASE ? `${MOTO_API_BASE}/api` : '/api';
 
 const api = axios.create({
-    baseURL: `${MOTO_API_BASE}/api/rus/`,
+    baseURL: `${apiBasePrefix}/rus/`,
     withCredentials: true
 });
 
 const infoautoApi = axios.create({
-    baseURL: `${MOTO_API_BASE}/api/infoauto/`,
+    baseURL: `${apiBasePrefix}/infoauto/`,
     withCredentials: true
 });
 
 const atmApi = axios.create({
-    baseURL: `${MOTO_API_BASE}/api/atm/`,
+    baseURL: `${apiBasePrefix}/atm/`,
     withCredentials: true
 });
 
 const sancristobalApi = axios.create({
-    baseURL: `${MOTO_API_BASE}/api/sancristobal/`,
+    baseURL: `${apiBasePrefix}/sancristobal/`,
     withCredentials: true
 });
 
 const integrityApi = axios.create({
-    baseURL: `${MOTO_API_BASE}/api/integrity/`,
+    baseURL: `${apiBasePrefix}/integrity/`,
     withCredentials: true
 });
 
 const localidadesApi = axios.create({
-    baseURL: `${MOTO_API_BASE}/api/localidades/`,
+    baseURL: `${apiBasePrefix}/localidades/`,
     withCredentials: true
 });
 
 const leadsApi = axios.create({
-    baseURL: `${MOTO_API_BASE}/api/leads`,
+    baseURL: `${apiBasePrefix}/leads`,
     withCredentials: true
 });
 

@@ -164,7 +164,7 @@ export function createApiClient(options: UnifiedApiClientOptions): AxiosInstance
 // Auto/Moto API Client (usa x-api-key)
 export const autoApiClient = createApiClient({
   baseURL: import.meta.env.VITE_API_BASE_URL 
-    ? `${import.meta.env.VITE_API_BASE_URL}/api` 
+    ? import.meta.env.VITE_API_BASE_URL 
     : '/api',
   tokenKey: 'auth_token',
   apiKeyHeader: 'x-api-key',
@@ -173,7 +173,7 @@ export const autoApiClient = createApiClient({
 
 // Hogar API Client (usa client secret)
 export const hogarApiClient = createApiClient({
-  baseURL: `${import.meta.env.VITE_HOGAR_API_URL || 'http://localhost:3000'}/api`,
+  baseURL: import.meta.env.VITE_HOGAR_API_URL ? import.meta.env.VITE_HOGAR_API_URL : 'http://localhost:3000',
   tokenKey: 'hogar_auth_token',
   clientSecret: import.meta.env.VITE_HOGAR_API_CLIENT_SECRET,
   clientSecretHeader: 'x-client-secret',
