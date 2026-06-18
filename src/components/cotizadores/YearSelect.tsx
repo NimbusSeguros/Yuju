@@ -37,9 +37,15 @@ export const YearSelect: React.FC<YearSelectProps> = ({ value, onChange, hasErro
     <div className="relative w-full" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
+<<<<<<< HEAD
         className={`w-full h-[56px] bg-bg-secondary border ${hasError ? 'border-red-500' : 'border-border-primary'} rounded-2xl px-5 flex items-center justify-between group yuju-input-blue transition-all`}
       >
         <span className={`${value ? 'text-text-primary font-bold' : 'text-text-secondary opacity-50'} text-base font-bold tracking-tight`}>
+=======
+        className={`w-full h-[56px] bg-bg-secondary border ${hasError ? 'border-red-500' : 'border-border-primary'} rounded-2xl px-5 flex items-center justify-between group hover:border-yuju-blue transition-all outline-none focus:outline-none focus:ring-2 focus:ring-yuju-blue/20`}
+      >
+        <span className={`${value ? 'text-text-primary font-bold' : 'text-text-secondary opacity-50'} text-base uppercase font-bold tracking-tight`}>
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
           {value || "Seleccioná el año"}
         </span>
         <ChevronDown className={`text-text-secondary transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} size={16} />
@@ -54,7 +60,11 @@ export const YearSelect: React.FC<YearSelectProps> = ({ value, onChange, hasErro
                 onClick={() => handleSelect(year)}
                 className={`py-2 rounded-lg transition-all font-bold text-xs ${
                   value === year.toString() 
+<<<<<<< HEAD
                   ? 'bg-yuju-blue text-white' 
+=======
+                  ? 'bg-yuju-blue text-white shadow-lg shadow-yuju-blue/20' 
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
                   : 'bg-bg-secondary hover:bg-yuju-blue hover:text-white text-text-primary'
                 }`}
               >

@@ -18,8 +18,12 @@
 
   --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   --animate-float: float 6s ease-in-out infinite;
+<<<<<<< HEAD
   --animate-scroll: scroll 120s linear infinite;
   --animate-shimmer: shimmer 2.5s infinite;
+=======
+  --animate-scroll: scroll 40s linear infinite;
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
 
   @keyframes float {
     0%, 100% { transform: translateY(0); }
@@ -30,10 +34,13 @@
     from { transform: translateX(0); }
     to { transform: translateX(-50%); }
   }
+<<<<<<< HEAD
 
   @keyframes shimmer {
     100% { transform: translateX(100%); }
   }
+=======
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
 }
 
 :root {
@@ -44,7 +51,10 @@
   --border-primary: rgba(0, 0, 0, 0.08);
   --glass-bg: rgba(255, 255, 255, 0.7);
   --hero-overlay: rgba(51, 105, 255, 0.9);
+<<<<<<< HEAD
   --logo-filter: none;
+=======
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
   color-scheme: light;
 }
 
@@ -56,6 +66,7 @@
   --border-primary: rgba(255, 255, 255, 0.1);
   --glass-bg: rgba(15, 23, 42, 0.8);
   --hero-overlay: rgba(2, 6, 23, 0.85);
+<<<<<<< HEAD
   --logo-filter: brightness(0) invert(1);
   color-scheme: dark;
 }
@@ -65,6 +76,11 @@ html {
   overflow-x: hidden;
 }
 
+=======
+  color-scheme: dark;
+}
+
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
 body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
@@ -72,8 +88,11 @@ body {
   -webkit-font-smoothing: antialiased;
   transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   min-height: 100vh;
+<<<<<<< HEAD
   overflow-x: hidden;
   width: 100%;
+=======
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
 }
 
 h1, h2, h3, .font-accent {
@@ -103,17 +122,28 @@ h1, h2, h3, .font-accent {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-yuju-blue to-yuju-cyan;
   }
 
+<<<<<<< HEAD
   .hero-box-highlight {
     @apply bg-yuju-cyan py-3 px-8 text-white font-black inline-block rounded-xl;
   }
 
   .section-title {
     @apply text-4xl md:text-5xl font-black font-accent tracking-tighter mb-4;
+=======
+  .hero-highlight {
+    @apply bg-yuju-cyan py-1.5 px-6 text-white font-black inline-block shadow-lg shadow-yuju-cyan/20;
+    box-shadow: 10px 10px 0px rgba(0, 246, 185, 0.1);
+  }
+
+  .section-title {
+    @apply text-4xl md:text-5xl font-black font-accent uppercase tracking-tighter mb-4;
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
   }
 
   .section-subtitle {
      @apply text-lg text-text-secondary max-w-2xl leading-relaxed font-medium;
   }
+<<<<<<< HEAD
 
   /* Glow Utilities for Inputs */
   .yuju-input-emerald {
@@ -139,6 +169,8 @@ h1, h2, h3, .font-accent {
   .yuju-container-orange {
     @apply transition-all duration-300 focus-within:ring-4 focus-within:ring-orange-500/15 focus-within:border-orange-500 focus-within:shadow-[0_0_20px_rgba(249,115,22,0.1)];
   }
+=======
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
 }
 
 /* Custom scrollbar */
@@ -154,6 +186,7 @@ h1, h2, h3, .font-accent {
 
 /* Companies infinite scroll */
 .logo-track {
+<<<<<<< HEAD
   @apply flex gap-8 w-fit animate-scroll;
 }
 
@@ -215,3 +248,7 @@ input[type="range"]::-moz-range-thumb:active {
   transform: scale(0.9);
 }
 
+=======
+  @apply flex gap-12 w-fit animate-scroll;
+}
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)

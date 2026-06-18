@@ -59,7 +59,11 @@ export const InstitutionalPage = () => {
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
+<<<<<<< HEAD
             className="text-6xl md:text-8xl font-black text-text-primary font-accent tracking-tighter leading-none mb-10"
+=======
+            className="text-6xl md:text-8xl font-black text-text-primary uppercase font-accent tracking-tighter leading-none mb-10"
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
           >
             Nacimos para <br />
             <span className="text-yuju-blue italic">simplificar</span> el futuro
@@ -86,7 +90,11 @@ export const InstitutionalPage = () => {
               viewport={{ once: true }}
               className="space-y-8"
             >
+<<<<<<< HEAD
               <h2 className="text-4xl md:text-5xl font-black text-text-primary font-accent tracking-tighter">
+=======
+              <h2 className="text-4xl md:text-5xl font-black text-text-primary uppercase font-accent tracking-tighter">
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
                 Más de 15 años <br />
                 <span className="text-text-primary/40">trascendiendo límites</span>
               </h2>
@@ -121,8 +129,13 @@ export const InstitutionalPage = () => {
                 className="relative glass-card aspect-square rounded-[60px] flex items-center justify-center p-1"
               >
                 <div className="w-full h-full rounded-[58px] overflow-hidden">
+<<<<<<< HEAD
                   <img src="https://res.cloudinary.com/dr8n9s55i/image/upload/f_auto,q_auto,c_fill,g_auto,z_0.7,ar_1:1/v1/IMG_9520_fhxyd0.jpg"
                     alt="Equipo Yuju Seguros" className="w-full h-full object-cover" />
+=======
+                  <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1000"
+                    alt="Tech Evolution" className="w-full h-full object-cover" />
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
                 </div>
                 {/* Floating elements */}
                 <div className="absolute -top-10 -right-10 w-32 h-32 bg-yuju-blue/20 blur-2xl rounded-full" />
@@ -134,7 +147,11 @@ export const InstitutionalPage = () => {
       </section>
 
       {/* CORE IDENTITY: MISSION, VISION & OBJECTIVE */}
+<<<<<<< HEAD
       <section id="mision" className="py-32 px-6 bg-bg-secondary overflow-hidden">
+=======
+      <section className="py-32 px-6 bg-bg-secondary overflow-hidden">
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -146,7 +163,11 @@ export const InstitutionalPage = () => {
               <div className="w-16 h-16 rounded-2xl bg-bg-primary border border-border-primary flex items-center justify-center text-yuju-blue mb-2">
                 <Target size={32} />
               </div>
+<<<<<<< HEAD
               <h3 className="text-3xl font-black text-text-primary font-accent">Misión</h3>
+=======
+              <h3 className="text-3xl font-black text-text-primary uppercase font-accent">Misión</h3>
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
               <p className="text-lg text-text-secondary leading-relaxed font-medium">
                 Revolucionar la protección de lo que la gente ama mediante tecnología, mejorando la seguridad y calidad de vida con soluciones ágiles y transparentes.
               </p>
@@ -164,7 +185,11 @@ export const InstitutionalPage = () => {
               <div className="w-16 h-16 rounded-2xl bg-bg-primary border border-border-primary flex items-center justify-center text-yuju-cyan mb-2">
                 <Eye size={32} />
               </div>
+<<<<<<< HEAD
               <h3 className="text-3xl font-black text-text-primary font-accent">Visión</h3>
+=======
+              <h3 className="text-3xl font-black text-text-primary uppercase font-accent">Visión</h3>
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
               <p className="text-lg text-text-secondary leading-relaxed font-medium">
                 Ser la Insurtech líder de la región, destacada por su excelencia, innovación constante y por construir los vínculos de mayor confianza en la industria.
               </p>
@@ -182,7 +207,11 @@ export const InstitutionalPage = () => {
               <div className="w-16 h-16 rounded-2xl bg-bg-primary border border-border-primary flex items-center justify-center text-indigo-500 mb-2">
                 <Flag size={32} />
               </div>
+<<<<<<< HEAD
               <h3 className="text-3xl font-black text-text-primary font-accent">Objetivo</h3>
+=======
+              <h3 className="text-3xl font-black text-text-primary uppercase font-accent">Objetivo</h3>
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
               <p className="text-lg text-text-secondary leading-relaxed font-medium">
                 Cubrir a tus seres queridos y tu patrimonio, con productos justos y modernos, totalmente transparentes y al mejor precio del mercado.
               </p>
@@ -195,8 +224,13 @@ export const InstitutionalPage = () => {
       <section className="py-32 px-6 bg-bg-primary">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-24">
+<<<<<<< HEAD
             <h2 className="text-yuju-blue font-black tracking-widest text-sm mb-4">Nuestros Pilares</h2>
             <p className="text-5xl md:text-6xl font-black text-text-primary font-accent tracking-tighter">Valores que nos impulsan</p>
+=======
+            <h2 className="text-yuju-blue font-black uppercase tracking-widest text-sm mb-4">Nuestros Pilares</h2>
+            <p className="text-5xl md:text-6xl font-black text-text-primary uppercase font-accent tracking-tighter">Valores que nos impulsan</p>
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -213,7 +247,11 @@ export const InstitutionalPage = () => {
                   <div className="w-14 h-14 rounded-xl bg-bg-primary border border-border-primary flex items-center justify-center text-yuju-blue mb-8 group-hover:scale-110 group-hover:rotate-3 transition-transform">
                     <pillar.icon size={24} />
                   </div>
+<<<<<<< HEAD
                   <h4 className="text-xl font-black text-text-primary mb-4 font-accent">{pillar.title}</h4>
+=======
+                  <h4 className="text-xl font-black text-text-primary mb-4 uppercase font-accent">{pillar.title}</h4>
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
                   <p className="text-text-secondary font-medium leading-relaxed">
                     {pillar.desc}
                   </p>
@@ -240,7 +278,11 @@ export const InstitutionalPage = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+<<<<<<< HEAD
             className="text-4xl md:text-7xl font-black text-text-primary font-accent tracking-tighter leading-tight"
+=======
+            className="text-4xl md:text-7xl font-black text-text-primary uppercase font-accent tracking-tighter leading-tight"
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
           >
             El futuro del seguro es <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-yuju-blue to-yuju-cyan">más simple de lo que imaginás.</span>

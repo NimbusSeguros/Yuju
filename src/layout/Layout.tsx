@@ -8,9 +8,15 @@ interface LayoutProps {
 
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
+<<<<<<< HEAD
     <div className="flex flex-col min-h-screen w-full relative overflow-x-hidden">
       <Navbar />
       <main className="flex-grow overflow-x-hidden">
+=======
+    <div className="flex flex-col min-h-screen">
+      <Navbar />
+      <main className="flex-grow">
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
         {children}
       </main>
       <Footer />

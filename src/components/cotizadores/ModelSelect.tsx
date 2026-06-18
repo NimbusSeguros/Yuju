@@ -7,7 +7,10 @@ interface Model {
   name: string;
   years: number[];
   codiaByYear: Record<string, any>;
+<<<<<<< HEAD
   photo_url?: string;
+=======
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
 }
 
 interface ModelSelectProps {
@@ -75,11 +78,15 @@ export const ModelSelect: React.FC<ModelSelectProps> = ({ value, marcaId, year, 
   }, [isOpen]);
 
   const handleSelect = (model: Model) => {
+<<<<<<< HEAD
     onChange(model.id.toString(), model.name, { 
       years: model.years, 
       codiaByYear: model.codiaByYear,
       photoUrl: model.photo_url 
     });
+=======
+    onChange(model.id.toString(), model.name, { years: model.years, codiaByYear: model.codiaByYear });
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
     setIsOpen(false);
     setSearchTerm("");
   };
@@ -96,10 +103,17 @@ export const ModelSelect: React.FC<ModelSelectProps> = ({ value, marcaId, year, 
       <button
         disabled={isDisabled}
         onClick={() => setIsOpen(!isOpen)}
+<<<<<<< HEAD
         className={`w-full h-[56px] bg-bg-secondary border ${hasError ? 'border-red-500' : 'border-border-primary'} rounded-2xl px-5 flex items-center justify-between group yuju-input-blue transition-all`}
       >
         <span className={`${value ? 'text-text-primary font-bold' : 'text-text-secondary opacity-50'} text-base font-bold tracking-tight truncate`}>
           {selectedModel ? selectedModel.name : "Seleccioná el modelo"}
+=======
+        className={`w-full h-[56px] bg-bg-secondary border ${hasError ? 'border-red-500' : 'border-border-primary'} rounded-2xl px-5 flex items-center justify-between group hover:border-yuju-blue transition-all outline-none focus:outline-none focus:ring-2 focus:ring-yuju-blue/20`}
+      >
+        <span className={`${value ? 'text-text-primary font-bold' : 'text-text-secondary opacity-50'} text-base uppercase font-bold tracking-tight truncate`}>
+          {selectedModel ? selectedModel.name.toUpperCase() : "Seleccioná el modelo"}
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
         </span>
         <ChevronDown className={`text-text-secondary transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} size={16} />
       </button>
@@ -113,7 +127,11 @@ export const ModelSelect: React.FC<ModelSelectProps> = ({ value, marcaId, year, 
                 ref={searchInputRef}
                 type="text"
                 placeholder="Buscar modelo..."
+<<<<<<< HEAD
                 className="w-full h-8 bg-bg-primary border border-border-primary rounded-md pl-8 pr-3 text-[11px] text-text-primary yuju-input-blue transition-all"
+=======
+                className="w-full h-8 bg-bg-primary border border-border-primary rounded-md pl-8 pr-3 text-[11px] text-text-primary outline-none focus:border-yuju-blue transition-all"
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />

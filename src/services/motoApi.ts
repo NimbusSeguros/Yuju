@@ -1,4 +1,5 @@
 import axios from 'axios';
+<<<<<<< HEAD
 import { initAuth } from './auth';
 
 // API instances configured to use the production URL or proxy
@@ -75,6 +76,24 @@ add401Interceptor(localidadesApi);
 add401Interceptor(leadsApi);
 
 // Global Error Interceptor for api (409 handling)
+=======
+
+// API instances configured to use the proxy defined in vite.config.ts
+
+const api = axios.create({
+    baseURL: '/api/rus/',
+});
+
+const infoautoApi = axios.create({
+    baseURL: '/api/infoauto/',
+});
+
+const atmApi = axios.create({
+    baseURL: '/api/atm/',
+});
+
+// Global Error Interceptor
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
 api.interceptors.response.use(
     (response) => response,
     (error) => {
@@ -127,6 +146,7 @@ export const getLocalities = async (zipCode: string | number) => {
     try {
         const response = await api.get(`localidades/${zipCode}`);
         return response.data;
+<<<<<<< HEAD
     } catch (error: any) {
         // RUS returns 409 when its internal SIS system is down - fallback to local endpoint
         if (error?.response?.status === 409 || error?.response?.data?.error?.httpStatusCode === 'CONFLICT') {
@@ -134,6 +154,9 @@ export const getLocalities = async (zipCode: string | number) => {
             const fallback = await localidadesApi.get(`${zipCode}`);
             return fallback.data;
         }
+=======
+    } catch (error) {
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
         console.error("Error fetching localities:", error);
         throw error;
     }
@@ -183,11 +206,15 @@ export const getPropuestaStatus = async (proposalNumber: string | number) => {
 
 export const getPolizaPdf = async (ramo: string | number, poliza: string | number, endoso: string | number) => {
     try {
+<<<<<<< HEAD
         const response = await api.post('descargar-poliza', {
             ramo,
             poliza,
             endoso
         }, {
+=======
+        const response = await api.get(`polizas/${ramo}/${poliza}/${endoso}/pdf`, {
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
             responseType: 'blob'
         });
         return response.data;
@@ -243,7 +270,11 @@ export const descargarPolizaATM = async ({ npoliza, reporte = 'POL', seccion = 4
 
 // --- Integrity Seguros ---
 export const cotizarIntegrity = async ({ codia, brandId, anio, codigoPostal, localidad, sumaAsegurada }: any) => {
+<<<<<<< HEAD
     const response = await integrityApi.post('cotizar', {
+=======
+    const response = await axios.post('/api/integrity/cotizar', {
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
         codia,
         brandId,
         anio,
@@ -254,6 +285,7 @@ export const cotizarIntegrity = async ({ codia, brandId, anio, codigoPostal, loc
     return response.data;
 };
 
+<<<<<<< HEAD
 // --- San Cristobal Seguros ---
 export const cotizarSanCristobal = async ({ codia, anio, localidad, numeroDocumento, sexo, es0Km, sumaAsegurada }: any) => {
     const response = await sancristobalApi.post(`cotizaciones/motos`, {
@@ -309,4 +341,6 @@ export const createLead = async (payload: {
     return response.data;
 };
 
+=======
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
 export default api;

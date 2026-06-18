@@ -555,12 +555,21 @@
       },
       {
         "nombre": "Daño parcial por accidente",
+<<<<<<< HEAD
         "descripcion": "Cobertura de daños parciales causados por accidentes con franquicia del 5%."
+=======
+        "descripcion": "Cobertura de daños parciales causados por accidentes con franquicia del 5%.",
+        "limite": "Franquicia a cargo del asegurado equivalente al porcentaje seleccionado calculado sobre el valor de la suma asegurada al momento del alta o renovación"
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
       },
       {
         "nombre": "Auxilio Mecánico y Remolque",
         "descripcion": "Servicio de asistencia mecánica and remolque en caso de desperfectos.",
+<<<<<<< HEAD
         "limite": ""
+=======
+        "limite": "1000 Km Lineales - 2000 totales en Argentina. 1000 Km Lineales - 2000 totales en países limítrofes. Cantidad de eventos ilimitado"
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
       },
       {
         "nombre": "Auto sustituto",
@@ -653,12 +662,21 @@
       },
       {
         "nombre": "Daño parcial por accidente",
+<<<<<<< HEAD
         "descripcion": "Cobertura de daños parciales causados por accidentes con franquicia del 2%."
+=======
+        "descripcion": "Cobertura de daños parciales causados por accidentes con franquicia del 2%.",
+        "limite": "Franquicia a cargo del asegurado equivalente al porcentaje seleccionado calculado sobre el valor de la suma asegurada al momento del alta o renovación"
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
       },
       {
         "nombre": "Auxilio Mecánico y Remolque",
         "descripcion": "Servicio de asistencia mecánica and remolque en caso de desperfectos.",
+<<<<<<< HEAD
         "limite": ""
+=======
+        "limite": "1000 Km Lineales - 2000 totales en Argentina. 1000 Km Lineales - 2000 totales en países limítrofes. Cantidad de eventos ilimitado"
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
       },
       {
         "nombre": "Auto sustituto",
@@ -687,4 +705,8 @@
       }
     ]
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)

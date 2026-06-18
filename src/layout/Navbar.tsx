@@ -1,19 +1,28 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+<<<<<<< HEAD
 import { Car, Home, Menu, X, ChevronRight, Sun, Moon, Laptop, ChevronDown, Bike, ShieldCheck } from 'lucide-react';
 import { MotorbikeIcon } from '../components/icons/MotorbikeIcon';
 import { MonopatinIcon } from '../components/icons/MonopatinIcon';
+=======
+import { Car, Bike, Home, Menu, X, ChevronRight, Sun, Moon } from 'lucide-react';
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from '../utils/utils';
 import { useTheme } from '../hooks/useTheme';
 
+<<<<<<< HEAD
 const directNavItems = [
+=======
+const navItems = [
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
   { 
     name: 'Seguro de Auto', 
     icon: Car, 
     href: '/cotizar/seguro-auto',
     activeColor: 'text-yuju-blue',
     iconColor: 'text-yuju-blue',
+<<<<<<< HEAD
     indicatorColor: 'from-yuju-blue to-yuju-blue',
     mobileBorder: 'border-yuju-blue/30',
     mobileBg: 'bg-yuju-blue'
@@ -31,12 +40,25 @@ const directNavItems = [
 ];
 
 const dropdownNavItems = [
+=======
+    indicatorColor: 'from-yuju-blue to-yuju-cyan'
+  },
+  { 
+    name: 'Seguro de Moto', 
+    icon: Bike, 
+    href: '/cotizar/seguro-moto',
+    activeColor: 'text-orange-500',
+    iconColor: 'text-orange-500',
+    indicatorColor: 'from-orange-500 to-orange-400'
+  },
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
   { 
     name: 'Seguro de Hogar', 
     icon: Home, 
     href: '/cotizar/seguro-hogar',
     activeColor: 'text-emerald-500',
     iconColor: 'text-emerald-500',
+<<<<<<< HEAD
     indicatorColor: 'from-emerald-500 to-emerald-400',
     mobileBorder: 'border-emerald-500/30',
     mobileBg: 'bg-emerald-500'
@@ -70,17 +92,26 @@ const dropdownNavItems = [
     indicatorColor: 'from-indigo-500 to-indigo-400',
     mobileBorder: 'border-indigo-500/30',
     mobileBg: 'bg-indigo-500'
+=======
+    indicatorColor: 'from-emerald-500 to-emerald-400'
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
   },
 ];
 
 export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+<<<<<<< HEAD
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const location = useLocation();
   const { theme, toggleTheme } = useTheme();
   const isHomePage = location.pathname === '/';
   const isCotizador = location.pathname.includes('/cotizar/');
+=======
+  const location = useLocation();
+  const { theme, toggleTheme } = useTheme();
+  const isHomePage = location.pathname === '/';
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -90,8 +121,12 @@ export const Navbar = () => {
 
   return (
     <nav className={cn(
+<<<<<<< HEAD
       isCotizador ? "absolute" : "fixed",
       "top-0 left-0 right-0 z-50 transition-all duration-700 ease-in-out",
+=======
+      "fixed top-0 left-0 right-0 z-50 transition-all duration-700 ease-in-out",
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
       scrolled ? "py-3 md:py-4 px-6" : "py-4 md:py-6 px-6 md:px-8"
     )}>
       <motion.div 
@@ -114,8 +149,13 @@ export const Navbar = () => {
           >
             <img 
               src={((!scrolled && isHomePage) || theme === 'dark') 
+<<<<<<< HEAD
                 ? "https://res.cloudinary.com/dewcgbpvp/image/upload/v1777053184/webBlanco-SASFsG6e_xkuubw.png"
                 : "https://res.cloudinary.com/dewcgbpvp/image/upload/v1777053220/logoYujuAzul-DE5urkwK_io55ss.png"
+=======
+                ? "https://yuju.com.ar/assets/webBlanco-SASFsG6e.png"
+                : "https://yuju.com.ar/assets/logoYujuAzul-DE5urkwK.png"
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
               } 
               alt="Yuju Logo" 
               className="h-full w-auto object-contain transition-all"
@@ -126,8 +166,12 @@ export const Navbar = () => {
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-12">
           <div className="flex items-center gap-10">
+<<<<<<< HEAD
             {/* Direct Links */}
             {directNavItems.map((item, i) => (
+=======
+            {navItems.map((item, i) => (
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
               <motion.div 
                 key={item.name} 
                 initial={{ opacity: 0, y: -10 }} 
@@ -136,18 +180,30 @@ export const Navbar = () => {
               >
                 <Link
                   to={item.href}
+<<<<<<< HEAD
                   className={cn(
+=======
+                   className={cn(
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
                     "group relative flex items-center gap-2.5 transition-all text-[15px] font-semibold tracking-tight",
                     (!scrolled && isHomePage)
                       ? "text-white/90 hover:text-white" 
                       : (location.pathname === item.href ? item.activeColor : "text-text-secondary hover:text-text-primary")
                   )}
                 >
+<<<<<<< HEAD
                   <item.icon size={18} strokeWidth={2.5} className={cn(
                     "transition-all duration-300 group-hover:scale-110 group-hover:rotate-6",
                     (!scrolled && isHomePage)
                       ? "text-white/40 group-hover:text-white/70" 
                       : (location.pathname === item.href ? item.iconColor : "text-text-secondary/50")
+=======
+                  <item.icon size={18} className={cn(
+                    "transition-all duration-300 group-hover:scale-110 group-hover:rotate-6",
+                    (!scrolled && isHomePage)
+                      ? "text-white/40 group-hover:text-white/70" 
+                      : (location.pathname === item.href ? item.iconColor : `${item.iconColor}/40`)
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
                   )} />
                   <span className="flex items-center gap-1">
                     <span className="hidden xl:inline whitespace-nowrap">Seguro de</span>
@@ -162,6 +218,7 @@ export const Navbar = () => {
                 </Link>
               </motion.div>
             ))}
+<<<<<<< HEAD
 
             {/* Premium Custom Hover Dropdown for Otros Seguros */}
             <div 
@@ -237,6 +294,8 @@ export const Navbar = () => {
                 )}
               </AnimatePresence>
             </div>
+=======
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
           </div>
 
           <div className="flex items-center gap-4 pl-10 border-l border-border-primary/50">
@@ -269,7 +328,11 @@ export const Navbar = () => {
                 { 
                   icon: (props: any) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>, 
                   name: 'Instagram', 
+<<<<<<< HEAD
                   href: 'https://www.instagram.com/yujuseguros/' 
+=======
+                  href: 'https://www.instagram.com/segurosyuju?igsh=djkyZWxkZ3pvcXJn' 
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
                 },
                 { 
                   icon: (props: any) => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>, 
@@ -331,6 +394,7 @@ export const Navbar = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+<<<<<<< HEAD
             className="fixed inset-0 bg-bg-primary/95 backdrop-blur-2xl z-[60] md:hidden p-6 flex flex-col"
           >
             {/* Header */}
@@ -354,15 +418,43 @@ export const Navbar = () => {
             {/* Scrollable Items Container */}
             <div className="flex-1 overflow-y-auto pr-1 flex flex-col gap-3 py-2 scrollbar-none">
               {[...directNavItems, ...dropdownNavItems].map((item, i) => (
+=======
+            className="fixed inset-0 bg-bg-primary/60 backdrop-blur-2xl z-[60] md:hidden p-8 flex flex-col"
+          >
+            <div className="flex items-center justify-between mb-12">
+              <div className="flex items-center gap-3">
+              <div className={cn(
+                "w-10 h-10 rounded-xl flex items-center justify-center font-black text-white italic",
+                theme === 'dark' || !scrolled ? "bg-yuju-blue" : "bg-yuju-blue"
+              )}>Y</div>
+                <span className="font-accent font-black text-xl uppercase tracking-tighter">Menu</span>
+              </div>
+              <motion.button 
+                whileTap={{ scale: 0.9 }}
+                onClick={() => setMobileMenuOpen(false)} 
+                className="p-3 rounded-2xl bg-bg-secondary border border-border-primary text-text-primary"
+              >
+                <X size={24}/>
+              </motion.button>
+            </div>
+
+            <div className="flex flex-col gap-4">
+              {navItems.map((item, i) => (
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
                 <motion.div
                   key={item.name}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
+<<<<<<< HEAD
                   transition={{ delay: i * 0.06 }}
+=======
+                  transition={{ delay: i * 0.1 }}
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
                 >
                   <Link 
                     to={item.href}
                     className={cn(
+<<<<<<< HEAD
                       "flex items-center justify-between p-3.5 rounded-2xl border transition-all",
                       location.pathname === item.href 
                         ? (item.name === 'Seguro de Bicicleta' ? 'bg-bg-secondary' : `bg-bg-secondary ${item.mobileBorder} ${item.activeColor}`) 
@@ -386,11 +478,33 @@ export const Navbar = () => {
                       <span className="text-sm font-bold tracking-tight">{item.name}</span>
                     </div>
                     <ChevronRight size={16} className="opacity-40" />
+=======
+                      "flex items-center justify-between p-5 rounded-2xl border transition-all",
+                      location.pathname === item.href 
+                        ? `bg-bg-secondary border-${item.iconColor.split('-')[1]}-500/30 ${item.activeColor}` 
+                        : "bg-bg-secondary/50 border-border-primary text-text-primary"
+                    )}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className={cn(
+                        "p-2.5 rounded-xl",
+                        location.pathname === item.href 
+                          ? `bg-${item.iconColor.split('-')[1] === 'yuju' ? 'yuju-blue' : item.iconColor.split('-')[1] + '-500'} text-white` 
+                          : "bg-bg-primary text-text-secondary opacity-40"
+                      )}>
+                        <item.icon size={20} />
+                      </div>
+                      <span className="text-lg font-bold tracking-tight">{item.name}</span>
+                    </div>
+                    <ChevronRight size={18} className="opacity-40" />
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
                   </Link>
                 </motion.div>
               ))}
             </div>
 
+<<<<<<< HEAD
             {/* Compact Social Icons Bottom Bar */}
             <div className="pt-4 pb-2 flex items-center justify-center gap-4 border-t border-border-primary/50 mt-4">
               {[
@@ -430,6 +544,17 @@ export const Navbar = () => {
                   <social.icon className="w-5 h-5" />
                 </motion.a>
               ))}
+=======
+            <div className="mt-auto space-y-4">
+              <Link to="/ingreso" onClick={() => setMobileMenuOpen(false)}>
+                <button className="w-full bg-yuju-blue text-white py-5 rounded-2xl font-bold text-lg shadow-xl shadow-yuju-blue/20">
+                  Iniciar Sesión
+                </button>
+              </Link>
+              <button className="w-full bg-bg-secondary text-text-primary py-5 rounded-2xl font-bold text-lg border border-border-primary">
+                Registrarme
+              </button>
+>>>>>>> dfbac8d (UI Refinement: standardized result cards, mobile optimization, and fixed AutoCotizador layout)
             </div>
           </motion.div>
         )}
