@@ -335,7 +335,6 @@ export const MotoCotizador = () => {
     setQuotationResult({ rus: undefined, atm: undefined, integrity: undefined, sanCristobal: undefined, rusError: undefined, atmError: undefined, integrityError: undefined, sanCristobalError: undefined });
 
     const { vigenciaDesde, vigenciaHasta, tipoVigencia } = calculateDatesForQuote();
-    const BASE_URL = import.meta.env.VITE_MOTO_API_URL ? `${import.meta.env.VITE_MOTO_API_URL}/api` : 'https://apiyujumotos.com/api';
 
     const payloadRus = {
       codigoTipoInteres: "MOTOVEHICULO",
@@ -360,40 +359,26 @@ export const MotoCotizador = () => {
     };
 
     try {
-      const { getAccessToken } = await import('../../services/apiClient');
-      const token = await getAccessToken();
-      const headers = { 
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
-      };
+      // Usamos directamente las funciones exportadas de motoApi.ts
+      // Estas funciones ya usan las instancias correctas (api, atmApi, integrityApi)
+      // que respetan la VITE_MOTO_API_URL configurada en el .env
 
       // 1. Define independent promises with their own state updates
-      const pRus = fetch(`${BASE_URL}/rus/cotizaciones/motos`, { method: "PUT", headers, body: JSON.stringify(payloadRus) })
-        .then(res => res.json())
+      const pRus = cotizar(payloadRus)
         .then(data => setQuotationResult((prev: QuotationResult | null) => prev ? { ...prev, rus: data } : null))
         .catch(err => setQuotationResult((prev: QuotationResult | null) => prev ? { ...prev, rusError: err.message } : null));
 
-      const pAtm = fetch(`${BASE_URL}/atm/cotizar`, { 
-        method: "POST", 
-        headers, 
-        body: JSON.stringify({ codia: String(selectedModel.codia), anio: parseInt(selectedYear), codpostal: parseInt(zipCode) }) 
-      })
-        .then(res => res.json())
+      const pAtm = cotizarATM({ codia: String(selectedModel.codia), anio: parseInt(selectedYear), codpostal: parseInt(zipCode) })
         .then(data => setQuotationResult((prev: QuotationResult | null) => prev ? { ...prev, atm: data } : null))
         .catch(err => setQuotationResult((prev: QuotationResult | null) => prev ? { ...prev, atmError: err.message } : null));
 
-      const pIntegrity = fetch(`${BASE_URL}/integrity/cotizar`, { 
-        method: "POST", 
-        headers, 
-        body: JSON.stringify({ 
+      const pIntegrity = cotizarIntegrity({ 
           codia: String(selectedModel.codia), 
           brandId: String(selectedBrand.id), 
           anio: parseInt(selectedYear), 
           codigoPostal: zipCode, 
           localidad: selectedLocality ? (selectedLocality.id || selectedLocality.ID) : "" 
-        }) 
-      })
-        .then(res => res.json())
+        })
         .then(data => setQuotationResult((prev: QuotationResult | null) => prev ? { ...prev, integrity: data } : null))
         .catch(err => setQuotationResult((prev: QuotationResult | null) => prev ? { ...prev, integrityError: err.message } : null));
 
