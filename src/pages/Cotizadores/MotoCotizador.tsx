@@ -11,7 +11,7 @@ import RusProposalModal from '../../components/cotizadores/RusProposalModal';
 import AtmProposalModal from '../../components/cotizadores/AtmProposalModal';
 import { FAQAccordion } from '../../components/cotizadores/FAQAccordion';
 import { SuccessStep } from '../../components/cotizadores/SuccessStep';
-import { createLead } from '../../services/motoApi';
+import { createLead, cotizar, cotizarATM, cotizarIntegrity } from '../../services/motoApi';
 import type { VehicleBrand, VehicleModel, Localidad, Vigencia, Quote, QuotationResult } from '../../types';
 
 const motoFAQ = [
